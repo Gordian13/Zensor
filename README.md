@@ -12,6 +12,8 @@
 
 ## The spirit: Robert M. Stanley
 
+// 1 paragraph about Stanley, his work, influence and motivation (+ quotes?)
+
 ## Concept
 
 // foo
