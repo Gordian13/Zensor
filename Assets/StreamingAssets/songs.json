@@ -1,0 +1,79 @@
+[
+  {
+    "id": "01",
+    "filename": "Die Haut - Der Karibische Western_Vinyl Noise.mp3",
+    "addressableKey": "Zensor/Assets/StreamingAssets/Vinyl/Die Haut - Der Karibische Western_Vinyl Noise.mp3",
+    "title": "Die Haut - Der Karibische Western",
+    "artist": "Die Haut",
+    "durationSeconds": 336,
+    "year": 1990,
+    "description": "Die Haut (German, 'the skin') was a German rock band active in Berlin from 1982 until 1997. Formed as an instrumental rock quartet, many of their recordings and live performances featured an array of international guest vocalists. The only constant member was Christoph Dreher.In 1983, they released Burnin' the Ice, recorded in collaboration with Nick Cave. Their last full-length album was Spring (1997) followed by a remix album called Springer (1998). At the same time the band went on hiatus, Remo Park and Christoph Dreher have continued to work as separate acts,[1] and Jochen Arbeit with Rudolph Moser joined the Berlin-based underground legend Einstürzende Neubauten.",
+    "thumbnailPath": "Art/Thumbnails/01.png"
+  },
+  {
+    "id": "02",
+    "filename": "Din A Testbild - No Repeat_Vinyl Noise.mp3",
+    "addressableKey": "Zensor/Assets/StreamingAssets/Vinyl/Din A Testbild - No Repeat_Vinyl Noise.mp3",
+    "title": "Din A Testbild - No Repeat",
+    "artist": "Din A Testbild",
+    "durationSeconds": 184,
+    "year": null,
+    "description": "",
+    "thumbnailPath": ""
+  },
+  {
+    "id": "03",
+    "filename": "Din A Testbild - She's So Nice_Vinyl Noise.mp3",
+    "addressableKey": "Zensor/Assets/StreamingAssets/Vinyl/Din A Testbild - She's So Nice_Vinyl Noise.mp3",
+    "title": "Din A Testbild - She's So Nice",
+    "artist": "Din A Testbild",
+    "durationSeconds": null,
+    "year": null,
+    "description": "",
+    "thumbnailPath": ""
+  },
+  {
+    "id": "04",
+    "filename": "Fireder Butzmann - Wolfsburg_Vinyl Noise.mp3",
+    "addressableKey": "Zensor/Assets/StreamingAssets/Vinyl/Fireder Butzmann - Wolfsburg_Vinyl Noise.mp3",
+    "title": "Fireder Butzmann - Wolfsburg",
+    "artist": "Fireder Butzmann",
+    "durationSeconds": null,
+    "year": null,
+    "description": "",
+    "thumbnailPath": ""
+  },
+  {
+    "id": "05",
+    "filename": "Liaisons Dangereuses - Peut Etre...Pas_Vinyl Noise.mp3",
+    "addressableKey": "Zensor/Assets/StreamingAssets/Vinyl/Liaisons Dangereuses - Peut Etre...Pas_Vinyl Noise.mp3",
+    "title": "Liaisons Dangereuses - Peut Etre...Pas",
+    "artist": "Liaisons Dangereuses",
+    "durationSeconds": null,
+    "year": null,
+    "description": "",
+    "thumbnailPath": ""
+  },
+  {
+    "id": "06",
+    "filename": "Sonic Youth - Kill Yr. Idols_Vinyl Noise.mp3",
+    "addressableKey": "Zensor/Assets/StreamingAssets/Vinyl/Sonic Youth - Kill Yr. Idols_Vinyl Noise.mp3",
+    "title": "Sonic Youth - Kill Yr. Idols",
+    "artist": "Sonic Youth",
+    "durationSeconds": null,
+    "year": null,
+    "description": "",
+    "thumbnailPath": ""
+  },
+  {
+    "id": "07",
+    "filename": "Truemmerfrauen - Glausaugen_Vinyl Noise.mp3",
+    "addressableKey": "Zensor/Assets/StreamingAssets/Vinyl/Truemmerfrauen - Glausaugen_Vinyl Noise.mp3",
+    "title": "Truemmerfrauen - Glausaugen",
+    "artist": "Truemmerfrauen",
+    "durationSeconds": null,
+    "year": null,
+    "description": "",
+    "thumbnailPath": ""
+  }
+]
