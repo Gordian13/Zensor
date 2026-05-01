@@ -8,6 +8,7 @@ public class RecordInfoUI : MonoBehaviour
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text authorText;
     [SerializeField] private TMP_Text yearText;
+    [SerializeField] private TMP_Text playableText;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private Image coverImage;
 
@@ -15,6 +16,9 @@ public class RecordInfoUI : MonoBehaviour
     [SerializeField] private string unknownTitle = "Unknown Title";
     [SerializeField] private string unknownAuthor = "Unknown Artist";
     [SerializeField] private string unknownYear = "Unknown Year";
+    [SerializeField] private string unknownPlayable = "Unknown Status";
+    [SerializeField] private string playableLabel = "Playable";
+    [SerializeField] private string notPlayableLabel = "Not Playable";
     [SerializeField] private string unknownDescription = "No description available.";
 
     public void Configure(
@@ -22,6 +26,7 @@ public class RecordInfoUI : MonoBehaviour
         TMP_Text title,
         TMP_Text author,
         TMP_Text year,
+        TMP_Text playable,
         TMP_Text description,
         Image cover)
     {
@@ -29,6 +34,7 @@ public class RecordInfoUI : MonoBehaviour
         titleText = title;
         authorText = author;
         yearText = year;
+        playableText = playable;
         descriptionText = description;
         coverImage = cover;
     }
@@ -72,6 +78,11 @@ public class RecordInfoUI : MonoBehaviour
             descriptionText.text = string.IsNullOrWhiteSpace(data.description) ? unknownDescription : data.description;
         }
 
+        if (playableText != null)
+        {
+            playableText.text = data.isPlayable ? playableLabel : notPlayableLabel;
+        }
+
         if (coverImage != null)
         {
             coverImage.sprite = data.sprite;
@@ -101,6 +112,11 @@ public class RecordInfoUI : MonoBehaviour
         if (yearText != null)
         {
             yearText.text = unknownYear;
+        }
+
+        if (playableText != null)
+        {
+            playableText.text = unknownPlayable;
         }
 
         if (descriptionText != null)
