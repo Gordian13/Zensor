@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
   m_Name: firstRecord
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: With Glory I shall Fall
-  author: jixwang
+  title: Night Tram Reverie
+  author: Zensor Archive
   year: 1998
-  description: Geile Game Musik
-  sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  description: Lo-fi night drive recording inspired by late Berlin tram ambience.
+  sprite: {fileID: 21300000, guid: 994da07734c8c2b48b6f37488bdf6775, type: 3}
   audioClip: {fileID: 8300000, guid: 469e2841ce6de4844b670f9d7ac85616, type: 3}
   isPlayable: 1
