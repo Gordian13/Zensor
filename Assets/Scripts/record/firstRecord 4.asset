@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
   m_Name: firstRecord 4
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: Test
-  author: Ich
-  description: Keine
-  sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  title: Midnight Intercom
+  author: Zensor Archive
+  year: 2001
+  description: Nocturnal textures and distant spoken fragments.
+  sprite: {fileID: 21300000, guid: 994da07734c8c2b48b6f37488bdf6775, type: 3}
   audioClip: {fileID: 8300000, guid: 9e056acf4d268944b9a99d5d6c43197d, type: 3}
+  isPlayable: 1

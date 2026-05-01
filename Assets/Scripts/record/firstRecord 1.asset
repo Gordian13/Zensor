@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
   m_Name: firstRecord 1
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: Test
-  author: Ich
-  description: Keine
-  sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  title: Paradise Wasteland
+  author: Zensor Archive
+  year: 1996
+  description: Ambient field recording with static textures.
+  sprite: {fileID: 21300000, guid: 994da07734c8c2b48b6f37488bdf6775, type: 3}
   audioClip: {fileID: 8300000, guid: f51cdc1151bcf474884dbb01ce0fcc32, type: 3}
+  isPlayable: 1
