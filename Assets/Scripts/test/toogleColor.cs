@@ -1,10 +1,11 @@
 using DefaultNamespace.GrayScale;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using util.GrayScale;
 
 public class toogleColor : MonoBehaviour
 {
-    public GrayscaleToggle itemToToggle;
+    public ColorRevealToggle itemToToggle;
 
     void Update()
     {
@@ -16,7 +17,7 @@ public class toogleColor : MonoBehaviour
         {
             Debug.Log($"Raycast hit: {hit.transform.name}");
             if (hit.transform == gameObject.transform)
-                itemToToggle.ToggleGrayScale();
+                itemToToggle.ToggleColor();
         }
     }
 }
