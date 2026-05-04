@@ -80,7 +80,7 @@ Supervised by:
 
 ### Team
 
-Anton E., Lennart K., Jessica L.,  Gordian R., Nils S., Nikita S., Ryu S., Phu Dat T., ...
+Anton E., Lennart K., Jessica L.,  Gordian R., Muhammad R., Nils S., Nikita S., Ryu S., Phu Dat T.
 
 ## License
 
