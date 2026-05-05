@@ -3,7 +3,7 @@
 // 1-sentence summary
 
 ## Folderstructure
-
+```
 Assets/
 ├─ Art/
 │  ├─ Models/
@@ -33,6 +33,7 @@ Assets/
 │  └─ Icons/
 ├─ StreamingAssets/ (extern geladene Audio-Dateien)
 └─ Documentation/
+```
 
 ## About
 
