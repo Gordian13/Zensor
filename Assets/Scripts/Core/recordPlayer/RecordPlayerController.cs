@@ -40,7 +40,7 @@ namespace recordPlayer
                 TrySnapRecord(vinyl, rb);
             }
         }
-        
+
         private void OnTriggerExit(Collider other)
         {
             if (!_isPlaying || _recordToPlay == null) return;
@@ -91,9 +91,17 @@ namespace recordPlayer
             _recordToPlay.OnPlaced();
 
             var clip = vinyl.GetData().audioClip;
+            var data = vinyl.GetData();
             if (clip != null)
             {
                 _audioSource.clip = clip;
+
+                // implement 33 & 45 speed technique of vinyls
+                if (data.speed == Speed.Slow) _audioSource.pitch = 0.65f;
+                else if (data.speed == Speed.Fast) _audioSource.pitch = 1.25f;
+                else if (data.speed == Speed.Normal) _audioSource.pitch = 1f;
+                else _audioSource.pitch = 1f;
+
                 _audioSource.Play();
             }
 
