@@ -2,8 +2,7 @@
 
 // 1-sentence summary
 
-## Folder Structure
-
+## Folderstructure
 ```
 Assets/
 ├─ Art/
@@ -15,6 +14,7 @@ Assets/
 │  ├─ Music/
 │  ├─ SFX/
 │  ├─ Dialogue/
+│  └─ Metadata/ (songs.json)
 ├─ Prefabs/
 │  ├─ Environment/ (Tresen, Regal, WandPanel)
 │  ├─ Interactions/ (AudioPlayer, InfoPanel)
@@ -31,8 +31,8 @@ Assets/
 │  ├─ Canvases/
 │  ├─ Fonts/
 │  └─ Icons/
-├─ StreamingAssets/
-└─ Documentation/ 
+├─ StreamingAssets/ (extern geladene Audio-Dateien)
+└─ Documentation/
 ```
 
 ## About
@@ -113,7 +113,7 @@ Supervised by:
 
 ### Team
 
-Anton E., Lennart K., Jessica L.,  Gordian R., Nils S., Nikita S., Ryu S., Phu Dat T., ...
+Anton E., Lennart K., Jessica L.,  Gordian R., Muhammad R., Nils S., Nikita S., Ryu S., Phu Dat T.
 
 ## License
 
