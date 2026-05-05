@@ -2,6 +2,39 @@
 
 // 1-sentence summary
 
+## Folderstructure
+```
+Assets/
+├─ Art/
+│  ├─ Models/
+│  ├─ Textures/
+│  ├─ Materials/
+│  └─ Sprites/
+├─ Audio/
+│  ├─ Music/
+│  ├─ SFX/
+│  ├─ Dialogue/
+│  └─ Metadata/ (songs.json)
+├─ Prefabs/
+│  ├─ Environment/ (Tresen, Regal, WandPanel)
+│  ├─ Interactions/ (AudioPlayer, InfoPanel)
+│  └─ Avatar/
+├─ Scenes/
+│  ├─ Main
+│  ├─ Tresen
+│  └─ Wand
+├─ Scripts/
+│  ├─ Core/ (GameManager, AudioManager, InputManager)
+│  ├─ Interaction/ (z.B. Interactable, TalkCounter, InfoWall, AudioPlayerController)
+│  ├─ UI/ (Popup, PlaylistUI)
+├─ UI/
+│  ├─ Canvases/
+│  ├─ Fonts/
+│  └─ Icons/
+├─ StreamingAssets/ (extern geladene Audio-Dateien)
+└─ Documentation/
+```
+
 ## About
 
 // 3 paragraphs about project
