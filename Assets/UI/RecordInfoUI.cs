@@ -17,8 +17,6 @@ public class RecordInfoUI : MonoBehaviour
     [SerializeField] private string unknownAuthor = "Unknown Artist";
     [SerializeField] private string unknownYear = "Unknown Year";
     [SerializeField] private string unknownPlayable = "Unknown Status";
-    [SerializeField] private string playableLabel = "Playable";
-    [SerializeField] private string notPlayableLabel = "Not Playable";
     [SerializeField] private string unknownDescription = "No description available.";
 
     public void Configure(
@@ -68,19 +66,9 @@ public class RecordInfoUI : MonoBehaviour
             authorText.text = string.IsNullOrWhiteSpace(data.author) ? unknownAuthor : data.author;
         }
 
-        if (yearText != null)
-        {
-            yearText.text = data.year > 0 ? data.year.ToString() : unknownYear;
-        }
-
         if (descriptionText != null)
         {
             descriptionText.text = string.IsNullOrWhiteSpace(data.description) ? unknownDescription : data.description;
-        }
-
-        if (playableText != null)
-        {
-            playableText.text = data.isPlayable ? playableLabel : notPlayableLabel;
         }
 
         if (coverImage != null)
