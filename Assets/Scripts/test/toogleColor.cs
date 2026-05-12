@@ -1,7 +1,6 @@
-using DefaultNamespace.GrayScale;
+using Interaction.util.ColorReveal;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using util.GrayScale;
 
 public class toogleColor : MonoBehaviour
 {
