@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using record;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -63,91 +60,6 @@ public static class RecordMetadataUISetup
         EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         Selection.activeGameObject = panel.gameObject;
         Debug.Log("Record metadata UI setup complete.");
-    }
-
-    [MenuItem("Tools/Zensor/Assign firstRecord* To Existing Vinyls")]
-    public static void AssignFirstRecordAssetsToVinyls()
-    {
-        var vinyls = Object.FindObjectsByType<RecordInteractionSkript>(FindObjectsSortMode.None)
-            .OrderBy(v => v.transform.position.x)
-            .ToList();
-
-        if (vinyls.Count == 0)
-        {
-            Debug.LogWarning("RecordMetadataUISetup: No vinyls with RecordInteractionSkript found in scene.");
-            return;
-        }
-
-        var recordAssets = LoadFirstRecordAssets();
-        if (recordAssets.Count == 0)
-        {
-            Debug.LogWarning("RecordMetadataUISetup: No RecordData assets found in Assets/Scripts/record.");
-            return;
-        }
-
-        for (int i = 0; i < vinyls.Count; i++)
-        {
-            vinyls[i].data = recordAssets[i % recordAssets.Count];
-            EditorUtility.SetDirty(vinyls[i]);
-        }
-
-        EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
-        Debug.Log($"Assigned {recordAssets.Count} record assets across {vinyls.Count} vinyl object(s).");
-    }
-
-    [MenuItem("Tools/Zensor/Spawn Vinyl Test Set From firstRecord*")]
-    public static void SpawnVinylTestSet()
-    {
-        var template = Object.FindFirstObjectByType<RecordInteractionSkript>();
-        if (template == null)
-        {
-            Debug.LogWarning("RecordMetadataUISetup: No RecordInteractionSkript found to use as template.");
-            return;
-        }
-
-        var recordAssets = LoadFirstRecordAssets();
-        if (recordAssets.Count == 0)
-        {
-            Debug.LogWarning("RecordMetadataUISetup: No RecordData assets found in Assets/Scripts/record.");
-            return;
-        }
-
-        const float spacing = 0.45f;
-        var startPosition = template.transform.position;
-        var parent = template.transform.parent;
-
-        for (int i = 0; i < recordAssets.Count; i++)
-        {
-            GameObject vinylObject;
-            RecordInteractionSkript interaction;
-
-            if (i == 0)
-            {
-                vinylObject = template.gameObject;
-                interaction = template;
-            }
-            else
-            {
-                vinylObject = Object.Instantiate(template.gameObject, parent);
-                interaction = vinylObject.GetComponent<RecordInteractionSkript>();
-            }
-
-            vinylObject.name = $"SM_VinylDisc_{i + 1}";
-            vinylObject.transform.position = startPosition + new Vector3(spacing * i, 0f, 0f);
-            vinylObject.transform.rotation = template.transform.rotation;
-
-            if (vinylObject.TryGetComponent<Rigidbody>(out var rb))
-            {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
-
-            interaction.data = recordAssets[i];
-            EditorUtility.SetDirty(interaction);
-        }
-
-        EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
-        Debug.Log($"Spawned/assigned {recordAssets.Count} vinyls for multi-record testing.");
     }
 
     private static Canvas GetOrCreateCanvas()
@@ -274,22 +186,4 @@ public static class RecordMetadataUISetup
         return image;
     }
 
-    private static List<RecordData> LoadFirstRecordAssets()
-    {
-        const string searchFolder = "Assets/Scripts/record";
-        var guids = AssetDatabase.FindAssets("t:RecordData firstRecord", new[] { searchFolder });
-        var assets = new List<RecordData>();
-
-        foreach (var guid in guids)
-        {
-            var path = AssetDatabase.GUIDToAssetPath(guid);
-            var data = AssetDatabase.LoadAssetAtPath<RecordData>(path);
-            if (data != null)
-            {
-                assets.Add(data);
-            }
-        }
-
-        return assets.OrderBy(a => a.name).ToList();
-    }
 }
