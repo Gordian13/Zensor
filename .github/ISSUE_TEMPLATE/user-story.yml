@@ -103,6 +103,7 @@ body:
           options:
             - label: Acceptance criteria met
             - label: Code is complete and Pull-Request created
+            - label: Code is documented
             - label: Code reviewed and approved
             - label: Code has been tested in production-like environment
             - label: Documentation has been updated
