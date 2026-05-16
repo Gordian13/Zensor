@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1740048164913385388}
   - component: {fileID: 815647906928786401}
   - component: {fileID: 582290950409264337}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SM_VinylDisc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
