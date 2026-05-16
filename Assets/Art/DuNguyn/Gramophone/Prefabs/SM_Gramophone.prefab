@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8788323944818514253}
   - component: {fileID: 6886978271399930490}
   - component: {fileID: 8769216005555514301}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SM_Gramophone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9708ed5e153200044a8dad789fbb6b2d, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9708ed5e153200044a8dad789fbb6b2d, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9708ed5e153200044a8dad789fbb6b2d, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9708ed5e153200044a8dad789fbb6b2d, type: 3}
       propertyPath: m_StaticEditorFlags

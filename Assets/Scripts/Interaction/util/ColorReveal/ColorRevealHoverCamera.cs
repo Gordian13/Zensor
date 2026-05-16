@@ -10,7 +10,7 @@ namespace Interaction.util.ColorReveal
     public class ColorRevealHoverCamera : MonoBehaviour
     {
         [SerializeField] private float maxDistanceMeter = 100f;
-        [SerializeField] private LayerMask hoverLayer = 1 << 3;
+        [SerializeField] private LayerMask hoverLayer = ~0;
 
         private Camera _camera;
         private IColorRevealable _lastHovered;
