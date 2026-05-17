@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Displays the metadata of the currently selected record in the UI panel.
+// This script only updates UI elements; it does not decide which record was selected.
 public class RecordInfoUI : MonoBehaviour
 {
     [SerializeField] private GameObject panelRoot;
@@ -19,6 +21,7 @@ public class RecordInfoUI : MonoBehaviour
     [SerializeField] private string unknownPlayable = "Unknown Status";
     [SerializeField] private string unknownDescription = "No description available.";
 
+    // Used by the editor setup tool to connect the generated UI elements automatically.
     public void Configure(
         GameObject panel,
         TMP_Text title,
@@ -47,8 +50,10 @@ public class RecordInfoUI : MonoBehaviour
         Hide();
     }
 
+    // Called when a record is selected. It reads the record metadata and fills the UI panel.
     public void ShowData(RecordData data)
     {
+        // If no record data is available, show neutral placeholder text instead.
         if (data == null)
         {
             Clear();
@@ -56,6 +61,7 @@ public class RecordInfoUI : MonoBehaviour
             return;
         }
 
+        // Each UI field is checked before use, so the panel still works if one reference is missing.
         if (titleText != null)
         {
             titleText.text = string.IsNullOrWhiteSpace(data.title) ? unknownTitle : data.title;
@@ -80,11 +86,13 @@ public class RecordInfoUI : MonoBehaviour
         SetPanelVisible(true);
     }
 
+    // Hides the metadata panel when no record is selected or the user clicks away.
     public void Hide()
     {
         SetPanelVisible(false);
     }
 
+    // Resets the UI to safe placeholder values so old record data is not left on screen.
     public void Clear()
     {
         if (titleText != null)
@@ -121,6 +129,7 @@ public class RecordInfoUI : MonoBehaviour
 
     private void SetPanelVisible(bool visible)
     {
+        // Turns the whole metadata panel on or off in the scene.
         if (panelRoot != null)
         {
             panelRoot.SetActive(visible);
