@@ -44,10 +44,16 @@ ExportedObj/
 *.VC.db
 *.DotSettings.user
 
+# Meta files built by Visual Studio
+*.meta
+
 # Unity generated meta files for IDE artifacts
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+
+# Asset meta data should only be ignored when the corresponding asset is also ignored
+!/[Aa]ssets/**/*.meta
 
 # Blender temp files
 *.blend1
