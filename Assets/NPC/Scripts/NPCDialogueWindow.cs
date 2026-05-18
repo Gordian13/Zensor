@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class NPCDialogueWindow : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class NPCDialogueWindow : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject root;
     [SerializeField] private TMP_Text dialogueText;
+
+    [SerializeField] private float dialogueDisplayTime = 5f;
 
     private void Awake()
     {
@@ -27,6 +30,7 @@ public class NPCDialogueWindow : MonoBehaviour
 
         dialogueText.text = text;
         root.SetActive(true);
+        Invoke(nameof(Hide), dialogueDisplayTime);
     }
 
     public void Hide()
