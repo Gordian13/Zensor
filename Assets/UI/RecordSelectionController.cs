@@ -70,23 +70,29 @@ public class RecordSelectionController : MonoBehaviour
 
         // Convert the 2D mouse position into a 3D ray that can hit objects in the scene.
         var ray = targetCamera.ScreenPointToRay(screenPosition);
-        if (!Physics.Raycast(ray, out var hit, rayDistance, interactableLayers))
+        var hits = Physics.RaycastAll(ray, rayDistance, interactableLayers);
+        if (hits.Length == 0)
         {
             return false;
         }
 
-        // Check the clicked object and its parents for a script that implements IVinyl.
-        var components = hit.transform.GetComponentsInParent<MonoBehaviour>(true);
-        foreach (var component in components)
+        var closestDistance = float.PositiveInfinity;
+
+        foreach (var hit in hits)
         {
-            // IVinyl means "this object can provide record data".
-            if (component is IVinyl provider)
+            // Check the clicked object and its parents for a script that implements IVinyl.
+            var components = hit.transform.GetComponentsInParent<MonoBehaviour>(true);
+            foreach (var component in components)
             {
-                vinyl = provider;
-                return true;
+                // IVinyl means "this object can provide record data".
+                if (component is IVinyl provider && hit.distance < closestDistance)
+                {
+                    vinyl = provider;
+                    closestDistance = hit.distance;
+                }
             }
         }
 
-        return false;
+        return vinyl != null;
     }
 }
