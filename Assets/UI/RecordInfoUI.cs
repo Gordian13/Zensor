@@ -47,7 +47,6 @@ public class RecordInfoUI : MonoBehaviour
             panelRoot = gameObject;
         }
 
-        ApplyResponsiveLayout();
         Hide();
     }
 
@@ -94,7 +93,6 @@ public class RecordInfoUI : MonoBehaviour
             coverImage.enabled = data.sprite != null;
         }
 
-        ApplyResponsiveLayout();
         SetPanelVisible(true);
     }
 
@@ -146,83 +144,5 @@ public class RecordInfoUI : MonoBehaviour
         {
             panelRoot.SetActive(visible);
         }
-    }
-
-    private void ApplyResponsiveLayout()
-    {
-        if (panelRoot == null)
-        {
-            return;
-        }
-
-        var panelRect = panelRoot.GetComponent<RectTransform>();
-        if (panelRect == null)
-        {
-            return;
-        }
-
-        var parentRect = panelRect.parent as RectTransform;
-        var parentHeight = parentRect != null ? parentRect.rect.height : Screen.height;
-        var panelHeight = Mathf.Clamp(parentHeight * 0.45f, 150f, 280f);
-
-        panelRect.anchorMin = new Vector2(0f, 0f);
-        panelRect.anchorMax = new Vector2(1f, 0f);
-        panelRect.pivot = new Vector2(0.5f, 0f);
-        panelRect.offsetMin = new Vector2(12f, 12f);
-        panelRect.offsetMax = new Vector2(-12f, 12f + panelHeight);
-
-        var coverWidth = coverImage != null && coverImage.enabled ? 126f : 0f;
-        var rightPadding = 16f + coverWidth;
-
-        SetTopTextRect(titleText, 16f, rightPadding, 12f, 34f, 22f);
-        SetTopTextRect(authorText, 16f, rightPadding, 42f, 24f, 17f);
-        SetTopTextRect(yearText, 16f, 260f, 68f, 22f, 15f);
-        SetTopTextRect(playableText, 150f, rightPadding, 68f, 22f, 15f);
-        SetStretchTextRect(descriptionText, 16f, 16f, 12f, 96f, 15f);
-
-        if (coverImage != null)
-        {
-            var coverRect = coverImage.rectTransform;
-            coverRect.anchorMin = new Vector2(1f, 1f);
-            coverRect.anchorMax = new Vector2(1f, 1f);
-            coverRect.pivot = new Vector2(1f, 1f);
-            coverRect.anchoredPosition = new Vector2(-16f, -16f);
-            coverRect.sizeDelta = new Vector2(118f, 118f);
-            coverImage.preserveAspect = true;
-        }
-    }
-
-    private static void SetTopTextRect(TMP_Text text, float left, float right, float top, float height, float fontSize)
-    {
-        if (text == null)
-        {
-            return;
-        }
-
-        var rect = text.rectTransform;
-        rect.anchorMin = new Vector2(0f, 1f);
-        rect.anchorMax = new Vector2(1f, 1f);
-        rect.offsetMin = new Vector2(left, -top - height);
-        rect.offsetMax = new Vector2(-right, -top);
-
-        text.fontSize = fontSize;
-        text.textWrappingMode = TextWrappingModes.Normal;
-    }
-
-    private static void SetStretchTextRect(TMP_Text text, float left, float right, float bottom, float top, float fontSize)
-    {
-        if (text == null)
-        {
-            return;
-        }
-
-        var rect = text.rectTransform;
-        rect.anchorMin = new Vector2(0f, 0f);
-        rect.anchorMax = new Vector2(1f, 1f);
-        rect.offsetMin = new Vector2(left, bottom);
-        rect.offsetMax = new Vector2(-right, -top);
-
-        text.fontSize = fontSize;
-        text.textWrappingMode = TextWrappingModes.Normal;
     }
 }
