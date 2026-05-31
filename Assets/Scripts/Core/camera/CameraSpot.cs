@@ -25,6 +25,7 @@ namespace Core.camera
             return this.spotCamera;
         }
 
+        
         public void Awake()
         {
             if (string.IsNullOrWhiteSpace(spotId))

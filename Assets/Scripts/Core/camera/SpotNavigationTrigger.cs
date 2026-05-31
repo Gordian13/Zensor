@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Core.camera
 {
+    /*
+     * how can we get to this spot?
+     */
     public class SpotNavigationTrigger : MonoBehaviour
     {
         [SerializeField] private CameraSpot targetSpot;

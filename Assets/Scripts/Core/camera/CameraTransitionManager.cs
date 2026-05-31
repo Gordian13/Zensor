@@ -11,9 +11,11 @@ namespace Core.camera
     {
         [SerializeField] private SpotManager spotManager;
         [SerializeField] private CameraSpotRegistry registry;
-        [SerializeField] private float blendTime;
+        [SerializeField] private CinemachineBrain brain;
+        [SerializeField] private float routeCameraTime = 0.25f;
         [SerializeField] private int inactivePriority = 0;
         [SerializeField] private int activePriority = 10;
+        [SerializeField] private float finishDelay = 0.75f;
 
         private Coroutine currentTransition;
         public bool IsTransitioning { get; private set; }
@@ -26,20 +28,18 @@ namespace Core.camera
             if (registry == null)
                 Debug.LogError($"{nameof(CameraTransitionManager)} has no CameraSpotRegistry assigned.", this);
 
-            if (blendTime <= 0f)
-                Debug.LogWarning($"{nameof(CameraTransitionManager)} blendTime is {blendTime}. Transitions will be instant or invalid.", this);
+            if (brain == null)
+                brain = FindFirstObjectByType<CinemachineBrain>();
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
-            yield return null;
-
             if (spotManager == null)
-                yield break;
+                return;
 
             CameraSpot currentSpot = spotManager.GetCurrentSpot();
             if (currentSpot != null)
-                SetActiveCamera(currentSpot.getSpotCamera());
+                StartOnCamera(currentSpot.getSpotCamera());
         }
 
         public void PlayRoute(CameraRoute route, string destinationSpotId)
@@ -74,6 +74,8 @@ namespace Core.camera
             if (currentSpot != null)
                 currentSpot.SetLookControlActive(false);
 
+            CinemachineCamera destinationCamera = destinationSpot.getSpotCamera();
+
             if (route != null && route.wayCamerasIds != null)
             {
                 foreach (string cameraId in route.wayCamerasIds)
@@ -89,6 +91,9 @@ namespace Core.camera
                         yield break;
                     }
 
+                    if (routeCamera == destinationCamera)
+                        continue;
+
                     ResetOrbitIfInactive(routeCamera);
 
                     if (!SetActiveCamera(routeCamera))
@@ -97,11 +102,10 @@ namespace Core.camera
                         yield break;
                     }
 
-                    yield return new WaitForSeconds(blendTime);
+                    yield return WaitForBlend(routeCameraTime);
                 }
             }
 
-            CinemachineCamera destinationCamera = destinationSpot.getSpotCamera();
             if (destinationCamera != null && destinationCamera.Priority != activePriority)
                 destinationSpot.ResetLook();
 
@@ -111,7 +115,7 @@ namespace Core.camera
                 yield break;
             }
 
-            yield return new WaitForSeconds(blendTime);
+            yield return WaitForBlend(finishDelay);
 
             if (spotManager != null)
                 spotManager.SetCurrentSpot(destinationSpot);
@@ -140,6 +144,50 @@ namespace Core.camera
 
             targetCamera.Priority = activePriority;
             return true;
+        }
+
+        private void StartOnCamera(CinemachineCamera targetCamera)
+        {
+            if (targetCamera == null)
+                return;
+
+            if (brain != null)
+                brain.enabled = false;
+
+            Camera outputCamera = brain != null ? brain.OutputCamera : Camera.main;
+            if (outputCamera != null)
+            {
+                outputCamera.transform.SetPositionAndRotation(
+                    targetCamera.transform.position,
+                    targetCamera.transform.rotation
+                );
+            }
+
+            SetActiveCamera(targetCamera);
+
+            if (brain != null)
+                StartCoroutine(EnableBrainAfterStartup());
+        }
+
+        private IEnumerator EnableBrainAfterStartup()
+        {
+            yield return null;
+            brain.enabled = true;
+        }
+
+        private IEnumerator WaitForBlend(float minimumTime)
+        {
+            float elapsed = 0f;
+            while (elapsed < minimumTime)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            while (brain != null && brain.enabled && brain.IsBlending)
+            {
+                yield return null;
+            }
         }
 
         private void ResetOrbitIfInactive(CinemachineCamera camera)

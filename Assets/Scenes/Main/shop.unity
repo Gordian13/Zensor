@@ -559,8 +559,7 @@ MonoBehaviour:
   targetSpot: {fileID: 1313512621}
   routes:
   - fromSpotId: vinyl
-    wayCamerasIds:
-    - doorCam
+    wayCamerasIds: []
 --- !u!4 &1687984542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1503844757079232779, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}

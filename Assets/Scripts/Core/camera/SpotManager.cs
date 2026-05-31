@@ -26,16 +26,7 @@ namespace Core.camera
             if (_startSpot != null && !string.IsNullOrWhiteSpace(startSpotId))
                 Debug.LogError($"{nameof(SpotManager)} has both Start Spot and Start Spot Id assigned. Use only one.", this);
 
-            if (CurrentSpot == null && !string.IsNullOrWhiteSpace(startSpotId))
-            {
-                if (registry == null)
-                {
-                    Debug.LogError($"{nameof(SpotManager)} cannot resolve Start Spot Id because registry is missing.", this);
-                    return;
-                }
-
-                CurrentSpot = registry.GetSpot(startSpotId);
-            }
+            ResolveStartSpot();
 
             if (CurrentSpot == null)
                 Debug.LogError($"{nameof(SpotManager)} has no current spot. Assign Start Spot or Start Spot Id.", this);
@@ -63,6 +54,7 @@ namespace Core.camera
 
         public CameraSpot GetCurrentSpot()
         {
+            ResolveStartSpot();
             return CurrentSpot;
         }
 
@@ -79,7 +71,22 @@ namespace Core.camera
 
         public bool IsCurrentSpot(CameraSpot spot)
         {
+            ResolveStartSpot();
             return this.CurrentSpot == spot;
+        }
+
+        private void ResolveStartSpot()
+        {
+            if (CurrentSpot != null || string.IsNullOrWhiteSpace(startSpotId))
+                return;
+
+            if (registry == null)
+            {
+                Debug.LogError($"{nameof(SpotManager)} cannot resolve Start Spot Id because registry is missing.", this);
+                return;
+            }
+
+            CurrentSpot = registry.GetSpot(startSpotId);
         }
     }
 }

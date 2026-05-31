@@ -1610,8 +1610,8 @@ MonoBehaviour:
     Enabled: 0
     DefaultMode: 2
   DefaultBlend:
-    Style: 1
-    Time: 2
+    Style: 6
+    Time: 1
     CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -1851,9 +1851,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Core.camera.CameraTransitionManager
   spotManager: {fileID: 2135236720}
   registry: {fileID: 2135236722}
-  blendTime: 2
+  brain: {fileID: 1660153193}
+  routeCameraTime: 0.5
   inactivePriority: 0
   activePriority: 10
+  finishDelay: 0.75
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
