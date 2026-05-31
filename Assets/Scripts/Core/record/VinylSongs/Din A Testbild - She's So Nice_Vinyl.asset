@@ -21,6 +21,6 @@ MonoBehaviour:
     behind West Berlin\u2019s expressive musical avant-garde and the subsequent techno
     wave."
   sprite: {fileID: 21300000, guid: 93d0cbfc6c65642668aab534bf1ec179, type: 3}
-  audioClip: {fileID: 8300000, guid: 6c27dbd567aed4031b2a8dc98ec46f48, type: 3}
-  format: 0
   speed: 0
+  tracks:
+  - {fileID: 8300000, guid: 6c27dbd567aed4031b2a8dc98ec46f48, type: 3}

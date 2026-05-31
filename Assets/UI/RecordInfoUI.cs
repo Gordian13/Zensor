@@ -84,7 +84,7 @@ public class RecordInfoUI : MonoBehaviour
 
         if (playableText != null)
         {
-            playableText.text = data.format == RecordFormat.Vinyl ? "Vinyl" : "Tape";
+            // playableText.text = data.format == RecordFormat.Vinyl ? "Vinyl" : "Tape";
         }
 
         if (coverImage != null)

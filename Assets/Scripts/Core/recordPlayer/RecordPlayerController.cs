@@ -1,135 +1,112 @@
-﻿using record;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace recordPlayer
 {
     public class RecordPlayerController : MonoBehaviour
     {
-        [SerializeField] private Transform snapPoint;
-        [SerializeField] private float snapRadius = 0.5f;
+        [Header("References")]
+        [SerializeField] private AudioSource audioSource;
 
-        private IVinyl _recordToPlay;
-        private Rigidbody _rbRecordToPlay;
-        private AudioSource _audioSource;
+        [Header("Record")]
+        [SerializeField] private RecordData currentRecord;
+
+        [Header("Animation")]
+        [SerializeField] private Transform toneArmPivot;
+        [SerializeField] private Transform platter;
+        [SerializeField] private Transform vinyl;        
+        [SerializeField] private float armRestAngle = 0f;
+        [SerializeField] private float armPlayAngle = 45f;
+        [SerializeField] private float armMoveSpeed = 1.5f;
+
         private bool _isPlaying;
-        private float _checkTimer;
-        private const float CheckInterval = 3f;
+        private int _currentTrackIndex;
+
+        private float _currentRPM = 33f;
 
         private void Awake()
         {
-            _audioSource = GetComponent<AudioSource>();
             _isPlaying = false;
-            _checkTimer = CheckInterval;
+            _currentTrackIndex = 0;
         }
 
-        private void Update()
+        void Update()
         {
-            _checkTimer += Time.deltaTime;
+
+            
+            if (_isPlaying)
+            {
+                // Plattenteller dreht sich
+                platter.Rotate(Vector3.forward, _currentRPM * 6f * Time.deltaTime);
+                // Vinyl dreht sich
+                vinyl.Rotate(Vector3.up, _currentRPM * 6f * Time.deltaTime);
+            }
+
+            // Tonarm bewegt sich (Z-Achse)
+            float targetAngle = _isPlaying ? armPlayAngle : armRestAngle;
+            float currentAngle = toneArmPivot.localEulerAngles.z;
+            float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, armMoveSpeed * Time.deltaTime);
+            toneArmPivot.localEulerAngles = new Vector3(
+                toneArmPivot.localEulerAngles.x,
+                toneArmPivot.localEulerAngles.y,
+                newAngle
+            );
         }
 
-        private void OnTriggerStay(Collider other)
+        public void TogglePlay()
         {
-            if (_isPlaying || _recordToPlay != null) return;
-            if (_checkTimer < CheckInterval) return;
-
-            _checkTimer = 0f;
-
-            if (other.TryGetComponent<RecordInteractionSkript>(out var vinyl))
-            {
-                var rb = other.attachedRigidbody != null ? other.attachedRigidbody : other.GetComponent<Rigidbody>();
-                TrySnapRecord(vinyl, rb);
-            }
+            if (_isPlaying) Stop();
+            else Play();
         }
 
-        private void OnTriggerExit(Collider other)
+        public void Play()
         {
-            if (!_isPlaying || _recordToPlay == null) return;
+            if (currentRecord == null || currentRecord.TrackCount == 0) return;
 
-            if (other.TryGetComponent<RecordInteractionSkript>(out var vinyl) && ReferenceEquals(vinyl, _recordToPlay))
+            audioSource.clip = currentRecord.GetTrack(_currentTrackIndex);
+            audioSource.pitch = currentRecord.speed switch
             {
-                ReleaseCurrentRecord();
-            }
-        }
+                Speed.Slow => 0.65f,
+                Speed.Fast => 1.25f,
+                Speed.Normal => 1f,
+                _ => 1f
+            };
 
-        public bool TrySnapRecord(RecordInteractionSkript vinyl, Rigidbody vinylRb)
-        {
-            if (vinyl == null) return false;
-
-            if (_isPlaying && ReferenceEquals(_recordToPlay, vinyl))
-            {
-                return true;
-            }
-
-            if (_isPlaying || _recordToPlay != null)
-            {
-                return false;
-            }
-
-            var snapPos = GetSnapPointPosition();
-            var sqrDistance = (vinyl.transform.position - snapPos).sqrMagnitude;
-            if (sqrDistance > snapRadius * snapRadius)
-            {
-                return false;
-            }
-
+            audioSource.Play();
             _isPlaying = true;
-            _recordToPlay = vinyl;
-            _rbRecordToPlay = vinylRb != null ? vinylRb : vinyl.GetComponent<Rigidbody>();
-
-            if (_rbRecordToPlay != null)
-            {
-                _rbRecordToPlay.linearVelocity = Vector3.zero;
-                _rbRecordToPlay.angularVelocity = Vector3.zero;
-                _rbRecordToPlay.useGravity = false;
-                _rbRecordToPlay.isKinematic = true;
-            }
-
-            var target = snapPoint != null ? snapPoint : transform;
-            vinyl.transform.position = target.position;
-            vinyl.transform.rotation = target.rotation;
-
-            _recordToPlay.OnPlaced();
-
-            var clip = vinyl.GetData().audioClip;
-            var data = vinyl.GetData();
-            if (clip != null)
-            {
-                _audioSource.clip = clip;
-
-                // implement 33 & 45 speed technique of vinyls
-                if (data.speed == Speed.Slow) _audioSource.pitch = 0.65f;
-                else if (data.speed == Speed.Fast) _audioSource.pitch = 1.25f;
-                else if (data.speed == Speed.Normal) _audioSource.pitch = 1f;
-                else _audioSource.pitch = 1f;
-
-                _audioSource.Play();
-            }
-
-            return true;
         }
 
-        public void ReleaseCurrentRecord()
+        public void Stop()
         {
-            if (_recordToPlay == null) return;
-
+            audioSource.Stop();
             _isPlaying = false;
-            _checkTimer = 0f;
-
-            if (_rbRecordToPlay != null)
-            {
-                _rbRecordToPlay.useGravity = true;
-                _rbRecordToPlay.isKinematic = false;
-            }
-
-            _recordToPlay.OnRemoved();
-            _audioSource.Stop();
-            _rbRecordToPlay = null;
-            _recordToPlay = null;
         }
 
-        public Vector3 GetSnapPointPosition()
+        public void NextTrack()
         {
-            return snapPoint != null ? snapPoint.position : transform.position;
+            if (currentRecord == null) return;
+            _currentTrackIndex = (_currentTrackIndex + 1) % currentRecord.TrackCount;
+            if (_isPlaying) Play();
+        }
+
+        public void PreviousTrack()
+        {
+            if (currentRecord == null) return;
+            _currentTrackIndex = (_currentTrackIndex - 1 + currentRecord.TrackCount) % currentRecord.TrackCount;
+            if (_isPlaying) Play();
+        }
+
+        public void SetRecord(RecordData record)
+        {
+            Stop();
+            currentRecord = record;
+            _currentTrackIndex = 0;
+        }
+
+        public void SetPitch(float rpm)
+        {
+            _currentRPM = rpm;
+            audioSource.pitch = rpm == 45f ? 1.25f : 0.65f;
         }
     }
 }

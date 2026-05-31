@@ -29,7 +29,7 @@ public static class RecordMetadataUISetup
         if (descriptionCreated)
         {
             descriptionText.alignment = TextAlignmentOptions.TopLeft;
-            descriptionText.enableWordWrapping = true;
+            // descriptionText.enableWordWrapping = true;
             descriptionText.overflowMode = TextOverflowModes.Overflow;
         }
 
