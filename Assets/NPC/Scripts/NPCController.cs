@@ -236,14 +236,22 @@ public class NPCController : MonoBehaviour
                 yield return null;
 
             // Wait until the NPC reaches the target.
-            while (agent.hasPath && agent.remainingDistance > agent.stoppingDistance)
+            while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
                 yield return null;
 
-            // Wait time depends on current mood.
+            // Stop agent hard, to prevent brake sliding
+            agent.isStopped = true;
+            agent.velocity = new Vector3(0.01f, 0f, 0.01f);
+            agent.ResetPath();
+
+            // Wait time depends on current mood
             NPCMoodData moodData = GetCurrentMoodData();
             float waitTime = moodData != null ? moodData.waitAtPointSeconds : 1f;
 
             yield return new WaitForSeconds(waitTime);
+
+            // Activate agent for the next patrol point
+            agent.isStopped = false;
         }
     }
 

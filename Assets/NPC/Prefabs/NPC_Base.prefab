@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: -5267859701713105055}
   - component: {fileID: 3176467681330572056}
   - component: {fileID: 7387718276659454907}
+  - component: {fileID: 8620543231635564788}
   m_Layer: 0
   m_Name: NPC_Base
   m_TagString: Untagged
@@ -102,9 +103,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 2
-  m_Acceleration: 8
+  m_Acceleration: 20
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -153,6 +154,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCReactionDebugTester
   npc: {fileID: 3176467681330572056}
+--- !u!114 &8620543231635564788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4428024062458576761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a511934b5133234094fcb078de98b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCHoverHighlight
+  npcController: {fileID: 3176467681330572056}
+  renderers:
+  - {fileID: 3977823995098444608}
+  highlightEnabled: 1
 --- !u!1 &8501415228719182762
 GameObject:
   m_ObjectHideFlags: 0
