@@ -69,6 +69,18 @@ namespace Core.camera
             return CurrentSpot.GetSpotId();
         }
 
+        public string GetStartSpotId()
+        {
+            if (!string.IsNullOrWhiteSpace(startSpotId))
+                return startSpotId;
+
+            if (_startSpot != null)
+                return _startSpot.GetSpotId();
+
+            Debug.LogError($"{nameof(SpotManager)} has no start spot assigned.", this);
+            return string.Empty;
+        }
+
         public bool IsCurrentSpot(CameraSpot spot)
         {
             ResolveStartSpot();
