@@ -10,6 +10,7 @@ namespace Interaction.util.ColorReveal
         [SerializeField] private bool startGrayscale = true;
         [SerializeField] private bool includeChildRenderers = false;
         [SerializeField] private bool includeInactiveChildren = true;
+        [SerializeField] private bool stayColored = false;
 
         private readonly List<Renderer> _renderers = new List<Renderer>();
         private MaterialPropertyBlock _propertyBlock;
@@ -42,16 +43,22 @@ namespace Interaction.util.ColorReveal
          */
         public void ToggleColor()
         {
-            _isGrayscale = !_isGrayscale;
-
-            float targetAmount = _isGrayscale ? 1f : 0f;
-
-            if (_transitionRoutine != null)
-                StopCoroutine(_transitionRoutine);
-
-            _transitionRoutine = StartCoroutine(AnimateColorAmount(targetAmount));
+            SetColor(_isGrayscale);
 
             Debug.Log($"Toggled grayscale on object {gameObject.name}");
+        }
+
+        /**
+         * Sets the object to color or grayscale directly.
+         * showColor true means _ColorAmount 0, showColor false means _ColorAmount 1.
+         */
+        public void SetColor(bool showColor)
+        {
+            if (stayColored && !showColor)
+                return;
+
+            _isGrayscale = !showColor;
+            StartColorTransition(_isGrayscale ? 1f : 0f);
         }
 
         /**
@@ -82,6 +89,14 @@ namespace Interaction.util.ColorReveal
             }
 
             SetColorAmount(targetAmount);
+        }
+
+        private void StartColorTransition(float targetAmount)
+        {
+            if (_transitionRoutine != null)
+                StopCoroutine(_transitionRoutine);
+
+            _transitionRoutine = StartCoroutine(AnimateColorAmount(targetAmount));
         }
 
         /**
@@ -170,6 +185,15 @@ namespace Interaction.util.ColorReveal
             }
 
             return colorAmounts;
+        }
+        
+        public void SetStayColored(bool stayColored)
+        {
+            this.stayColored = stayColored;
+            if (stayColored)
+            {
+                SetColor(true);
+            }
         }
     }
 }
