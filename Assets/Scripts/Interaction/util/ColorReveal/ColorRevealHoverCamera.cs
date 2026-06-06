@@ -5,7 +5,7 @@ namespace Interaction.util.ColorReveal
 {
     /**
      * Camera script that detects IColorRevealable objects under the mouse cursor
-     * and toggles their color when the hovered object changes.
+     * and sets their color state when the hovered object changes.
      */
     public class ColorRevealHoverCamera : MonoBehaviour
     {
@@ -34,8 +34,8 @@ namespace Interaction.util.ColorReveal
             if (Equals(currentHovered, _lastHovered))
                 return;
 
-            _lastHovered?.ToggleColor();
-            currentHovered?.ToggleColor();
+            _lastHovered?.SetColor(false);
+            currentHovered?.SetColor(true);
 
             _lastHovered = currentHovered;
         }
