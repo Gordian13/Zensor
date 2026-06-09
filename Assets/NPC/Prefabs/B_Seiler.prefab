@@ -14,12 +14,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5267859701713105055, guid: 83024d59323c82344b89eec91017f5d1, type: 3}
       propertyPath: m_AngularSpeed
-      value: 360
+      value: 720
       objectReference: {fileID: 0}
     - target: {fileID: 3176467681330572056, guid: 83024d59323c82344b89eec91017f5d1, type: 3}
       propertyPath: profile
       value: 
       objectReference: {fileID: 11400000, guid: de9bf969281bd6440a36ba989309eb77, type: 2}
+    - target: {fileID: 3176467681330572056, guid: 83024d59323c82344b89eec91017f5d1, type: 3}
+      propertyPath: patrolPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3939992218947453458, guid: 83024d59323c82344b89eec91017f5d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -108,6 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCAnimationController
   agent: {fileID: 6965068603932430482}
   animator: {fileID: 557816399987040436}
+  referenceWalkSpeed: 2
+  animationSpeedMultiplier: 1.3
 --- !u!1001 &6257565480515394853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168,6 +174,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.10714033
       objectReference: {fileID: 0}
+    - target: {fileID: -73690430385757562, guid: 6a5ba52d82501e74fbf9fb1a245f464d, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 96260acbdd65a90429ff86ced579ee1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 6a5ba52d82501e74fbf9fb1a245f464d, type: 3}
       propertyPath: m_Name
       value: Male_Adult_01
@@ -182,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 6a5ba52d82501e74fbf9fb1a245f464d, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

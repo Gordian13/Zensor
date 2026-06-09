@@ -65,6 +65,7 @@ public class NPCController : MonoBehaviour
     {
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
+            agent.updateRotation = false; // We handle rotation manually in the animation controller for better control.
 
         ApplyCurrentMoodSettings();
     }

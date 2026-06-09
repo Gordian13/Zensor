@@ -1224,6 +1224,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2895080460853919651, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 96260acbdd65a90429ff86ced579ee1d, type: 2}
+    - target: {fileID: 6965068603932430482, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 6981005416767380961, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
