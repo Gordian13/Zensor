@@ -15,6 +15,10 @@ public class NPCInteractionHandler : MonoBehaviour
     // Maximum distance the mouse raycast can reach.
     [SerializeField] private float maxDistance = 100f;
 
+    [Header("Interaction Anchor")]
+    [SerializeField] private Transform interactionAnchor;
+    [SerializeField] private Transform lookAtTarget;
+
     private void Awake()
     {
         // Automatically use the main camera if none was assigned.
@@ -51,6 +55,15 @@ public class NPCInteractionHandler : MonoBehaviour
 
         // Open the interaction menu for the clicked NPC.
         // Requires NPCInteractionMenu to exist in the scene.
-        NPCInteractionMenu.Instance.Open(npc);
+        if (NPCInteractionMenu.Instance == null)
+        {
+            Debug.LogError("NPCInteractionMenu.Instance is NULL.");
+            return;
+        }
+
+        npc.MoveToInteractionAnchor(interactionAnchor, lookAtTarget, () =>
+        {
+            NPCInteractionMenu.Instance.Open(npc);
+        });
     }
 }

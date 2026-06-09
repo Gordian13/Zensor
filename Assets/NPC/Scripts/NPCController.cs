@@ -19,6 +19,8 @@ public class NPCController : MonoBehaviour
     // NavMeshAgent used for pathfinding and movement.
     [SerializeField] private NavMeshAgent agent;
 
+    [SerializeField] private float interactionArrivalDistance = 1.5f;
+
     // Scene patrol points the NPC can walk between.
     [SerializeField] private List<Transform> patrolPoints = new List<Transform>();
 
@@ -43,6 +45,9 @@ public class NPCController : MonoBehaviour
     // Shows the currently selected patrol target in the Inspector.
     [SerializeField] private Transform currentTarget;
 
+    [SerializeField] private float interactionMoveAwayTolerance = 1f;
+    [SerializeField] private float interactionDestinationRefreshRate = 0.15f;
+
     // Public read-only access to profile and runtime state.
     public NPCProfile Profile => profile;
     public string NPCName => profile != null ? profile.npcName : "Unnamed NPC";
@@ -52,6 +57,9 @@ public class NPCController : MonoBehaviour
     private Coroutine patrolRoutine;
     private int currentPatrolIndex = -1;
     private Transform lastTarget;
+    private bool isInteracting;
+    private bool wasPatrollingBeforeInteraction;
+    private Coroutine interactionMoveRoutine;
 
     // Called by Unity when the component is added or reset.
     // Auto-fills the NavMeshAgent reference if possible.
@@ -147,7 +155,7 @@ public class NPCController : MonoBehaviour
 
         if (NPCDialogueWindow.Instance != null)
         {
-            NPCDialogueWindow.Instance.Show(text);
+            NPCDialogueWindow.Instance.Show(text, this);
         }
         else
         {
@@ -325,5 +333,167 @@ public class NPCController : MonoBehaviour
             Gizmos.color = Color.white;
             Gizmos.DrawSphere(currentTarget.position, 0.4f);
         }
+    }
+
+    public void BeginInteraction()
+    {
+        if (isInteracting)
+            return;
+
+        isInteracting = true;
+        wasPatrollingBeforeInteraction = patrolRoutine != null;
+
+        StopPatrol();
+
+        if (agent != null)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
+    }
+
+    public void EndInteraction()
+    {
+        if (!isInteracting)
+            return;
+
+        isInteracting = false;
+
+        if (agent != null)
+            agent.isStopped = false;
+        
+        if (interactionMoveRoutine != null)
+        {
+            StopCoroutine(interactionMoveRoutine);
+            interactionMoveRoutine = null;
+        }
+
+        if (wasPatrollingBeforeInteraction)
+            StartPatrol();
+    }
+    public void MoveToInteractionAnchor(
+        Transform anchor,
+        Transform lookAtTarget,
+        System.Action onArrived)
+    {
+        if (anchor == null)
+        {
+            Debug.LogWarning("Interaction anchor is null.");
+            return;
+        }
+
+        BeginInteraction();
+
+        if (interactionMoveRoutine != null)
+            StopCoroutine(interactionMoveRoutine);
+
+        interactionMoveRoutine = StartCoroutine(
+            MoveToInteractionAnchorRoutine(anchor, lookAtTarget, onArrived)
+        );
+    }
+
+    private void FacePosition(Vector3 lookAtPosition)
+    {
+        Vector3 direction = lookAtPosition - transform.position;
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude <= 0.001f)
+            return;
+
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    private void CancelInteractionMove()
+    {
+        Debug.Log("NPC interaction cancelled because interaction anchor moved.");
+
+        if (agent != null)
+        {
+            agent.isStopped = false;
+            agent.ResetPath();
+        }
+
+        EndInteraction();
+    }
+
+    private IEnumerator MoveToInteractionAnchorRoutine(
+        Transform anchor,
+        Transform lookAtTarget,
+        System.Action onArrived)
+    {
+        if (agent == null || anchor == null)
+            yield break;
+
+        float originalStoppingDistance = agent.stoppingDistance;
+        agent.stoppingDistance = interactionArrivalDistance;
+
+        float shortestDistanceToAnchor = Vector3.Distance(transform.position, anchor.position);
+
+        agent.isStopped = false;
+        agent.SetDestination(anchor.position);
+
+        float refreshTimer = 0f;
+
+        while (agent.pathPending)
+            yield return null;
+
+        while (true)
+        {
+            if (anchor == null)
+            {
+                agent.stoppingDistance = originalStoppingDistance;
+                CancelInteractionMove();
+                yield break;
+            }
+
+            float currentDistanceToAnchor = Vector3.Distance(transform.position, anchor.position);
+
+            if (currentDistanceToAnchor < shortestDistanceToAnchor)
+            {
+                shortestDistanceToAnchor = currentDistanceToAnchor;
+                agent.SetDestination(anchor.position);
+            }
+            
+
+            bool movedAwayAfterGettingCloser =
+                currentDistanceToAnchor > shortestDistanceToAnchor + interactionMoveAwayTolerance;
+
+            if (movedAwayAfterGettingCloser)
+            {
+                agent.stoppingDistance = originalStoppingDistance;
+                CancelInteractionMove();
+                yield break;
+            }
+
+            bool arrived =
+                !agent.pathPending &&
+                agent.remainingDistance <= agent.stoppingDistance;
+
+            if (arrived)
+                break;
+
+            refreshTimer += Time.deltaTime;
+
+            if (refreshTimer >= interactionDestinationRefreshRate)
+            {
+                agent.SetDestination(anchor.position);
+                refreshTimer = 0f;
+            }
+
+            yield return null;
+        }
+
+        agent.isStopped = true;
+        agent.ResetPath();
+
+        agent.stoppingDistance = originalStoppingDistance;
+
+        Vector3 lookPosition = lookAtTarget != null
+            ? lookAtTarget.position
+            : anchor.position;
+
+        FacePosition(lookPosition);
+
+        onArrived?.Invoke();
     }
 }

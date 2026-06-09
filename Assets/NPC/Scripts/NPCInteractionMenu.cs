@@ -1,94 +1,106 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
-// Controls the right-click NPC interaction menu.
-// It dynamically creates one UI button for every interaction assigned to the NPC profile.
 public class NPCInteractionMenu : MonoBehaviour
 {
-    // Singleton-style access so NPCInteractionHandler can call:
-    // NPCInteractionMenu.Instance.Open(npc);
     public static NPCInteractionMenu Instance;
 
     [Header("UI")]
-    // Root panel of the interaction menu.
-    // This is activated when the menu opens and deactivated when it closes.
     [SerializeField] private GameObject root;
-
-    // Parent object under which generated interaction buttons are placed.
     [SerializeField] private Transform buttonParent;
-
-    // Button prefab used to create one button per NPC interaction.
     [SerializeField] private Button buttonPrefab;
+    [SerializeField] private TMP_Text emptyText;
 
-    // The NPC currently being interacted with.
     private NPCController currentNPC;
 
     private void Awake()
     {
-        // Register this menu as the active global instance.
         Instance = this;
 
-        // Start with the menu hidden.
         if (root != null)
             root.SetActive(false);
+
+        if (emptyText != null)
+            emptyText.gameObject.SetActive(false);
     }
 
-    // Opens the interaction menu for a specific NPC.
+    private void Update()
+    {
+        if (root != null && root.activeSelf && Keyboard.current != null)
+        {
+            if (Keyboard.current.escapeKey.wasPressedThisFrame)
+                Close();
+        }
+    }
+
     public void Open(NPCController npc)
     {
-        // Without an NPC or profile, there is no interaction data to show.
         if (npc == null || npc.Profile == null)
             return;
 
         currentNPC = npc;
-
-        // Remove old buttons from the previous NPC/menu opening.
+        currentNPC.BeginInteraction();
         ClearButtons();
 
-        // Create one button for every interaction assigned in the NPCProfile.
-        foreach (NPCInteraction interaction in npc.Profile.interactions)
+        bool hasInteractions = npc.Profile.interactions != null && npc.Profile.interactions.Count > 0;
+
+        if (emptyText != null)
+            emptyText.gameObject.SetActive(!hasInteractions);
+
+        if (hasInteractions)
         {
-            // Ignore missing interaction references.
-            if (interaction == null)
-                continue;
-
-            // Create a new button from the prefab under buttonParent.
-            Button button = Instantiate(buttonPrefab, buttonParent);
-
-            // Find the TMP text inside the button and set its label.
-            TMP_Text text = button.GetComponentInChildren<TMP_Text>();
-
-            if (text != null)
-                text.text = interaction.interactionName;
-
-            // When clicked, execute the interaction on the currently selected NPC,
-            // then close the menu.
-            button.onClick.AddListener(() =>
+            foreach (NPCInteraction interaction in npc.Profile.interactions)
             {
-                interaction.Execute(currentNPC);
-                Close();
-            });
+                if (interaction == null)
+                    continue;
+
+                Button button = Instantiate(buttonPrefab, buttonParent);
+                TMP_Text text = button.GetComponentInChildren<TMP_Text>();
+
+                if (text != null)
+                    text.text = interaction.interactionName;
+
+                button.onClick.AddListener(() =>
+                {
+                    interaction.Execute(currentNPC);
+
+                    if (root != null)
+                        root.SetActive(false);
+
+                    ClearButtons();
+
+                    if (emptyText != null)
+                        emptyText.gameObject.SetActive(false);
+                });
+            }
         }
 
-        // Show the menu after buttons have been generated.
         root.SetActive(true);
     }
 
-    // Closes the menu and clears generated buttons.
     public void Close()
     {
-        root.SetActive(false);
+        if (root != null)
+            root.SetActive(false);
+
         ClearButtons();
+
+        if (emptyText != null)
+            emptyText.gameObject.SetActive(false);
+
+        if (currentNPC != null)
+            currentNPC.EndInteraction();
+        currentNPC = null;
     }
 
-    // Deletes all dynamically created interaction buttons.
     private void ClearButtons()
     {
-        // Iterate backwards because child count changes as objects are destroyed.
+        if (buttonParent == null)
+            return;
+
         for (int i = buttonParent.childCount - 1; i >= 0; i--)
-        {
             Destroy(buttonParent.GetChild(i).gameObject);
-        }
     }
 }

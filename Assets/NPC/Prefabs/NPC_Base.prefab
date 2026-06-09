@@ -129,6 +129,7 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: 8d9740c6a17741f4e9ded8f001c0b121, type: 2}
   currentMood: 0
   agent: {fileID: -5267859701713105055}
+  interactionArrivalDistance: 1.2
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -141,6 +142,8 @@ MonoBehaviour:
   avoidSamePointTwice: 1
   drawGizmos: 1
   currentTarget: {fileID: 0}
+  interactionMoveAwayTolerance: 0.25
+  interactionDestinationRefreshRate: 0.2
 --- !u!114 &7387718276659454907
 MonoBehaviour:
   m_ObjectHideFlags: 0
