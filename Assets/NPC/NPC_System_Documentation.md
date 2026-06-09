@@ -1,25 +1,36 @@
-# NPC System Documentation (Current Progress)
+# NPC System Documentation
 
-## Overview
+## Purpose
 
-This NPC system is designed as a modular, expandable Unity NPC framework focused entirely on NPC-side logic.
+This document describes how to use the current NPC prototype system in Unity.
 
-Current implemented features:
+The system is built for a museum/store-style experience where an NPC can:
 
-- Patrol movement using NavMeshAgent
-- Mood/state system
-- Event/reaction system
-- Hover highlighting
-- Right-click interaction menu
-- Modular interactions using ScriptableObjects
-- Dialogue window UI
-- Extensible architecture for future dialogue trees and custom behaviors
+- Patrol through the scene
+- React to scripted user actions
+- Change mood/state
+- Show hover feedback
+- Open an interaction menu
+- Display dialogue
+- Walk toward an interaction anchor before starting an interaction
+- Resume patrol after interaction ends
+
+The system intentionally focuses on **NPC-side logic only**.
+
+It does not manage:
+
+- Museum objects
+- Audio playback
+- Scene switching
+- Inventory
+- Quest progression
+- Player movement systems
+
+Other systems should communicate with the NPC through public methods and reaction contexts.
 
 ---
 
-# Folder Structure
-
-Recommended structure:
+# Recommended Folder Structure
 
 ```text
 Assets
@@ -35,9 +46,9 @@ Assets
 
 ---
 
-# Prefab Structure
+# NPC Prefab Structure
 
-Current NPC prefab structure:
+Recommended prefab:
 
 ```text
 NPC_Base
@@ -45,96 +56,106 @@ NPC_Base
 ├── NPCController
 ├── NPCHoverHighlight
 ├── Visual
-│   ├── Mesh Renderer
-│   └── Capsule Collider
+│   ├── Mesh Renderer / Skinned Mesh Renderer
+│   └── Collider
 └── InteractionTrigger
     └── Capsule Collider
 ```
 
-Notes:
+## Important Setup Notes
 
-- `NPC_Base` stays at world ground level.
-- `Visual` is offset upward visually.
-- `NavMeshAgent` is attached to `NPC_Base`, NOT the visual object.
-- `InteractionTrigger` is used for mouse raycast interaction.
-
----
-
-# Required Components
-
-## NPC_Base
-
-Must contain:
-
-- NavMeshAgent
-- NPCController
-- NPCHoverHighlight
-
-## Visual
-
-Must contain:
-
-- Renderer
-- Collider
+- `NPC_Base` should stay at ground level.
+- `NavMeshAgent` belongs on `NPC_Base`, not on `Visual`.
+- `Base Offset` on the NavMeshAgent should usually be `0`.
+- `Visual` may be offset upward if using a capsule placeholder.
+- `InteractionTrigger` is used for raycast interaction detection.
+- `NPCHoverHighlight` should sit on `NPC_Base`, because raycasts may hit child objects like `InteractionTrigger`.
 
 ---
 
 # NavMeshAgent Setup
 
-Recommended values:
+Recommended starting values:
 
 ```text
 Speed:             controlled by mood
-Angular Speed:     120
-Acceleration:      8
+Angular Speed:     720
+Acceleration:      30
 Stopping Distance: 0.5
 Radius:            0.5
 Height:            2
 Base Offset:       0
 ```
 
-Important:
+The NPC uses regular NavMeshAgent movement for patrol and interaction approach.
 
-- `Base Offset` must stay `0`
-- Parent object (`NPC_Base`) should remain at `Y = 0`
+The interaction approach uses an interaction-specific stopping distance so the NPC does not walk directly into the player/camera anchor.
 
 ---
 
-# Patrol System
+# Patrol Setup
 
-NPCs patrol between assigned patrol points.
-
-Patrol points are simple empty GameObjects placed in the scene.
-
-Example:
+Create simple empty GameObjects in the scene:
 
 ```text
-PatrolPoints
+PatrolPoints_NPC
 ├── PatrolPoint_01
 ├── PatrolPoint_02
 ├── PatrolPoint_03
 └── PatrolPoint_04
 ```
 
-Assigned in:
+Assign them in:
 
 ```text
-NPCController
+NPC_Base
+→ NPCController
 → Patrol Points
 ```
 
-Current behavior supports:
+The patrol system supports:
 
-- Random patrol
-- Sequential patrol
-- Avoiding repeated points
-- Wait time at points
+- Random patrol point selection
+- Sequential patrol point selection
+- Avoiding the same point twice
+- Waiting at points
+- Mood-dependent movement speed
+- Mood-dependent wait time
+
+---
+
+# NPC Profile
+
+NPC configuration is stored in a ScriptableObject.
+
+Create one via:
+
+```text
+Right Click → Create → NPC → Profile
+```
+
+Recommended location:
+
+```text
+Assets/NPCs/ScriptableObjects/Profiles
+```
+
+The profile stores:
+
+- NPC name
+- Hover color
+- Mood settings
+- Reaction rules
+- Interaction list
+- Default dialogue
+
+This keeps reusable NPC data out of the runtime controller.
 
 ---
 
 # Mood System
 
-## Supported Moods
+Current moods:
 
 ```text
 Normal
@@ -142,91 +163,77 @@ Moody
 Raged
 ```
 
-Each mood controls:
+Each mood can define:
 
 - Movement speed
-- Wait time
-- Dialogue flavor
+- Wait time at patrol points
+- Speech flavor text
 - Debug gizmo color
 
-Mood data is stored in:
+Mood changes are handled through:
 
-```text
-NPCProfile
+```csharp
+npc.SetMood(NPCMood.Raged);
 ```
 
----
-
-# NPC Profiles
-
-NPC configuration is stored using ScriptableObjects.
-
-Location:
-
-```text
-Assets/NPCs/ScriptableObjects/Profiles
-```
-
-Created via:
-
-```text
-Create → NPC → Profile
-```
-
-Current profile contains:
-
-- NPC Name
-- Hover Color
-- Mood Settings
-- Reaction Rules
-- Interactions
-- Default Dialogue
+External systems should not directly modify internal fields.
 
 ---
 
 # Reaction Rule System
 
-The NPC can react to external gameplay contexts.
+The reaction system lets the NPC respond to external user actions.
 
-Architecture:
+External systems create an `NPCReactionContext` and pass it to the NPC:
 
-```text
-External System
-→ creates NPCReactionContext
-→ NPCController.ReactTo(context)
-→ NPC checks rules
-→ NPC reacts
+```csharp
+NPCReactionContext context = new NPCReactionContext(
+    NPCReactionEventType.RecordPlayed,
+    "record_forbidden_01",
+    "Forbidden Record"
+);
+
+NPCReactionResult result = npc.ReactTo(context);
 ```
 
-Possible reactions:
+The NPC checks its profile rules and can:
 
 - Change mood
-- Say dialogue text
-- Block external action
+- Say a dialogue line
+- Return whether the original action should be blocked
 
-Example:
+Example profile rule:
 
 ```text
 Event Type: RecordPlayed
-Object Id: record_forbidden_01
-Result Mood: Raged
-Block Action: true
+Required Object Id: record_forbidden_01
+Change Mood: true
+Resulting Mood: Raged
+Reaction Text: Die darfst du nicht spielen. Du bist nicht cool genug.
+Block Original Action: true
+```
+
+This allows another system to ask whether an action may continue by checking:
+
+```csharp
+result.blockOriginalAction
 ```
 
 ---
 
-# Hover Highlight System
+# Hover Highlight (Deprecated and currently not in use!)
 
-The NPC supports hover highlighting using centralized raycast detection.
+Hovering is detected by a central raycast detector.
 
-Architecture:
+Scene object:
 
 ```text
-NPCHoverDetector
-→ raycasts from camera
-→ finds NPCHoverHighlight
-→ applies highlight color
+NPC_InputSystem
+├── NPCHoverDetector
+└── NPCInteractionHandler
 ```
+
+`NPCHoverDetector` casts from the active camera and looks for an `NPCHoverHighlight`.
 
 Hover color comes from:
 
@@ -234,111 +241,362 @@ Hover color comes from:
 NPCProfile.hoverColor
 ```
 
+Recommended hover alpha:
+
+```text
+0.2 - 0.4
+```
+
+Higher values quickly become radioactive. Use with restraint, unless the NPC has recently discovered uranium.
+
 ---
 
 # Interaction System
 
-Right-clicking the NPC opens an interaction menu.
+Right-clicking an NPC starts an interaction request.
 
-Architecture:
+Flow:
 
 ```text
-Right Click
-→ NPCInteractionHandler
-→ NPCInteractionMenu
-→ NPCInteraction execution
+Right-click NPC
+→ NPCInteractionHandler detects NPC
+→ NPC walks to interaction anchor
+→ NPC opens interaction menu after arrival
+→ Player selects interaction
+→ Dialogue opens
+→ ESC closes dialogue
+→ NPC resumes patrol
 ```
 
-Interactions are modular ScriptableObjects.
+Interactions are ScriptableObjects derived from:
 
-Current implementation:
+```csharp
+NPCInteraction
+```
+
+Current concrete interaction:
 
 ```text
 NPCTalkInteraction
 ```
 
-Future possibilities:
+Create one via:
 
-- Dialogue Trees
-- Conditional interactions
-- Quest interactions
-- Custom scripted actions
+```text
+Right Click → Create → NPC → Interactions → Talk Interaction
+```
+
+Then add it to:
+
+```text
+NPC_Profile
+→ Interactions
+```
+
+---
+
+# Interaction Anchor System
+
+The NPC does not need a real player character.
+
+Instead, the system uses an **interaction anchor**.
+
+This is usually an empty GameObject placed where the NPC should walk before starting the interaction.
+
+Example:
+
+```text
+NPC_PlayerInteractionAnchor
+```
+
+Assign it in:
+
+```text
+NPC_InputSystem
+→ NPCInteractionHandler
+→ Interaction Anchor
+```
+
+Also assign:
+
+```text
+Look At Target → Main Camera
+```
+
+## Why anchors?
+
+This works for:
+
+- Fixed-camera museum scenes
+- Point-and-click camera switching
+- A future real player character
+- Prototype freecam testing, if needed
+
+If a real player object exists later, the same concept still works by passing the player transform or a child interaction anchor.
+
+---
+
+# Interaction Movement Behaviour
+
+When an interaction is requested:
+
+```text
+NPC stops patrol
+NPC walks toward the interaction anchor
+NPC updates the destination while the anchor moves closer
+NPC cancels if the anchor moves away after getting closer
+NPC stops within interaction range
+NPC faces the look target
+Menu opens
+```
+
+The goal is:
+
+```text
+If the player/view moves toward the NPC → continue and meet earlier
+If the player/view moves away → cancel interaction
+```
+
+This avoids the NPC chasing outdated positions forever.
+
+---
+
+# Useful Interaction Movement Values
+
+Recommended values:
+
+```csharp
+[SerializeField] private float interactionArrivalDistance = 1.5f;
+[SerializeField] private float interactionMoveAwayTolerance = 1.0f;
+[SerializeField] private float interactionDestinationRefreshRate = 0.15f;
+```
+
+## interactionArrivalDistance
+
+Controls how far away the NPC stops from the anchor.
+
+Recommended:
+
+```text
+1.2 - 1.8
+```
+
+Use:
+
+```text
+1.5
+```
+
+as a practical starting point.
+
+If the NPC walks too close, increase it.
+
+If the NPC stops too far away, decrease it.
+
+## interactionMoveAwayTolerance
+
+Controls how much the anchor may move away before the interaction cancels.
+
+Recommended:
+
+```text
+0.75 - 1.25
+```
+
+Use:
+
+```text
+1.0
+```
+
+for museum-style point-and-click movement.
+
+Too low:
+
+```text
+tiny viewpoint movement cancels interaction
+```
+
+Too high:
+
+```text
+NPC keeps following when the player clearly left
+```
+
+## interactionDestinationRefreshRate
+
+Controls how often the NPC updates its destination while the anchor moves closer.
+
+Recommended:
+
+```text
+0.1 - 0.2 seconds
+```
+
+Use:
+
+```text
+0.15
+```
+
+as a good prototype value.
+
+Too low recalculates too often.
+
+Too high makes the NPC feel sluggish when the target moves closer.
 
 ---
 
 # Dialogue Window
 
-Current dialogue UI:
+The dialogue window is a simple UI panel.
+
+Current behavior:
 
 ```text
-NPCDialogueWindow
+NPC says text
+→ NPCDialogueWindow opens
+→ ESC closes window
+→ NPC resumes patrol
 ```
 
-Supports:
+The dialogue system currently supports one-way NPC text.
 
-- Showing NPC dialogue text
-- Opening/closing UI window
-- Centralized dialogue display
-
-Currently dialogue is one-way only.
-
-Future expansion:
-
-- Player response options
-- Branching dialogue
-- Conditions
-- Relationship logic
+Full dialogue trees are intentionally out of scope for the current prototype.
 
 ---
 
-# Current NPC Flow
+# Interaction Menu
 
-Example flow:
+The interaction menu is opened after the NPC reaches the interaction anchor.
+
+It dynamically creates buttons from:
 
 ```text
-Player right-clicks NPC
-→ Interaction menu opens
-→ Player selects interaction
-→ Interaction executes
-→ NPC dialogue window opens
+NPCProfile.interactions
+```
+
+If no interactions exist, it can show an empty text message.
+
+Recommended empty text:
+
+```text
+No interactions available.
+```
+
+The menu can be closed with:
+
+```text
+ESC
 ```
 
 ---
 
-# Current Design Philosophy
+# Public NPC API
 
-This system intentionally focuses ONLY on NPC logic.
+Other systems should communicate with the NPC using public methods.
 
-The NPC system does NOT manage:
+Common calls:
 
-- Museum objects
-- Audio playback
-- Scene management
-- Quest progression
-- Inventory systems
+```csharp
+npc.SetMood(NPCMood.Moody);
+npc.Say("Please do not touch that.");
+npc.ReactTo(context);
+npc.BeginInteraction();
+npc.EndInteraction();
+```
 
-External systems are expected to communicate through:
+For user action reactions, prefer:
 
 ```csharp
 npc.ReactTo(context);
 ```
 
-This keeps the NPC architecture modular and scalable.
+instead of directly changing mood or dialogue.
+
+That keeps rule logic inside the NPC system.
 
 ---
 
-# Future Expansion Plans
+# Current Prototype Flow Example
 
-Planned additions:
+```text
+NPC patrols between points
+Player right-clicks NPC
+NPC stops patrol
+NPC walks toward interaction anchor
+If player/view moves away, interaction cancels
+If player/view moves closer, NPC updates destination
+NPC stops at interaction distance
+NPC faces camera/look target
+Interaction menu opens
+Player selects "Begrüßen"
+Dialogue window opens
+Player presses ESC
+Dialogue closes
+NPC resumes patrol
+```
 
-- Dialogue trees
-- Response choices
-- Conditional interactions
-- NPC action system
-- Animation integration
-- Speech bubbles
-- Relationship/reputation logic
-- Advanced reaction chaining
-- Mood-specific interaction availability
+---
+
+# Design Boundaries
+
+This NPC system should remain responsible for:
+
+- NPC patrol
+- NPC state/mood
+- NPC reactions
+- NPC interactions
+- NPC dialogue display
+- NPC hover feedback
+
+It should not become responsible for:
+
+- Museum object behavior
+- Playing records
+- Reading flyers
+- Scene switching
+- Camera transition logic
+- Quest progression
+- Inventory state
+
+Other systems should call into the NPC through clean interfaces.
+
+This prevents the NPC from becoming a charming but monstrous God-object. Unity projects have enough folklore already.
+
+---
+
+# Current Prototype Status
+
+Implemented:
+
+- Patrol movement
+- Mood system
+- ScriptableObject NPC profiles
+- Reaction rules
+- Reaction context/result API
+- Hover highlighting
+- Right-click detection
+- Interaction menu
+- ScriptableObject interactions
+- Dialogue window
+- Interaction stopping/resuming patrol
+- Interaction anchor approach behavior
+- Cancellation when player/view moves away
+
+Prototype-ready for:
+
+- Main branch testing
+- Museum interaction experiments
+- Store-owner / caretaker behavior tests
+- Simple scripted boundary enforcement
+
+Not implemented / intentionally out of scope:
+
+- Full dialogue trees
+- Advanced AI conversation
+- Complex emotional simulation
+- Production-grade animation logic
+- Final UI polish
 
 ---
