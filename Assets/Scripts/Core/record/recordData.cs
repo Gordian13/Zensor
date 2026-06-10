@@ -10,6 +10,12 @@ public enum Speed
     Normal // for tape
 }
 
+public enum Vinyltype
+{
+    seven,
+    twelve
+}
+
 [CreateAssetMenu(fileName = "recordData", menuName = "Zensor/recordData")]
 public class RecordData : ScriptableObject
 {
@@ -26,8 +32,11 @@ public class RecordData : ScriptableObject
     [Header("Format")]
     public Speed speed;
 
+    [Header("Vinyltype")]
+
     [Header("Tracks")]
     public List<AudioClip> tracks = new List<AudioClip>();
+
 
     // Convenience: ersten Track zurückgeben (Abwärtskompatibilität)
     public AudioClip audioClip => tracks.Count > 0 ? tracks[0] : null;
