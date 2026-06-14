@@ -1,19 +1,23 @@
-using System;
-using NUnit.Framework.Constraints;
 using UnityEngine;
 
 namespace record
 {
-    public class RecordInteractionSkript : MonoBehaviour, IVinyl
+    public class RecordInteractionScript : MonoBehaviour, IVinyl
     {
-        public RecordData data;
-        public int rotationSpeed = 10;
+        [SerializeField] private RecordData data;
+        [SerializeField] private Transform selectionRoot;
+        [SerializeField] private int rotationSpeed = 10;
+
         private bool isPlaying;
         
         public RecordData GetData() => data;
+        public Transform GetSelectionTransform() => selectionRoot != null ? selectionRoot : transform;
 
-        public void Start()
+        private void Awake()
         {
+            if (selectionRoot == null)
+                selectionRoot = transform;
+
             isPlaying = false;
         }
 
@@ -29,12 +33,11 @@ namespace record
             Debug.Log("Record removed");
         }
 
-        public void Update()
+        private void Update()
         {
             if (!isPlaying) return;
             
             transform.Rotate(Vector3.up * (rotationSpeed * Time.deltaTime));
-            Debug.Log("Record update");
         }
     }
 }

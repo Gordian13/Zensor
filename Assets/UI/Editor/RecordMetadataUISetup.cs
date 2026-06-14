@@ -48,26 +48,27 @@ public static class RecordMetadataUISetup
 
         infoUI.Configure(panel.gameObject, titleText, authorText, yearText, playableText, descriptionText, coverImage);
 
-        // Connect the click/selection controller to the scene camera.
-        var camera = Camera.main;
-        if (camera == null)
+        // Connect the panel and existing buttons to the vinyl state controller.
+        var vinylSelectController = Object.FindFirstObjectByType<VinylSelectController>();
+        if (vinylSelectController != null)
         {
-            camera = Object.FindFirstObjectByType<Camera>();
-        }
-
-        if (camera != null)
-        {
-            var selectionController = camera.GetComponent<RecordSelectionController>();
-            if (selectionController == null)
+            var selectionUI = canvas.GetComponent<VinylSelectionUI>();
+            if (selectionUI == null)
             {
-                selectionController = camera.gameObject.AddComponent<RecordSelectionController>();
+                selectionUI = canvas.gameObject.AddComponent<VinylSelectionUI>();
             }
 
-            selectionController.Configure(camera, infoUI);
+            selectionUI.Configure(
+                vinylSelectController,
+                infoUI,
+                FindDirectChild(canvas.transform, "Info"),
+                FindDirectChild(canvas.transform, "CloseInfo"),
+                FindDirectChild(canvas.transform, "BrowseMore"),
+                FindDirectChild(canvas.transform, "Play"));
         }
         else
         {
-            Debug.LogWarning("RecordMetadataUISetup: No camera found. Add RecordSelectionController manually after creating a camera.");
+            Debug.LogWarning("RecordMetadataUISetup: No VinylSelectController found in the scene.");
         }
 
         // Mark the scene as changed so Unity knows it should be saved.
@@ -76,14 +77,20 @@ public static class RecordMetadataUISetup
         Debug.Log("Record metadata UI setup complete.");
     }
 
+    private static GameObject FindDirectChild(Transform parent, string childName)
+    {
+        var child = parent.Find(childName);
+        return child != null ? child.gameObject : null;
+    }
+
     // Creates the Canvas that contains UI elements, or reuses an existing one.
     private static Canvas GetOrCreateCanvas()
     {
-        var existing = Object.FindFirstObjectByType<Canvas>();
-        if (existing != null)
+        var existingObject = GameObject.Find(CanvasName);
+        if (existingObject != null && existingObject.TryGetComponent(out Canvas existingCanvas))
         {
-            ConfigureCanvas(existing);
-            return existing;
+            ConfigureCanvas(existingCanvas);
+            return existingCanvas;
         }
 
         var canvasGo = new GameObject(CanvasName);
