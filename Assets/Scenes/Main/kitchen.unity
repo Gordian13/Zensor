@@ -187,7 +187,8 @@ PrefabInstance:
       propertyPath: startGrayscale
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8788323944818514253, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -270,7 +271,8 @@ PrefabInstance:
       propertyPath: startGrayscale
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8788323944818514253, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -528,7 +530,8 @@ PrefabInstance:
       propertyPath: startGrayscale
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8788323944818514253, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -606,7 +609,8 @@ PrefabInstance:
       propertyPath: startGrayscale
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8788323944818514253, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -679,7 +683,8 @@ PrefabInstance:
       propertyPath: startGrayscale
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8788323944818514253, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -838,7 +843,8 @@ PrefabInstance:
       propertyPath: startGrayscale
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8788323944818514253, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
