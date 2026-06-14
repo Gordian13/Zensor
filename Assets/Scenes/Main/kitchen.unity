@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Gramophone (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6886978271399930490, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8769216005555514301, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
       propertyPath: startGrayscale
       value: 1
@@ -249,6 +253,10 @@ PrefabInstance:
     - target: {fileID: 6125377157684126347, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
       propertyPath: m_Name
       value: SM_Gramophone (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886978271399930490, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8769216005555514301, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
       propertyPath: startGrayscale
@@ -504,6 +512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Gramophone (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6886978271399930490, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8769216005555514301, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
       propertyPath: startGrayscale
       value: 1
@@ -578,6 +590,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Gramophone (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6886978271399930490, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8769216005555514301, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
       propertyPath: startGrayscale
       value: 1
@@ -647,6 +663,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Gramophone (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6886978271399930490, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8769216005555514301, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
       propertyPath: startGrayscale
       value: 1
@@ -696,6 +716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Core.camera.CameraSpot
   spotId: kitchen
   spotCamera: {fileID: 789530799}
+  rightClickCameraOrbit: {fileID: 0}
   allowRightClickLook: 1
 --- !u!4 &1536808920
 Transform:
@@ -800,6 +821,10 @@ PrefabInstance:
     - target: {fileID: 6125377157684126347, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
       propertyPath: m_Name
       value: SM_Gramophone (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886978271399930490, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8769216005555514301, guid: a49206e40dd072d47b1844bb2d713e07, type: 3}
       propertyPath: startGrayscale
