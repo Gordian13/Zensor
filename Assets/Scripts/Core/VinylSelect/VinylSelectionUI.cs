@@ -1,6 +1,10 @@
 using Core.VinylSelect;
 using UnityEngine;
 
+/**
+ * Updates the vinyl UI whenever the selection state changes.
+ * Controls the visible buttons and displays the selected record information.
+ */
 public class VinylSelectionUI : MonoBehaviour
 {
     [SerializeField] private VinylSelectController controller;
@@ -12,6 +16,9 @@ public class VinylSelectionUI : MonoBehaviour
     [SerializeField] private GameObject browseMoreButton;
     [SerializeField] private GameObject playButton;
 
+    /**
+     * Connects the controller, info panel, and buttons when the UI is created by the editor setup tool.
+     */
     public void Configure(
         VinylSelectController selectController,
         RecordInfoUI infoUI,
@@ -30,6 +37,9 @@ public class VinylSelectionUI : MonoBehaviour
         Refresh();
     }
 
+    /**
+     * Finds missing references, subscribes to state changes, and applies the current state.
+     */
     private void OnEnable()
     {
         if (controller == null)
@@ -52,6 +62,9 @@ public class VinylSelectionUI : MonoBehaviour
         Refresh();
     }
 
+    /**
+     * Removes the state event subscription when this component is disabled.
+     */
     private void OnDisable()
     {
         if (controller != null)
@@ -60,11 +73,17 @@ public class VinylSelectionUI : MonoBehaviour
         }
     }
 
+    /**
+     * Applies the new state whenever the VinylSelectController reports a change.
+     */
     private void OnStateChanged(VinylState previousState, VinylState nextState)
     {
         ApplyState(nextState);
     }
 
+    /**
+     * Refreshes the UI from the controller's current state.
+     */
     private void Refresh()
     {
         if (controller != null)
@@ -73,11 +92,14 @@ public class VinylSelectionUI : MonoBehaviour
         }
     }
 
+    /**
+     * Shows the buttons and information panel required by the given vinyl state.
+     */
     private void ApplyState(VinylState state)
     {
-        bool isSelected = state == VinylState.Selected;
-        bool isInfoOpen = state == VinylState.InfoOpen;
-        bool isFocused = state == VinylState.VinylFocused;
+        bool isSelected = state == VinylState.VinylSelected;
+        bool isInfoOpen = state == VinylState.VinylInfoOpen;
+        bool isFocused = state == VinylState.VinylDraggedOutFocused;
 
         SetVisible(infoButton, isSelected);
         SetVisible(closeInfoButton, isInfoOpen);
@@ -99,6 +121,9 @@ public class VinylSelectionUI : MonoBehaviour
         }
     }
 
+    /**
+     * Activates or deactivates a UI object when its visibility needs to change.
+     */
     private static void SetVisible(GameObject target, bool visible)
     {
         if (target != null && target.activeSelf != visible)

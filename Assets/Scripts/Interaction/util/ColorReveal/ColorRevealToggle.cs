@@ -201,6 +201,10 @@ namespace Interaction.util.ColorReveal
             {
                 SetColor(true);
             }
+            else
+            {
+                SetColor(false);
+            }
         }
     }
 }

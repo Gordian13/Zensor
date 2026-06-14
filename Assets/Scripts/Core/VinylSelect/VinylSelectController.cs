@@ -1,64 +1,112 @@
 using System;
 using Core.VinylSelect;
+using Interaction.util.ColorReveal;
 using UnityEngine;
 
+/**
+ * Owns the current vinyl selection state and validates all allowed state transitions.
+ * Other scripts request changes through this controller instead of changing the state directly.
+ */
 public class VinylSelectController : MonoBehaviour
 {
-    public VinylState CurrentVinylState { get; private set; } = VinylState.Browsing;
+    public VinylState CurrentVinylState { get; private set; } = VinylState.BrowsingBox;
     public IVinyl SelectedVinyl { get; private set; }
 
     public event Action<VinylState, VinylState> StateChanged;
     
+    /**
+     * Selects a vinyl while browsing and changes the state to VinylSelected.
+     */
     public bool SelectVinyl(IVinyl vinyl)
     {
-        if (CurrentVinylState != VinylState.Browsing || vinyl == null)
+        if (CurrentVinylState != VinylState.BrowsingBox || vinyl == null)
             return false;
 
         SelectedVinyl = vinyl;
-        ChangeState(VinylState.Selected);
+        vinyl.GetSelectionTransform().GetComponentInChildren<IColorRevealable>().SetStayColored(true);
+        ChangeState(VinylState.VinylSelected);
         return true;
     }
 
+    /**
+     * Opens the information view for the currently selected vinyl.
+     */
     public bool OpenInfo()
     {
-        return TryChangeState(VinylState.Selected, VinylState.InfoOpen);
+        return TryChangeState(VinylState.VinylSelected, VinylState.VinylInfoOpen);
     }
 
+    /**
+     * Closes the information view and returns to the selected state.
+     */
     public bool CloseInfo()
     {
-        return TryChangeState(VinylState.InfoOpen, VinylState.Selected);
+        return TryChangeState(VinylState.VinylInfoOpen, VinylState.VinylSelected);
     }
 
+    /**
+     * Starts dragging the disc out of its cover.
+     */
     public bool BeginDragOut()
     {
-        return TryChangeState(VinylState.Selected, VinylState.DraggingOut);
+        return TryChangeState(VinylState.VinylSelected, VinylState.DraggingVinylOut);
     }
 
+    /**
+     * Finishes dragging out and changes to the focused state.
+     */
     public bool FinishDragOut()
     {
-        return TryChangeState(VinylState.DraggingOut, VinylState.VinylFocused);
+        return TryChangeState(VinylState.DraggingVinylOut, VinylState.VinylDraggedOutFocused);
     }
 
+    /**
+     * Cancels dragging out and returns to the selected state.
+     */
+    public bool CancelDragOut()
+    {
+        return TryChangeState(VinylState.DraggingVinylOut, VinylState.VinylSelected);
+    }
+
+    /**
+     * Starts dragging the focused disc back into its cover.
+     */
     public bool BeginDragIn()
     {
-        return TryChangeState(VinylState.VinylFocused, VinylState.DraggingIn);
+        return TryChangeState(VinylState.VinylDraggedOutFocused, VinylState.DraggingVinylIn);
     }
 
+    /**
+     * Finishes dragging in and returns to the selected state.
+     */
     public bool FinishDragIn()
     {
-        return TryChangeState(VinylState.DraggingIn, VinylState.Selected);
+        return TryChangeState(VinylState.DraggingVinylIn, VinylState.VinylSelected);
     }
 
+    /**
+     * Cancels dragging in and returns to the focused state.
+     */
+    public bool CancelDragIn()
+    {
+        return TryChangeState(VinylState.DraggingVinylIn, VinylState.VinylDraggedOutFocused);
+    }
+
+    /**
+     * Clears the current selection and returns to browsing.
+     */
     public bool CloseSelection()
     {
-        if (CurrentVinylState != VinylState.Selected)
+        if (CurrentVinylState != VinylState.VinylSelected)
             return false;
 
-        ChangeState(VinylState.Browsing);
+        ChangeState(VinylState.BrowsingBox);
+        SelectedVinyl.GetSelectionTransform().GetComponentInChildren<IColorRevealable>().SetStayColored(false);
         SelectedVinyl = null;
         return true;
     }
 
+    // Void wrappers are used because Unity buttons do not display bool-returning methods.
     public void OpenInfoFromButton()
     {
         OpenInfo();
@@ -94,6 +142,9 @@ public class VinylSelectController : MonoBehaviour
         CloseSelection();
     }
 
+    /**
+     * Changes the state only if the controller is currently in the required state.
+     */
     private bool TryChangeState(VinylState requiredState, VinylState nextState)
     {
         if (CurrentVinylState != requiredState)
@@ -103,6 +154,9 @@ public class VinylSelectController : MonoBehaviour
         return true;
     }
 
+    /**
+     * Stores the new state and informs subscribed view and interaction scripts.
+     */
     private void ChangeState(VinylState nextState)
     {
         if (CurrentVinylState == nextState)

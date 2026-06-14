@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Core.VinylSelect;
+using Interaction.util.ColorReveal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,7 +46,7 @@ namespace record
         private void Update()
         {
             if (vinylSelectController == null ||
-                vinylSelectController.CurrentVinylState != VinylState.Browsing)
+                vinylSelectController.CurrentVinylState != VinylState.BrowsingBox)
             {
                 ClearHover(true);
                 return;

@@ -1654,6 +1654,7 @@ GameObject:
   - component: {fileID: 1320968141}
   - component: {fileID: 1320968147}
   - component: {fileID: 1320968148}
+  - component: {fileID: 1320968149}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1833,6 +1834,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::camera.CameraController
   moveSpeed: 4
   lookSpeed: 0.1
+--- !u!114 &1320968149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320968140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898b06149ee6484eb34d52274f9ba789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core.VinylSelect.VinylDragController
+  vinylSelectController: {fileID: 1112518049}
+  vinylLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  rayDistance: 100
+  localUnitsPerPixel: 0.001
+  focusedDistance: 0.6
+  completionThreshold: 0.6
 --- !u!1 &1367046447
 GameObject:
   m_ObjectHideFlags: 0
