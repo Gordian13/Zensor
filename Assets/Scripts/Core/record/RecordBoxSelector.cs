@@ -117,16 +117,23 @@ namespace record
                 return null;
 
             Ray ray = targetCamera.ScreenPointToRay(mouse.position.ReadValue());
-            RaycastHit[] hits = Physics.RaycastAll(ray, rayDistance, recordLayer);
+            RaycastHit[] hits = Physics.RaycastAll(
+                ray,
+                rayDistance,
+                recordLayer,
+                QueryTriggerInteraction.Ignore);
 
             if (hits.Length == 0)
                 return null;
 
-            System.Array.Sort(hits, (first, second) => first.distance.CompareTo(second.distance));
+            System.Array.Sort(
+                hits,
+                (first, second) => first.distance.CompareTo(second.distance));
 
             foreach (RaycastHit hit in hits)
             {
-                MonoBehaviour[] components = hit.transform.GetComponentsInParent<MonoBehaviour>(true);
+                MonoBehaviour[] components =
+                    hit.collider.GetComponentsInParent<MonoBehaviour>(true);
 
                 foreach (MonoBehaviour component in components)
                 {

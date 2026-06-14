@@ -5,19 +5,23 @@ namespace record
     public class RecordInteractionScript : MonoBehaviour, IVinyl
     {
         [SerializeField] private RecordData data;
-        [SerializeField] private Transform selectionRoot;
+
+        [Header("Vinyl Parts")]
+        [SerializeField] private Transform cover;
+        [SerializeField] private Transform vinylDisc;
+        
+        [Header("Playback")]
         [SerializeField] private int rotationSpeed = 10;
 
         private bool isPlaying;
         
         public RecordData GetData() => data;
-        public Transform GetSelectionTransform() => selectionRoot != null ? selectionRoot : transform;
+        public Transform GetSelectionTransform() => transform;
+        public Transform GetCoverTransform() => cover;
+        public Transform GetVinylDiscTransform() => vinylDisc;
 
         private void Awake()
         {
-            if (selectionRoot == null)
-                selectionRoot = transform;
-
             isPlaying = false;
         }
 

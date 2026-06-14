@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2772847
 RectTransform:
   m_ObjectHideFlags: 0
@@ -258,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &64842322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -545,28 +545,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::record.RecordInteractionScript
   data: {fileID: 11400000, guid: c64e96bcec57a6649b7ce05c43aafeef, type: 2}
   selectionRoot: {fileID: 0}
+  cover: {fileID: 0}
+  vinylDisc: {fileID: 0}
   rotationSpeed: 10
---- !u!65 &157825249
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157825246}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &260597584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -635,9 +616,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 157825249}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 157825248}
@@ -715,9 +693,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2048581716}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2048581715}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
       insertIndex: -1
@@ -741,7 +716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &333532177
 RectTransform:
   m_ObjectHideFlags: 0
@@ -856,6 +831,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333532176}
   m_CullTransparentMesh: 1
+--- !u!4 &498085452 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7184960119004496200, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+  m_PrefabInstance: {fileID: 1287785111}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &513345170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -926,14 +906,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1993589626}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1993589625}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1993589624}
   m_SourcePrefab: {fileID: 100100000, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+--- !u!4 &518777732 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1463818706300653924, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+  m_PrefabInstance: {fileID: 1287785111}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &537856812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1002,9 +984,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1110499400}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1110499399}
@@ -1091,6 +1070,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &691301860 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7184960119004496200, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+  m_PrefabInstance: {fileID: 537856812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &779943995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,24 +1109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   menu: {fileID: 779943995}
---- !u!114 &779944001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779943995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6632f3171d742fc84131dc79636124e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VinylSelectionUI
-  controller: {fileID: 1112518049}
-  recordInfoUI: {fileID: 0}
-  infoButton: {fileID: 2123294999}
-  closeInfoButton: {fileID: 64842321}
-  browseMoreButton: {fileID: 333532176}
-  playButton: {fileID: 2772846}
 --- !u!114 &779943997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,7 +1143,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1229,6 +1195,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &779944001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779943995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6632f3171d742fc84131dc79636124e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VinylSelectionUI
+  controller: {fileID: 1112518049}
+  recordInfoUI: {fileID: 0}
+  infoButton: {fileID: 2123294999}
+  closeInfoButton: {fileID: 64842321}
+  browseMoreButton: {fileID: 333532176}
+  playButton: {fileID: 2772846}
+--- !u!4 &949153856 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1463818706300653924, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+  m_PrefabInstance: {fileID: 537856812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &983259584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,13 +1242,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983259584}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 1.051}
+  m_LocalRotation: {x: -0.0059392164, y: -0.7182304, z: -0.69576526, w: 0.004524643}
+  m_LocalPosition: {x: -0.31, y: 0.001, z: 1.056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1320968145}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -91.824, y: -3.179016, z: -175.973}
 --- !u!1 &1110499396 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
@@ -1294,29 +1283,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::record.RecordInteractionScript
   data: {fileID: 11400000, guid: cfb621017c906416887569bc1e5869bf, type: 2}
-  selectionRoot: {fileID: 0}
+  selectionRoot: {fileID: 1110499401}
+  cover: {fileID: 691301860}
+  vinylDisc: {fileID: 949153856}
   rotationSpeed: 10
---- !u!65 &1110499400
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!4 &1110499401 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+  m_PrefabInstance: {fileID: 537856812}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110499396}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1112518048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,29 +1507,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::record.RecordInteractionScript
   data: {fileID: 11400000, guid: ad2fbfea75b25448d938aa20ddab99f9, type: 2}
-  selectionRoot: {fileID: 0}
+  selectionRoot: {fileID: 1175693421}
+  cover: {fileID: 498085452}
+  vinylDisc: {fileID: 518777732}
   rotationSpeed: 10
---- !u!65 &1175693420
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!4 &1175693421 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+  m_PrefabInstance: {fileID: 1287785111}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1175693417}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1287785111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1615,17 +1576,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: -3901055670466054249, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3901055670466054249, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1733461875792396278, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1733461875792396278, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
       propertyPath: m_Name
       value: Vinyl12Inches (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3676695266033915781, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3676695266033915781, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185526392857601903, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185526392857601903, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251853815866223728, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251853815866223728, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219677415431015515, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219677415431015515, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1175693420}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1175693419}
@@ -1647,6 +1653,7 @@ GameObject:
   - component: {fileID: 1320968142}
   - component: {fileID: 1320968141}
   - component: {fileID: 1320968147}
+  - component: {fileID: 1320968148}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1811,6 +1818,21 @@ MonoBehaviour:
   inspectionPoint: {fileID: 983259585}
   positionSpeed: 6
   rotationSpeed: 8
+  vinylDiscInspectionXOffset: 0.25
+--- !u!114 &1320968148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320968140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b585a9fa2fc095438af6a5386f99800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::camera.CameraController
+  moveSpeed: 4
+  lookSpeed: 0.1
 --- !u!1 &1367046447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,28 +2005,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::record.RecordInteractionScript
   data: {fileID: 11400000, guid: 3ae4967b0b28b4a868daa293e0021a97, type: 2}
   selectionRoot: {fileID: 0}
+  cover: {fileID: 0}
+  vinylDisc: {fileID: 0}
   rotationSpeed: 10
---- !u!65 &1993589626
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993589623}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2048581713 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
@@ -2040,28 +2043,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::record.RecordInteractionScript
   data: {fileID: 11400000, guid: 29d333dbf37714c84b394b66d0f67eb1, type: 2}
   selectionRoot: {fileID: 0}
+  cover: {fileID: 0}
+  vinylDisc: {fileID: 0}
   rotationSpeed: 10
---- !u!65 &2048581716
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2048581713}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2072395475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,7 +2201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2123295000
 RectTransform:
   m_ObjectHideFlags: 0
