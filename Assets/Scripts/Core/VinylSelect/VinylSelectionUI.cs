@@ -1,4 +1,5 @@
 using Core.VinylSelect;
+using TMPro;
 using UnityEngine;
 
 /**
@@ -16,6 +17,15 @@ public class VinylSelectionUI : MonoBehaviour
     [SerializeField] private GameObject browseMoreButton;
     [SerializeField] private GameObject playButton;
 
+    [Header("Guidance")]
+    [SerializeField] private GameObject guidanceRoot;
+    [SerializeField] private TMP_Text primaryHintText;
+    [SerializeField] private TMP_Text secondaryHintText;
+
+    [SerializeField] private string pullRecordOutHint = "Left Mouse Button + Drag -> Pull Record Out";
+    [SerializeField] private string putRecordBackHint = "Left Mouse Button + Drag -> Put Record Back";
+    [SerializeField] private string rotateHint = "Hold Right Mouse Button -> Rotate Cover or Record";
+
     /**
      * Connects the controller, info panel, and buttons when the UI is created by the editor setup tool.
      */
@@ -25,7 +35,10 @@ public class VinylSelectionUI : MonoBehaviour
         GameObject info,
         GameObject closeInfo,
         GameObject browseMore,
-        GameObject play)
+        GameObject play,
+        GameObject guidance = null,
+        TMP_Text primaryHint = null,
+        TMP_Text secondaryHint = null)
     {
         controller = selectController;
         recordInfoUI = infoUI;
@@ -33,6 +46,9 @@ public class VinylSelectionUI : MonoBehaviour
         closeInfoButton = closeInfo;
         browseMoreButton = browseMore;
         playButton = play;
+        guidanceRoot = guidance;
+        primaryHintText = primaryHint;
+        secondaryHintText = secondaryHint;
 
         Refresh();
     }
@@ -105,6 +121,7 @@ public class VinylSelectionUI : MonoBehaviour
         SetVisible(closeInfoButton, isInfoOpen);
         SetVisible(browseMoreButton, isSelected);
         SetVisible(playButton, isFocused);
+        UpdateGuidance(state);
 
         if (recordInfoUI == null)
         {
@@ -118,6 +135,35 @@ public class VinylSelectionUI : MonoBehaviour
         else
         {
             recordInfoUI.Hide();
+        }
+    }
+
+    /**
+     * Shows contextual control hints while the player can manipulate the selected vinyl.
+     */
+    private void UpdateGuidance(VinylState state)
+    {
+        bool canPullRecordOut = state == VinylState.VinylSelected ||
+                                state == VinylState.DraggingVinylOut;
+        bool canPutRecordBack = state == VinylState.VinylDraggedOutFocused ||
+                                state == VinylState.DraggingVinylIn;
+        bool shouldShowGuidance = canPullRecordOut || canPutRecordBack;
+
+        SetVisible(guidanceRoot, shouldShowGuidance);
+
+        if (!shouldShowGuidance)
+        {
+            return;
+        }
+
+        if (primaryHintText != null)
+        {
+            primaryHintText.text = canPutRecordBack ? putRecordBackHint : pullRecordOutHint;
+        }
+
+        if (secondaryHintText != null)
+        {
+            secondaryHintText.text = rotateHint;
         }
     }
 
