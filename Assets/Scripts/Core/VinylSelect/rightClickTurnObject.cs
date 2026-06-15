@@ -3,10 +3,14 @@ using UnityEngine.InputSystem;
 
 namespace Core.vinyl
 {
+    // State als Serialize privat übergeben
+    // Transform vom Hauptobjekt übergeben
+    // immer checken ob --> rechtsclick --> State = übergebener State --> Spin 
+    //TODO: Spin Rotationen States setzten
     public class RightClickTurnObject : MonoBehaviour
     {
         private Vector3 _startRotationPos;
-        
+
         #region Input Actions
 
         [SerializeField] private InputActionAsset _actions;
@@ -43,7 +47,7 @@ namespace Core.vinyl
 
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.lockState = CursorLockMode.Locked;
 
             _camera = Camera.main;
         }
@@ -69,6 +73,7 @@ namespace Core.vinyl
             {
                 _rotateAllowed = true;
             }
+
             if (context.canceled)
             {
                 _rotateAllowed = false;
@@ -78,7 +83,7 @@ namespace Core.vinyl
 
         public void ReturnToRotation(Vector3 rotation)
         {
-            this.transform.eulerAngles = rotation;
+            this.transform.localEulerAngles = rotation;
         }
 
         protected virtual Vector2 GetMouseLookInput()
@@ -96,10 +101,14 @@ namespace Core.vinyl
 
             Vector2 MouseDelta = GetMouseLookInput();
 
-            MouseDelta *= _speed * Time.deltaTime;
-
-            transform.Rotate(Vector3.up * (_inverted ? 1 : -1), MouseDelta.x, Space.World);
-            transform.Rotate(Vector3.right * (_inverted ? -1 : 1), MouseDelta.y, Space.World);
+            // MouseDelta *= _speed * Time.deltaTime;
+            // transform.Rotate(Vector3.right * (_inverted ? -1 : 1), MouseDelta.y, Space.World);
+            
+            transform.Rotate(
+                Vector3.back,
+                _speed * Time.deltaTime,
+                Space.Self
+            );
         }
     }
 }

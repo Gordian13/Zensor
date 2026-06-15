@@ -7,6 +7,8 @@ namespace Core.VinylSelect
     {
         BrowsingBox,
         VinylSelected,
+        VinylRotating,
+        DiscRotating,
         VinylInfoOpen,
         DraggingVinylOut,
         VinylDraggedOutFocused,
