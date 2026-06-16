@@ -63,10 +63,7 @@ public class VinylSelectionUI : MonoBehaviour
             controller = FindFirstObjectByType<VinylSelectController>();
         }
 
-        if (recordInfoUI == null)
-        {
-            recordInfoUI = FindFirstObjectByType<RecordInfoUI>(FindObjectsInactive.Include);
-        }
+        ResolveRecordInfoUI();
 
         if (controller == null)
         {
@@ -117,6 +114,8 @@ public class VinylSelectionUI : MonoBehaviour
         bool isInfoOpen = state == VinylState.VinylInfoOpen;
         bool isFocused = state == VinylState.VinylDraggedOutFocused;
 
+        ResolveRecordInfoUI();
+
         SetVisible(infoButton, isSelected);
         SetVisible(closeInfoButton, isInfoOpen);
         SetVisible(browseMoreButton, isSelected);
@@ -125,6 +124,11 @@ public class VinylSelectionUI : MonoBehaviour
 
         if (recordInfoUI == null)
         {
+            if (isInfoOpen)
+            {
+                Debug.LogWarning("VinylSelectionUI: RecordInfoUI reference is missing.", this);
+            }
+
             return;
         }
 
@@ -175,6 +179,14 @@ public class VinylSelectionUI : MonoBehaviour
         if (target != null && target.activeSelf != visible)
         {
             target.SetActive(visible);
+        }
+    }
+
+    private void ResolveRecordInfoUI()
+    {
+        if (recordInfoUI == null)
+        {
+            recordInfoUI = FindFirstObjectByType<RecordInfoUI>(FindObjectsInactive.Include);
         }
     }
 }
