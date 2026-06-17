@@ -17,7 +17,7 @@ MonoBehaviour:
   moods:
   - mood: 0
     moveSpeed: 2
-    waitAtPointSeconds: 1.5
+    waitAtPointSeconds: 3
     speechBubbleText: Hello
     gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   - mood: 1

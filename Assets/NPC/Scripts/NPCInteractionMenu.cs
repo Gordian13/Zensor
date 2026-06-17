@@ -28,11 +28,12 @@ public class NPCInteractionMenu : MonoBehaviour
 
     private void Update()
     {
-        if (root != null && root.activeSelf && Keyboard.current != null)
+        // Deprecated, was used to allow closing the menu with the Escape key.
+        /*if (root != null && root.activeSelf && Keyboard.current != null)
         {
             if (Keyboard.current.escapeKey.wasPressedThisFrame)
                 Close();
-        }
+        }*/
     }
 
     public void Open(NPCController npc)
@@ -65,14 +66,6 @@ public class NPCInteractionMenu : MonoBehaviour
                 button.onClick.AddListener(() =>
                 {
                     interaction.Execute(currentNPC);
-
-                    if (root != null)
-                        root.SetActive(false);
-
-                    ClearButtons();
-
-                    if (emptyText != null)
-                        emptyText.gameObject.SetActive(false);
                 });
             }
         }
@@ -89,6 +82,9 @@ public class NPCInteractionMenu : MonoBehaviour
 
         if (emptyText != null)
             emptyText.gameObject.SetActive(false);
+
+        if (NPCDialogueWindow.Instance != null)
+            NPCDialogueWindow.Instance.Hide();
 
         if (currentNPC != null)
             currentNPC.EndInteraction();

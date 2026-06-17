@@ -48,6 +48,8 @@ public class NPCController : MonoBehaviour
     [SerializeField] private float interactionMoveAwayTolerance = 1f;
     [SerializeField] private float interactionDestinationRefreshRate = 0.15f;
 
+    [SerializeField] private NPCAnimationController animationController;
+
     // Public read-only access to profile and runtime state.
     public NPCProfile Profile => profile;
     public string NPCName => profile != null ? profile.npcName : "Unnamed NPC";
@@ -74,7 +76,8 @@ public class NPCController : MonoBehaviour
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false; // We handle rotation manually in the animation controller for better control.
-
+        if (animationController == null)
+            animationController = GetComponent<NPCAnimationController>();
         ApplyCurrentMoodSettings();
     }
 
@@ -154,13 +157,9 @@ public class NPCController : MonoBehaviour
         Debug.Log($"{NPCName} says: {text}");
 
         if (NPCDialogueWindow.Instance != null)
-        {
-            NPCDialogueWindow.Instance.Show(text, this);
-        }
+            NPCDialogueWindow.Instance.ShowReactionDialogue(text);
         else
-        {
             Debug.LogWarning("NPCDialogueWindow.Instance is null.");
-        }
     }
 
     // Applies movement values from the current mood data.
@@ -341,7 +340,10 @@ public class NPCController : MonoBehaviour
             return;
 
         isInteracting = true;
+         animationController?.SetInteracting(true);
         wasPatrollingBeforeInteraction = patrolRoutine != null;
+
+        
 
         StopPatrol();
 
@@ -358,6 +360,7 @@ public class NPCController : MonoBehaviour
             return;
 
         isInteracting = false;
+        animationController?.SetInteracting(false);
 
         if (agent != null)
             agent.isStopped = false;

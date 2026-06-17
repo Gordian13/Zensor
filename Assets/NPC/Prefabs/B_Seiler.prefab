@@ -494,6 +494,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogueWindow
   root: {fileID: 4964488399513985141}
   dialogueText: {fileID: 4309668128458150979}
+  closeButton: {fileID: 0}
+  defaultReactionDuration: 4
 --- !u!1 &5246064676239690521
 GameObject:
   m_ObjectHideFlags: 0

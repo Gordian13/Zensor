@@ -34,7 +34,7 @@ public class NPCInteractionHandler : MonoBehaviour
             return;
 
         // Only react on the exact frame the right mouse button is pressed.
-        if (!Mouse.current.rightButton.wasPressedThisFrame)
+        if (!Mouse.current.leftButton.wasPressedThisFrame)
             return;
 
         // Convert current mouse position into a ray from the camera.

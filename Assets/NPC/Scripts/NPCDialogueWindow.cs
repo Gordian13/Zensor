@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class NPCDialogueWindow : MonoBehaviour
 {
@@ -9,7 +9,13 @@ public class NPCDialogueWindow : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject root;
     [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private Button closeButton;
+
+    [Header("Reaction Dialogue")]
+    [SerializeField] private float defaultReactionDuration = 4f;
+
     private NPCController currentNPC;
+    private Coroutine autoHideRoutine;
 
     private void Awake()
     {
@@ -17,18 +23,43 @@ public class NPCDialogueWindow : MonoBehaviour
 
         if (root != null)
             root.SetActive(false);
+
+        if (closeButton != null)
+            closeButton.onClick.AddListener(Hide);
     }
 
-    private void Update()
+    public void ShowInteractionDialogue(string text, NPCController npc)
     {
-        if (root != null && root.activeSelf && Keyboard.current != null)
-        {
-            if (Keyboard.current.escapeKey.wasPressedThisFrame)
-                Hide();
-        }
+        StopAutoHide();
+
+        currentNPC = npc;
+
+        if (closeButton != null)
+            closeButton.gameObject.SetActive(false);
+
+        ShowText(text);
     }
 
-    public void Show(string text, NPCController npc = null)
+    public void ShowReactionDialogue(string text)
+    {
+        ShowReactionDialogue(text, defaultReactionDuration);
+    }
+
+    public void ShowReactionDialogue(string text, float duration)
+    {
+        StopAutoHide();
+
+        currentNPC = null;
+
+        if (closeButton != null)
+            closeButton.gameObject.SetActive(true);
+
+        ShowText(text);
+
+        autoHideRoutine = StartCoroutine(AutoHideAfterSeconds(duration));
+    }
+
+    private void ShowText(string text)
     {
         if (root == null || dialogueText == null)
         {
@@ -36,20 +67,32 @@ public class NPCDialogueWindow : MonoBehaviour
             return;
         }
 
-        currentNPC = npc;
         dialogueText.text = text;
         root.SetActive(true);
     }
 
     public void Hide()
     {
+        StopAutoHide();
+
         if (root != null)
             root.SetActive(false);
 
-        if (currentNPC != null)
+        currentNPC = null;
+    }
+
+    private System.Collections.IEnumerator AutoHideAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Hide();
+    }
+
+    private void StopAutoHide()
+    {
+        if (autoHideRoutine != null)
         {
-            currentNPC.EndInteraction();
-            currentNPC = null;
+            StopCoroutine(autoHideRoutine);
+            autoHideRoutine = null;
         }
     }
 }

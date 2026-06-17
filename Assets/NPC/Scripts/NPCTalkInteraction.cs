@@ -15,11 +15,10 @@ public class NPCTalkInteraction : NPCInteraction
     // Executes the interaction on the given NPC.
     public override void Execute(NPCController npc)
     {
-        // Defensive check: without an NPC, there is nothing to execute on.
         if (npc == null)
             return;
 
-        // Reuse the NPC's central dialogue output method.
-        npc.Say(dialogueText);
+        if (NPCDialogueWindow.Instance != null)
+            NPCDialogueWindow.Instance.ShowInteractionDialogue(dialogueText, npc);
     }
 }

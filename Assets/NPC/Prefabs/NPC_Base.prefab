@@ -144,6 +144,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   interactionMoveAwayTolerance: 0.25
   interactionDestinationRefreshRate: 0.2
+  animationController: {fileID: 0}
 --- !u!114 &7387718276659454907
 MonoBehaviour:
   m_ObjectHideFlags: 0
