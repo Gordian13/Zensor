@@ -17,17 +17,17 @@ MonoBehaviour:
   moods:
   - mood: 0
     moveSpeed: 2
-    waitAtPointSeconds: 3
+    waitAtPointSeconds: 4
     speechBubbleText: Hello
     gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   - mood: 1
     moveSpeed: 2.5
-    waitAtPointSeconds: 2
+    waitAtPointSeconds: 4
     speechBubbleText: Leave me
     gizmoColor: {r: 1, g: 0.47529262, b: 0, a: 0}
   - mood: 2
     moveSpeed: 4
-    waitAtPointSeconds: 1
+    waitAtPointSeconds: 2
     speechBubbleText: I WILL FIND YOU
     gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   reactionRules:
@@ -43,6 +43,12 @@ MonoBehaviour:
     resultingMood: 0
     reactionText: Den Flyer hat seit Jahren niemand freiwillig gelesen.
     blockOriginalAction: 0
+  - eventType: 2
+    requiredObjectId: flyer_old_event
+    changeMood: 0
+    resultingMood: 0
+    reactionText: Den Flyer hat seit Jahren niemand freiwillig gelesen.
+    blockOriginalAction: 0
   interactions:
-  - {fileID: 11400000, guid: 83d21854949f1d849805cc14bc19cabd, type: 2}
-  defaultSpeechBubbleText: 
+  - {fileID: 0}
+  defaultDialogueScript: {fileID: 11400000, guid: f74036bc3c79cc044a66fdcc11669898, type: 2}

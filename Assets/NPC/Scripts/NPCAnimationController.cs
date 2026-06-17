@@ -47,11 +47,16 @@ public class NPCAnimationController : MonoBehaviour
 
         if (speed == 0f)
         {
-            animator.SetInteger(
-                RandomIdleHash,
-                // Set range up for more animations
-                Random.Range(0, 2)
-            );
+            int maxIdleAnimations = 3;
+
+            int oldValue = animator.GetInteger(RandomIdleHash);
+
+            int newValue = Random.Range(0, maxIdleAnimations - 1);
+
+            if (newValue >= oldValue)
+                newValue++;
+
+            animator.SetInteger(RandomIdleHash, newValue);
         }
         animator.SetFloat(SpeedHash, speed);
 

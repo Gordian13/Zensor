@@ -14,6 +14,7 @@ public class NPCInteractionMenu : MonoBehaviour
     [SerializeField] private TMP_Text emptyText;
 
     private NPCController currentNPC;
+    private Coroutine closeRoutine;
 
     private void Awake()
     {
@@ -42,7 +43,6 @@ public class NPCInteractionMenu : MonoBehaviour
             return;
 
         currentNPC = npc;
-        currentNPC.BeginInteraction();
         ClearButtons();
 
         bool hasInteractions = npc.Profile.interactions != null && npc.Profile.interactions.Count > 0;
@@ -75,6 +75,11 @@ public class NPCInteractionMenu : MonoBehaviour
 
     public void Close()
     {
+        if (closeRoutine != null)
+        {
+            StopCoroutine(closeRoutine);
+            closeRoutine = null;
+        }
         if (root != null)
             root.SetActive(false);
 
@@ -89,6 +94,20 @@ public class NPCInteractionMenu : MonoBehaviour
         if (currentNPC != null)
             currentNPC.EndInteraction();
         currentNPC = null;
+    }
+
+    public void CloseAfterDelay(float seconds)
+    {
+        if (closeRoutine != null)
+            StopCoroutine(closeRoutine);
+
+        closeRoutine = StartCoroutine(CloseAfterDelayRoutine(seconds));
+    }
+
+    private System.Collections.IEnumerator CloseAfterDelayRoutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Close();
     }
 
     private void ClearButtons()

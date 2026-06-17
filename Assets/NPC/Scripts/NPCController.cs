@@ -55,6 +55,7 @@ public class NPCController : MonoBehaviour
     public string NPCName => profile != null ? profile.npcName : "Unnamed NPC";
     public NPCMood CurrentMood => currentMood;
     public List<Transform> PatrolPoints => patrolPoints;
+    public bool IsInteracting => isInteracting;
 
     private Coroutine patrolRoutine;
     private int currentPatrolIndex = -1;
@@ -73,6 +74,8 @@ public class NPCController : MonoBehaviour
     // Runtime initialization.
     private void Awake()
     {
+        if (animationController == null)
+            animationController = GetComponent<NPCAnimationController>();
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false; // We handle rotation manually in the animation controller for better control.
@@ -340,7 +343,7 @@ public class NPCController : MonoBehaviour
             return;
 
         isInteracting = true;
-         animationController?.SetInteracting(true);
+        animationController?.SetInteracting(true);
         wasPatrollingBeforeInteraction = patrolRoutine != null;
 
         

@@ -62,8 +62,9 @@ public class NPCInteractionHandler : MonoBehaviour
         }
 
         npc.MoveToInteractionAnchor(interactionAnchor, lookAtTarget, () =>
-        {
-            NPCInteractionMenu.Instance.Open(npc);
+{
+            if (NPCDialogueWindow.Instance != null)
+                NPCDialogueWindow.Instance.ShowDialogueScript(npc.Profile.defaultDialogueScript, npc);
         });
     }
 }

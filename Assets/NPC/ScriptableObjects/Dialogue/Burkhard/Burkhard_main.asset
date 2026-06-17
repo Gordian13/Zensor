@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e56986e72841045b39d8be6f829376, type: 3}
+  m_Name: Burkhard_main
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialogueScript
+  dialogueText: "::start\r\nNPC: Wat gibts?\r\n\r\n> Erz\xE4hl mir die Geschichte
+    von Zensor.\r\n-> zensor_story_1\r\n\r\n> Wer bist du eigentlich?\r\n-> burkhard_1\r\n\r\n>
+    Was ist mit den Platten hier?\r\n-> records_1\r\n\r\n> Tsch\xFCss.\r\nNPC: Wenns
+    sonst nichts ist...\r\n-> end\r\n\r\n\r\n::zensor_story_1\r\nNPC: Angefangen
+    hat dit eigentlich mit \u2019nem Karton Singles aus London. Ende der Siebziger
+    bin ick r\xFCber und kam mit Platten zur\xFCck, die hier kaum einer kannte.\r\n\r\n>
+    Und dann?\r\n-> zensor_story_2\r\n\r\n> Zur\xFCck.\r\n-> start\r\n\r\n\r\n::zensor_story_2\r\nNPC:
+    Erst hab ick die Dinger auf Konzerten und Flohm\xE4rkten verkauft. Wenn jemand
+    wat wollte und ick hatte dit nich, hab ick gesagt: \u201EIs zensiert.\u201C\r\n\r\n>
+    Daher der Name?\r\n-> zensor_story_3\r\n\r\n> Zur\xFCck.\r\n-> start\r\n\r\n\r\n::zensor_story_3\r\nNPC:
+    Exakt. Irgendwann blieb der Name h\xE4ngen. Also hie\xDF der Laden eben Zensor.
+    War billiger als Marketing.\r\n\r\n> Hat der Name \xC4rger gemacht?\r\nNPC: Nich
+    wirklich. Die meisten haben gelacht. Die anderen waren meistens genau die Leute,
+    \xFCber die man lachen sollte.\r\n-> zensor_story_3\r\n\r\n> Und der Laden selbst?\r\n->
+    zensor_story_4\r\n\r\n> Zur\xFCck.\r\n-> zensor_story_2\r\n\r\n\r\n::zensor_story_4\r\nNPC:
+    1979 ging's los. Punk, Reggae, New Wave, Free Jazz. Alles wat anderswo komisch
+    angeguckt wurde.\r\n\r\n> Wer kam denn da hin?\r\n-> zensor_story_5\r\n\r\n>
+    Zur\xFCck.\r\n-> zensor_story_3\r\n\r\n\r\n::zensor_story_5\r\nNPC: Zensor war
+    immer auch \u2019n Treffpunkt f\xFCr Leute, die woanders zu komisch waren. Also
+    eigentlich f\xFCr die richtigen Leute.\r\n\r\n> Was f\xFCr Leute waren das?\r\nNPC:
+    Musiker, Studenten, K\xFCnstler, Arbeitslose, Verr\xFCckte. Oft alles gleichzeitig.\r\n->
+    zensor_story_5\r\n\r\n> Und dann?\r\n-> zensor_story_6\r\n\r\n> Zur\xFCck.\r\n->
+    zensor_story_4\r\n\r\n\r\n::zensor_story_6\r\nNPC: Der Laden war klein, aber
+    die Ideen hatten Platzangst. Die mussten raus \u2014 auf Vinyl, auf Kassetten
+    oder auf irgendeine B\xFChne.\r\n\r\n> Klingt chaotisch.\r\n-> zensor_story_7\r\n\r\n>
+    Zur\xFCck.\r\n-> zensor_story_5\r\n\r\n\r\n::zensor_story_7\r\nNPC: War et auch.
+    Manche Abende wusste keiner, ob dit Konzert oder Unfall war. Meistens beides.\r\n\r\n>
+    Wirklich so chaotisch?\r\nNPC: Siehste den Konzertposter da an der Wand? Damals
+    hat man nicht gefragt, ob dit funktioniert. Man hat gefragt, ob jemand \u2019nen
+    Verst\xE4rker hat.\r\n-> zensor_story_7\r\n\r\n> Wie ging's weiter?\r\n-> zensor_story_8\r\n\r\n>
+    Zur\xFCck.\r\n-> zensor_story_6\r\n\r\n\r\n::zensor_story_8\r\nNPC: Irgendwann
+    wurde aus dem Laden auch ein Label. Und aus dem Chaos wurde Geschichte. Wat meistens
+    passiert, wenn genug Zeit vergeht.\r\n\r\n> Zur\xFCck zum Anfang.\r\n-> start\r\n\r\n\r\n\r\n::burkhard_1\r\nNPC:
+    Manche nennen mich Burkhard. Manche nennen mich Zensor. Kommt drauf an, ob se
+    Musik suchen oder \xC4rger.\r\n\r\n> Du arbeitest hier immer noch?\r\nNPC: Na
+    irgendwer muss ja aufpassen, dass ihr nich die guten Platten anfasst.\r\n-> burkhard_1\r\n\r\n>
+    Warum ausgerechnet Platten?\r\n-> burkhard_2\r\n\r\n> Zur\xFCck.\r\n-> start\r\n\r\n\r\n::burkhard_2\r\nNPC:
+    Weil Musik die h\xF6flichste Form von Ungehorsam sein kann. Du legst einfach
+    'ne Platte auf und pl\xF6tzlich klingt die Welt anders.\r\n\r\n> Klingt romantisch.\r\n->
+    burkhard_3\r\n\r\n> Zur\xFCck.\r\n-> start\r\n\r\n\r\n::burkhard_3\r\nNPC: Romantisch?
+    Nee. Praktisch. Manche Leute gehen demonstrieren. Andere gr\xFCnden 'nen Plattenladen.\r\n\r\n>
+    Also warst du Aktivist?\r\nNPC: Ick war Plattenh\xE4ndler. Der Rest passiert
+    automatisch, wenn man die richtigen Leute zusammenbringt.\r\n-> burkhard_3\r\n\r\n>
+    Und du?\r\n-> burkhard_4\r\n\r\n> Zur\xFCck.\r\n-> burkhard_2\r\n\r\n\r\n::burkhard_4\r\nNPC:
+    Ick hab irgendwann gemerkt, dass Musik interessanter wird, je weniger Leute sie
+    verstehen.\r\n\r\n> Das klingt elit\xE4r.\r\n-> burkhard_5\r\n\r\n> Zur\xFCck.\r\n->
+    burkhard_3\r\n\r\n\r\n::burkhard_5\r\nNPC: Nee. Elit\xE4r w\xE4re zu glauben,
+    man h\xE4tte recht. Wir wollten blo\xDF neugierig bleiben.\r\n\r\n> Hat das funktioniert?\r\nNPC:
+    Keine Ahnung. Aber langweilig war's selten.\r\n-> burkhard_5\r\n\r\n> Zur\xFCck
+    zum Anfang.\r\n-> start\r\n\r\n\r\n\r\n::records_1\r\nNPC: Die meisten Leute
+    sehen nur Vinyl. Ick seh Erinnerungen, Streit, schlechte Entscheidungen und gelegentlich
+    gute Musik.\r\n\r\n> Welche Platte sollte ich h\xF6ren?\r\nNPC: Die Frage is
+    nich welche Platte du h\xF6ren solltest. Die Frage is welche Platte bereit is,
+    dich zu h\xF6ren.\r\n-> records_1\r\n\r\n> Wie meinst du das?\r\n-> records_2\r\n\r\n>
+    Zur\xFCck.\r\n-> start\r\n\r\n\r\n::records_2\r\nNPC: Manche Leute wollten Hits.
+    Andere wollten Ger\xE4usche, die ihnen erkl\xE4ren, warum sie morgens schlecht
+    geschlafen haben. F\xFCr die waren wir da.\r\n\r\n> Das klingt speziell.\r\n->
+    records_3\r\n\r\n> Zur\xFCck.\r\n-> start\r\n\r\n\r\n::records_3\r\nNPC: Speziell
+    is nur ein h\xF6fliches Wort f\xFCr interessant.\r\n\r\n> Was war die seltsamste
+    Platte?\r\nNPC: Wahrscheinlich die, bei der selbst der K\xFCnstler nich wusste,
+    ob dit Musik war.\r\n-> records_3\r\n\r\n> Hast du Empfehlungen?\r\n-> records_4\r\n\r\n>
+    Zur\xFCck.\r\n-> records_2\r\n\r\n\r\n::records_4\r\nNPC: Die Platte da? Die
+    musste man nicht verkaufen. Die musste man jemandem zumuten. Kleiner Unterschied.\r\n\r\n>
+    Klingt gef\xE4hrlich.\r\n-> records_5\r\n\r\n> Zur\xFCck.\r\n-> records_3\r\n\r\n\r\n::records_5\r\nNPC:
+    Gute Musik is manchmal wie schlechtes Wetter. Erst beschwert man sich, sp\xE4ter
+    vermisst man's.\r\n\r\n> Also magst du schwierige Musik?\r\nNPC: Schwierige Musik?
+    Nee. Nur Musik, die nich sofort alles verr\xE4t.\r\n-> records_5\r\n\r\n> Zur\xFCck
+    zum Anfang.\r\n-> start"
+  externalDialogue: {fileID: 0}
