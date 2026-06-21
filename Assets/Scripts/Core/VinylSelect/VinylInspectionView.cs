@@ -16,6 +16,24 @@ public class VinylInspectionView : MonoBehaviour
     private Transform _inspectedVinyl;
     private RestPose _restPose;
     private bool _hasRestPose;
+    private float _vinylRotationDegrees;
+    private float _discRotationDegrees;
+
+    /**
+     * Adds right-mouse inspection rotation to the selected cover/vinyl group.
+     */
+    public void AddVinylInspectionRotation(float degrees)
+    {
+        _vinylRotationDegrees += degrees;
+    }
+
+    /**
+     * Adds right-mouse inspection rotation to the focused disc only.
+     */
+    public void AddDiscInspectionRotation(float degrees)
+    {
+        _discRotationDegrees += degrees;
+    }
 
     /**
      * Validates the references required to display a vinyl at the inspection point.
@@ -35,6 +53,7 @@ public class VinylInspectionView : MonoBehaviour
     private void Update()
     {
         CacheSelectedVinyl();
+        ResetInactiveRotationOffsets();
 
         if (!_hasRestPose || _inspectedVinyl == null)
             return;
@@ -44,14 +63,25 @@ public class VinylInspectionView : MonoBehaviour
             MoveToInspectionPoint(_inspectedVinyl);
 
             if (ShouldDiscPeekOut())
+            {
                 MoveDiscToInspectionPose(_restPose);
+                MoveDiscToRestRotation(_restPose);
+            }
             else if (ShouldDiscSitInCover())
+            {
                 MoveDiscToRestPose(_restPose);
+                MoveDiscToRestRotation(_restPose);
+            }
+            else if (ShouldDiscStayFocused())
+            {
+                MoveDiscToFocusedRotation(_restPose);
+            }
         }
         else
         {
             MoveToRestPose(_inspectedVinyl, _restPose);
             MoveDiscToRestPose(_restPose);
+            MoveDiscToRestRotation(_restPose);
         }
     }
 
@@ -76,8 +106,11 @@ public class VinylInspectionView : MonoBehaviour
             selectedTransform.localPosition,
             selectedTransform.localRotation,
             vinylDisc,
-            vinylDisc != null ? vinylDisc.localPosition : Vector3.zero
+            vinylDisc != null ? vinylDisc.localPosition : Vector3.zero,
+            vinylDisc != null ? vinylDisc.localRotation : Quaternion.identity
         );
+        _vinylRotationDegrees = 0f;
+        _discRotationDegrees = 0f;
         _hasRestPose = true;
     }
 
@@ -103,6 +136,23 @@ public class VinylInspectionView : MonoBehaviour
     }
 
     /**
+     * Clears stale rotation from states where that object should no longer be rotated.
+     */
+    private void ResetInactiveRotationOffsets()
+    {
+        if (vinylSelectController == null)
+            return;
+
+        VinylState state = vinylSelectController.CurrentVinylState;
+
+        if (state != VinylState.VinylSelected)
+            _vinylRotationDegrees = 0f;
+
+        if (state != VinylState.VinylDraggedOutFocused)
+            _discRotationDegrees = 0f;
+    }
+
+    /**
      * Returns true while the disc should peek out of its cover.
      */
     private bool ShouldDiscPeekOut()
@@ -121,6 +171,15 @@ public class VinylInspectionView : MonoBehaviour
     }
 
     /**
+     * Returns true while the disc is out of the cover and can be inspected on its own.
+     */
+    private bool ShouldDiscStayFocused()
+    {
+        return vinylSelectController != null &&
+               vinylSelectController.CurrentVinylState == VinylState.VinylDraggedOutFocused;
+    }
+
+    /**
      * Immediately restores the previously inspected vinyl before another vinyl is cached.
      */
     private void RestoreCurrentVinylImmediately()
@@ -132,7 +191,10 @@ public class VinylInspectionView : MonoBehaviour
         _inspectedVinyl.localRotation = _restPose.LocalRotation;
 
         if (_restPose.VinylDisc != null)
+        {
             _restPose.VinylDisc.localPosition = _restPose.VinylDiscLocalPosition;
+            _restPose.VinylDisc.localRotation = _restPose.VinylDiscLocalRotation;
+        }
     }
 
     /**
@@ -140,6 +202,13 @@ public class VinylInspectionView : MonoBehaviour
      */
     private void MoveToInspectionPoint(Transform vinylTransform)
     {
+        Quaternion targetRotation = inspectionPoint.rotation;
+        if (vinylSelectController != null &&
+            vinylSelectController.CurrentVinylState == VinylState.VinylSelected)
+        {
+            targetRotation *= Quaternion.AngleAxis(_vinylRotationDegrees, Vector3.back);
+        }
+
         vinylTransform.position = Vector3.Lerp(
             vinylTransform.position,
             inspectionPoint.position,
@@ -148,7 +217,7 @@ public class VinylInspectionView : MonoBehaviour
 
         vinylTransform.rotation = Quaternion.Slerp(
             vinylTransform.rotation,
-            inspectionPoint.rotation,
+            targetRotation,
             rotationSpeed * Time.deltaTime
         );
     }
@@ -205,6 +274,40 @@ public class VinylInspectionView : MonoBehaviour
     }
 
     /**
+     * Smoothly restores the disc to the rotation it had inside its cover.
+     */
+    private void MoveDiscToRestRotation(RestPose restPose)
+    {
+        if (restPose.VinylDisc == null)
+            return;
+
+        restPose.VinylDisc.localRotation = Quaternion.Slerp(
+            restPose.VinylDisc.localRotation,
+            restPose.VinylDiscLocalRotation,
+            rotationSpeed * Time.deltaTime
+        );
+    }
+
+    /**
+     * Applies right-mouse inspection rotation to the focused disc.
+     */
+    private void MoveDiscToFocusedRotation(RestPose restPose)
+    {
+        if (restPose.VinylDisc == null)
+            return;
+
+        Quaternion targetRotation =
+            restPose.VinylDiscLocalRotation *
+            Quaternion.AngleAxis(_discRotationDegrees, Vector3.back);
+
+        restPose.VinylDisc.localRotation = Quaternion.Slerp(
+            restPose.VinylDisc.localRotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
+    }
+
+    /**
      * Stores the original local pose of the complete vinyl and its disc.
      */
     private readonly struct RestPose
@@ -213,17 +316,20 @@ public class VinylInspectionView : MonoBehaviour
         public Quaternion LocalRotation { get; }
         public Transform VinylDisc { get; }
         public Vector3 VinylDiscLocalPosition { get; }
+        public Quaternion VinylDiscLocalRotation { get; }
 
         public RestPose(
             Vector3 localPosition,
             Quaternion localRotation,
             Transform vinylDisc,
-            Vector3 vinylDiscLocalPosition)
+            Vector3 vinylDiscLocalPosition,
+            Quaternion vinylDiscLocalRotation)
         {
             LocalPosition = localPosition;
             LocalRotation = localRotation;
             VinylDisc = vinylDisc;
             VinylDiscLocalPosition = vinylDiscLocalPosition;
+            VinylDiscLocalRotation = vinylDiscLocalRotation;
         }
     }
 }

@@ -42,6 +42,10 @@ namespace Core.vinyl
         private void Awake()
         {
             _startRotationPos = this.transform.localRotation.eulerAngles;
+
+            if (!enabled)
+                return;
+
             InitializeInputSystem();
         }
 
@@ -54,6 +58,9 @@ namespace Core.vinyl
 
         private void InitializeInputSystem()
         {
+            if (actions == null)
+                return;
+
             rightClickPressedInputAction = actions.FindAction("Right Click");
             if (rightClickPressedInputAction != null)
             {
@@ -65,6 +72,21 @@ namespace Core.vinyl
             mouseLookInputAction = actions.FindAction("Mouse Look");
 
             actions.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _rotateAllowed = false;
+        }
+
+        private void OnDestroy()
+        {
+            if (rightClickPressedInputAction == null)
+                return;
+
+            rightClickPressedInputAction.started -= OnRightClickPressed;
+            rightClickPressedInputAction.performed -= OnRightClickPressed;
+            rightClickPressedInputAction.canceled -= OnRightClickPressed;
         }
 
         protected virtual void OnRightClickPressed(InputAction.CallbackContext context)

@@ -1636,7 +1636,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110499396}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee4a184417154693935996bfc4aaa6f1, type: 3}
   m_Name: 
@@ -2025,6 +2025,7 @@ GameObject:
   - component: {fileID: 1320968141}
   - component: {fileID: 1320968147}
   - component: {fileID: 1320968149}
+  - component: {fileID: 1320968152}
   - component: {fileID: 1320968150}
   - component: {fileID: 1320968151}
   m_Layer: 0
@@ -2212,6 +2213,22 @@ MonoBehaviour:
   localUnitsPerPixel: 0.001
   focusedDistance: 0.8
   completionThreshold: 0.6
+--- !u!114 &1320968152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320968140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94c094e56c6464cb9911965e05222bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core.VinylSelect.VinylInspectionRotator
+  vinylSelectController: {fileID: 1112518049}
+  inspectionView: {fileID: 1320968147}
+  degreesPerPixel: 0.35
+  invertDirection: 0
 --- !u!114 &1320968150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2242,6 +2259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::camera.CameraController
   moveSpeed: 2
   lookSpeed: 0.1
+  vinylSelectController: {fileID: 1112518049}
 --- !u!1 &1351243305
 GameObject:
   m_ObjectHideFlags: 0
