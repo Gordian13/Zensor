@@ -38,7 +38,7 @@ public class RecordData : ScriptableObject
     public List<AudioClip> tracks = new List<AudioClip>();
 
 
-    // Convenience: ersten Track zurÃ¼ckgeben (AbwÃ¤rtskompatibilitÃ¤t)
+    // Convenience: ersten Track zurückgeben (Abwärtskompatibilität)
     public AudioClip audioClip => tracks.Count > 0 ? tracks[0] : null;
 
     public AudioClip GetTrack(int index)
@@ -48,4 +48,9 @@ public class RecordData : ScriptableObject
     }
 
     public int TrackCount => tracks.Count;
+    [Header("Textures")]
+    public Texture2D labelFrontTexture;
+    public Texture2D labelBackTexture;
+    public Texture2D coverFrontTexture;
+    public Texture2D coverBackTexture;
 }

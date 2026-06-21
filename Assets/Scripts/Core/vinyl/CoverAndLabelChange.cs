@@ -1,11 +1,9 @@
-﻿using UnityEngine;
+﻿using record;
+using UnityEngine;
 
 public class CoverAndLabelChange : MonoBehaviour
 {
-    [Header("Textures")] [SerializeField] private Texture2D labelFrontTexture;
-    [SerializeField] private Texture2D labelBackTexture;
-    [SerializeField] private Texture2D coverFrontTexture;
-    [SerializeField] private Texture2D coverBackTexture;
+    private RecordData _vinylData;
 
     private Renderer _labelFrontRenderer;
     private Renderer _labelBackRenderer;
@@ -18,6 +16,7 @@ public class CoverAndLabelChange : MonoBehaviour
     void Awake()
     {
         FindRenderers();
+        _vinylData = GetComponent<RecordInteractionScript>().GetData();
     }
 
     void Start()
@@ -55,10 +54,10 @@ public class CoverAndLabelChange : MonoBehaviour
 
     void ApplyTextures()
     {
-        ApplyToRenderer(_labelFrontRenderer, labelFrontTexture);
-        ApplyToRenderer(_labelBackRenderer, labelBackTexture);
-        ApplyToRenderer(_coverFrontRenderer, coverFrontTexture);
-        ApplyToRenderer(_coverBackRenderer, coverBackTexture);
+        ApplyToRenderer(_labelFrontRenderer, _vinylData.labelFrontTexture);
+        ApplyToRenderer(_labelBackRenderer, _vinylData.labelBackTexture);
+        ApplyToRenderer(_coverFrontRenderer, _vinylData.coverFrontTexture);
+        ApplyToRenderer(_coverBackRenderer, _vinylData.coverBackTexture);
     }
 
     void ApplyToRenderer(Renderer rend, Texture2D tex)
