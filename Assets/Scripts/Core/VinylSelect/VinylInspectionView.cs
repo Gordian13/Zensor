@@ -297,8 +297,8 @@ public class VinylInspectionView : MonoBehaviour
             return;
 
         Quaternion targetRotation =
-            restPose.VinylDiscLocalRotation *
-            Quaternion.AngleAxis(_discRotationDegrees, Vector3.back);
+            Quaternion.AngleAxis(_discRotationDegrees, Vector3.back) *
+            restPose.VinylDiscLocalRotation;
 
         restPose.VinylDisc.localRotation = Quaternion.Slerp(
             restPose.VinylDisc.localRotation,
