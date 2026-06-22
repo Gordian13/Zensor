@@ -16,11 +16,24 @@ public class CoverAndLabelChange : MonoBehaviour
     void Awake()
     {
         FindRenderers();
-        _vinylData = GetComponent<RecordInteractionScript>().GetData();
+        RecordInteractionScript recordInteraction = GetComponent<RecordInteractionScript>();
+        if (recordInteraction == null)
+        {
+            Debug.LogWarning($"{nameof(CoverAndLabelChange)} needs a {nameof(RecordInteractionScript)} on the same GameObject.", this);
+            return;
+        }
+
+        _vinylData = recordInteraction.GetData();
     }
 
     void Start()
     {
+        if (_vinylData == null)
+        {
+            Debug.LogWarning($"{nameof(CoverAndLabelChange)} has no {nameof(RecordData)} assigned.", this);
+            return;
+        }
+
         ApplyTextures();
     }
 
