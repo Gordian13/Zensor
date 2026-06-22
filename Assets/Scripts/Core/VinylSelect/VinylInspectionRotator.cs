@@ -10,7 +10,7 @@ namespace Core.VinylSelect
     {
         [SerializeField] private VinylSelectController vinylSelectController;
         [SerializeField] private VinylInspectionView inspectionView;
-        [SerializeField] private float degreesPerPixel = 0.35f;
+        [SerializeField] private float degreesPerPixel = 1.2f;
         [SerializeField] private bool invertDirection;
 
         private void Awake()

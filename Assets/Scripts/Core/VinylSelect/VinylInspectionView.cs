@@ -10,7 +10,7 @@ public class VinylInspectionView : MonoBehaviour
     [SerializeField] private VinylSelectController vinylSelectController;
     [SerializeField] private Transform inspectionPoint;
     [SerializeField] private float positionSpeed = 6f;
-    [SerializeField] private float rotationSpeed = 8f;
+    [SerializeField] private float rotationSpeed = 15f;
     [SerializeField] private float vinylDiscInspectionXOffset = 0.2f;
 
     private Transform _inspectedVinyl;
