@@ -93,5 +93,10 @@ namespace Core.camera
 
             rightClickCameraOrbit.enabled = isActive && allowRightClickLook;
         }
+
+        public void SetAllowRightClickLook(bool state)
+        {
+            this.allowRightClickLook = state;
+        }
     }
 }

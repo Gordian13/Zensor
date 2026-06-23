@@ -16,8 +16,8 @@ MonoBehaviour:
   author: Die Zwei
   album: Countryboy
   year: 1985
-  description: 
-  sprite: {fileID: 0}
+  description: Test
+  sprite: {fileID: 21300000, guid: 994da07734c8c2b48b6f37488bdf6775, type: 3}
   format: 0
   speed: 0
   vinylType: 1

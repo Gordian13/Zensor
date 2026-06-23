@@ -1,4 +1,5 @@
 using System;
+using Core.camera;
 using Core.VinylSelect;
 using Interaction.util.ColorReveal;
 using UnityEngine;
@@ -13,7 +14,13 @@ public class VinylSelectController : MonoBehaviour
     public IVinyl SelectedVinyl { get; private set; }
 
     public event Action<VinylState, VinylState> StateChanged;
-    
+    private CameraSpot _spot;
+
+    public void Awake()
+    {
+        this._spot = GetComponentInParent<CameraSpot>();
+    }
+
     /**
      * Selects a vinyl while browsing and changes the state to VinylSelected.
      */
@@ -21,6 +28,8 @@ public class VinylSelectController : MonoBehaviour
     {
         if (CurrentVinylState != VinylState.BrowsingBox || vinyl == null)
             return false;
+
+        this._spot.SetAllowRightClickLook(false);
 
         SelectedVinyl = vinyl;
         vinyl.GetSelectionTransform().GetComponentInChildren<IColorRevealable>().SetStayColored(true);
@@ -99,6 +108,8 @@ public class VinylSelectController : MonoBehaviour
     {
         if (CurrentVinylState != VinylState.VinylSelected)
             return false;
+        
+        this._spot.SetAllowRightClickLook(true);
 
         ChangeState(VinylState.BrowsingBox);
         SelectedVinyl.GetSelectionTransform().GetComponentInChildren<IColorRevealable>().SetStayColored(false);
