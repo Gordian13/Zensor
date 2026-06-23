@@ -18,6 +18,12 @@ MonoBehaviour:
   year: 1985
   description: 
   sprite: {fileID: 0}
+  format: 0
   speed: 0
+  vinylType: 1
   tracks:
   - {fileID: 8300000, guid: e4d54a50d6602473cafd14d4a4130180, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: eb7f15c302a91954dbeff42e60e9a6ff, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: 0d22b667dba5e6d4e80a46a84ccb6072, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: 524986cb19b831046a750dfd523fb942, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: f1e129494e3d7544b865bda97bf60642, type: 3}
