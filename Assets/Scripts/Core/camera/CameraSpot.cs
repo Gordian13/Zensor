@@ -14,6 +14,7 @@ namespace Core.camera
         [SerializeField] private CinemachineCamera spotCamera;
         [SerializeField] private RightClickCameraOrbit rightClickCameraOrbit;
         [SerializeField] private bool allowRightClickLook = true;
+        private bool isLookControlActive;
 
         public string GetSpotId()
         {
@@ -88,15 +89,22 @@ namespace Core.camera
 
         public void SetLookControlActive(bool isActive)
         {
+            isLookControlActive = isActive;
+
             if (rightClickCameraOrbit == null)
                 return;
 
-            rightClickCameraOrbit.enabled = isActive && allowRightClickLook;
+            rightClickCameraOrbit.enabled = isLookControlActive && allowRightClickLook;
         }
 
         public void SetAllowRightClickLook(bool state)
         {
-            this.allowRightClickLook = state;
+            allowRightClickLook = state;
+
+            if (rightClickCameraOrbit == null)
+                return;
+
+            rightClickCameraOrbit.enabled = isLookControlActive && allowRightClickLook;
         }
     }
 }
