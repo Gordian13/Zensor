@@ -19,6 +19,8 @@ namespace Interaction.util.ColorReveal
 
         // _ColorAmount ID in shader
         private static readonly int ColorAmountId = Shader.PropertyToID("_ColorAmount");
+        private const float GrayscaleAmount = 0f;
+        private const float ColorAmount = 1f;
 
         /**
          * Sets the initial color amount based on startGrayscale.
@@ -35,7 +37,7 @@ namespace Interaction.util.ColorReveal
             }
 
             _isGrayscale = startGrayscale;
-            SetColorAmount(_isGrayscale ? 1f : 0f);
+            SetColorAmount(_isGrayscale ? GrayscaleAmount : ColorAmount);
         }
 
         /**
@@ -48,9 +50,14 @@ namespace Interaction.util.ColorReveal
             Debug.Log($"Toggled grayscale on object {gameObject.name}");
         }
 
+        public void SetColorReveal(bool revealed)
+        {
+            SetColor(revealed);
+        }
+
         /**
          * Sets the object to color or grayscale directly.
-         * showColor true means _ColorAmount 0, showColor false means _ColorAmount 1.
+         * showColor true means _ColorAmount 1, showColor false means _ColorAmount 0.
          */
         public void SetColor(bool showColor)
         {
@@ -58,7 +65,7 @@ namespace Interaction.util.ColorReveal
                 return;
 
             _isGrayscale = !showColor;
-            StartColorTransition(_isGrayscale ? 1f : 0f);
+            StartColorTransition(_isGrayscale ? GrayscaleAmount : ColorAmount);
         }
 
         /**

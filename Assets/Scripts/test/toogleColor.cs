@@ -16,7 +16,7 @@ public class toogleColor : MonoBehaviour
         {
             Debug.Log($"Raycast hit: {hit.transform.name}");
             if (hit.transform == gameObject.transform)
-                itemToToggle.ToggleColor();
+                itemToToggle.SetColorReveal(true);
         }
     }
 }
