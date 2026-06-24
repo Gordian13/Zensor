@@ -9,6 +9,8 @@ namespace Core.camera
      */
     public class CameraTransitionManager : MonoBehaviour
     {
+        public static CameraTransitionManager Instance { get; private set; }
+
         [SerializeField] private SpotManager spotManager;
         [SerializeField] private CameraSpotRegistry registry;
         [SerializeField] private CinemachineBrain brain;
@@ -22,6 +24,8 @@ namespace Core.camera
 
         private void Awake()
         {
+            Instance = this;
+
             if (spotManager == null)
                 Debug.LogError($"{nameof(CameraTransitionManager)} has no SpotManager assigned.", this);
 
@@ -59,6 +63,23 @@ namespace Core.camera
                 Debug.LogError($"Destination spot id '{destinationSpotId}' was not found.", this);
                 return;
             }
+
+            if (spotManager != null && spotManager.IsCurrentSpot(destinationSpot))
+                return;
+
+            currentTransition = StartCoroutine(PlayRouteRoutine(route, destinationSpot));
+        }
+
+        public void PlayRoute(CameraRoute route, CameraSpot destinationSpot)
+        {
+            if (destinationSpot == null)
+            {
+                Debug.LogError("Cannot play transition because destination spot is null.", this);
+                return;
+            }
+
+            if (IsTransitioning)
+                return;
 
             if (spotManager != null && spotManager.IsCurrentSpot(destinationSpot))
                 return;

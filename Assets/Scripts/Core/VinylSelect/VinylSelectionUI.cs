@@ -16,6 +16,8 @@ public class VinylSelectionUI : MonoBehaviour
     [SerializeField] private GameObject closeInfoButton;
     [SerializeField] private GameObject browseMoreButton;
     [SerializeField] private GameObject playButton;
+    [SerializeField] private GameObject nextTrackButton;
+    [SerializeField] private GameObject previousTrackButton;
 
     [Header("Guidance")]
     [SerializeField] private GameObject guidanceRoot;
@@ -113,6 +115,9 @@ public class VinylSelectionUI : MonoBehaviour
         bool isSelected = state == VinylState.VinylSelected;
         bool isInfoOpen = state == VinylState.VinylInfoOpen;
         bool isFocused = state == VinylState.VinylDraggedOutFocused;
+        bool isInPlayer = state == VinylState.vinylPlayer;
+
+        bool hasMultipleTracks = controller.SelectedVinyl?.GetData()?.TrackCount > 1;
 
         ResolveRecordInfoUI();
 
@@ -120,6 +125,8 @@ public class VinylSelectionUI : MonoBehaviour
         SetVisible(closeInfoButton, isInfoOpen);
         SetVisible(browseMoreButton, isSelected);
         SetVisible(playButton, isFocused);
+        SetVisible(nextTrackButton, isInPlayer && hasMultipleTracks);
+        SetVisible(previousTrackButton, isInPlayer && hasMultipleTracks);
         UpdateGuidance(state);
 
         if (recordInfoUI == null)

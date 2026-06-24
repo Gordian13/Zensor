@@ -153,6 +153,33 @@ public class VinylSelectController : MonoBehaviour
         CloseSelection();
     }
 
+    public void GoToVinylPlayerFromButton()
+    {
+        GoToVinylPlayer();
+    }
+
+    public bool GoToVinylPlayer()
+    {
+        return TryChangeState(VinylState.VinylDraggedOutFocused, VinylState.vinylPlayer);
+    }
+
+    public void ExitVinylPlayerFromButton()
+    {
+        ExitVinylPlayer();
+    }
+
+    public bool ExitVinylPlayer()
+    {
+        if (CurrentVinylState != VinylState.vinylPlayer)
+            return false;
+
+        this._spot.SetAllowRightClickLook(true);
+        SelectedVinyl.GetSelectionTransform().GetComponentInChildren<IColorRevealable>().SetStayColored(false);
+        SelectedVinyl = null;
+        ChangeState(VinylState.BrowsingBox);
+        return true;
+    }
+
     /**
      * Changes the state only if the controller is currently in the required state.
      */

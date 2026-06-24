@@ -1,3 +1,4 @@
+using Core.VinylSelect;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,7 @@ namespace Core.camera
         [SerializeField] private SpotManager spotManager;
         [SerializeField] private CameraSpotRegistry registry;
         [SerializeField] private CameraTransitionManager transitionManager;
+        [SerializeField] private VinylSelectController vinylSelectController;
         [SerializeField] private LayerMask spotLayer = ~0;
         [SerializeField] private float rayDistance = 100f;
 
@@ -32,6 +34,12 @@ namespace Core.camera
         private void Update()
         {
             if (transitionManager != null && transitionManager.IsTransitioning)
+                return;
+
+            if (vinylSelectController == null)
+                vinylSelectController = FindFirstObjectByType<VinylSelectController>(FindObjectsInactive.Include);
+
+            if (vinylSelectController != null && vinylSelectController.CurrentVinylState == VinylState.vinylPlayer)
                 return;
 
             UpdateHover();
