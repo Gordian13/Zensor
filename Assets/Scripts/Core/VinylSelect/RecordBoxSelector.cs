@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Core.camera;
 using Core.VinylSelect;
 using Interaction.util.ColorReveal;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace record
         [SerializeField] private RecordInfoUI recordInfoUI;
 
         [Header("Raycast")] [SerializeField] private LayerMask recordLayer = ~0;
+        [SerializeField] private LayerMask blockingLayer = Physics.DefaultRaycastLayers;
         [SerializeField] private float rayDistance = 100f;
 
         [Header("Hover Animation")] [SerializeField]
@@ -24,6 +26,11 @@ namespace record
 
         [Header("State Controller")] [SerializeField]
         private VinylSelectController vinylSelectController;
+
+        [Header("Spot Guard")] [SerializeField]
+        private SpotManager spotManager;
+
+        [SerializeField] private CameraSpot owningSpot;
 
         private readonly Dictionary<Transform, Vector3> restPositions = new();
         private Transform hoveredTransform;
@@ -41,11 +48,18 @@ namespace record
 
             if (vinylSelectController == null)
                 Debug.LogError($"{nameof(RecordBoxSelector)} has no VinylSelectController assigned.", this);
+
+            if (spotManager == null)
+                spotManager = FindFirstObjectByType<SpotManager>();
+
+            if (owningSpot == null)
+                owningSpot = GetComponentInParent<CameraSpot>();
         }
 
         private void Update()
         {
-            if (vinylSelectController == null ||
+            if (!IsOwningSpotActive() ||
+                vinylSelectController == null ||
                 vinylSelectController.CurrentVinylState != VinylState.BrowsingBox)
             {
                 ClearHover(true);
@@ -118,39 +132,20 @@ namespace record
                 return null;
 
             Ray ray = targetCamera.ScreenPointToRay(mouse.position.ReadValue());
-            RaycastHit[] hits = Physics.RaycastAll(
+            if (!Physics.Raycast(
                 ray,
+                out RaycastHit hit,
                 rayDistance,
-                recordLayer,
-                QueryTriggerInteraction.Ignore);
-
-            if (hits.Length == 0)
-                return null;
-
-            System.Array.Sort(
-                hits,
-                (first, second) => first.distance.CompareTo(second.distance));
-
-            foreach (RaycastHit hit in hits)
+                GetBlockingLayerMask(),
+                QueryTriggerInteraction.Ignore))
             {
-                MonoBehaviour[] components =
-                    hit.collider.GetComponentsInParent<MonoBehaviour>(true);
-
-                foreach (MonoBehaviour component in components)
-                {
-                    if (component is not IVinyl vinyl)
-                        continue;
-
-                    RecordData data = vinyl.GetData();
-                    if (data == null || data.format != RecordFormat.Vinyl)
-                        continue;
-
-                    vinylTransform = vinyl.GetSelectionTransform();
-                    return vinyl;
-                }
+                return null;
             }
 
-            return null;
+            if (!IsLayerInMask(hit.collider.gameObject.layer, recordLayer))
+                return null;
+
+            return GetVinylFromHit(hit, out vinylTransform);
         }
 
         private void ClearHover(bool restoreImmediately = false)
@@ -168,6 +163,49 @@ namespace record
 
             if (hideUIWhenNotHovering)
                 recordInfoUI?.Hide();
+        }
+
+        private bool IsOwningSpotActive()
+        {
+            if (spotManager == null || owningSpot == null)
+                return true;
+
+            return spotManager.IsCurrentSpot(owningSpot);
+        }
+
+        private int GetBlockingLayerMask()
+        {
+            return blockingLayer.value != 0
+                ? blockingLayer.value
+                : Physics.DefaultRaycastLayers;
+        }
+
+        private static bool IsLayerInMask(int layer, LayerMask layerMask)
+        {
+            return (layerMask.value & (1 << layer)) != 0;
+        }
+
+        private static IVinyl GetVinylFromHit(RaycastHit hit, out Transform vinylTransform)
+        {
+            vinylTransform = null;
+
+            MonoBehaviour[] components =
+                hit.collider.GetComponentsInParent<MonoBehaviour>(true);
+
+            foreach (MonoBehaviour component in components)
+            {
+                if (component is not IVinyl vinyl)
+                    continue;
+
+                RecordData data = vinyl.GetData();
+                if (data == null || data.format != RecordFormat.Vinyl)
+                    continue;
+
+                vinylTransform = vinyl.GetSelectionTransform();
+                return vinyl;
+            }
+
+            return null;
         }
     }
 }
