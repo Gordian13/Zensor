@@ -47,6 +47,37 @@ public class VinylInspectionView : MonoBehaviour
             Debug.LogError($"{nameof(VinylInspectionView)} has no inspection point assigned.", this);
     }
 
+    private void OnEnable()
+    {
+        if (vinylSelectController != null)
+            vinylSelectController.StateChanged += OnVinylStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        if (vinylSelectController != null)
+            vinylSelectController.StateChanged -= OnVinylStateChanged;
+    }
+
+    /**
+     * Hides the disc rotation reset when the player starts or finishes pushing the disc back into its cover.
+     */
+    private void OnVinylStateChanged(VinylState previousState, VinylState nextState)
+    {
+        bool startedDraggingIn =
+            previousState == VinylState.VinylDraggedOutFocused &&
+            nextState == VinylState.DraggingVinylIn;
+
+        bool finishedDraggingIn =
+            previousState == VinylState.DraggingVinylIn &&
+            nextState == VinylState.VinylSelected;
+
+        if (startedDraggingIn || finishedDraggingIn)
+        {
+            SnapDiscToRestRotation(_restPose);
+        }
+    }
+
     /**
      * Updates the selected vinyl and disc positions according to the current vinyl state.
      */
@@ -148,8 +179,11 @@ public class VinylInspectionView : MonoBehaviour
         if (state != VinylState.VinylSelected)
             _vinylRotationDegrees = 0f;
 
-        if (state != VinylState.VinylDraggedOutFocused)
+        if (state != VinylState.VinylDraggedOutFocused &&
+            state != VinylState.DraggingVinylIn)
+        {
             _discRotationDegrees = 0f;
+        }
     }
 
     /**
@@ -286,6 +320,18 @@ public class VinylInspectionView : MonoBehaviour
             restPose.VinylDiscLocalRotation,
             rotationSpeed * Time.deltaTime
         );
+    }
+
+    /**
+     * Immediately restores the hidden disc rotation without animating a visible correction.
+     */
+    private void SnapDiscToRestRotation(RestPose restPose)
+    {
+        if (restPose.VinylDisc == null)
+            return;
+
+        _discRotationDegrees = 0f;
+        restPose.VinylDisc.localRotation = restPose.VinylDiscLocalRotation;
     }
 
     /**
