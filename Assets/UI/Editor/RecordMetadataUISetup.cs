@@ -12,6 +12,10 @@ public static class RecordMetadataUISetup
     private const string CanvasName = "RecordInfoCanvas";
     private const string PanelName = "RecordInfoPanel";
     private static readonly Vector2 ReferenceResolution = new Vector2(1920f, 1080f);
+    private static readonly Vector2 PanelAnchor = new Vector2(1f, 0.5f);
+    private static readonly Vector2 PanelPivot = new Vector2(1f, 0.5f);
+    private static readonly Vector2 PanelPosition = new Vector2(-185.03503f, -28.144318f);
+    private static readonly Vector2 PanelSize = new Vector2(748.7676f, 1001.6851f);
 
     // Adds the setup action to the Unity menu: Tools > Zensor > Setup Record Metadata UI.
     [MenuItem("Tools/Zensor/Setup Record Metadata UI")]
@@ -21,23 +25,16 @@ public static class RecordMetadataUISetup
         var canvas = GetOrCreateCanvas();
         var panel = GetOrCreatePanel(canvas.transform);
 
-        var titleText = GetOrCreateText(panel.transform, "TitleText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(16f, -16f), new Vector2(-160f, -56f), 30, out _);
-        var authorText = GetOrCreateText(panel.transform, "AuthorText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(16f, -64f), new Vector2(-160f, -94f), 20, out _);
-        var yearText = GetOrCreateText(panel.transform, "YearText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(16f, -102f), new Vector2(-300f, -132f), 18, out _);
-        var playableText = GetOrCreateText(panel.transform, "PlayableText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(270f, -120f), new Vector2(-160f, -150f), 18, out _);
-        var descriptionText = GetOrCreateText(panel.transform, "DescriptionText", new Vector2(0f, 0f), new Vector2(1f, 1f), new Vector2(16f, 16f), new Vector2(-16f, -168f), 18, out var descriptionCreated);
-        if (descriptionCreated)
-        {
-            descriptionText.alignment = TextAlignmentOptions.TopLeft;
-            // descriptionText.enableWordWrapping = true;
-            descriptionText.overflowMode = TextOverflowModes.Overflow;
-        }
+        RemoveObsoleteChild(panel.transform, "PlayableText");
+        RemoveObsoleteChild(panel.transform, "CoverImage");
 
-        var coverImage = GetOrCreateImage(panel.transform, "CoverImage", new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-144f, -16f), new Vector2(-16f, -144f), out var coverCreated);
-        if (coverCreated)
-        {
-            coverImage.preserveAspect = true;
-        }
+        var titleText = GetOrCreateText(panel.transform, "TitleText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -120f), new Vector2(-48f, 75.3654f), 30f, out _);
+        var authorText = GetOrCreateText(panel.transform, "AuthorText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -190f), new Vector2(-48f, 30f), 30f, out _);
+        var albumText = GetOrCreateText(panel.transform, "AlbumText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -250f), new Vector2(-48f, 30f), 30f, out _);
+        var yearText = GetOrCreateText(panel.transform, "YearText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -310f), new Vector2(-48f, 34.6054f), 30f, out _);
+        var descriptionText = GetOrCreateText(panel.transform, "DescriptionText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -560f), new Vector2(-48f, 400f), 33f, out _);
+        descriptionText.alignment = TextAlignmentOptions.TopLeft;
+        descriptionText.overflowMode = TextOverflowModes.Overflow;
 
         // Add the display script to the panel and connect all generated UI references.
         var infoUI = panel.GetComponent<RecordInfoUI>();
@@ -46,7 +43,7 @@ public static class RecordMetadataUISetup
             infoUI = panel.AddComponent<RecordInfoUI>();
         }
 
-        infoUI.Configure(panel.gameObject, titleText, authorText, yearText, playableText, descriptionText, coverImage);
+        infoUI.Configure(panel.gameObject, titleText, authorText, albumText, yearText, descriptionText);
 
         // Connect the panel and existing buttons to the vinyl state controller.
         var vinylSelectController = Object.FindFirstObjectByType<VinylSelectController>();
@@ -81,6 +78,15 @@ public static class RecordMetadataUISetup
     {
         var child = parent.Find(childName);
         return child != null ? child.gameObject : null;
+    }
+
+    private static void RemoveObsoleteChild(Transform parent, string childName)
+    {
+        var child = parent.Find(childName);
+        if (child != null)
+        {
+            Object.DestroyImmediate(child.gameObject);
+        }
     }
 
     // Creates the Canvas that contains UI elements, or reuses an existing one.
@@ -127,23 +133,38 @@ public static class RecordMetadataUISetup
         var panelTransform = canvasTransform.Find(PanelName);
         if (panelTransform != null)
         {
+            ConfigurePanel(panelTransform.gameObject);
             return panelTransform.gameObject;
         }
 
         var panelGo = new GameObject(PanelName);
         panelGo.transform.SetParent(canvasTransform, false);
-
-        var rect = panelGo.AddComponent<RectTransform>();
-        rect.anchorMin = new Vector2(0f, 0f);
-        rect.anchorMax = new Vector2(0f, 0f);
-        rect.pivot = new Vector2(0f, 0f);
-        rect.anchoredPosition = new Vector2(16f, 16f);
-        rect.sizeDelta = new Vector2(620f, 280f);
-
-        var image = panelGo.AddComponent<Image>();
-        image.color = new Color(0f, 0f, 0f, 0.65f);
+        ConfigurePanel(panelGo);
 
         return panelGo;
+    }
+
+    private static void ConfigurePanel(GameObject panelGo)
+    {
+        var rect = panelGo.GetComponent<RectTransform>();
+        if (rect == null)
+        {
+            rect = panelGo.AddComponent<RectTransform>();
+        }
+
+        rect.anchorMin = PanelAnchor;
+        rect.anchorMax = PanelAnchor;
+        rect.pivot = PanelPivot;
+        rect.anchoredPosition = PanelPosition;
+        rect.sizeDelta = PanelSize;
+
+        var image = panelGo.GetComponent<Image>();
+        if (image == null)
+        {
+            image = panelGo.AddComponent<Image>();
+        }
+
+        image.color = new Color(0f, 0f, 0f, 0.65f);
     }
 
     // Creates or updates a TextMeshPro text field used by the metadata panel.
@@ -152,8 +173,9 @@ public static class RecordMetadataUISetup
         string name,
         Vector2 anchorMin,
         Vector2 anchorMax,
-        Vector2 offsetMin,
-        Vector2 offsetMax,
+        Vector2 pivot,
+        Vector2 anchoredPosition,
+        Vector2 sizeDelta,
         float fontSize,
         out bool created)
     {
@@ -173,13 +195,11 @@ public static class RecordMetadataUISetup
             rect = textGo.AddComponent<RectTransform>();
         }
 
-        if (created)
-        {
-            rect.anchorMin = anchorMin;
-            rect.anchorMax = anchorMax;
-            rect.offsetMin = offsetMin;
-            rect.offsetMax = offsetMax;
-        }
+        rect.anchorMin = anchorMin;
+        rect.anchorMax = anchorMax;
+        rect.pivot = pivot;
+        rect.anchoredPosition = anchoredPosition;
+        rect.sizeDelta = sizeDelta;
 
         var text = textGo.GetComponent<TextMeshProUGUI>();
         if (text == null)
@@ -191,9 +211,6 @@ public static class RecordMetadataUISetup
         if (created)
         {
             text.text = name;
-            text.fontSize = fontSize;
-            text.alignment = TextAlignmentOptions.TopLeft;
-            text.color = new Color(0.95f, 0.95f, 0.95f, 1f);
 
             if (TMP_Settings.defaultFontAsset != null)
             {
@@ -201,56 +218,11 @@ public static class RecordMetadataUISetup
             }
         }
 
+        text.fontSize = fontSize;
+        text.alignment = TextAlignmentOptions.TopLeft;
+        text.color = new Color(0.95f, 0.95f, 0.95f, 1f);
+
         return text;
-    }
-
-    // Creates or updates the image field used for the record cover.
-    private static Image GetOrCreateImage(
-        Transform parent,
-        string name,
-        Vector2 anchorMin,
-        Vector2 anchorMax,
-        Vector2 offsetMin,
-        Vector2 offsetMax,
-        out bool created)
-    {
-        // If the image object already exists, reuse it instead of creating duplicates.
-        var existing = parent.Find(name);
-        created = existing == null;
-        var imageGo = existing != null ? existing.gameObject : new GameObject(name);
-
-        if (created)
-        {
-            imageGo.transform.SetParent(parent, false);
-        }
-
-        var rect = imageGo.GetComponent<RectTransform>();
-        if (rect == null)
-        {
-            rect = imageGo.AddComponent<RectTransform>();
-        }
-
-        if (created)
-        {
-            rect.anchorMin = anchorMin;
-            rect.anchorMax = anchorMax;
-            rect.offsetMin = offsetMin;
-            rect.offsetMax = offsetMax;
-        }
-
-        var image = imageGo.GetComponent<Image>();
-        if (image == null)
-        {
-            image = imageGo.AddComponent<Image>();
-            created = true;
-        }
-
-        if (created)
-        {
-            image.color = Color.white;
-        }
-
-        return image;
     }
 
 }
