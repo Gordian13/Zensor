@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Din A Testbild - Programm 2
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Din A Testbild - Programm 2
+  author: Din A Testbild
+  album: Programm 2
+  year: 1981
+  description: "DIN A Testbild is a West Berlin underground band from the late 1970s
+    that is still active today. DIN A Testbild is considered one of the driving forces
+    behind West Berlin\u2019s expressive musical avant-garde and the subsequent techno
+    wave."
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 1
+  tracks:
+  - {fileID: 8300000, guid: 18e78e139bfdc496aa83aceed76141d4, type: 3}
+  - {fileID: 8300000, guid: 5db07f079424146a29624e15b47e0df0, type: 3}
+  - {fileID: 8300000, guid: c3233d9ebbb4b4bcf99fddbf87aada9d, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: 1542e1319345982468459a64c7ffd3bd, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: f98add67634610449bd17b9e4898b5ec, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: 64f2eea1d2df4414f8cfa5c2580dea11, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: 2b7ff6b48acf9ae4493751b30dbc9ca7, type: 3}

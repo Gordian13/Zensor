@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Malaria - Malaria
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Malaria! - Malaria!
+  author: Malaria!
+  album: Malaria!
+  year: 1981
+  description: 
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 1
+  tracks:
+  - {fileID: 8300000, guid: 62929feab26de40cc8e3e2233df0fa6c, type: 3}
+  - {fileID: 8300000, guid: f4929a713886f4dd2bf61a9c371e1b71, type: 3}
+  - {fileID: 8300000, guid: 29e7c86f5babe438389d0d6d3012f03a, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: d296d8b56e0fb3045b7f74b469880fe1, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: 15810099c2e290947b14bf314af08ba0, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: ea89b949a84cfd14986120f23ee48f67, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: df61bccdacea92b409a896b23081109b, type: 3}

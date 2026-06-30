@@ -65,6 +65,13 @@ public class CoverAndLabelChange : MonoBehaviour
         }
     }
 
+    public void SetData(RecordData data)
+    {
+        _vinylData = data;
+        if (_vinylData != null)
+            ApplyTextures();
+    }
+
     void ApplyTextures()
     {
         ApplyToRenderer(_labelFrontRenderer, _vinylData.labelFrontTexture);

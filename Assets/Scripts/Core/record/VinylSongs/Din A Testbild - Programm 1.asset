@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
-  m_Name: Din A Testbild - She's So Nice_Vinyl
+  m_Name: Din A Testbild - Programm 1
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: She's So Nice
+  title: Din A Testbild - Programm 1
   author: Din A Testbild
   album: Programm 1
   year: 1980
@@ -20,7 +20,13 @@ MonoBehaviour:
     that is still active today. DIN A Testbild is considered one of the driving forces
     behind West Berlin\u2019s expressive musical avant-garde and the subsequent techno
     wave."
-  sprite: {fileID: 21300000, guid: 93d0cbfc6c65642668aab534bf1ec179, type: 3}
+  sprite: {fileID: 0}
+  format: 0
   speed: 0
+  vinylType: 1
   tracks:
-  - {fileID: 8300000, guid: 6c27dbd567aed4031b2a8dc98ec46f48, type: 3}
+  - {fileID: 8300000, guid: 2e58aaa3511a34d2aa911638a4569635, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: 9289d45ff6f24b44d804450eb0a74785, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: 56dda5188f023fe4a9f572e2609bacf8, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: f0d583193993878439417b9972ca8fb5, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: 344f77a592f072b45b9241d962d84885, type: 3}
