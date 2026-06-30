@@ -1,3 +1,4 @@
+using Core.VinylSelect;
 using UnityEngine;
 
 namespace Core.camera
@@ -40,6 +41,15 @@ namespace Core.camera
             {
                 Debug.LogError($"{nameof(ReturnToStartButton)} cannot return because no start spot id was found.", this);
                 return;
+            }
+            
+            VinylSelectController vinylController = FindFirstObjectByType<VinylSelectController>();
+            if (vinylController != null)
+            {
+                if (vinylController.CurrentVinylState == VinylState.vinylPlayer)
+                    vinylController.ExitVinylPlayer();
+                else if (vinylController.CurrentVinylState != VinylState.BrowsingBox)
+                    vinylController.CloseSelection();
             }
 
             transitionManager.PlayRoute(null, startSpotId);

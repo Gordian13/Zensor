@@ -2122,7 +2122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core.camera.SpotManager
   _startSpot: {fileID: 0}
-  startSpotId: 
+  startSpotId: vinyl
   registry: {fileID: 2135236722}
 --- !u!4 &2135236721
 Transform:

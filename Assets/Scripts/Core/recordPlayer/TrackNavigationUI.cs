@@ -9,6 +9,7 @@ namespace recordPlayer
     {
         [SerializeField] private Button nextTrackButton;
         [SerializeField] private Button previousTrackButton;
+        [SerializeField] private Button BackButton;
         [SerializeField] private TMP_Text trackDisplay;
 
         private RecordPlayerController _player;
@@ -28,6 +29,7 @@ namespace recordPlayer
 
             nextTrackButton?.onClick.AddListener(_player.NextTrack);
             previousTrackButton?.onClick.AddListener(_player.PreviousTrack);
+            BackButton?.onClick.AddListener(() => _selectController?.ExitVinylPlayer()); 
 
             if (_selectController != null)
                 _selectController.StateChanged += OnStateChanged;
@@ -60,6 +62,7 @@ namespace recordPlayer
         private void SetVisible(bool visible)
         {
             if (trackDisplay != null) trackDisplay.gameObject.SetActive(visible);
+            if (BackButton != null) BackButton.gameObject.SetActive(visible);
         }
     }
 }

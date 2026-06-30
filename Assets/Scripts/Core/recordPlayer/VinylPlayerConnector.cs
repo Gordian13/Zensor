@@ -74,7 +74,7 @@ namespace recordPlayer
             CameraTransitionManager.Instance.PlayRoute(routeToPlayer, playerSpot);
         }
 
-        private void ExitPlayer()
+        public void ExitPlayer()
         {
             recordPlayer?.ClearRecord();
 
