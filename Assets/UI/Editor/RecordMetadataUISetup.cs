@@ -10,12 +10,19 @@ using UnityEngine.UI;
 public static class RecordMetadataUISetup
 {
     private const string CanvasName = "RecordInfoCanvas";
+    private const string VinylSelectCanvasName = "VinylSelectCanvas";
     private const string PanelName = "RecordInfoPanel";
     private static readonly Vector2 ReferenceResolution = new Vector2(1920f, 1080f);
     private static readonly Vector2 PanelAnchor = new Vector2(1f, 0.5f);
     private static readonly Vector2 PanelPivot = new Vector2(1f, 0.5f);
     private static readonly Vector2 PanelPosition = new Vector2(-185.03503f, -28.144318f);
     private static readonly Vector2 PanelSize = new Vector2(748.7676f, 1001.6851f);
+    private static readonly Color PositiveButtonColor = new Color(0.24705882f, 0.68235296f, 0.3529412f, 1f);
+    private static readonly Color PositiveButtonHighlight = new Color(0.3372549f, 0.78431374f, 0.43529412f, 1f);
+    private static readonly Color PositiveButtonPressed = new Color(0.18431373f, 0.56078434f, 0.28235295f, 1f);
+    private static readonly Color ExitButtonColor = new Color(0.8509804f, 0.34509805f, 0.22745098f, 1f);
+    private static readonly Color ExitButtonHighlight = new Color(0.9411765f, 0.44313726f, 0.30980393f, 1f);
+    private static readonly Color ExitButtonPressed = new Color(0.68235296f, 0.23137255f, 0.15686275f, 1f);
 
     // Adds the setup action to the Unity menu: Tools > Zensor > Setup Record Metadata UI.
     [MenuItem("Tools/Zensor/Setup Record Metadata UI")]
@@ -24,6 +31,8 @@ public static class RecordMetadataUISetup
         // Create or reuse the main UI containers before adding the individual UI fields.
         var canvas = GetOrCreateCanvas();
         var panel = GetOrCreatePanel(canvas.transform);
+        var vinylButtonCanvas = FindSceneObjectTransform(VinylSelectCanvasName);
+        var buttonRoot = vinylButtonCanvas != null ? vinylButtonCanvas : canvas.transform;
 
         RemoveObsoleteChild(panel.transform, "PlayableText");
         RemoveObsoleteChild(panel.transform, "CoverImage");
@@ -49,24 +58,28 @@ public static class RecordMetadataUISetup
         var vinylSelectController = Object.FindFirstObjectByType<VinylSelectController>();
         if (vinylSelectController != null)
         {
-            var selectionUI = canvas.GetComponent<VinylSelectionUI>();
+            var selectionUI = buttonRoot.GetComponent<VinylSelectionUI>();
             if (selectionUI == null)
             {
-                selectionUI = canvas.gameObject.AddComponent<VinylSelectionUI>();
+                selectionUI = buttonRoot.gameObject.AddComponent<VinylSelectionUI>();
             }
 
             selectionUI.Configure(
                 vinylSelectController,
                 infoUI,
-                FindDirectChild(canvas.transform, "Info"),
-                FindDirectChild(canvas.transform, "CloseInfo"),
-                FindDirectChild(canvas.transform, "BrowseMore"),
-                FindDirectChild(canvas.transform, "Play"));
+                FindDirectChild(buttonRoot, "Info"),
+                FindDirectChild(buttonRoot, "CloseInfo"),
+                FindDirectChild(buttonRoot, "BrowseMore"),
+                FindDirectChild(buttonRoot, "Play"));
         }
         else
         {
             Debug.LogWarning("RecordMetadataUISetup: No VinylSelectController found in the scene.");
         }
+
+        ApplyButtonColors(canvas.transform);
+        ApplyButtonColors(vinylButtonCanvas);
+        ApplyButtonStyle(GameObject.Find("HomeButton"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
 
         // Mark the scene as changed so Unity knows it should be saved.
         EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
@@ -78,6 +91,57 @@ public static class RecordMetadataUISetup
     {
         var child = parent.Find(childName);
         return child != null ? child.gameObject : null;
+    }
+
+    private static Transform FindSceneObjectTransform(string objectName)
+    {
+        var sceneObject = GameObject.Find(objectName);
+        return sceneObject != null ? sceneObject.transform : null;
+    }
+
+    private static void ApplyButtonColors(Transform canvasTransform)
+    {
+        if (canvasTransform == null)
+        {
+            return;
+        }
+
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "BrowseMore"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Back"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "CloseInfo"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Previous"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Info"), PositiveButtonColor, PositiveButtonHighlight, PositiveButtonPressed);
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Play"), PositiveButtonColor, PositiveButtonHighlight, PositiveButtonPressed);
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Next"), PositiveButtonColor, PositiveButtonHighlight, PositiveButtonPressed);
+    }
+
+    private static void ApplyButtonStyle(GameObject buttonObject, Color normal, Color highlighted, Color pressed)
+    {
+        if (buttonObject == null)
+        {
+            return;
+        }
+
+        if (buttonObject.TryGetComponent(out Image image))
+        {
+            image.color = normal;
+        }
+
+        if (buttonObject.TryGetComponent(out Button button))
+        {
+            var colors = button.colors;
+            colors.normalColor = normal;
+            colors.highlightedColor = highlighted;
+            colors.pressedColor = pressed;
+            colors.selectedColor = highlighted;
+            colors.disabledColor = new Color(normal.r, normal.g, normal.b, 0.45f);
+            button.colors = colors;
+        }
+
+        foreach (var label in buttonObject.GetComponentsInChildren<TMP_Text>(true))
+        {
+            label.color = Color.white;
+        }
     }
 
     private static void RemoveObsoleteChild(Transform parent, string childName)
