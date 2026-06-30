@@ -38,17 +38,23 @@ public class NPCController : MonoBehaviour
     // Prevents the NPC from selecting the same patrol point twice in a row.
     [SerializeField] private bool avoidSamePointTwice = true;
 
+    [Header("Interactions")]
+    [SerializeField] private bool isInteractable = true;
+    public bool IsInteractable => isInteractable;
+
+    [SerializeField] private float interactionMoveAwayTolerance = 1f;
+    [SerializeField] private float interactionDestinationRefreshRate = 0.15f;
+
+    [Header("Animation")]
+
+    [SerializeField] private NPCAnimationController animationController;
+
     [Header("Debug")]
     // Enables/disables scene gizmo drawing for patrol points.
     [SerializeField] private bool drawGizmos = true;
 
     // Shows the currently selected patrol target in the Inspector.
     [SerializeField] private Transform currentTarget;
-
-    [SerializeField] private float interactionMoveAwayTolerance = 1f;
-    [SerializeField] private float interactionDestinationRefreshRate = 0.15f;
-
-    [SerializeField] private NPCAnimationController animationController;
 
     // Public read-only access to profile and runtime state.
     public NPCProfile Profile => profile;
@@ -212,8 +218,8 @@ public class NPCController : MonoBehaviour
 
         patrolRoutine = null;
 
-        if (agent != null)
-            agent.ResetPath();
+        //if (agent != null)
+        //    agent.ResetPath();
     }
 
     // Main patrol loop.
@@ -346,15 +352,9 @@ public class NPCController : MonoBehaviour
         animationController?.SetInteracting(true);
         wasPatrollingBeforeInteraction = patrolRoutine != null;
 
-        
-
+    
         StopPatrol();
 
-        if (agent != null)
-        {
-            agent.isStopped = true;
-            agent.ResetPath();
-        }
     }
 
     public void EndInteraction()
@@ -377,7 +377,7 @@ public class NPCController : MonoBehaviour
         if (wasPatrollingBeforeInteraction)
             StartPatrol();
     }
-    public void MoveToInteractionAnchor(
+    public void MoveToInteractionAnchor( 
         Transform anchor,
         Transform lookAtTarget,
         System.Action onArrived)
@@ -499,7 +499,18 @@ public class NPCController : MonoBehaviour
             : anchor.position;
 
         FacePosition(lookPosition);
-
         onArrived?.Invoke();
+    }
+
+    private void OnEnable()
+    {
+        if (NPCReactionBroadcaster.Instance != null)
+            NPCReactionBroadcaster.Instance.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        if (NPCReactionBroadcaster.Instance != null)
+            NPCReactionBroadcaster.Instance.Unregister(this);
     }
 }

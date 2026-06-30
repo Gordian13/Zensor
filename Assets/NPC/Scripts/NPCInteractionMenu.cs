@@ -44,7 +44,7 @@ public class NPCInteractionMenu : MonoBehaviour
 
         currentNPC = npc;
         ClearButtons();
-
+        
         bool hasInteractions = npc.Profile.interactions != null && npc.Profile.interactions.Count > 0;
 
         if (emptyText != null)

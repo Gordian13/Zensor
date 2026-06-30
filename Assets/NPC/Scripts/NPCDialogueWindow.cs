@@ -22,6 +22,7 @@ public class NPCDialogueWindow : MonoBehaviour
     [SerializeField] private float defaultReactionDuration = 4f;
 
     [Header("Typing")]
+    [SerializeField] private bool useTypingAnimation = false;
     [SerializeField] private float charactersPerSecond = 40f;
 
     private NPCController currentNPC;
@@ -205,6 +206,13 @@ public class NPCDialogueWindow : MonoBehaviour
         StopTyping();
 
         fullCurrentText = text;
+
+        if (!useTypingAnimation)
+        {
+            npcText.text = text;
+            return;
+        }
+
         typingRoutine = StartCoroutine(TypeText(text));
     }
 

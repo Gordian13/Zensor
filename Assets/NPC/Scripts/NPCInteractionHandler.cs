@@ -53,6 +53,11 @@ public class NPCInteractionHandler : MonoBehaviour
         if (npc == null)
             return;
 
+        if(!npc.IsInteractable)
+        {
+            return;
+        }
+
         // Open the interaction menu for the clicked NPC.
         // Requires NPCInteractionMenu to exist in the scene.
         if (NPCInteractionMenu.Instance == null)
@@ -62,7 +67,7 @@ public class NPCInteractionHandler : MonoBehaviour
         }
 
         npc.MoveToInteractionAnchor(interactionAnchor, lookAtTarget, () =>
-{
+        {
             if (NPCDialogueWindow.Instance != null)
                 NPCDialogueWindow.Instance.ShowDialogueScript(npc.Profile.defaultDialogueScript, npc);
         });
