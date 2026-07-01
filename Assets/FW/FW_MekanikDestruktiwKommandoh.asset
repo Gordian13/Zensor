@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_MekanikDestruktiwKommandoh
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: 0323463a6a48702488be66339a6a90a0, type: 3}
+  title: "M\xE9kanik Destruktiw K\xF6mmand\xF6h \u2013 Early Zensor Concert, 1979"
+  description: "Am 3. November 1979 wurde der Keller von Zensor in der\nBelziger
+    Stra\xDFe 23 zu einer provisorischen West-Berliner\nUntergrundb\xFChne: Mekanik
+    Destr\xFCktiw Komand\xF6h spielten dort\nnicht vor Abstand, sondern mitten im
+    Raum."
+  hasExtraInfo: 1
+  extraInfoTitle: "M\xE9kanik Destruktiw K\xF6mmand\xF6h"
+  extraInfoContent: "Das handgemachte Konzertplakat k\xFCndigt Mekanik Destr\xFCktiw\nKomand\xF6h
+    f\xFCr Samstag,den 3. November 1979, beim Zensor, Belziger Stra\xDFe 23, an;\nauf
+    dem Poster erscheint au\xDFerdem PIE als weiterer Act. Der Abend steht f\xFCr
+    die fr\xFChe\nPhase von Zensor, als der Laden nicht nur Platten verkaufte, sondern
+    selbst ein lebendiger\nOrt f\xFCr Konzerte, Experimente und internationale Underground-Verbindungen
+    wurde.\nMekanik Destr\xFCktiw Komand\xF6h, oft MDK genannt, kamen aus dem niederl\xE4ndischen\nUnderground
+    und verbanden Punk, Industrial, Performance, elektronische St\xF6rung\nund dadaistische
+    Zerst\xF6rungsfantasie. Die \xC4sthetik des Plakats \u2014 Maschinen, Ruinen,\nkindliche
+    Handschrift, kaputte Symbole \u2014 passt genau zu dieser Musik: etwas Neues\nentsteht
+    nicht aus sauberer Ordnung, sondern aus Bruch, L\xE4rm und Mut. Im West-Berlin\nvon
+    1979 wurde der Zensor-Keller damit zu einem kleinen, aber wichtigen Knotenpunkt\nzwischen
+    Plattenladen, Szene-Treffpunkt und radikaler Live-Kultur."
+  extraInfoImage: {fileID: 21300000, guid: 889be034cf9720b448191745c8af293f, type: 3}
