@@ -5,7 +5,7 @@
         /**
          * Toggles the Color of the Object that has this Interface
          */
-        void ToggleColor();
+        void SetColorReveal(bool revealed);
 
         /**
          * Sets whether the object should be shown in color.

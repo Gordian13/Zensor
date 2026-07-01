@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Die Zwei - Grapsch
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Die Zwei - Grapsch
+  author: Die Zwei
+  album: Grapsch
+  year: 1983
+  description: 
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 1
+  tracks:
+  - {fileID: 8300000, guid: 55b29596ca3784970be114d70a77180f, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: eb7f15c302a91954dbeff42e60e9a6ff, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: 0d22b667dba5e6d4e80a46a84ccb6072, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: b778401a9ec524646b4ef992765ae514, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: 09da219be8ad6de458d939345d2f2cd5, type: 3}

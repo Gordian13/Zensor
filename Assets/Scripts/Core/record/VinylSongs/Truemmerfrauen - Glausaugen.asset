@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Truemmerfrauen - Glausaugen
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Truemmerfrauen - Glausaugen
+  author: Truemmerfrauen
+  album: Glausaugen
+  year: 1982
+  description: 
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 1
+  tracks:
+  - {fileID: 8300000, guid: 129911606aab7451099787c1fcfff69d, type: 3}
+  - {fileID: 8300000, guid: 6ea90c76e2576430db7b47cbadbd6947, type: 3}
+  - {fileID: 8300000, guid: a73833e357a7b44c38cbe04aa8c1a848, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: 06880acd6322db94283d04d28501a6b7, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: e6a523e751e0edb469aac98b83384605, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: 9af96cdf6e075124f91e9218eec17e22, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: 98a42a9c703083144a3f4ea1242eefba, type: 3}

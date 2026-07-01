@@ -17,7 +17,7 @@ namespace Interaction.util.ColorReveal
 
         private void Awake()
         {
-            _camera = Camera.main;
+            _camera = GetComponent<Camera>();
 
             if (_camera == null)
                 Debug.LogError($"{nameof(ColorRevealHoverCamera)}: no Camera.main found in the scene.", this);
