@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Kalambya Sisters - Katilina
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Kalambya Sisters - Katilina
+  author: Kalambya Sisters
+  album: Katilina
+  year: 1983
+  description: 
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 1
+  tracks:
+  - {fileID: 8300000, guid: 7b721e6b3d3ac40d39ad1729adf68570, type: 3}
+  - {fileID: 8300000, guid: 353a9f96a76ce42dcab21c6dcbfaa788, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: 81ff3efac26667646b11225a6e8341b5, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: 6ce9086b4ae0e704eb4c4b86547137c3, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: 4315e080298f7254b8a4cffdd640a459, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: 2ab2eac3b6df57e48a0f457423f9a7d9, type: 3}

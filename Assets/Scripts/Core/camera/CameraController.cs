@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Core.VinylSelect;
 
 namespace camera
 {
@@ -7,6 +8,7 @@ namespace camera
     {
         public float moveSpeed = 2f;
         public float lookSpeed = 0.1f;
+        [SerializeField] private VinylSelectController vinylSelectController;
 
         private float _pitch;
         private float _yaw;
@@ -15,6 +17,9 @@ namespace camera
         {
             _pitch = transform.eulerAngles.x;
             _yaw = transform.eulerAngles.y;
+
+            if (vinylSelectController == null)
+                vinylSelectController = FindFirstObjectByType<VinylSelectController>();
         }
 
         void Update()
@@ -39,7 +44,8 @@ namespace camera
         private void HandleLook()
         {
             var mouse = Mouse.current;
-            if (!mouse.rightButton.isPressed) return;
+            if (mouse == null || !mouse.rightButton.isPressed) return;
+            if (IsVinylInspectionRotationState()) return;
 
             Vector2 delta = mouse.delta.ReadValue();
             _yaw += delta.x * lookSpeed;
@@ -47,6 +53,16 @@ namespace camera
             _pitch = Mathf.Clamp(_pitch, -89f, 89f);
 
             transform.rotation = Quaternion.Euler(_pitch, _yaw, 0f);
+        }
+
+        private bool IsVinylInspectionRotationState()
+        {
+            if (vinylSelectController == null)
+                return false;
+
+            VinylState state = vinylSelectController.CurrentVinylState;
+            return state == VinylState.VinylSelected ||
+                   state == VinylState.VinylDraggedOutFocused;
         }
     }
 }

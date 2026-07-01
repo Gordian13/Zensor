@@ -3,7 +3,87 @@ guid: c8508534fc0bc4bff8083df4c014fb7f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Aged dark grey pipe
+    second: {fileID: 2100000, guid: 0dfe30f88bf20dd44b4356e562bcbfe6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black rubber cable.001
+    second: {fileID: 2100000, guid: 750eb71c00a7c794f89bee4e25bba30c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blank
+    second: {fileID: 2100000, guid: 34c2b3e85b4e99f48bab61ddbc224ccc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grey pipe plastic_metal
+    second: {fileID: 2100000, guid: 185968e0814e39a4a80fdbafc522cf9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: fa53a825660928b429d3c4ccd57c2c97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: aef28f97eff0f4945b6ffc669a867b5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 44226071158fc414b98be43802587f41, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: af9e0eccca014d54b992bbe078e88258, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: c3000b9da8c37ff4abb9240d8a26b8a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.010
+    second: {fileID: 2100000, guid: 69df89ef77f49b649852070653d71ecd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sticker
+    second: {fileID: 2100000, guid: 54b9117478af0c34dbae007ace022085, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tape
+    second: {fileID: 2100000, guid: c6ee1fa9610eeb74e8c0834ae36449b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VinylNight
+    second: {fileID: 2100000, guid: d7bf28898591ab5449264505af3f05c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aged white posters
+    second: {fileID: 2100000, guid: e148d48a30f3a2248bcd30e9d5c5542e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: black poster
+    second: {fileID: 2100000, guid: fed49dbf6475db34a8d1432cbaa6e024, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dark metal clamps
+    second: {fileID: 2100000, guid: cffa1aa6d40956f4da7ef4daeb94bbea, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

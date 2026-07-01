@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Die Zwei - Einsamkeit Hat Viele Namen
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Die Zwei - Einsamkeit Hat Viele Namen
+  author: Die Zwei
+  album: Einsamkeit Hat Viele Namen
+  year: 1982
+  description: 
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 1
+  tracks:
+  - {fileID: 8300000, guid: c21cf5b32e4a0486192793d9289bb1cf, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: b507f04014256a84882ed0d9ee19824b, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: 06e911a18b0fc84469279e537cfdc4d6, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: 5170e7fa644feb84f966000fa3965e01, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: aae76bff4bcbf4c4e8b4c85d8cbcb249, type: 3}
