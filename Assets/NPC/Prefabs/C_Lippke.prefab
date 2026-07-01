@@ -2168,8 +2168,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   stoppingDistance: 0.5
-  startPatrollingOnStart: 1
-  pickRandomPoints: 1
+  startPatrollingOnStart: 0
+  pickRandomPoints: 0
   avoidSamePointTwice: 1
   isInteractable: 0
   interactionMoveAwayTolerance: 0.25

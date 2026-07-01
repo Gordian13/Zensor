@@ -718,6 +718,38 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5389119003126099075, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389119003126099075, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678305822848185812, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678305822848185812, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6981005416767380961, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -779,7 +811,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8816145889897903339, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
-      propertyPath: isInteractable
+      propertyPath: pickRandomPoints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816145889897903339, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: avoidSamePointTwice
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816145889897903339, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: startPatrollingOnStart
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8816145889897903339, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
@@ -791,7 +831,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3369374}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4100657679443561517, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
@@ -979,6 +1020,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8816145889897903339, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: pickRandomPoints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816145889897903339, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: startPatrollingOnStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816145889897903339, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 111720772}
@@ -987,7 +1036,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3369374}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4100657679443561517, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
