@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_3. Okt
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: 1e9289a47760b4d4b98c61d7421a9942, type: 3}
+  title: "Siouxsie & The Banshees \u2013 Tour 80, Berlin"
+  description: "Das \u201ETour 80\u201C-Plakat zu Siouxsie and the Banshees am\n3.
+    Oktober 1980 in der Neuen Welt zeigt West-Berlin als\nDurchgangsstation f\xFCr
+    internationalen Post-Punk \u2014 mit Mania D\nals lokaler Vorhut aus dem Zensor-Umfeld."
+  hasExtraInfo: 1
+  extraInfoTitle: Siouxsie and the Banshees
+  extraInfoContent: "Am 3. Oktober 1980 spielten Siouxsie and the Banshees in der\nNeuen
+    Welt in West-Berlin; Beginn war laut Plakat 20 Uhr. Die\nbritische Band um Siouxsie
+    Sioux geh\xF6rte zu den pr\xE4genden\nGruppen des Post-Punk und verband Punk-Energie
+    mit\ndunkler Atmosph\xE4re, Tribal-Drums, scharfen Gitarren und\neiner starken
+    visuellen Identit\xE4t. Auf dem Poster ist Mania D\nals Special Guest angek\xFCndigt
+    \u2014 eine wichtige Verbindung\nzur Berliner Szene. Gudrun Gut, Mitgr\xFCnderin
+    von Mania D,\narbeitete auch bei Zensor und geh\xF6rte zu den zentralen\nFiguren
+    der fr\xFChen West-Berliner Underground- und\nFrauenband-Bewegung. Mania D war
+    eine der ersten all\nfemale Bands dieser Szene; aus ihrem Umfeld gingen sp\xE4ter\nunter
+    anderem Malaria! hervor. Der Abend steht deshalb f\xFCr\nmehr als ein internationales
+    Konzert: Er zeigt, wie Zensor,\nlokale Berliner Musikerinnen und britischer Post-Punk\nmiteinander
+    verbunden waren. Die gro\xDFe Band kam von\nau\xDFen, aber die Berliner Antwort
+    stand schon auf der B\xFChne."
+  extraInfoImage: {fileID: 0}
