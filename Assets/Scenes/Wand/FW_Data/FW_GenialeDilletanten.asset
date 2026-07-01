@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_GenialeDilletanten
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: 11c5b5b8d0c664045b8db0242208bfa2, type: 3}
+  title: "Grosse Untergangs-Show \u2013 Festival Genialer Dilletanten, 1981"
+  description: "Die \u201EGro\xDFe Untergangs-Show \u2013 Festival Genialer Dilletanten\u201C
+    am\n4. September 1981 im Tempodrom war ein Brennpunkt der West\nBerliner Subkultur:
+    L\xE4rm, Film, Performance, Punk, Kunst und\nradikale Selbsterm\xE4chtigung auf
+    einer B\xFChne."
+  hasExtraInfo: 1
+  extraInfoTitle: Festival Genialer Dilletanten
+  extraInfoContent: "Am Freitag, 4. September 1981, fand im Tempodrom in West\nBerlin
+    im Rahmen von \u201EBild + Ton live!\u201C die \u201EGro\xDFe\nUntergangs-Show
+    \u2013 Festival Genialer Dilletanten\u201C statt. Beginn\nwar laut Anzeige 19.30
+    Uhr, der Eintritt kostete 6 Mark. Das\nProgramm versammelte zentrale Figuren
+    der Berliner\nUnderground- und Avantgarde-Szene, darunter Einst\xFCrzende\nNeubauten,
+    Die T\xF6dliche Doris, Blixa Bargeld, Gudrun Gut, F.\nM. Einheit, DIN A Testbild,
+    Sprung aus den Wolken, Mark\nReeder, Max M\xFCller, Wolfgang M\xFCller, Alexander
+    von Borsig\nund viele weitere. Die zeitgen\xF6ssische Ank\xFCndigung\nbeschreibt
+    das Ereignis als Festival mit mehr als 30\nUnderground-Musikanten und Aktionisten,
+    bei dem die\nBerliner Subkultur sich \u201Ein Bild und Ton\u201C pr\xE4sentierte.
+    Das\nFestival wurde sp\xE4ter zu einem Schl\xFCsselereignis f\xFCr den\nBegriff
+    \u201EGeniale Dilletanten\u201C: bewusst roh, falsch, offen, anti\nakademisch
+    \u2014 nicht perfekt spielen, sondern etwas\nfreisetzen. Genau darin lag die
+    Kraft: Aus West-Berliner\nIsolation wurde eine eigene Sprache aus Krach, K\xF6rper,
+    Film, Risiko und Haltung."
+  extraInfoImage: {fileID: 0}
