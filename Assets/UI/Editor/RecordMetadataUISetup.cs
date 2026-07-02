@@ -17,6 +17,11 @@ public static class RecordMetadataUISetup
     private static readonly Vector2 PanelPivot = new Vector2(1f, 0.5f);
     private static readonly Vector2 PanelPosition = new Vector2(-185.03503f, -28.144318f);
     private static readonly Vector2 PanelSize = new Vector2(748.7676f, 1001.6851f);
+    private static readonly Vector2 TopRightButtonAnchor = new Vector2(1f, 1f);
+    private static readonly Vector2 TopRightButtonPivot = new Vector2(1f, 1f);
+    private static readonly Vector2 TopRightPrimaryPosition = new Vector2(-20f, -20f);
+    private static readonly Vector2 TopRightSecondaryPosition = new Vector2(-190f, -20f);
+    private static readonly Vector2 ButtonSize = new Vector2(160f, 30f);
     private static readonly Color PositiveButtonColor = new Color(0.24705882f, 0.68235296f, 0.3529412f, 1f);
     private static readonly Color PositiveButtonHighlight = new Color(0.3372549f, 0.78431374f, 0.43529412f, 1f);
     private static readonly Color PositiveButtonPressed = new Color(0.18431373f, 0.56078434f, 0.28235295f, 1f);
@@ -82,6 +87,8 @@ public static class RecordMetadataUISetup
 
         ApplyButtonColors(canvas.transform);
         ApplyButtonColors(vinylButtonCanvas);
+        ApplyButtonLayout(canvas.transform);
+        ApplyButtonLayout(vinylButtonCanvas);
         ApplyButtonStyle(GameObject.Find("HomeButton"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed, "Zum Start");
 
         // Mark the scene as changed so Unity knows it should be saved.
@@ -149,6 +156,33 @@ public static class RecordMetadataUISetup
                 label.text = labelText;
             }
         }
+    }
+
+    private static void ApplyButtonLayout(Transform canvasTransform)
+    {
+        if (canvasTransform == null)
+        {
+            return;
+        }
+
+        ConfigureButtonRect(FindDirectChild(canvasTransform, "Info"), TopRightPrimaryPosition);
+        ConfigureButtonRect(FindDirectChild(canvasTransform, "CloseInfo"), TopRightPrimaryPosition);
+        ConfigureButtonRect(FindDirectChild(canvasTransform, "Play"), TopRightPrimaryPosition);
+        ConfigureButtonRect(FindDirectChild(canvasTransform, "Back"), TopRightSecondaryPosition);
+    }
+
+    private static void ConfigureButtonRect(GameObject buttonObject, Vector2 anchoredPosition)
+    {
+        if (buttonObject == null || !buttonObject.TryGetComponent(out RectTransform rect))
+        {
+            return;
+        }
+
+        rect.anchorMin = TopRightButtonAnchor;
+        rect.anchorMax = TopRightButtonAnchor;
+        rect.pivot = TopRightButtonPivot;
+        rect.anchoredPosition = anchoredPosition;
+        rect.sizeDelta = ButtonSize;
     }
 
     private static void RemoveObsoleteChild(Transform parent, string childName)

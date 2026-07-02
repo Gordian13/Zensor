@@ -45,7 +45,7 @@ namespace recordPlayer
 
         private void OnStateChanged(VinylState previous, VinylState next)
         {
-            bool isPlayer = next == VinylState.vinylPlayer;
+            bool isPlayer = IsPlayerState(next);
             if (isPlayer) _lastTrackIndex = -1;
             SetVisible(isPlayer);
         }
@@ -63,6 +63,12 @@ namespace recordPlayer
         {
             if (trackDisplay != null) trackDisplay.gameObject.SetActive(visible);
             if (BackButton != null) BackButton.gameObject.SetActive(visible);
+        }
+
+        private static bool IsPlayerState(VinylState state)
+        {
+            return state == VinylState.vinylPlayer ||
+                   state == VinylState.VinylPlayerInfoOpen;
         }
     }
 }

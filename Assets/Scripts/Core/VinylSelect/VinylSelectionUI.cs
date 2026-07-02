@@ -116,13 +116,15 @@ public class VinylSelectionUI : MonoBehaviour
         bool isInfoOpen = state == VinylState.VinylInfoOpen;
         bool isFocused = state == VinylState.VinylDraggedOutFocused;
         bool isInPlayer = state == VinylState.vinylPlayer;
+        bool isPlayerInfoOpen = state == VinylState.VinylPlayerInfoOpen;
+        bool isAnyInfoOpen = isInfoOpen || isPlayerInfoOpen;
 
         bool hasMultipleTracks = controller.SelectedVinyl?.GetData()?.TrackCount > 1;
 
         ResolveRecordInfoUI();
 
-        SetVisible(infoButton, isSelected);
-        SetVisible(closeInfoButton, isInfoOpen);
+        SetVisible(infoButton, isSelected || isInPlayer);
+        SetVisible(closeInfoButton, isAnyInfoOpen);
         SetVisible(browseMoreButton, isSelected);
         SetVisible(playButton, isFocused);
         SetVisible(nextTrackButton, isInPlayer && hasMultipleTracks);
@@ -131,7 +133,7 @@ public class VinylSelectionUI : MonoBehaviour
 
         if (recordInfoUI == null)
         {
-            if (isInfoOpen)
+            if (isAnyInfoOpen)
             {
                 Debug.LogWarning("VinylSelectionUI: RecordInfoUI reference is missing.", this);
             }
@@ -139,7 +141,7 @@ public class VinylSelectionUI : MonoBehaviour
             return;
         }
 
-        if (isInfoOpen)
+        if (isAnyInfoOpen)
         {
             recordInfoUI.ShowData(controller.SelectedVinyl?.GetData());
         }

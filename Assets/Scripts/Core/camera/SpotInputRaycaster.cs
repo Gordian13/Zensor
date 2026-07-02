@@ -39,7 +39,7 @@ namespace Core.camera
             if (vinylSelectController == null)
                 vinylSelectController = FindFirstObjectByType<VinylSelectController>(FindObjectsInactive.Include);
 
-            if (vinylSelectController != null && vinylSelectController.CurrentVinylState == VinylState.vinylPlayer)
+            if (vinylSelectController != null && IsVinylPlayerState(vinylSelectController.CurrentVinylState))
                 return;
 
             UpdateHover();
@@ -139,6 +139,12 @@ namespace Core.camera
             }
 
             return currentHoveredTrigger.GetRouteFrom(spotManager.GetCurrentSpotId());
+        }
+
+        private static bool IsVinylPlayerState(VinylState state)
+        {
+            return state == VinylState.vinylPlayer ||
+                   state == VinylState.VinylPlayerInfoOpen;
         }
     }
 }

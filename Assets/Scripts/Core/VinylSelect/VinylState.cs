@@ -11,6 +11,7 @@
         DraggingVinylOut,
         VinylDraggedOutFocused,
         DraggingVinylIn,
-        vinylPlayer
+        vinylPlayer,
+        VinylPlayerInfoOpen
     }
 }

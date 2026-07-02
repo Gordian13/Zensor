@@ -42,15 +42,27 @@ public class VinylSelectController : MonoBehaviour
      */
     public bool OpenInfo()
     {
-        return TryChangeState(VinylState.VinylSelected, VinylState.VinylInfoOpen);
+        if (CurrentVinylState == VinylState.VinylSelected)
+            return TryChangeState(VinylState.VinylSelected, VinylState.VinylInfoOpen);
+
+        if (CurrentVinylState == VinylState.vinylPlayer)
+            return TryChangeState(VinylState.vinylPlayer, VinylState.VinylPlayerInfoOpen);
+
+        return false;
     }
 
     /**
-     * Closes the information view and returns to the selected state.
+     * Closes the information view and returns to the state that opened it.
      */
     public bool CloseInfo()
     {
-        return TryChangeState(VinylState.VinylInfoOpen, VinylState.VinylSelected);
+        if (CurrentVinylState == VinylState.VinylInfoOpen)
+            return TryChangeState(VinylState.VinylInfoOpen, VinylState.VinylSelected);
+
+        if (CurrentVinylState == VinylState.VinylPlayerInfoOpen)
+            return TryChangeState(VinylState.VinylPlayerInfoOpen, VinylState.vinylPlayer);
+
+        return false;
     }
 
     /**
@@ -170,7 +182,8 @@ public class VinylSelectController : MonoBehaviour
 
     public bool ExitVinylPlayer()
     {
-        if (CurrentVinylState != VinylState.vinylPlayer)
+        if (CurrentVinylState != VinylState.vinylPlayer &&
+            CurrentVinylState != VinylState.VinylPlayerInfoOpen)
             return false;
 
         this._spot.SetAllowRightClickLook(true);
