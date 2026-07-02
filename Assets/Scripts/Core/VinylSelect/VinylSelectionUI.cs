@@ -24,9 +24,9 @@ public class VinylSelectionUI : MonoBehaviour
     [SerializeField] private TMP_Text primaryHintText;
     [SerializeField] private TMP_Text secondaryHintText;
 
-    [SerializeField] private string pullRecordOutHint = "Left Mouse Button + Drag -> Pull Record Out";
-    [SerializeField] private string putRecordBackHint = "Left Mouse Button + Drag -> Put Record Back";
-    [SerializeField] private string rotateHint = "Hold Right Mouse Button -> Rotate Cover or Record";
+    [SerializeField] private string pullRecordOutHint = "Linke Maustaste + Ziehen -> Platte herausziehen";
+    [SerializeField] private string putRecordBackHint = "Linke Maustaste + Ziehen -> Platte zurücklegen";
+    [SerializeField] private string rotateHint = "Rechte Maustaste halten + Maus bewegen -> Cover oder Platte drehen";
 
     /**
      * Connects the controller, info panel, and buttons when the UI is created by the editor setup tool.

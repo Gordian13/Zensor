@@ -79,7 +79,7 @@ public static class RecordMetadataUISetup
 
         ApplyButtonColors(canvas.transform);
         ApplyButtonColors(vinylButtonCanvas);
-        ApplyButtonStyle(GameObject.Find("HomeButton"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
+        ApplyButtonStyle(GameObject.Find("HomeButton"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed, "Zum Start");
 
         // Mark the scene as changed so Unity knows it should be saved.
         EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
@@ -106,16 +106,16 @@ public static class RecordMetadataUISetup
             return;
         }
 
-        ApplyButtonStyle(FindDirectChild(canvasTransform, "BrowseMore"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
-        ApplyButtonStyle(FindDirectChild(canvasTransform, "Back"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
-        ApplyButtonStyle(FindDirectChild(canvasTransform, "CloseInfo"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
-        ApplyButtonStyle(FindDirectChild(canvasTransform, "Previous"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed);
-        ApplyButtonStyle(FindDirectChild(canvasTransform, "Info"), PositiveButtonColor, PositiveButtonHighlight, PositiveButtonPressed);
-        ApplyButtonStyle(FindDirectChild(canvasTransform, "Play"), PositiveButtonColor, PositiveButtonHighlight, PositiveButtonPressed);
-        ApplyButtonStyle(FindDirectChild(canvasTransform, "Next"), PositiveButtonColor, PositiveButtonHighlight, PositiveButtonPressed);
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "BrowseMore"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed, "Stöbern");
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Back"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed, "Zurück");
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "CloseInfo"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed, "Schließen");
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Previous"), ExitButtonColor, ExitButtonHighlight, ExitButtonPressed, "Zurück");
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Info"), PositiveButtonColor, PositiveButtonHighlight, PositiveButtonPressed, "Info");
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Play"), PositiveButtonColor, PositiveButtonHighlight, PositiveButtonPressed, "Abspielen");
+        ApplyButtonStyle(FindDirectChild(canvasTransform, "Next"), PositiveButtonColor, PositiveButtonHighlight, PositiveButtonPressed, "Weiter");
     }
 
-    private static void ApplyButtonStyle(GameObject buttonObject, Color normal, Color highlighted, Color pressed)
+    private static void ApplyButtonStyle(GameObject buttonObject, Color normal, Color highlighted, Color pressed, string labelText = null)
     {
         if (buttonObject == null)
         {
@@ -141,6 +141,10 @@ public static class RecordMetadataUISetup
         foreach (var label in buttonObject.GetComponentsInChildren<TMP_Text>(true))
         {
             label.color = Color.white;
+            if (!string.IsNullOrEmpty(labelText))
+            {
+                label.text = labelText;
+            }
         }
     }
 
