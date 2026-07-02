@@ -16,10 +16,7 @@ MonoBehaviour:
   author: Din A Testbild
   album: Programm 2
   year: 1981
-  description: "DIN A Testbild is a West Berlin underground band from the late 1970s
-    that is still active today. DIN A Testbild is considered one of the driving forces
-    behind West Berlin\u2019s expressive musical avant-garde and the subsequent techno
-    wave."
+  description: 'Din A Testbild – „Programm 2“ erschien 1981 in Deutschland auf Roadrunner Records / Innovative Communication unter der Katalognummer RR 9990 als Vinyl-LP mit 45 RPM. Musikalisch bewegt sich die Platte zwischen Electronic, Electro, Synth-Pop und Experimental. Die Stücke sind „Satisfactory“, „Tight Pants“, „Lasst Uns Singen“, „Logischer Gefrierpunkt“ und „Harrakiry Mon Amour“, bei dem Andy Orgel spielt. Mark Eins war für Texte, Gesang und Konzeptideen verantwortlich; Funky Götzner spielte Schlagzeug, Klaus Schulze produzierte, mischte und schnitt das Album von den Original-Mastertapes, außerdem steuerte er Sequencer und Sounds bei. Aufgenommen wurde im IC-Studio und im Klaus Schulze Studio, veröffentlicht über P.O.E.M. Musikverlag / Klaus D. Mueller, Berlin. Auch wenn „Programm 2“ nicht direkt auf Zensor erschien, gehört Din A Testbild eng in das Umfeld, das Zensor sichtbar machte: eine West-Berliner Zone zwischen Laden, Bühne, Elektronik, Punk, Kunst und Zukunftsrauschen.'
   sprite: {fileID: 0}
   format: 0
   speed: 0

@@ -13,11 +13,11 @@ public class RecordInfoUI : MonoBehaviour
     [SerializeField] private TMP_Text descriptionText;
 
     [Header("Fallback Text")]
-    [SerializeField] private string unknownTitle = "Unknown Title";
-    [SerializeField] private string unknownAuthor = "Unknown Artist";
-    [SerializeField] private string unknownAlbum = "Unknown Album";
-    [SerializeField] private string unknownYear = "Unknown Year";
-    [SerializeField] private string unknownDescription = "No description available.";
+    [SerializeField] private string unknownTitle = "Unbekannter Titel";
+    [SerializeField] private string unknownAuthor = "Unbekannter Künstler";
+    [SerializeField] private string unknownAlbum = "Unbekanntes Album";
+    [SerializeField] private string unknownYear = "Unbekanntes Jahr";
+    [SerializeField] private string unknownDescription = "Keine Beschreibung verfügbar.";
 
     // Used by the editor setup tool to connect the generated UI elements automatically.
     public void Configure(

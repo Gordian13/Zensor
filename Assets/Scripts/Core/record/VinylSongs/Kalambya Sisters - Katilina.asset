@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
   m_Name: Kalambya Sisters - Katilina
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: Kalambya Sisters - Katilina
+  title: Kalambya Sisters - Katelina
   author: Kalambya Sisters
-  album: Katilina
+  album: Katelina
   year: 1983
-  description: 
+  description: 'Kalambya Sisters – „Katelina“ erschien im September 1983 auf Zensor unter den Katalognummern Zensor 07 / Zensor ZS 07 als 12"-Vinyl mit 45 RPM. Die A-Seite enthält „Katelina“, auf dem Label auch als „Katilina“ geschrieben, komponiert von Diana und Flossie, mit einer Laufzeit von 4:37. Auf der B-Seite steht „Mbie Nuke“ von Kalambya Brothers and Kalambya Sisters, komponiert von Diana, Flossie und Unesmus, mit 4:44. Produziert wurde die Platte von Joe Mwangi, aufgenommen 1983 in Nairobi, Kenia; die Überspielung erfolgte im September 1983 durch Peter Harrenberg in Berlin. Die Grafik stammt von Hans Vegt, der Lackfolienschnitt wurde im Teldec-Studio Berlin gemacht. Stilistisch gehört die Veröffentlichung zum Benga, einer tanzbaren ostafrikanischen Gitarrenmusik. Für Zensor ist diese Platte wichtig, weil sie zeigt, dass Burkhardt Seilers Label nicht nur West-Berliner Punk, Elektronik und New Wave veröffentlichte, sondern auch internationale Musik mit Neugier und Respekt in Umlauf brachte. Der Laden war klein, aber die Ohren waren groß.'
   sprite: {fileID: 0}
   format: 0
   speed: 0

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
   m_Name: Truemmerfrauen - Glausaugen
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: Truemmerfrauen - Glausaugen
-  author: Truemmerfrauen
-  album: Glausaugen
+  title: Trümmerfrauen - Glasaugen
+  author: Trümmerfrauen
+  album: Glasaugen
   year: 1982
-  description: 
+  description: 'Trümmerfrauen – „Glasaugen“ erschien im März 1982 auf Zensor unter der Katalognummer TF01 / TFO1 als 7"-Vinyl mit 45 RPM. Die Platte enthält auf der A-Seite „Glasaugen“ mit 2:50, mit Text von Ingrid Schulze und Snare von Jens Tröndle, sowie „Arbeit“ mit 3:20, dessen Text von Trümmerfrauen stammt. Auf der B-Seite steht „Gelbkreuz“ mit 2:57, ebenfalls mit Text von Trümmerfrauen. Die Musik wurde von der Band geschrieben; zur Besetzung gehören Ingrid Janowsky an Bass und Stimme, Pia Lenz am Schlagzeug, Stephanie Groth an Gitarre und Stimme sowie Gabi Streckfuss an Synthesizer und Stimme. Produziert wurde die Single von Burkhardt Seiler und Mike Cooper, aufgenommen in Game’s Soundstudio / Game-Studio 36, geschnitten im TELDEC-Studio Hamburg und gepresst bei Teldec-Press GmbH. Im Zensor-Kosmos steht „Glasaugen“ für eine direkte, ungeschönte West-Berliner Punk/New-Wave-Sprache: wenig Dekoration, viel Haltung, drei kurze Stücke wie Splitter aus Beton, Arbeit, Körper und Stadt.'
   sprite: {fileID: 0}
   format: 0
   speed: 0

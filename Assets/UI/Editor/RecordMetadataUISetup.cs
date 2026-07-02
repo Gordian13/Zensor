@@ -41,9 +41,12 @@ public static class RecordMetadataUISetup
         var authorText = GetOrCreateText(panel.transform, "AuthorText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -190f), new Vector2(-48f, 30f), 30f, out _);
         var albumText = GetOrCreateText(panel.transform, "AlbumText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -250f), new Vector2(-48f, 30f), 30f, out _);
         var yearText = GetOrCreateText(panel.transform, "YearText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -310f), new Vector2(-48f, 34.6054f), 30f, out _);
-        var descriptionText = GetOrCreateText(panel.transform, "DescriptionText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -560f), new Vector2(-48f, 400f), 33f, out _);
+        var descriptionText = GetOrCreateText(panel.transform, "DescriptionText", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0f, -625f), new Vector2(-48f, 520f), 22f, out _);
         descriptionText.alignment = TextAlignmentOptions.TopLeft;
         descriptionText.overflowMode = TextOverflowModes.Overflow;
+        descriptionText.enableAutoSizing = true;
+        descriptionText.fontSizeMin = 16f;
+        descriptionText.fontSizeMax = 22f;
 
         // Add the display script to the panel and connect all generated UI references.
         var infoUI = panel.GetComponent<RecordInfoUI>();
