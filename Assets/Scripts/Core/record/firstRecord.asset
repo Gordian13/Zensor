@@ -14,8 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
   title: Night Tram Reverie
   author: Zensor Archive
+  album: 
   year: 1998
   description: Lo-fi night drive recording inspired by late Berlin tram ambience.
   sprite: {fileID: 21300000, guid: 994da07734c8c2b48b6f37488bdf6775, type: 3}
-  audioClip: {fileID: 8300000, guid: 469e2841ce6de4844b670f9d7ac85616, type: 3}
-  isPlayable: 1
+  format: 0
+  speed: 0
+  vinylType: 0
+  tracks: []
+  labelFrontTexture: {fileID: 2800000, guid: 994da07734c8c2b48b6f37488bdf6775, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: 994da07734c8c2b48b6f37488bdf6775, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: 994da07734c8c2b48b6f37488bdf6775, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: 994da07734c8c2b48b6f37488bdf6775, type: 3}
