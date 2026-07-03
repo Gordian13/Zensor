@@ -16,11 +16,24 @@ MonoBehaviour:
   author: "Tabea Blumenschein, Frieder Butzmann, Gudrun Gut, Bettina K\xF6ster"
   album: White Christmas
   year: 1980
-  description: 'Tabea Blumenschein / Frieder Butzmann / Gudrun Gut / Bettina Köster – „White Christmas“ erschien 1980 in Deutschland auf Marat Records unter der Katalognummer 24 als 7"-Vinyl mit 45 RPM und wurde über Zensor vertrieben. Die x-Seite enthält „Stille Nacht Goes Disco“ mit 3:30, die y-Seite „White Christmas“ mit 2:55, ursprünglich von Irving Berlin geschrieben. Stilistisch bewegt sich die Single zwischen New Wave, Avantgarde, Holiday-Musik, Rock und Non-Music — also eher Weihnachtskarte aus dem beschädigten Untergrund als festliche Dekoration. Tabea Blumenschein singt, Frieder Butzmann spielt Orgel und Synthesizer, Gudrun Gut Schlagzeug und Gitarre, Bettina Köster Saxofon. Die Platte wurde im TELDEC-Studio Hamburg geschnitten und bei Teldec-Press GmbH gepresst; die Fotos stammen von T. Kiesel. Im Zensor-XR-Kontext zeigt diese kleine Single wunderbar, wie offen der Zensor/Marat-Kosmos war: Pop-Tradition reinnehmen, einmal zerlegen, schief wieder zusammensetzen — und plötzlich klingt Weihnachten nach West-Berlin.'
+  description: "Tabea Blumenschein / Frieder Butzmann / Gudrun Gut / Bettina K\xF6ster
+    \u2013 \u201EWhite Christmas\u201C erschien 1980 in Deutschland auf Marat Records
+    unter der Katalognummer 24 als 7\"-Vinyl mit 45 RPM und wurde \xFCber Zensor
+    vertrieben. Die x-Seite enth\xE4lt \u201EStille Nacht Goes Disco\u201C mit 3:30,
+    die y-Seite \u201EWhite Christmas\u201C mit 2:55, urspr\xFCnglich von Irving
+    Berlin geschrieben. Stilistisch bewegt sich die Single zwischen New Wave, Avantgarde,
+    Holiday-Musik, Rock und Non-Music \u2014 also eher Weihnachtskarte aus dem besch\xE4digten
+    Untergrund als festliche Dekoration. Tabea Blumenschein singt, Frieder Butzmann
+    spielt Orgel und Synthesizer, Gudrun Gut Schlagzeug und Gitarre, Bettina K\xF6ster
+    Saxofon. Die Platte wurde im TELDEC-Studio Hamburg geschnitten und bei Teldec-Press
+    GmbH gepresst; die Fotos stammen von T. Kiesel. Im Zensor-XR-Kontext zeigt diese
+    kleine Single wunderbar, wie offen der Zensor/Marat-Kosmos war: Pop-Tradition
+    reinnehmen, einmal zerlegen, schief wieder zusammensetzen \u2014 und pl\xF6tzlich
+    klingt Weihnachten nach West-Berlin."
   sprite: {fileID: 0}
   format: 0
   speed: 0
-  vinylType: 1
+  vinylType: 0
   tracks:
   - {fileID: 8300000, guid: a08dc1ffb37fd4e9e833fb1886446f00, type: 3}
   - {fileID: 8300000, guid: 10c64e0ee525143109378c5b34537e95, type: 3}

@@ -12,15 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
   m_Name: Truemmerfrauen - Glausaugen
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: Trümmerfrauen - Glasaugen
-  author: Trümmerfrauen
+  title: "Tr\xFCmmerfrauen - Glasaugen"
+  author: "Tr\xFCmmerfrauen"
   album: Glasaugen
   year: 1982
-  description: 'Trümmerfrauen – „Glasaugen“ erschien im März 1982 auf Zensor unter der Katalognummer TF01 / TFO1 als 7"-Vinyl mit 45 RPM. Die Platte enthält auf der A-Seite „Glasaugen“ mit 2:50, mit Text von Ingrid Schulze und Snare von Jens Tröndle, sowie „Arbeit“ mit 3:20, dessen Text von Trümmerfrauen stammt. Auf der B-Seite steht „Gelbkreuz“ mit 2:57, ebenfalls mit Text von Trümmerfrauen. Die Musik wurde von der Band geschrieben; zur Besetzung gehören Ingrid Janowsky an Bass und Stimme, Pia Lenz am Schlagzeug, Stephanie Groth an Gitarre und Stimme sowie Gabi Streckfuss an Synthesizer und Stimme. Produziert wurde die Single von Burkhardt Seiler und Mike Cooper, aufgenommen in Game’s Soundstudio / Game-Studio 36, geschnitten im TELDEC-Studio Hamburg und gepresst bei Teldec-Press GmbH. Im Zensor-Kosmos steht „Glasaugen“ für eine direkte, ungeschönte West-Berliner Punk/New-Wave-Sprache: wenig Dekoration, viel Haltung, drei kurze Stücke wie Splitter aus Beton, Arbeit, Körper und Stadt.'
+  description: "Tr\xFCmmerfrauen \u2013 \u201EGlasaugen\u201C erschien im M\xE4rz
+    1982 auf Zensor unter der Katalognummer TF01 / TFO1 als 7\"-Vinyl mit 45 RPM.
+    Die Platte enth\xE4lt auf der A-Seite \u201EGlasaugen\u201C mit 2:50, mit Text
+    von Ingrid Schulze und Snare von Jens Tr\xF6ndle, sowie \u201EArbeit\u201C mit
+    3:20, dessen Text von Tr\xFCmmerfrauen stammt. Auf der B-Seite steht \u201EGelbkreuz\u201C
+    mit 2:57, ebenfalls mit Text von Tr\xFCmmerfrauen. Die Musik wurde von der Band
+    geschrieben; zur Besetzung geh\xF6ren Ingrid Janowsky an Bass und Stimme, Pia
+    Lenz am Schlagzeug, Stephanie Groth an Gitarre und Stimme sowie Gabi Streckfuss
+    an Synthesizer und Stimme. Produziert wurde die Single von Burkhardt Seiler und
+    Mike Cooper, aufgenommen in Game\u2019s Soundstudio / Game-Studio 36, geschnitten
+    im TELDEC-Studio Hamburg und gepresst bei Teldec-Press GmbH. Im Zensor-Kosmos
+    steht \u201EGlasaugen\u201C f\xFCr eine direkte, ungesch\xF6nte West-Berliner
+    Punk/New-Wave-Sprache: wenig Dekoration, viel Haltung, drei kurze St\xFCcke wie
+    Splitter aus Beton, Arbeit, K\xF6rper und Stadt."
   sprite: {fileID: 0}
   format: 0
   speed: 0
-  vinylType: 1
+  vinylType: 0
   tracks:
   - {fileID: 8300000, guid: 129911606aab7451099787c1fcfff69d, type: 3}
   - {fileID: 8300000, guid: 6ea90c76e2576430db7b47cbadbd6947, type: 3}
