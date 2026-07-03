@@ -110,7 +110,9 @@ namespace record
 
                 Vector3 targetPosition = record.Value;
                 if (record.Key == hoveredTransform)
-                    targetPosition += hoverOffset;
+                {
+                    targetPosition += record.Key.localRotation * Vector3.forward * hoverOffset.y;
+                }
 
                 record.Key.localPosition = Vector3.Lerp(
                     record.Key.localPosition,
