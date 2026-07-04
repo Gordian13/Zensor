@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_9. Okt
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: ffd6f7ee79716d146b73adb9d957ad8e, type: 3}
+  title: "Ex-Cess \u2013 October '80 Programme, Die Neue Musik live!"
+  description: "EXXCESS war ein kurzlebiger West-Berliner Ort f\xFCr\nSpree-New-Wave,
+    Live-Konzerte und Multimedia-Experimente\nin der ehemaligen Diskothek \u201EFamily\u201C
+    an der Kurf\xFCrstenstra\xDFe 101."
+  hasExtraInfo: 1
+  extraInfoTitle: Ex-Cess and the Neue Deutsche Welle
+  extraInfoContent: "Am 9. Oktober 1980 spielten Fehlfarben im EXXCESS in West-Berlin,\nKurf\xFCrstenstra\xDFe
+    101 / Ecke N\xFCrnberger Stra\xDFe. Der Konzertflyer\nk\xFCndigte den Abend unter
+    dem Motto \u201EDie Neue Music live!\u201C an,\nBeginn war ab 21 Uhr. Fehlfarben
+    wurden auf dem Poster mit\nihrer neuen EMI-LP \u201EMonarchie und Alltag\u201C
+    angek\xFCndigt, einem\nder pr\xE4genden Alben der deutschsprachigen Post-Punk-
+    und\nNew-Wave-Zeit. Das EXXCESS war laut zeitgen\xF6ssischer Presse\nein neuer
+    Auftrittsort in den R\xE4umen der fr\xFCheren Diskothek\n\u201EFamily\u201C und
+    sollte k\xFCnftig Live-Konzerte und Multimedia\nExperimente zeigen. Damit geh\xF6rte
+    der Club zu jener kurzen,\nrohen West-Berliner Phase, in der L\xE4den, Keller,
+    Plattenl\xE4den\nund tempor\xE4re B\xFChnen oft wichtiger waren als gro\xDFe
+    Institutionen.\r\n"
+  extraInfoImage: {fileID: 0}

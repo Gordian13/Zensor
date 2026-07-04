@@ -21,6 +21,8 @@ namespace recordPlayer
         [Header("Auto-found at runtime - leave empty")]
         [SerializeField] private VinylSelectController selectController;
 
+        private bool _isExiting;
+
         private void OnEnable()
         {
             if (selectController == null)
@@ -39,7 +41,7 @@ namespace recordPlayer
         private void Update()
         {
             if (selectController == null) return;
-            if (selectController.CurrentVinylState != VinylState.vinylPlayer) return;
+            if (!IsPlayerState(selectController.CurrentVinylState)) return;
 
             if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
                 ExitPlayer();
@@ -47,9 +49,12 @@ namespace recordPlayer
 
         private void OnStateChanged(VinylState previous, VinylState next)
         {
-            if (next == VinylState.vinylPlayer)
+            bool enteredPlayer = !IsPlayerState(previous) && IsPlayerState(next);
+            bool exitedPlayer = IsPlayerState(previous) && !IsPlayerState(next);
+
+            if (enteredPlayer)
                 EnterPlayer();
-            else if (previous == VinylState.vinylPlayer)
+            else if (exitedPlayer)
                 ExitPlayer();
         }
 
@@ -76,12 +81,23 @@ namespace recordPlayer
 
         public void ExitPlayer()
         {
+            if (_isExiting)
+                return;
+
+            _isExiting = true;
             recordPlayer?.ClearRecord();
 
             if (browsingSpot != null)
                 CameraTransitionManager.Instance?.PlayRoute(routeToBrowsing, browsingSpot);
 
             selectController?.ExitVinylPlayer();
+            _isExiting = false;
+        }
+
+        private static bool IsPlayerState(VinylState state)
+        {
+            return state == VinylState.vinylPlayer ||
+                   state == VinylState.VinylPlayerInfoOpen;
         }
     }
 }

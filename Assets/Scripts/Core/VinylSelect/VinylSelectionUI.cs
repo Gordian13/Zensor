@@ -24,9 +24,9 @@ public class VinylSelectionUI : MonoBehaviour
     [SerializeField] private TMP_Text primaryHintText;
     [SerializeField] private TMP_Text secondaryHintText;
 
-    [SerializeField] private string pullRecordOutHint = "Left Mouse Button + Drag -> Pull Record Out";
-    [SerializeField] private string putRecordBackHint = "Left Mouse Button + Drag -> Put Record Back";
-    [SerializeField] private string rotateHint = "Hold Right Mouse Button -> Rotate Cover or Record";
+    [SerializeField] private string pullRecordOutHint = "Linke Maustaste + Ziehen -> Platte herausziehen";
+    [SerializeField] private string putRecordBackHint = "Linke Maustaste + Ziehen -> Platte zurücklegen";
+    [SerializeField] private string rotateHint = "Rechte Maustaste halten + Maus bewegen -> Cover oder Platte drehen";
 
     /**
      * Connects the controller, info panel, and buttons when the UI is created by the editor setup tool.
@@ -116,13 +116,15 @@ public class VinylSelectionUI : MonoBehaviour
         bool isInfoOpen = state == VinylState.VinylInfoOpen;
         bool isFocused = state == VinylState.VinylDraggedOutFocused;
         bool isInPlayer = state == VinylState.vinylPlayer;
+        bool isPlayerInfoOpen = state == VinylState.VinylPlayerInfoOpen;
+        bool isAnyInfoOpen = isInfoOpen || isPlayerInfoOpen;
 
         bool hasMultipleTracks = controller.SelectedVinyl?.GetData()?.TrackCount > 1;
 
         ResolveRecordInfoUI();
 
-        SetVisible(infoButton, isSelected);
-        SetVisible(closeInfoButton, isInfoOpen);
+        SetVisible(infoButton, isSelected || isInPlayer);
+        SetVisible(closeInfoButton, isAnyInfoOpen);
         SetVisible(browseMoreButton, isSelected);
         SetVisible(playButton, isFocused);
         SetVisible(nextTrackButton, isInPlayer && hasMultipleTracks);
@@ -131,7 +133,7 @@ public class VinylSelectionUI : MonoBehaviour
 
         if (recordInfoUI == null)
         {
-            if (isInfoOpen)
+            if (isAnyInfoOpen)
             {
                 Debug.LogWarning("VinylSelectionUI: RecordInfoUI reference is missing.", this);
             }
@@ -139,7 +141,7 @@ public class VinylSelectionUI : MonoBehaviour
             return;
         }
 
-        if (isInfoOpen)
+        if (isAnyInfoOpen)
         {
             recordInfoUI.ShowData(controller.SelectedVinyl?.GetData());
         }

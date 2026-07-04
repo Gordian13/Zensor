@@ -46,13 +46,19 @@ namespace Core.camera
             VinylSelectController vinylController = FindFirstObjectByType<VinylSelectController>();
             if (vinylController != null)
             {
-                if (vinylController.CurrentVinylState == VinylState.vinylPlayer)
+                if (IsVinylPlayerState(vinylController.CurrentVinylState))
                     vinylController.ExitVinylPlayer();
                 else if (vinylController.CurrentVinylState != VinylState.BrowsingBox)
                     vinylController.CloseSelection();
             }
 
             transitionManager.PlayRoute(null, startSpotId);
+        }
+
+        private static bool IsVinylPlayerState(VinylState state)
+        {
+            return state == VinylState.vinylPlayer ||
+                   state == VinylState.VinylPlayerInfoOpen;
         }
     }
 }

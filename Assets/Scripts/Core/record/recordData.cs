@@ -28,6 +28,7 @@ public class RecordData : ScriptableObject
     public string author;
     public string album;
     public string year;
+    [TextArea(4, 12)]
     public string description;
 
     [Header("Visuals")]

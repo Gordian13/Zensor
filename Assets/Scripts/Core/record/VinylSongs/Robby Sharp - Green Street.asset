@@ -12,15 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
   m_Name: Robby Sharp - Green Street
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: Robby Sharp - Green Street
-  author: Robby Sharp
+  title: Rebby Sharp - Green Street
+  author: Rebby Sharp
   album: Green Street
-  year: 
-  description: 
+  year: 1982
+  description: "Rebby Sharp \u2013 \u201EGreen Street\u201C erschien 1982 in Deutschland
+    auf Zensor unter der Katalognummer Zensor 03 als 7\"-Vinyl-Single. Die A-Seite
+    enth\xE4lt \u201EGreen Street\u201C mit einer Laufzeit von 3:40, die B-Seite
+    \u201EHollow Earth\u201C mit 2:21. Musikalisch wird die Ver\xF6ffentlichung dem
+    Bereich Rock zugeordnet, mit einem besonderen Klang zwischen Lo-Fi und Neofolk.
+    Rebby Sharp schrieb, arrangierte und sang die Songs und spielte au\xDFerdem Gitarre
+    und Bass. John Barnett steuerte Percussion bei, Frank Daniel war Engineer, und
+    produziert wurde die Single von Burkhardt Seiler. Im Zensor-Kosmos zeigt diese
+    kleine Platte eine andere Seite des Labels: nicht nur L\xE4rm, Punk, Elektronik
+    oder Clubenergie, sondern auch intime, handgemachte Musik mit viel Luft zwischen
+    den T\xF6nen. Ein stilles St\xFCck Zensor \u2014 aber nicht weniger eigenwillig."
   sprite: {fileID: 0}
   format: 0
   speed: 0
-  vinylType: 1
+  vinylType: 0
   tracks:
   - {fileID: 8300000, guid: 8c1c068a72322495baf3cb5bb66e55f4, type: 3}
   - {fileID: 8300000, guid: d175378ac97d5489199a2f2596cee1fd, type: 3}

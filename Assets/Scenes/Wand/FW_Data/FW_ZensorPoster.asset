@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_ZensorPoster
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: 80202727ad07553488c382e59fc94813, type: 3}
+  title: "Der Zensor \u2013 Sch\xF6neberg's Underground Record Store"
+  description: "\u201EDer Zensor kommt\u201C war mehr als Werbung im Schaufenster:\nDas
+    gr\xFCne Plakat k\xFCndigte Zensor als neuen West-Berliner\nUmschlagplatz f\xFCr
+    Punk, Rockabilly, Reggae, Electronic Music,\ninternationale Schallplatten und
+    Rarit\xE4ten an."
+  hasExtraInfo: 1
+  extraInfoTitle: About Zensor
+  extraInfoContent: "Dieses fr\xFChe Zensor-Werbeplakat verdichtet den Start des
+    Ladens in der\nBelziger Stra\xDFe 23, Berlin-Sch\xF6neberg zu einem einfachen
+    Versprechen:\nHier kommt etwas anderes. Auf dem Poster stehen die Genres wie
+    ein\nkleines Manifest: Punk, Rock-A-Billy, Reggae, Electronic Music\nsowie internationale
+    Schallplatten-Rarit\xE4ten. Genau diese Offenheit\nmachte Zensor wichtig. Burkhardt
+    Seiler f\xFChrte keinen spezialisierten Nostalgie-Laden,\nsondern einen lebendigen
+    Import-, Szene und Mailorder-Knotenpunkt,\nder Musik nach West-Berlin holte und
+    von dort wieder verschickte.\nDie Plakate hingen im und um den Laden, auch in
+    den Fenstern, und wirkten wie ein\nSignal an alle, die nach anderer Musik suchten.
+    In einer Stadt,\ndie geografisch eingeschlossen war, wurde Zensor zu einem\noffenen
+    Ohr: jamaikanischer Reggae, britischer Punk, amerikanischer Underground,\ndeutsche
+    Elektronik und lokale Experimente lagen hier nicht getrennt, sondern\nnebeneinander.
+    Der Hype um Zensor entstand genau daraus \u2014 nicht aus Gr\xF6\xDFe,\nsondern
+    aus Auswahl, Haltung und Timing."
+  extraInfoImage: {fileID: 0}

@@ -12,15 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
   m_Name: Soweto - Compilation
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: Soweto - Compilation
-  author: Soweto
-  album: Compilation
-  year: 
-  description: 
+  title: Various Artists - Soweto
+  author: Various Artists
+  album: Soweto
+  year: 1982
+  description: "Various \u2013 \u201ESoweto\u201C erschien 1982 auf Zensor / Rough
+    Trade und bewegt sich zwischen Funk / Soul, Folk, World & Country, Afrobeat und
+    African. Die Compilation versammelt K\xFCnstler und Gruppen wie New Lucky Boys,
+    Kid Bera-Bera and Mister King Jerroo, Willy Khuno, S. Tshabalala, Steven Phiri,
+    John Motha, Elfas Zondi, Saul Malapane and Mister King Jerroo und A. M\u2019Kosane.
+    Viele Aufnahmen sind mit The Bamalangabis verbunden; Wilbur Dlamini erscheint
+    als zentraler Produzent und Komponist mehrerer St\xFCcke. Burkhardt Seiler wird
+    f\xFCr die Compilation Assistance genannt, die Sleeve Notes stammen von Julins
+    Levin. Gemastert wurde bei Tape One, gepresst von PRS Ltd. F\xFCr den Zensor-Kosmos
+    ist diese Ver\xF6ffentlichung wichtig, weil sie zeigt, dass Burkhardts Blick
+    nie nur auf West-Berliner Punk, New Wave oder Elektronik beschr\xE4nkt war. Zensor
+    war auch ein Durchgangsort f\xFCr Musik aus anderen Realit\xE4ten: Tanz, Widerstand,
+    Alltag, W\xE4rme, Stra\xDFe. \u201ESoweto\u201C klingt wie ein Fenster \u2014
+    nicht dekorativ, sondern offen."
   sprite: {fileID: 0}
   format: 0
   speed: 0
-  vinylType: 1
+  vinylType: 0
   tracks:
   - {fileID: 8300000, guid: 1ad6845eb33a64a3cb042d9c96e68766, type: 3}
   - {fileID: 8300000, guid: 83e8b112ebfbb4016a6673a679d920fd, type: 3}

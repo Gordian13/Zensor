@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
   m_Name: Die Zwei - USA! USA! USA!
   m_EditorClassIdentifier: Assembly-CSharp::RecordData
-  title: Die Zwei - USA! USA! USA!
+  title: Die Zwei - U.S.A.! U.S.A.! U.S.A.!
   author: Die Zwei
-  album: USA! USA! USA!
+  album: U.S.A.! U.S.A.! U.S.A.!
   year: 1984
-  description: 
+  description: 'Die Zwei – „U.S.A.! U.S.A.! U.S.A.!“ erschien 1984 in Deutschland auf East West Trading Company / Zensor unter den Katalognummern EWLP 2 und Zensor CM 06 als Vinyl-LP. Die Platte bewegt sich zwischen Electronic, Electro und Experimental und spielt auffällig mit amerikanischen Pop- und Film-Mythen: vom „Harry Lime Theme“ über den Beach-Boys-Medley „45 Boys On The Beach“ bis zu „River Of No Return“ und dem futuristischen Verweis „Wanted: The Tyrell Corp.“. Produziert wurde das Album von Die Zwei, aufgenommen und gemischt von Thomas Hofer, mit Hans Vegt für Coverdesign und Fotografie. Zur Besetzung gehören unter anderem Marc Klein an Synthesizer und Programmierung, Frieder Butzmann an Synthesizer und Vocoder, Evert Fraterman am Schlagzeug, Norbert Nagel an Saxofon und Klarinette sowie mehrere Bläser. Veröffentlicht wurde die Musik über ZENSOR Musikproduktion, das Copyright lag bei B. Seiler Musikverlag. Im Zensor-Kontext wirkt diese LP wie ein west-berlinerischer Blick auf Amerika: halb Sehnsucht, halb Parodie, halb Maschinenmusik — also natürlich drei Hälften, dit passt schon.'
   sprite: {fileID: 0}
   format: 0
   speed: 0

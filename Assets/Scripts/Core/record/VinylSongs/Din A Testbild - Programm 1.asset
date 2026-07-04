@@ -16,10 +16,7 @@ MonoBehaviour:
   author: Din A Testbild
   album: Programm 1
   year: 1980
-  description: "DIN A Testbild is a West Berlin underground band from the late 1970s
-    that is still active today. DIN A Testbild is considered one of the driving forces
-    behind West Berlin\u2019s expressive musical avant-garde and the subsequent techno
-    wave."
+  description: 'Din A Testbild – „Programm 1“ erschien 1980 in Deutschland auf Innovative Communication unter der Katalognummer KS 80.002 als Vinyl-LP mit 45 RPM. Die Platte bewegt sich zwischen Electronic, Electro, Synth-Pop und Experimental und enthält die Stücke „Die Siebziger“, „DNS Of Time“, „No Repeat“, „Urwald-Liebe“, „Age Is A State Of Mind“ und „She’s So Nice“. Texte und Gesang stammen von Marc Eins, Musik und Performance von Genee Romee. Produziert wurde das Album von Klaus D. Mueller und Klaus Schulze, der auch Mischung und Linernotes übernahm. Aufgenommen wurde im IC-Studio in Winsen / Aller im September 1980, gemischt in Klaus Schulzes Studio. Auch wenn diese Veröffentlichung nicht auf Zensor erschien, gehört Din A Testbild klar zum geistigen Umfeld jener frühen West-Berliner Szene, in der Zensor als Laden, Treffpunkt und Filter für neue elektronische, punkige und experimentelle Musik wirkte. „Programm 1“ klingt wie ein Sendetest aus einer Zeit, in der Zukunft noch aus Bandmaschinen, Synthesizern, Haltung und ein bisschen kaputtem Humor gebaut wurde.'
   sprite: {fileID: 0}
   format: 0
   speed: 0
