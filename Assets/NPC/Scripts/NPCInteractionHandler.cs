@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.EventSystems;
 // Detects right-clicks on NPCs and opens the NPC interaction menu.
 // This script should usually live on a central scene object, for example "NPC_InputSystem".
 public class NPCInteractionHandler : MonoBehaviour
@@ -32,6 +32,9 @@ public class NPCInteractionHandler : MonoBehaviour
         // If there is no mouse or no camera, interaction detection cannot run.
         if (Mouse.current == null || raycastCamera == null)
             return;
+        
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return;
 
         // Only react on the exact frame the right mouse button is pressed.
         if (!Mouse.current.leftButton.wasPressedThisFrame)
@@ -57,15 +60,6 @@ public class NPCInteractionHandler : MonoBehaviour
         {
             return;
         }
-
-        // Open the interaction menu for the clicked NPC.
-        // Requires NPCInteractionMenu to exist in the scene.
-        if (NPCInteractionMenu.Instance == null)
-        {
-            Debug.LogError("NPCInteractionMenu.Instance is NULL.");
-            return;
-        }
-
         npc.MoveToInteractionAnchor(interactionAnchor, lookAtTarget, () =>
         {
             if (NPCDialogueWindow.Instance != null)

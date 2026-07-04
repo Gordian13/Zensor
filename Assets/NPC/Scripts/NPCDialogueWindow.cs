@@ -17,6 +17,7 @@ public class NPCDialogueWindow : MonoBehaviour
     [SerializeField] private GameObject choicesArea;
     [SerializeField] private float conversationHeight = 400f;
     [SerializeField] private float reactionHeight = 180f;
+    [SerializeField] private GameObject clickBlocker;
 
     [Header("Reaction Dialogue")]
     [SerializeField] private float defaultReactionDuration = 4f;
@@ -54,7 +55,6 @@ public class NPCDialogueWindow : MonoBehaviour
             Debug.LogWarning("Dialogue script is null.");
             return;
         }
-
         StopAutoHide();
         StopTyping();
 
@@ -67,7 +67,7 @@ public class NPCDialogueWindow : MonoBehaviour
             Debug.LogWarning("Dialogue script has no ::start node.");
             return;
         }
-
+        GlobalInteractionState.Instance.BlockInteractions();
         if (closeButton != null)
             closeButton.gameObject.SetActive(true);
 
@@ -174,16 +174,19 @@ public class NPCDialogueWindow : MonoBehaviour
     public void CloseConversation()
     {
         Hide();
-        NPCAmbientSpeech ambient = currentNPC.GetComponent<NPCAmbientSpeech>();
-
-        if (ambient != null)
-            ambient.PauseAmbient(5f);
 
         if (currentNPC != null)
         {
+            NPCAmbientSpeech ambient = currentNPC.GetComponent<NPCAmbientSpeech>();
+
+            if (ambient != null)
+                ambient.PauseAmbient(5f);
+
             currentNPC.EndInteraction();
             currentNPC = null;
         }
+
+        GlobalInteractionState.Instance.UnblockInteractions();
     }
 
     public void Hide()

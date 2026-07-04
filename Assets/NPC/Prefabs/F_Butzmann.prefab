@@ -1174,6 +1174,7 @@ MonoBehaviour:
   choicesArea: {fileID: 7210650592131904354}
   conversationHeight: 400
   reactionHeight: 180
+  clickBlocker: {fileID: 0}
   defaultReactionDuration: 4
   useTypingAnimation: 0
   charactersPerSecond: 100

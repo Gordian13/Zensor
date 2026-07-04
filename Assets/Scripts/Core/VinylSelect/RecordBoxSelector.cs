@@ -58,6 +58,9 @@ namespace record
 
         private void Update()
         {
+            if (GlobalInteractionState.Instance != null &&
+                GlobalInteractionState.Instance.IsInteractionBlocked)
+                return;
             if (!IsOwningSpotActive() ||
                 vinylSelectController == null ||
                 vinylSelectController.CurrentVinylState != VinylState.BrowsingBox)

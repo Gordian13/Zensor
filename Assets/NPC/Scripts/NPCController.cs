@@ -422,6 +422,13 @@ public class NPCController : MonoBehaviour
         EndInteraction();
     }
 
+    Vector3 GetFlatAnchorPosition(Transform anchor)
+    {
+        Vector3 position = anchor.position;
+        position.y = transform.position.y;
+        return position;
+    }
+
     private IEnumerator MoveToInteractionAnchorRoutine(
         Transform anchor,
         Transform lookAtTarget,
@@ -436,7 +443,7 @@ public class NPCController : MonoBehaviour
         float shortestDistanceToAnchor = Vector3.Distance(transform.position, anchor.position);
 
         agent.isStopped = false;
-        agent.SetDestination(anchor.position);
+        agent.SetDestination(GetFlatAnchorPosition(anchor));
 
         float refreshTimer = 0f;
 
@@ -457,7 +464,7 @@ public class NPCController : MonoBehaviour
             if (currentDistanceToAnchor < shortestDistanceToAnchor)
             {
                 shortestDistanceToAnchor = currentDistanceToAnchor;
-                agent.SetDestination(anchor.position);
+                agent.SetDestination(GetFlatAnchorPosition(anchor));
             }
             
 
@@ -482,7 +489,7 @@ public class NPCController : MonoBehaviour
 
             if (refreshTimer >= interactionDestinationRefreshRate)
             {
-                agent.SetDestination(anchor.position);
+                agent.SetDestination(GetFlatAnchorPosition(anchor));
                 refreshTimer = 0f;
             }
 
@@ -491,7 +498,7 @@ public class NPCController : MonoBehaviour
 
         agent.isStopped = true;
         agent.ResetPath();
-
+        agent.velocity = Vector3.zero;
         agent.stoppingDistance = originalStoppingDistance;
 
         Vector3 lookPosition = lookAtTarget != null
