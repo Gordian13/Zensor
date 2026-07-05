@@ -458,9 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core.camera.SpotNavigationTrigger
   targetSpot: {fileID: 1313512621}
-  routes:
-  - fromSpotId: vinyl
-    wayCamerasIds: []
+  routes: []
 --- !u!1 &1354643778
 GameObject:
   m_ObjectHideFlags: 0
