@@ -27,9 +27,11 @@ public class VinylSelectController : MonoBehaviour
      */
     public bool SelectVinyl(IVinyl vinyl)
     {
+        if (GlobalInteractionState.Instance.IsInteractionBlocked) return false;
         if (CurrentVinylState != VinylState.BrowsingBox || vinyl == null)
             return false;
 
+        GlobalInteractionState.Instance.BlockInteractions();
         this._spot.SetAllowRightClickLook(false);
 
         SelectedVinyl = vinyl;
@@ -116,10 +118,14 @@ public class VinylSelectController : MonoBehaviour
 
     /**
      * Clears the current selection and returns to browsing.
+     * Also works with the disc dragged out or the info panel open, so leaving
+     * the spot always releases the selection and the global interaction block.
      */
     public bool CloseSelection()
     {
-        if (CurrentVinylState != VinylState.VinylSelected)
+        if (CurrentVinylState != VinylState.VinylSelected &&
+            CurrentVinylState != VinylState.VinylInfoOpen &&
+            CurrentVinylState != VinylState.VinylDraggedOutFocused)
             return false;
         
         this._spot.SetAllowRightClickLook(true);
@@ -127,6 +133,7 @@ public class VinylSelectController : MonoBehaviour
         ChangeState(VinylState.BrowsingBox);
         SelectedVinyl.GetSelectionTransform().GetComponentInChildren<IColorRevealable>().SetStayColored(false);
         SelectedVinyl = null;
+        GlobalInteractionState.Instance.UnblockInteractions();
         return true;
     }
 
@@ -184,11 +191,12 @@ public class VinylSelectController : MonoBehaviour
 
     public bool ExitVinylPlayer()
     {
-        BackGroundMusicManager.Instance.PlayBackGroundMusic();
         if (CurrentVinylState != VinylState.vinylPlayer &&
             CurrentVinylState != VinylState.VinylPlayerInfoOpen)
             return false;
 
+        GlobalInteractionState.Instance.UnblockInteractions();
+        BackGroundMusicManager.Instance.PlayBackGroundMusic();
         this._spot.SetAllowRightClickLook(true);
         SelectedVinyl.GetSelectionTransform().GetComponentInChildren<IColorRevealable>().SetStayColored(false);
         SelectedVinyl = null;
