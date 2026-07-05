@@ -21,6 +21,8 @@ namespace Core.camera
             return targetSpot != null ? targetSpot.GetSpotId() : string.Empty;
         }
 
+        // Returns the route matching the current spot, or null when none is
+        // defined so the transition falls back to a direct blend.
         public CameraRoute GetRouteFrom(string currentSpotId)
         {
             if (string.IsNullOrWhiteSpace(currentSpotId))
@@ -30,27 +32,20 @@ namespace Core.camera
             }
 
             if (routes == null || routes.Length == 0)
-            {
-                Debug.LogError($"{nameof(SpotNavigationTrigger)} on {name} has no routes assigned.", this);
                 return null;
-            }
 
-            if (routes != null)
+            foreach (CameraRoute route in routes)
             {
-                foreach (CameraRoute route in routes)
+                if (route == null)
                 {
-                    if (route == null)
-                    {
-                        Debug.LogError($"{nameof(SpotNavigationTrigger)} on {name} has a null route entry.", this);
-                        return null;
-                    }
-
-                    if (route.fromSpotId == currentSpotId)
-                        return route;
+                    Debug.LogError($"{nameof(SpotNavigationTrigger)} on {name} has a null route entry.", this);
+                    continue;
                 }
+
+                if (route.fromSpotId == currentSpotId)
+                    return route;
             }
 
-            Debug.LogError($"No route from spot id '{currentSpotId}' on {name}.", this);
             return null;
         }
     }

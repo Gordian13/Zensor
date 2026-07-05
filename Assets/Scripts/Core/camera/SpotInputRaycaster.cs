@@ -86,12 +86,8 @@ namespace Core.camera
                 return;
             }
 
+            // No matching route means a direct blend to the target spot.
             CameraRoute route = GetCurrentRoute();
-            if (route == null)
-            {
-                Debug.LogWarning("Clicked spot trigger, but no route matched the current spot.", currentHoveredTrigger);
-                return;
-            }
 
             targetSpot.SetSpotReveal(false);
             transitionManager.PlayRoute(route, targetSpotId);
