@@ -1,17 +1,23 @@
 using Core.VinylSelect;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /**
  * Moves the selected vinyl to the inspection point and returns it to its original pose.
  * Also controls whether the disc sits inside the cover or peeks out of it.
+ * Twelve and seven inch vinyls use separate inspection points because the discs differ in size.
  */
 public class VinylInspectionView : MonoBehaviour
 {
     [SerializeField] private VinylSelectController vinylSelectController;
-    [SerializeField] private Transform inspectionPoint;
+    [FormerlySerializedAs("inspectionPoint")]
+    [SerializeField] private Transform twelveInchInspectionPoint;
+    [SerializeField] private Transform sevenInchInspectionPoint;
     [SerializeField] private float positionSpeed = 6f;
     [SerializeField] private float rotationSpeed = 15f;
-    [SerializeField] private float vinylDiscInspectionXOffset = 0.2f;
+    [FormerlySerializedAs("vinylDiscInspectionXOffset")]
+    [SerializeField] private float twelveInchDiscInspectionXOffset = 0.2f;
+    [SerializeField] private float sevenInchDiscInspectionXOffset = 0.12f;
 
     private Transform _inspectedVinyl;
     private RestPose _restPose;
@@ -43,8 +49,11 @@ public class VinylInspectionView : MonoBehaviour
         if (vinylSelectController == null)
             Debug.LogError($"{nameof(VinylInspectionView)} has no VinylSelectController assigned.", this);
 
-        if (inspectionPoint == null)
-            Debug.LogError($"{nameof(VinylInspectionView)} has no inspection point assigned.", this);
+        if (twelveInchInspectionPoint == null)
+            Debug.LogError($"{nameof(VinylInspectionView)} has no twelve inch inspection point assigned.", this);
+
+        if (sevenInchInspectionPoint == null)
+            Debug.LogError($"{nameof(VinylInspectionView)} has no seven inch inspection point assigned.", this);
     }
 
     private void OnEnable()
@@ -146,13 +155,44 @@ public class VinylInspectionView : MonoBehaviour
     }
 
     /**
+     * Returns the inspection point matching the selected vinyl's type from its record data.
+     * Seven inch discs are smaller, so they use their own point closer to the camera.
+     */
+    private Transform GetActiveInspectionPoint()
+    {
+        if (IsSevenInchSelected() && sevenInchInspectionPoint != null)
+            return sevenInchInspectionPoint;
+
+        return twelveInchInspectionPoint;
+    }
+
+    /**
+     * Returns the disc peek-out offset matching the selected vinyl's type.
+     */
+    private float GetActiveDiscInspectionXOffset()
+    {
+        return IsSevenInchSelected()
+            ? sevenInchDiscInspectionXOffset
+            : twelveInchDiscInspectionXOffset;
+    }
+
+    /**
+     * Returns true if the selected vinyl is marked as a seven inch disc in its record data.
+     */
+    private bool IsSevenInchSelected()
+    {
+        RecordData data = vinylSelectController?.SelectedVinyl?.GetData();
+        return data != null && data.vinylType == VinylType.SevenInch;
+    }
+
+    /**
      * Returns true while the selected vinyl should remain in front of the camera.
      */
     private bool ShouldShowAtInspectionPoint()
     {
         if (vinylSelectController == null ||
             vinylSelectController.SelectedVinyl == null ||
-            inspectionPoint == null)
+            GetActiveInspectionPoint() == null)
         {
             return false;
         }
@@ -236,7 +276,9 @@ public class VinylInspectionView : MonoBehaviour
      */
     private void MoveToInspectionPoint(Transform vinylTransform)
     {
-        Quaternion targetRotation = inspectionPoint.rotation;
+        Transform activeInspectionPoint = GetActiveInspectionPoint();
+
+        Quaternion targetRotation = activeInspectionPoint.rotation;
         if (vinylSelectController != null &&
             vinylSelectController.CurrentVinylState == VinylState.VinylSelected)
         {
@@ -245,7 +287,7 @@ public class VinylInspectionView : MonoBehaviour
 
         vinylTransform.position = Vector3.Lerp(
             vinylTransform.position,
-            inspectionPoint.position,
+            activeInspectionPoint.position,
             positionSpeed * Time.deltaTime
         );
 
@@ -283,7 +325,7 @@ public class VinylInspectionView : MonoBehaviour
             return;
 
         Vector3 targetPosition =
-            restPose.VinylDiscLocalPosition + Vector3.left * vinylDiscInspectionXOffset;
+            restPose.VinylDiscLocalPosition + Vector3.left * GetActiveDiscInspectionXOffset();
 
         restPose.VinylDisc.localPosition = Vector3.Lerp(
             restPose.VinylDisc.localPosition,
