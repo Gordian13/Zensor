@@ -50,21 +50,25 @@ public class NPCDialogueWindow : MonoBehaviour
 
     public void ShowDialogueScript(NPCDialogueScript dialogueScript, NPCController npc)
     {
-        if (dialogueScript == null)
-        {
-            Debug.LogWarning("Dialogue script is null.");
-            return;
-        }
         StopAutoHide();
         StopTyping();
 
         currentNPC = npc;
+
+        if (dialogueScript == null)
+        {
+            Debug.LogWarning("Dialogue script is null.");
+            CloseConversation();
+            return;
+        }
+
         currentScript = dialogueScript;
         currentNodes = NPCDialogueParser.Parse(dialogueScript.dialogueText);
 
         if (!currentNodes.TryGetValue(RootNodeId, out currentNode))
         {
             Debug.LogWarning("Dialogue script has no ::start node.");
+            CloseConversation();
             return;
         }
         GlobalInteractionState.Instance.BlockInteractions();

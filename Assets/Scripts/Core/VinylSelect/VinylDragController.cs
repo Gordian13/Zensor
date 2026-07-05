@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Core.VinylSelect
 {
     /**
      * Camera script that detects dragging on the selected vinyl disc.
      * Moves the disc between its selected and focused position and requests the matching state changes.
+     * Seven inch discs are smaller and therefore use a shorter drag-out distance.
      */
     [RequireComponent(typeof(Camera))]
     public class VinylDragController : MonoBehaviour
@@ -16,7 +18,9 @@ namespace Core.VinylSelect
 
         [Header("Drag")]
         [SerializeField] private float localUnitsPerPixel = 0.001f;
-        [SerializeField] private float focusedDistance = 0.6f;
+        [FormerlySerializedAs("focusedDistance")]
+        [SerializeField] private float twelveInchFocusedDistance = 0.6f;
+        [SerializeField] private float sevenInchFocusedDistance = 0.35f;
         [SerializeField, Range(0f, 1f)] private float completionThreshold = 0.6f;
 
         private Camera targetCamera;
@@ -25,6 +29,7 @@ namespace Core.VinylSelect
         private Vector3 selectedDiscPosition;
         private Vector3 focusedDiscPosition;
         private bool isDraggingOut;
+        private float activeFocusedDistance;
 
         /**
          * Caches the Camera component used for raycasts and validates the state controller reference.
@@ -88,13 +93,24 @@ namespace Core.VinylSelect
 
             draggedDisc = disc;
             dragStartMousePosition = mousePosition;
+            activeFocusedDistance = GetFocusedDistanceForSelectedVinyl();
 
             if (isDraggingOut)
             {
                 selectedDiscPosition = disc.localPosition;
                 focusedDiscPosition =
-                    selectedDiscPosition + Vector3.left * focusedDistance;
+                    selectedDiscPosition + Vector3.left * activeFocusedDistance;
             }
+        }
+
+        /**
+         * Returns the drag-out distance matching the selected vinyl's type from its record data.
+         */
+        private float GetFocusedDistanceForSelectedVinyl()
+        {
+            RecordData data = vinylSelectController?.SelectedVinyl?.GetData();
+            bool isSevenInch = data != null && data.vinylType == VinylType.SevenInch;
+            return isSevenInch ? sevenInchFocusedDistance : twelveInchFocusedDistance;
         }
 
         /**
@@ -105,9 +121,9 @@ namespace Core.VinylSelect
             float horizontalPixels = dragStartMousePosition.x - mousePosition.x;
             float outwardDistance = isDraggingOut
                 ? -horizontalPixels * localUnitsPerPixel
-                : focusedDistance - horizontalPixels * localUnitsPerPixel;
+                : activeFocusedDistance - horizontalPixels * localUnitsPerPixel;
 
-            outwardDistance = Mathf.Clamp(outwardDistance, 0f, focusedDistance);
+            outwardDistance = Mathf.Clamp(outwardDistance, 0f, activeFocusedDistance);
             draggedDisc.localPosition =
                 selectedDiscPosition + Vector3.left * outwardDistance;
         }
@@ -121,8 +137,8 @@ namespace Core.VinylSelect
                 draggedDisc.localPosition,
                 selectedDiscPosition);
 
-            float progress = focusedDistance > 0f
-                ? draggedDistance / focusedDistance
+            float progress = activeFocusedDistance > 0f
+                ? draggedDistance / activeFocusedDistance
                 : 0f;
 
             if (isDraggingOut)

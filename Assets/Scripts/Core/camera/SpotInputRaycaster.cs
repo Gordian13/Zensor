@@ -36,6 +36,11 @@ namespace Core.camera
             if (transitionManager != null && transitionManager.IsTransitioning)
                 return;
 
+            // Another interaction (dialogue, vinyl flow, ...) currently owns the input.
+            if (GlobalInteractionState.Instance != null &&
+                GlobalInteractionState.Instance.IsInteractionBlocked)
+                return;
+
             if (vinylSelectController == null)
                 vinylSelectController = FindFirstObjectByType<VinylSelectController>(FindObjectsInactive.Include);
 

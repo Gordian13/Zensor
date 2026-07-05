@@ -36,6 +36,11 @@ public class NPCInteractionHandler : MonoBehaviour
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             return;
 
+        // Another interaction (dialogue, vinyl flow, ...) currently owns the input.
+        if (GlobalInteractionState.Instance != null &&
+            GlobalInteractionState.Instance.IsInteractionBlocked)
+            return;
+
         // Only react on the exact frame the right mouse button is pressed.
         if (!Mouse.current.leftButton.wasPressedThisFrame)
             return;
@@ -60,6 +65,18 @@ public class NPCInteractionHandler : MonoBehaviour
         {
             return;
         }
+
+        if (interactionAnchor == null)
+        {
+            Debug.LogWarning("Interaction anchor is null.");
+            return;
+        }
+
+        // Own the input from the click on, so nothing else can start while the
+        // NPC is still walking over. Released again by NPCController.EndInteraction.
+        if (GlobalInteractionState.Instance != null)
+            GlobalInteractionState.Instance.BlockInteractions();
+
         npc.MoveToInteractionAnchor(interactionAnchor, lookAtTarget, () =>
         {
             if (NPCDialogueWindow.Instance != null)

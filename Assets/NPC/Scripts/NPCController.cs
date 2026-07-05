@@ -376,6 +376,11 @@ public class NPCController : MonoBehaviour
 
         if (wasPatrollingBeforeInteraction)
             StartPatrol();
+
+        // The interaction owned the global input block (set on the NPC click);
+        // release it on every exit path, including cancelled walks.
+        if (GlobalInteractionState.Instance != null)
+            GlobalInteractionState.Instance.UnblockInteractions();
     }
     public void MoveToInteractionAnchor( 
         Transform anchor,
