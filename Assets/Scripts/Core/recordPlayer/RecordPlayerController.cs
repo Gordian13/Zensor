@@ -4,6 +4,25 @@ namespace recordPlayer
 {
     public class RecordPlayerController : MonoBehaviour
     {
+        [System.Serializable]
+        private class VinylVariant
+        {
+            public VinylType type;
+            [Tooltip("Das Vinyl-Modell auf dem Teller fuer diese Groesse.")]
+            public Transform vinyl;
+            [Tooltip("Winkel des Tonarms am Anfang der Platte (aussen).")]
+            public float armPlayAngle = 45f;
+            [Tooltip("Winkel des Tonarms am Ende der Platte (innen).")]
+            public float armEndAngle = 80f;
+
+            [Header("Cover (neben dem Player)")]
+            public GameObject coverObject;
+            public Renderer coverRenderer;
+
+            [System.NonSerialized] public Renderer[] renderers;
+            [System.NonSerialized] public Renderer labelRenderer;
+        }
+
         [Header("References")]
         [SerializeField] private AudioSource audioSource;
 
@@ -13,16 +32,13 @@ namespace recordPlayer
         [Header("Animation")]
         [SerializeField] private Transform toneArmPivot;
         [SerializeField] private Transform platter;
-        [SerializeField] private Transform vinyl;
         [SerializeField] private Vector3 vinylRotationAxis = Vector3.up;
         [SerializeField] private float armRestAngle = 0f;
-        [SerializeField] private float armPlayAngle = 45f;
-        [SerializeField] private float armEndAngle = 80f;
         [SerializeField] private float armMoveSpeed = 1.5f;
 
-        [Header("Cover Display")]
-        [SerializeField] private GameObject coverObject;
-        [SerializeField] private Renderer coverRenderer;
+        [Header("Vinyl Variants")]
+        [SerializeField] private VinylVariant twelveInch;
+        [SerializeField] private VinylVariant sevenInch;
 
         public int CurrentTrackIndex => _currentTrackIndex;
         public int TrackCount => currentRecord?.TrackCount ?? 0;
@@ -31,46 +47,61 @@ namespace recordPlayer
         private bool _isPlaying;
         private int _currentTrackIndex;
         private float _currentRPM = 33f;
-        private Renderer _vinylRenderer;
-        private Renderer[] _vinylRenderers;
         private float _totalDuration;
         private float _playedBeforeCurrentTrack;
+        private VinylVariant _activeVariant;
 
         private void Awake()
         {
             _isPlaying = false;
             _currentTrackIndex = 0;
 
-            if (coverObject != null)
-                coverObject.SetActive(false);
+            CacheVariant(twelveInch);
+            CacheVariant(sevenInch);
 
-            if (vinyl != null)
+            SetVariantVisible(twelveInch, false);
+            SetVariantVisible(sevenInch, false);
+            HideCover(twelveInch);
+            HideCover(sevenInch);
+        }
+
+        private void CacheVariant(VinylVariant variant)
+        {
+            if (variant == null || variant.vinyl == null)
             {
-                _vinylRenderers = vinyl.GetComponentsInChildren<Renderer>(true);
-                foreach (Renderer r in _vinylRenderers)
-                {
-                    if (r.name == "LabelFront")
-                        _vinylRenderer = r;
-                }
-                SetVinylVisible(false);
+                Debug.LogWarning($"CacheVariant: Vinyl-Transform fehlt fuer Variante {variant?.type}.", this);
+                return;
+            }
+
+            variant.renderers = variant.vinyl.GetComponentsInChildren<Renderer>(true);
+            Debug.Log($"CacheVariant {variant.type}: {variant.renderers.Length} Renderer gefunden auf '{variant.vinyl.name}'.", this);
+            foreach (Renderer r in variant.renderers)
+            {
+                if (r.name == "LabelFront")
+                    variant.labelRenderer = r;
             }
         }
 
         void Update()
         {
-            if (_isPlaying)
+            if (_isPlaying && _activeVariant?.vinyl != null)
             {
                 platter.Rotate(Vector3.forward, _currentRPM * 6f * Time.deltaTime);
-                vinyl.Rotate(vinylRotationAxis, _currentRPM * 6f * Time.deltaTime);
+                _activeVariant.vinyl.Rotate(vinylRotationAxis, _currentRPM * 6f * Time.deltaTime);
             }
 
             float targetAngle;
-            if (_isPlaying && _totalDuration > 0)
-                targetAngle = Mathf.Lerp(armPlayAngle, armEndAngle, (_playedBeforeCurrentTrack + audioSource.time) / _totalDuration);
-            else if (currentRecord != null && _totalDuration > 0)
-                targetAngle = Mathf.Lerp(armPlayAngle, armEndAngle, _playedBeforeCurrentTrack / _totalDuration);
+            if (_activeVariant != null && _totalDuration > 0)
+            {
+                float progress = _isPlaying
+                    ? (_playedBeforeCurrentTrack + audioSource.time) / _totalDuration
+                    : _playedBeforeCurrentTrack / _totalDuration;
+                targetAngle = Mathf.Lerp(_activeVariant.armPlayAngle, _activeVariant.armEndAngle, progress);
+            }
             else
+            {
                 targetAngle = armRestAngle;
+            }
 
             float currentAngle = toneArmPivot.localEulerAngles.z;
             float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, armMoveSpeed * Time.deltaTime);
@@ -137,9 +168,9 @@ namespace recordPlayer
 
         private void SnapArmToProgress()
         {
-            if (_totalDuration <= 0) return;
+            if (_activeVariant == null || _totalDuration <= 0) return;
             float progress = _playedBeforeCurrentTrack / _totalDuration;
-            float angle = Mathf.Lerp(armPlayAngle, armEndAngle, progress);
+            float angle = Mathf.Lerp(_activeVariant.armPlayAngle, _activeVariant.armEndAngle, progress);
             toneArmPivot.localEulerAngles = new Vector3(
                 toneArmPivot.localEulerAngles.x,
                 toneArmPivot.localEulerAngles.y,
@@ -159,9 +190,15 @@ namespace recordPlayer
                 AudioClip clip = record.GetTrack(i);
                 if (clip != null) _totalDuration += clip.length;
             }
+
+            _activeVariant = GetVariant(record.vinylType);
+
+            // Nur die passende Groesse anzeigen.
+            SetVariantVisible(twelveInch, _activeVariant == twelveInch);
+            SetVariantVisible(sevenInch, _activeVariant == sevenInch);
+
             ApplyLabel(record);
             ApplyCover(record);
-            SetVinylVisible(true);
         }
 
         public void ClearRecord()
@@ -169,14 +206,24 @@ namespace recordPlayer
             Stop();
             currentRecord = null;
             _currentTrackIndex = 0;
-            ApplyCover(null);
-            SetVinylVisible(false);
+            _activeVariant = null;
+            SetVariantVisible(twelveInch, false);
+            SetVariantVisible(sevenInch, false);
+            HideCover(twelveInch);
+            HideCover(sevenInch);
         }
 
-        private void SetVinylVisible(bool visible)
+        private VinylVariant GetVariant(VinylType type)
         {
-            if (_vinylRenderers == null) return;
-            foreach (Renderer r in _vinylRenderers)
+            if (sevenInch != null && sevenInch.type == type && sevenInch.vinyl != null) return sevenInch;
+            if (twelveInch != null && twelveInch.type == type && twelveInch.vinyl != null) return twelveInch;
+            return twelveInch; // Fallback
+        }
+
+        private static void SetVariantVisible(VinylVariant variant, bool visible)
+        {
+            if (variant?.renderers == null) return;
+            foreach (Renderer r in variant.renderers)
                 r.enabled = visible;
         }
 
@@ -188,9 +235,10 @@ namespace recordPlayer
 
         private void ApplyLabel(RecordData record)
         {
-            if (_vinylRenderer == null || record == null || record.labelFrontTexture == null) return;
+            Renderer labelRenderer = _activeVariant?.labelRenderer;
+            if (labelRenderer == null || record == null || record.labelFrontTexture == null) return;
 
-            Material mat = _vinylRenderer.material;
+            Material mat = labelRenderer.material;
             if (mat.HasProperty("_BaseMap"))
                 mat.SetTexture("_BaseMap", record.labelFrontTexture);
             else if (mat.HasProperty("_MainTex"))
@@ -199,19 +247,31 @@ namespace recordPlayer
 
         private void ApplyCover(RecordData record)
         {
-            bool hasRecord = record != null && record.coverFrontTexture != null;
+            // Cover der nicht-aktiven Groesse ausblenden.
+            if (_activeVariant != twelveInch) HideCover(twelveInch);
+            if (_activeVariant != sevenInch) HideCover(sevenInch);
 
-            if (coverObject != null)
-                coverObject.SetActive(hasRecord);
+            if (_activeVariant == null) return;
 
-            if (coverRenderer != null && hasRecord)
+            bool hasCover = record != null && record.coverFrontTexture != null;
+
+            if (_activeVariant.coverObject != null)
+                _activeVariant.coverObject.SetActive(hasCover);
+
+            if (_activeVariant.coverRenderer != null && hasCover)
             {
-                Material mat = coverRenderer.material;
+                Material mat = _activeVariant.coverRenderer.material;
                 if (mat.HasProperty("_BaseMap"))
                     mat.SetTexture("_BaseMap", record.coverFrontTexture);
                 else if (mat.HasProperty("_MainTex"))
                     mat.SetTexture("_MainTex", record.coverFrontTexture);
             }
+        }
+
+        private static void HideCover(VinylVariant variant)
+        {
+            if (variant?.coverObject != null)
+                variant.coverObject.SetActive(false);
         }
     }
 }
