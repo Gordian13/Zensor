@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 
 /// <summary>
@@ -52,15 +53,16 @@ public class FotowandUI : MonoBehaviour
 
     private void Update()
     {
-        if (panel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        if (panel.activeSelf && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             Close();
     }
+
 
     // -- Public API --
     /// <summary>
     /// Opens the UI panel and populates it with data from the given FotowandData asset.
     /// </summary>
-    
+
     public void Open(FotowandData data)
     {
         photoImage.sprite = data.photo;

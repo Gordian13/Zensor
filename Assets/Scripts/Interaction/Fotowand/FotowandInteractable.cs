@@ -1,3 +1,16 @@
+using UnityEngine;
+
+public class FotowandInteractable : MonoBehaviour, IFotowand
+{
+    [Header("Data")]
+    [Tooltip("The ScriptableObject containing this wall's photo and info")]
+    public FotowandData data;
+
+    public FotowandData GetData() => data;
+    public Transform GetSelectionTransform() => transform;
+}
+
+
 /*using UnityEngine;
 
 /// <summary>
@@ -25,8 +38,8 @@ public class FotowandInteractable : MonoBehaviour
     [Tooltip("Key the player presses to open this Fotowand")]
     public KeyCode interactKey = KeyCode.E;
     public float interactDistance = 3f;
-    
-   
+
+
     [Header("Emission color shown when the player is in range")]
     public Color outlineColor = Color.yellow;
 
@@ -45,16 +58,16 @@ public class FotowandInteractable : MonoBehaviour
 
     private void Update()
     {
-        
+
         if (_player == null) return;
 
         float distance = Vector3.Distance(
             GetComponent<Collider>().ClosestPoint(_player.position),
             _player.position
         );
-        
+
         bool inRange = distance <= interactDistance;
-       
+
 
         // Hint & Outline use interactDistance
         if (inRange && !_playerInRange)
@@ -68,7 +81,7 @@ public class FotowandInteractable : MonoBehaviour
             _playerInRange = false;
             SetOutline(false);
             ui.HideHint();
-            
+
         }
 
         //
@@ -77,7 +90,7 @@ public class FotowandInteractable : MonoBehaviour
             ui.Open(data);
         }
 
-       
+
     }
 
     //// -- Trigger detection --
@@ -128,12 +141,12 @@ public class FotowandInteractable : MonoBehaviour
 
     }
 
-    
+
 }
 */
 
 
-using UnityEngine;
+/*using UnityEngine;
 
 /// <summary>
 /// Attach this script to a Fotowand GameObject.
@@ -172,4 +185,5 @@ public class FotowandInteractable : MonoBehaviour
         if (ui != null)
             ui.Close();
     }
-}
+}*/
+
