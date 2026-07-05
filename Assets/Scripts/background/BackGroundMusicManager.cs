@@ -17,15 +17,15 @@ namespace background
 
         void Awake()
         {
-            PlayMusic();
+            PlayBackGroundMusic();
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
 
-        public void StopMusic() => stopping = true;
+        public void StopBackGroundMusic() => stopping = true;
 
-        public void PlayMusic()
+        public void PlayBackGroundMusic()
         {
             stopping = false;
             foreach (var s in targetedBoxes) { s.volume = volume; s.Play(); }

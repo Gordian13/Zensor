@@ -1,4 +1,5 @@
 using System;
+using background;
 using Core.camera;
 using Core.VinylSelect;
 using Interaction.util.ColorReveal;
@@ -172,6 +173,7 @@ public class VinylSelectController : MonoBehaviour
 
     public bool GoToVinylPlayer()
     {
+        BackGroundMusicManager.Instance.StopBackGroundMusic();
         return TryChangeState(VinylState.VinylDraggedOutFocused, VinylState.vinylPlayer);
     }
 
@@ -182,6 +184,7 @@ public class VinylSelectController : MonoBehaviour
 
     public bool ExitVinylPlayer()
     {
+        BackGroundMusicManager.Instance.PlayBackGroundMusic();
         if (CurrentVinylState != VinylState.vinylPlayer &&
             CurrentVinylState != VinylState.VinylPlayerInfoOpen)
             return false;
