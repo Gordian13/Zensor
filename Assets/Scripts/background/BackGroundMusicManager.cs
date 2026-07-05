@@ -28,7 +28,11 @@ namespace background
         public void PlayBackGroundMusic()
         {
             stopping = false;
-            foreach (var s in targetedBoxes) { s.volume = volume; s.Play(); }
+            foreach (var s in targetedBoxes)
+            {
+                s.volume = volume;
+                if (!s.isPlaying) s.UnPause();
+            }
         }
 
         void Update()
@@ -42,7 +46,7 @@ namespace background
                 foreach (var s in targetedBoxes)
                 {
                     s.volume = Mathf.MoveTowards(s.volume, 0f, fadeSpeed * Time.deltaTime);
-                    if (s.volume <= 0f) s.Stop();
+                    if (s.volume <= 0f) s.Pause();
                 }
                 return;
             }
