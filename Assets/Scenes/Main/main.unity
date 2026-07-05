@@ -119,6 +119,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &92059598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 92059600}
+  - component: {fileID: 92059599}
+  m_Layer: 0
+  m_Name: BackGroundMusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &92059599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92059598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43576bef2e4a3ee4d8ae38a822d80e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::background.BackGroundMusicManager
+  songs:
+  - {fileID: 8300000, guid: 7b6ef22b2f300f64abed5cd51977e6d6, type: 3}
+  - {fileID: 8300000, guid: eed4a5ce624221044b0ac50bd7baf341, type: 3}
+  - {fileID: 8300000, guid: 9e056acf4d268944b9a99d5d6c43197d, type: 3}
+  fadeSpeed: 2
+  volume: 0.1
+--- !u!4 &92059600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92059598}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &126020102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,6 +1483,38 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.0000017318205
       objectReference: {fileID: 0}
+    - target: {fileID: 5389119003126099075, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389119003126099075, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678305822848185812, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678305822848185812, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6981005416767380961, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.8
@@ -2556,6 +2638,38 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.97
       objectReference: {fileID: 0}
+    - target: {fileID: 5389119003126099075, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389119003126099075, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678305822848185812, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678305822848185812, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6981005416767380961, guid: a81380bb0fd970f4e85c2407b974e77c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.9999999
@@ -2768,3 +2882,4 @@ SceneRoots:
   - {fileID: 1710395174}
   - {fileID: 1996150281}
   - {fileID: 1188386560}
+  - {fileID: 92059600}
