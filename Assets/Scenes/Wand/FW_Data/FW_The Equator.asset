@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_The Equator
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: ec529349ce036d5479144d6c80774b39, type: 3}
+  title: The Equators
+  description: "Die \u201ESon of Stiff\u201C-Tour am 14. November\n1980 im SO36 war
+    Zensor als Konzertmotor:\nbritischer Label-Wahnsinn, New Wave, Pub-Rock,\nReggae
+    und West-Berliner Nachtstrom in einem\neinzigen Rockmarathon."
+  hasExtraInfo: 1
+  extraInfoTitle: 
+  extraInfoContent: "Das auf dem Poster genannte Datum ist Freitag, 14.\nNovember
+    1980 \u2014 nicht 1990. Zensor Concerts pr\xE4sentierte\ndie \u201ESon of Stiff\u201C-Tour
+    im SO36, Oranienstra\xDFe 190, Beginn\n21 Uhr, Vorverkauf 14 DM, Abendkasse 16
+    DM. Auf der B\xFChne\nstanden Any Trouble, Dirty Looks, The Equators, Tenpole
+    Tudor\nund Joe \u201CKing\u201D Carrasco. Die zeitgen\xF6ssische Presse beschrieb\nden
+    Abend als Rockmarathon und stellte die Tour als Nachwuchs-Showcase\ndes britischen
+    Independent-Labels Stiff Records vor, das durch\nK\xFCnstler wie Ian Dury, Wreckless
+    Eric und Elvis Costello bekannt\ngeworden war. F\xFCr Zensor war dieser Abend
+    wichtig, weil er\ngenau Burkhardt Seilers offenen Geschmack zeigte: nicht nur
+    Punk,\nnicht nur New Wave, sondern auch Pop-Schr\xE4gheit, Pub-Rock-Energie\nund
+    mit The Equators eine klare Reggae-Verbindung \u2014 passend\nzu Burkhardts gro\xDFer
+    Liebe zu Reggae. Hier wurde West-Berlin direkt\nan den britischen Independent-Kreislauf
+    angeschlossen:\nein importierter Label-Abend, aber mit Zensor-Handschrift.\r\n"
+  extraInfoImage: {fileID: 0}

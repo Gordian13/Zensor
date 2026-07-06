@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_BS1
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: 16bf29313f1777b4fafd54e13f2c4c67, type: 3}
+  title: Burkhardt Seiler
+  description: "Der Mann hinter dem Namen \"Zensor\": Burkhardt Seiler (1953\u20132023)
+    \ner\xF6ffnete den Laden im Fr\xFChjahr 1979 gemeinsam mit Tina Fiedler in \nder
+    Belziger Stra\xDFe. Seinen Spitznamen bekam er, weil er fehlende \nPlatten im
+    Sortiment scherzhaft als \"zensiert\" bezeichnete."
+  hasExtraInfo: 1
+  extraInfoTitle: "Vom Schallplattenh\xE4ndler zum Labelgr\xFCnder"
+  extraInfoContent: "1978 reiste der junge Berliner Punk-Fan nach London, um dort
+    nach \r\nneuen Sounds zu suchen. Auf dieser Reise lernte er Geoff Travis \r\nkennen,
+    den Betreiber des Plattenladens Rough Trade, und wurde \r\neiner seiner ersten
+    Exportkunden. Bald verkaufte Seiler die \r\nmitgebrachten Platten auf Konzerten,
+    Flohm\xE4rkten und im privaten \r\nKreis. War eine gesuchte Platte nicht in seinem
+    Angebot vorhanden, \r\nerkl\xE4rte er das scherzhaft damit, sie sei \"zensiert\"
+    \u2013 daher der \r\nSpitzname \"Zensor\".\r\n\r\nIm Fr\xFChjahr 1979 er\xF6ffnete
+    der damals 25-J\xE4hrige zusammen mit \r\nTina Fiedler den Laden in der Belziger
+    Stra\xDFe, zun\xE4chst im \r\nHinterzimmer der Rockabilly-Boutique \"Blue Moon\"
+    in Sch\xF6neberg. \r\nDas Sortiment reichte von Punk \xFCber New Wave und Reggae
+    bis hin \r\nzu Free Jazz und etwas Klassik.\r\n\r\nGemeinsam mit dem Sounds-Journalisten
+    Hans Keller pr\xE4gte Seiler \r\nden Begriff \"Neue Deutsche Welle\". Die erste
+    Ver\xF6ffentlichung des \r\ngleichnamigen Labels war 1981 die LP \"Funeral In
+    Berlin\" der \r\nenglischen Gruppe Throbbing Gristle."
+  extraInfoImage: {fileID: 0}

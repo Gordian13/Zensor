@@ -38,6 +38,8 @@ public class FotowandUI : MonoBehaviour
     [Header("Close Button")]
     public Button closeButton;
 
+    public bool IsOpen => panel != null && panel.activeSelf;
+
     // -- Unity lifecycle --
     private void Awake()
     {

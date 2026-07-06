@@ -18,6 +18,8 @@ namespace Core.FotowandSelect
         [SerializeField] private SpotManager spotManager;
         [SerializeField] private CameraSpot owningSpot;
 
+        private bool wasUiOpen;
+
         private void Awake()
         {
             if (targetCamera == null)
@@ -35,6 +37,11 @@ namespace Core.FotowandSelect
             if (!IsOwningSpotActive())
                 return;
 
+            HandleUiStateChange();
+
+            if (fotowandUI != null && fotowandUI.IsOpen)
+                return;
+
             Mouse mouse = Mouse.current;
             if (mouse == null || !mouse.leftButton.wasPressedThisFrame)
                 return;
@@ -44,10 +51,21 @@ namespace Core.FotowandSelect
                 fotowandUI.Open(hit.GetData());
         }
 
+        private void HandleUiStateChange()
+        {
+            if (fotowandUI == null || owningSpot == null)
+                return;
+
+            bool isUiOpenNow = fotowandUI.IsOpen;
+            if (isUiOpenNow == wasUiOpen)
+                return;
+
+            wasUiOpen = isUiOpenNow;
+            owningSpot.SetAllowRightClickLook(!isUiOpenNow);
+        }
+
         private IFotowand GetFotowandUnderCursor()
         {
-            // Hier nochmal prüfen (nicht nur Awake), da Camera.main
-            // Konnte in Awake aufgrund von Ladezeiten zwischen Szenen nicht aufgelöst werden.
             if (targetCamera == null)
                 targetCamera = Camera.main;
 
@@ -59,7 +77,16 @@ namespace Core.FotowandSelect
             if (!Physics.Raycast(ray, out RaycastHit hitInfo, rayDistance, fotowandLayer))
                 return null;
 
-            return hitInfo.collider.GetComponentInParent<IFotowand>();
+            IFotowand hit = hitInfo.collider.GetComponentInParent<IFotowand>();
+
+           
+            if (hit is MonoBehaviour hitBehaviour && owningSpot != null)
+            {
+                if (!hitBehaviour.transform.IsChildOf(owningSpot.transform))
+                    return null;
+            }
+
+            return hit;
         }
 
         private bool IsOwningSpotActive()
