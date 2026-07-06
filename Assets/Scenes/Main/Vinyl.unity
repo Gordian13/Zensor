@@ -1251,6 +1251,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecordButton
   buttonType: 1
   controller: {fileID: 1262899054}
+  leftLight: {fileID: 3577852678313599546}
+  rightLight: {fileID: 6829458528488167781}
 --- !u!65 &84302848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5322,6 +5324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecordButton
   buttonType: 0
   controller: {fileID: 1262899054}
+  leftLight: {fileID: 0}
+  rightLight: {fileID: 0}
 --- !u!65 &774766225
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12640,6 +12644,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecordButton
   buttonType: 2
   controller: {fileID: 1262899054}
+  leftLight: {fileID: 3577852678313599546}
+  rightLight: {fileID: 6829458528488167781}
 --- !u!65 &1706407575
 BoxCollider:
   m_ObjectHideFlags: 0

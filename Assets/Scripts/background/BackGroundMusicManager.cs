@@ -37,8 +37,8 @@ namespace background
 
         void Update()
         {
-            Debug.Log(stopping);
-            Debug.Log(targetedBoxes.Count);
+            //Debug.Log(stopping);
+            //Debug.Log(targetedBoxes.Count);
             if (targetedBoxes.Count == 0) return; 
 
             if (stopping)
