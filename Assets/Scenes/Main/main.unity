@@ -887,6 +887,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 339527552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &842677977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4930216143178475068, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+  m_PrefabInstance: {fileID: 1188386560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &842677980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842677977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
+  transitionDuration: 1
+  startGrayscale: 1
+  includeChildRenderers: 1
+  includeInactiveChildren: 1
+  stayColored: 0
 --- !u!1 &846747108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,7 +1501,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4930216143178475068, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 842677980}
   m_SourcePrefab: {fileID: 100100000, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
 --- !u!1 &1246787163
 GameObject:
