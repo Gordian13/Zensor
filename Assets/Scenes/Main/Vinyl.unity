@@ -10565,6 +10565,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vinyl7InchesForPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: ace94385fc4377b4e97d2227b4b1d1cd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.10799975
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: ace94385fc4377b4e97d2227b4b1d1cd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.123000465
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: ace94385fc4377b4e97d2227b4b1d1cd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.43979192
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: ace94385fc4377b4e97d2227b4b1d1cd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5536994
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: ace94385fc4377b4e97d2227b4b1d1cd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5536995
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: ace94385fc4377b4e97d2227b4b1d1cd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.43979192
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14911,6 +14935,30 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
       propertyPath: m_Name
       value: Vinyl12IncheForPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.057000116
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0049994467
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.47549424
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5233596
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5233596
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184960119004496200, guid: 0795ea27cc86ce0419e3a64c6062c4e5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.47549424
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
