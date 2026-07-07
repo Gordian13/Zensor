@@ -18,7 +18,11 @@ namespace Core.FotowandSelect
         [SerializeField] private SpotManager spotManager;
         [SerializeField] private CameraSpot owningSpot;
 
+        [Header("Global Navigation Lock")]
+        [SerializeField] private SpotInputRaycaster spotInputRaycaster;
+
         private bool wasUiOpen;
+        private IFotowand hoveredFotowand;
 
         private void Awake()
         {
@@ -30,25 +34,56 @@ namespace Core.FotowandSelect
 
             if (owningSpot == null)
                 owningSpot = GetComponentInParent<CameraSpot>();
+
+            if (spotInputRaycaster == null)
+                spotInputRaycaster = FindFirstObjectByType<SpotInputRaycaster>();
         }
 
         private void Update()
         {
             if (!IsOwningSpotActive())
+            {
+                ClearHover();
                 return;
+            }
 
             HandleUiStateChange();
 
             if (fotowandUI != null && fotowandUI.IsOpen)
+            {
+                ClearHover();
                 return;
+            }
+
+            UpdateHover();
 
             Mouse mouse = Mouse.current;
             if (mouse == null || !mouse.leftButton.wasPressedThisFrame)
                 return;
 
-            IFotowand hit = GetFotowandUnderCursor();
-            if (hit != null)
-                fotowandUI.Open(hit.GetData());
+            if (hoveredFotowand != null)
+                fotowandUI.Open(hoveredFotowand.GetData());
+        }
+
+        private void UpdateHover()
+        {
+            IFotowand hitFotowand = GetFotowandUnderCursor();
+
+            if (hitFotowand == hoveredFotowand)
+                return;
+
+            hoveredFotowand?.SetHighlight(false);
+            hoveredFotowand = hitFotowand;
+            hoveredFotowand?.SetHighlight(true);
+        }
+
+        private void ClearHover()
+        {
+            if (hoveredFotowand == null)
+                return;
+
+            hoveredFotowand.SetHighlight(false);
+            hoveredFotowand = null;
         }
 
         private void HandleUiStateChange()
@@ -62,6 +97,9 @@ namespace Core.FotowandSelect
 
             wasUiOpen = isUiOpenNow;
             owningSpot.SetAllowRightClickLook(!isUiOpenNow);
+
+            if (spotInputRaycaster != null)
+                spotInputRaycaster.enabled = !isUiOpenNow;
         }
 
         private IFotowand GetFotowandUnderCursor()
@@ -79,7 +117,6 @@ namespace Core.FotowandSelect
 
             IFotowand hit = hitInfo.collider.GetComponentInParent<IFotowand>();
 
-           
             if (hit is MonoBehaviour hitBehaviour && owningSpot != null)
             {
                 if (!hitBehaviour.transform.IsChildOf(owningSpot.transform))

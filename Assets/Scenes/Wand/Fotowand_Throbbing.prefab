@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2251792128283610495}
   - component: {fileID: 8012614522744911019}
   - component: {fileID: 5642939462780450120}
-  - component: {fileID: 4861025685443169330}
   - component: {fileID: 1973593970063806163}
   - component: {fileID: 3580737004562128141}
   m_Layer: 0
@@ -97,23 +96,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4861025685443169330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3857353155893980221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac61bc7129ac51b4bad5badf0a8dcef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FotowandInteractable
-  data: {fileID: 11400000, guid: 6bb24f00dc2fd2343840759cc73b9a48, type: 2}
-  ui: {fileID: 0}
-  interactKey: 101
-  interactDistance: 12
-  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!65 &1973593970063806163
 BoxCollider:
   m_ObjectHideFlags: 0

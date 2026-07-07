@@ -3,11 +3,25 @@ using UnityEngine;
 public class FotowandInteractable : MonoBehaviour, IFotowand
 {
     [Header("Data")]
-    [Tooltip("The ScriptableObject containing this wall's photo and info")]
     public FotowandData data;
+
+    [Header("Highlight")]
+    [Tooltip("Child object with the yellow border frame, shown on hover")]
+    [SerializeField] private GameObject highlightBorder;
 
     public FotowandData GetData() => data;
     public Transform GetSelectionTransform() => transform;
+
+    private void Awake()
+    {
+        SetHighlight(false);
+    }
+
+    public void SetHighlight(bool isHighlighted)
+    {
+        if (highlightBorder != null)
+            highlightBorder.SetActive(isHighlighted);
+    }
 }
 
 

@@ -1,5 +1,6 @@
 using Core.VinylSelect;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Core.camera
@@ -13,6 +14,7 @@ namespace Core.camera
         [SerializeField] private VinylSelectController vinylSelectController;
         [SerializeField] private LayerMask spotLayer = ~0;
         [SerializeField] private float rayDistance = 100f;
+        [SerializeField] private FotowandUI fotowandUI;
 
         private SpotNavigationTrigger currentHoveredTrigger;
 
@@ -33,6 +35,17 @@ namespace Core.camera
 
         private void Update()
         {
+            // https://discussions.unity.com/t/how-to-stop-raycast-by-ui/915538/14
+
+            if (IsPointerOverUI())
+            {
+                ClearHover();
+                return;
+            }
+
+            if (GlobalInteractionState.Instance.IsInteractionBlocked)
+                return;
+
             if (transitionManager != null && transitionManager.IsTransitioning)
                 return;
 
@@ -45,6 +58,12 @@ namespace Core.camera
                 vinylSelectController = FindFirstObjectByType<VinylSelectController>(FindObjectsInactive.Include);
 
             if (vinylSelectController != null && IsVinylPlayerState(vinylSelectController.CurrentVinylState))
+                return;
+
+            if (fotowandUI == null)
+                fotowandUI = FindFirstObjectByType<FotowandUI>();
+
+            if (fotowandUI != null && fotowandUI.IsOpen)
                 return;
 
             UpdateHover();
@@ -147,5 +166,23 @@ namespace Core.camera
             return state == VinylState.vinylPlayer ||
                    state == VinylState.VinylPlayerInfoOpen;
         }
+
+
+        private void ClearHover()
+        {
+            if (currentHoveredTrigger == null)
+                return;
+
+            SetHoveredReveal(false);
+            currentHoveredTrigger = null;
+        }
+
+        private static bool IsPointerOverUI()
+        {
+            return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        }
     }
+
+    
+
 }
