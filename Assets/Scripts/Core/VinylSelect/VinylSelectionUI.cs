@@ -27,8 +27,6 @@ public class VinylSelectionUI : MonoBehaviour
     [SerializeField] private string pullRecordOutHint = "Linke Maustaste + Ziehen -> Platte herausziehen";
     [SerializeField] private string putRecordBackHint = "Linke Maustaste + Ziehen -> Platte zurücklegen";
     [SerializeField] private string rotateHint = "Rechte Maustaste halten + Maus bewegen -> Cover oder Platte drehen";
-    [SerializeField] private string playerTrackHint = "Weiter / Zurück -> Titel wechseln";
-    [SerializeField] private string playerInfoHint = "Info -> Details anzeigen | Zurück -> zur Plattenauswahl";
 
     /**
      * Connects the controller, info panel, and buttons when the UI is created by the editor setup tool.
@@ -162,28 +160,12 @@ public class VinylSelectionUI : MonoBehaviour
                                 state == VinylState.DraggingVinylOut;
         bool canPutRecordBack = state == VinylState.VinylDraggedOutFocused ||
                                 state == VinylState.DraggingVinylIn;
-        bool isInPlayer = state == VinylState.vinylPlayer;
-        bool shouldShowGuidance = canPullRecordOut || canPutRecordBack || isInPlayer;
+        bool shouldShowGuidance = canPullRecordOut || canPutRecordBack;
 
         SetVisible(guidanceRoot, shouldShowGuidance);
 
         if (!shouldShowGuidance)
         {
-            return;
-        }
-
-        if (isInPlayer)
-        {
-            if (primaryHintText != null)
-            {
-                primaryHintText.text = playerTrackHint;
-            }
-
-            if (secondaryHintText != null)
-            {
-                secondaryHintText.text = playerInfoHint;
-            }
-
             return;
         }
 
