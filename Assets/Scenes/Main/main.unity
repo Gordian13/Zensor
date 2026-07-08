@@ -149,9 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::background.BackGroundMusicManager
   songs:
-  - {fileID: 8300000, guid: 7b6ef22b2f300f64abed5cd51977e6d6, type: 3}
-  - {fileID: 8300000, guid: eed4a5ce624221044b0ac50bd7baf341, type: 3}
-  - {fileID: 8300000, guid: 9e056acf4d268944b9a99d5d6c43197d, type: 3}
+  - {fileID: 8300000, guid: a1962ada54a47ec4897378a47e1c84ff, type: 3}
   fadeSpeed: 2
   volume: 0.1
 --- !u!4 &92059600
@@ -1397,7 +1395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1614593783702109698, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000013659
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1614593783702109698, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1405,7 +1403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1614593783702109698, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0054639
+      value: -0.574
       objectReference: {fileID: 0}
     - target: {fileID: 4386106217530650124, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1418,6 +1416,38 @@ PrefabInstance:
     - target: {fileID: 4386106217530650124, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.0000017318205
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389119003126099075, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389119003126099075, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565289898012550623, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678305822848185812, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678305822848185812, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6981005416767380961, guid: 55294bd98975ab94c8f8e2134ec04def, type: 3}
       propertyPath: m_LocalScale.x
@@ -2333,6 +2363,9 @@ MonoBehaviour:
   spotLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  wallBlockLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
   rayDistance: 100
   fotowandUI: {fileID: 0}
 --- !u!1001 &1700305582
@@ -2773,6 +2806,118 @@ Transform:
   m_Children: []
   m_Father: {fileID: 339527552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2076169318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2076169320}
+  - component: {fileID: 2076169319}
+  m_Layer: 0
+  m_Name: Spline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2076169319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076169318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineContainer
+  m_Spline:
+    m_EditModeType: 1
+    m_Knots: []
+    m_MetaData: []
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  m_Splines:
+  - m_EditModeType: 1
+    m_Knots:
+    - Position:
+        x: 0
+        y: 0
+        z: 0
+      TangentIn:
+        x: -0
+        y: -0
+        z: -0.1
+      TangentOut:
+        x: 0
+        y: 0
+        z: 0.1
+      Rotation:
+        value:
+          x: 7.850463e-18
+          y: -0.70710677
+          z: -7.850463e-18
+          w: 0.70710677
+    - Position:
+        x: -1
+        y: 0
+        z: 0
+      TangentIn:
+        x: -0
+        y: -0
+        z: -0.1
+      TangentOut:
+        x: 0
+        y: 0
+        z: 0.1
+      Rotation:
+        value:
+          x: 7.850463e-18
+          y: -0.70710677
+          z: -7.850463e-18
+          w: 0.70710677
+    m_MetaData:
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  m_Knots:
+    m_KnotsLink: []
+--- !u!4 &2076169320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076169318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11, y: 1, z: 19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2135236719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,7 +2950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core.camera.SpotManager
   _startSpot: {fileID: 0}
-  startSpotId: vinyl
+  startSpotId: start
   registry: {fileID: 2135236722}
 --- !u!4 &2135236721
 Transform:
@@ -2871,3 +3016,4 @@ SceneRoots:
   - {fileID: 92059600}
   - {fileID: 1700305582}
   - {fileID: 126830734}
+  - {fileID: 2076169320}

@@ -13,6 +13,7 @@ namespace Core.camera
         [SerializeField] private CameraTransitionManager transitionManager;
         [SerializeField] private VinylSelectController vinylSelectController;
         [SerializeField] private LayerMask spotLayer = ~0;
+        [SerializeField] private LayerMask wallBlockLayer = ~0;
         [SerializeField] private float rayDistance = 100f;
         [SerializeField] private FotowandUI fotowandUI;
 
@@ -144,7 +145,9 @@ namespace Core.camera
 
             Ray ray = targetCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            if (!Physics.Raycast(ray, out RaycastHit hit, rayDistance, spotLayer))
+            // Use wallBlockLayer (all layers by default) so walls block the ray.
+            // Only return a trigger if the very first hit object is a spot trigger.
+            if (!Physics.Raycast(ray, out RaycastHit hit, rayDistance, wallBlockLayer))
                 return null;
 
             return hit.collider.GetComponentInParent<SpotNavigationTrigger>();

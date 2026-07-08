@@ -12979,14 +12979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core.camera.SpotNavigationTrigger
   targetSpot: {fileID: 1733630016}
-  routes:
-  - fromSpotId: kitchen
-    wayCamerasIds:
-    - kitchenCornerCam
-  - fromSpotId: shop
-    wayCamerasIds: []
-  - fromSpotId: player
-    wayCamerasIds: []
+  routes: []
 --- !u!4 &1748240029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1463818706300653924, guid: ace94385fc4377b4e97d2227b4b1d1cd, type: 3}
@@ -15584,7 +15577,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   blockingLayer:
     serializedVersion: 2
-    m_Bits: 59
+    m_Bits: 51
   rayDistance: 100
   hoverOffset: {x: 0, y: 0.25, z: 0}
   moveSpeed: 8
