@@ -17,17 +17,17 @@ MonoBehaviour:
   moods:
   - mood: 0
     moveSpeed: 2
-    waitAtPointSeconds: 4
+    waitAtPointSeconds: 12
     speechBubbleText: MOOD NORMAL
     gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   - mood: 1
     moveSpeed: 2
-    waitAtPointSeconds: 4
+    waitAtPointSeconds: 12
     speechBubbleText: MOOD MOODY
     gizmoColor: {r: 1, g: 0.47529262, b: 0, a: 0}
   - mood: 2
     moveSpeed: 2
-    waitAtPointSeconds: 4
+    waitAtPointSeconds: 12
     speechBubbleText: MOOD RAGED
     gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   reactionRules:
