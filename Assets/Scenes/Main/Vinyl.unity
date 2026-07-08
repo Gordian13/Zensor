@@ -15577,7 +15577,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   blockingLayer:
     serializedVersion: 2
-    m_Bits: 51
+    m_Bits: 59
   rayDistance: 100
   hoverOffset: {x: 0, y: 0.25, z: 0}
   moveSpeed: 8
