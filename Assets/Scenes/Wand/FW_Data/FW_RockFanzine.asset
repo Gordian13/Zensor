@@ -15,19 +15,19 @@ MonoBehaviour:
   photo: {fileID: 21300000, guid: b275862746f4644439dc8d5b9b029e36, type: 3}
   title: "Rockmusik \u2013 Fanzine Nr. 7, M\xE4rz 1980"
   description: "Das Titelblatt des Fanzines \u201ERockmusik\u201C (Ausgabe Nr. 7,
-    M\xE4rz\n1980) \u2013 ein West-Berliner Underground-Magazin, das bewusst\nwie
-    ein Supermarkt-Discountprospekt gestaltet war und\nSchallplatten sowie Neuerscheinungen
-    wie Lebensmittel\nSonderangebote mit Preisen in D-Mark auflistete."
+    M\xE4rz 1980) \u2013 ein West-Berliner Underground-Magazin, das bewusst wie ein
+    Supermarkt-Discountprospekt gestaltet war und\nSchallplatten sowie Neuerscheinungen
+    wie Lebensmittel Sonderangebote mit Preisen in D-Mark auflistete."
   hasExtraInfo: 1
   extraInfoTitle: Fanzines and Underground Media
-  extraInfoContent: "Vor der \xC4ra des Internets bildeten Fanzines das Lebenselixier\nder
-    Underground-Musikszene. In West-Berlin vernetzten\nPublikationen wie *Rockmusik*
-    Fans, Bands und Gesch\xE4fte in\neiner Stadt, die vom \xFCbrigen Deutschland
-    abgeschnitten war.\nDas markante Design dieser Ausgabe \u2013 das das Layout
-    billiger\nSupermarktwerbung imitierte, inklusive fingierter Preise und\n\u201ESonderangebote\u201C
-    \u2013 war eine scharfe Satire: Es nahm die\nKonsumkultur aufs Korn und verbreitete
-    zugleich echte\nNeuigkeiten aus der Musikwelt. Diese verspielte, fotokopierte\nDIY-\xC4sthetik
-    war an sich schon ein Statement; Gesch\xE4fte wie\n*Zensor* f\xFChrten und vertrieben
-    solche Zines und entwickelten\nsich dadurch ebenso sehr zu Medienknotenpunkten
+  extraInfoContent: "Vor der \xC4ra des Internets bildeten Fanzines das Lebenselixier
+    der Underground-Musikszene. In West-Berlin vernetzten Publikationen wie *Rockmusik*
+    Fans, Bands und Gesch\xE4fte in einer Stadt, die vom \xFCbrigen Deutschland abgeschnitten
+    war. Das markante Design dieser Ausgabe \u2013 das das Layout billiger Supermarktwerbung
+    imitierte, inklusive fingierter Preise und \u201ESonderangebote\u201C \u2013
+    war eine scharfe Satire: Es nahm die Konsumkultur aufs Korn und verbreitete zugleich
+    echte Neuigkeiten aus der Musikwelt. Diese verspielte, fotokopierte DIY-\xC4sthetik
+    war an sich schon ein Statement; Gesch\xE4fte wie *Zensor* f\xFChrten und vertrieben
+    solche Zines und entwickelten sich dadurch ebenso sehr zu Medienknotenpunkten
     wie zu\nPlattenl\xE4den."
   extraInfoImage: {fileID: 0}

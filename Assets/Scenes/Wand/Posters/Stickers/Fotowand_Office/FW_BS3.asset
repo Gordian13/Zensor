@@ -14,16 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FotowandData
   photo: {fileID: 21300000, guid: 182b2126e6cd4404aa63f9bcff3cbf3f, type: 3}
   title: "Im B\xFCro von Zensor"
-  description: "Der Arbeitsalltag hinter dem Laden: Telefone klingeln, Poster \r\nstapeln
-    sich, und mittendrin das Namensschild \"Zensor\" \u2013 \r\nZentrale des Labels
-    und Vertriebs, von dem aus Burkhardt Seiler \r\nund sein Team die Berliner Undergroundszene
+  description: "Der Arbeitsalltag hinter dem Laden: Telefone klingeln, Poster stapeln
+    sich, und mittendrin das Namensschild \"Zensor\" \u2013 Zentrale des Labels und
+    Vertriebs, von dem aus Burkhardt Seiler und sein Team die Berliner Undergroundszene
     mitorganisierten."
   hasExtraInfo: 1
   extraInfoTitle: Mehr als nur ein Plattenladen
   extraInfoContent: "Neben dem Ladengesch\xE4ft in der Belziger Stra\xDFe betrieb
-    Zensor \r\nauch Vertrieb und Versand f\xFCr zahlreiche unabh\xE4ngige Labels.
-    \r\nKontakte zu Hamburg (Zick Zack), Hannover (No Fun) und anderen \r\nBerliner
-    Labels entstanden genau hier \u2013 im B\xFCroalltag zwischen \r\nTelefonaten,
-    Schallplattenstapeln und Konzertplakaten wie dem \r\nhier sichtbaren \"American
-    Rhythm\"."
+    Zensor auch Vertrieb und Versand f\xFCr zahlreiche unabh\xE4ngige Labels. Kontakte
+    zu Hamburg (Zick Zack), Hannover (No Fun) und anderen Berliner Labels entstanden
+    genau hier \u2013 im B\xFCroalltag zwischen Telefonaten, Schallplattenstapeln
+    und Konzertplakaten wie dem hier sichtbaren \"American Rhythm\"."
   extraInfoImage: {fileID: 0}

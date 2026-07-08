@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FotowandData
   photo: {fileID: 21300000, guid: 4b3b3fc0b8cd14841a9a66a7aa6057eb, type: 3}
   title: Blue Moon
-  description: "Blue Moon war der vordere Raum, Zensor der Hinterraum:\nIn der Belziger
-    Stra\xDFe 23 trafen Doc Martens,\nRockabilly-Jacken, Szene-Humor und Burkhardt
-    Seilers\nPlattenkosmos direkt Wand an Wand aufeinander."
+  description: "Blue Moon war der vordere Raum, Zensor der Hinterraum: In der Belziger
+    Stra\xDFe 23 trafen Doc Martens, Rockabilly-Jacken, Szene-Humor und Burkhardt
+    Seilers Plattenkosmos direkt Wand an Wand aufeinander."
   hasExtraInfo: 1
   extraInfoTitle: 
-  extraInfoContent: "Der Blue Moon von Armin Andersch war Ende der 1970er\nund Anfang
-    der 1980er Jahre kein normaler Schuh- oder\nModeladen, sondern ein West-Berliner
-    Szenebiotop. Andersch\nwar einer der ersten, der Doc Martens Boots nach Berlin
-    brachte,\nund pr\xE4gte mit Schuhen, Rockabilly-Mode, Vintage-St\xFCcken,\nJacken,
-    Sammelsurium und trockenem Humor den Stil einer\nalternativen Kundschaft aus
-    Musiker:innen, Punks, Rockabillys\nund Nachtschw\xE4rmern. Am Anfang stand der
-    Laden in der Belziger\nStra\xDFe 23 in Sch\xF6neberg \u2014 jener Adresse, die
-    auch f\xFCr Zensor\nzentral wurde. Im Hinterraum von Blue Moon konnte Burkhardt\nSeiler
-    seinen Plattenladen Zensor aufbauen: vorne Kleidung,\nBoots, Jukebox-Atmosph\xE4re
-    und Szene-Objekte; hinten Importplatten,\nReggae, Punk, Electronic Music, Mailorder
-    und Underground-Gespr\xE4che.\nDie Zensor XR-Rekonstruktion dieses Raums zeigt
-    deshalb nicht\nnur einen Laden, sondern eine Verdichtung von West-Berliner\nKultur:
-    Mode, Musik, Haltung und Freundschaft als gemeinsamer Raum."
+  extraInfoContent: "Der Blue Moon von Armin Andersch war Ende der 1970er und Anfang
+    der 1980er Jahre kein normaler Schuh- oder Modeladen, sondern ein West-Berliner
+    Szenebiotop. Andersch war einer der ersten, der Doc Martens Boots nach Berlin
+    brachte, und pr\xE4gte mit Schuhen, Rockabilly-Mode, Vintage-St\xFCcken, Jacken,
+    Sammelsurium und trockenem Humor den Stil einer alternativen Kundschaft aus Musiker:innen,
+    Punks, Rockabillys und Nachtschw\xE4rmern. Am Anfang stand der Laden in der Belziger
+    Stra\xDFe 23 in Sch\xF6neberg \u2014 jener Adresse, die auch f\xFCr Zensor zentral
+    wurde. Im Hinterraum von Blue Moon konnte Burkhardt Seiler seinen Plattenladen
+    Zensor aufbauen: vorne Kleidung, Boots, Jukebox-Atmosph\xE4re und Szene-Objekte;
+    hinten Importplatten, Reggae, Punk, Electronic Music, Mailorder und Underground-Gespr\xE4che.
+    Die Zensor XR-Rekonstruktion dieses Raums zeigt deshalb nicht nur einen Laden,
+    sondern eine Verdichtung von West-Berliner Kultur: Mode, Musik, Haltung und Freundschaft
+    als gemeinsamer Raum."
   extraInfoImage: {fileID: 0}

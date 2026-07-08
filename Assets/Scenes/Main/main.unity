@@ -2331,6 +2331,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   rayDistance: 100
+  fotowandUI: {fileID: 0}
 --- !u!1001 &1700305582
 PrefabInstance:
   m_ObjectHideFlags: 0

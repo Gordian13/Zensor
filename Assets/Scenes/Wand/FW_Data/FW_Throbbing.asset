@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FotowandData
   photo: {fileID: 21300000, guid: f9b58ef7c4f2691439f0c07d6f5face9, type: 3}
   title: "Throbbing Gristle \u2013 Band Portrait, 1980"
-  description: "Throbbing Gristle spielten am 7. und 8. November 1980 im SO36\nin
-    West-Berlin \u2014 zwei N\xE4chte industrieller Grenzverschiebung,\nsp\xE4ter
+  description: "Throbbing Gristle spielten am 7. und 8. November 1980 im SO36 in
+    West-Berlin \u2014 zwei N\xE4chte industrieller Grenzverschiebung, sp\xE4ter
     als Live-Vinyl \xFCber Zensor im Berliner Untergrund weitergetragen."
   hasExtraInfo: 1
   extraInfoTitle: Throbbing Gristle
   extraInfoContent: "Am 7. und 8. November 1980 traten Throbbing Gristle im SO36
-    in Kreuzberg auf, einem der\nzentralen Orte des West-Berliner Punk-, New-Wave-
-    und Underground-Netzwerks. Die\nbritische Gruppe um Genesis P-Orridge, Cosey
-    Fanni Tutti, Chris Carter und Peter\n\u201CSleazy\u201D Christopherson galt als
-    eine der pr\xE4genden Kr\xE4fte der fr\xFChen Industrial Music:\nkonfrontativ,
-    elektronisch, performativ, unbequem. In West-Berlin traf dieser Sound auf\neine
-    Stadt, die selbst wie ein Experiment klang \u2014 isoliert, politisch aufgeladen,\nroh
-    und nachts besonders wach. Die Konzerte wurden zu einem wichtigen Moment im\nAustausch
-    zwischen britischem Industrial und der Berliner Avantgarde-Szene. Dass daraus\nsp\xE4ter
-    eine Live-Vinyl-Ver\xF6ffentlichung auf Zensor entstand, machte den Abend nicht
-    nur\nzu einer Erinnerung, sondern zu einem zirkulierenden Dokument: ein St\xFCck
-    SO36,\nein St\xFCck Zensor, ein St\xFCck kalter November 1980 auf Platte.\r\n"
+    in Kreuzberg auf, einem der zentralen Orte des West-Berliner Punk-, New-Wave-
+    und Underground-Netzwerks. Die britische Gruppe um Genesis P-Orridge, Cosey Fanni
+    Tutti, Chris Carter und Peter \u201CSleazy\u201D Christopherson galt als eine
+    der pr\xE4genden Kr\xE4fte der fr\xFChen Industrial Music: konfrontativ, elektronisch,
+    performativ, unbequem. In West-Berlin traf dieser Sound auf eine Stadt, die selbst
+    wie ein Experiment klang \u2014 isoliert, politisch aufgeladen, roh und nachts
+    besonders wach. Die Konzerte wurden zu einem wichtigen Moment im Austausch zwischen
+    britischem Industrial und der Berliner Avantgarde-Szene. Dass daraus sp\xE4ter
+    eine Live-Vinyl Ver\xF6ffentlichung auf Zensor entstand, machte den Abend nicht
+    nur zu einer Erinnerung, sondern zu einem zirkulierenden Dokument: ein St\xFCck
+    SO36, ein St\xFCck Zensor, ein St\xFCck kalter November 1980 auf Platte.\r\n"
   extraInfoImage: {fileID: 21300000, guid: b2abde25ac1fb3341a451eaee570a405, type: 3}
