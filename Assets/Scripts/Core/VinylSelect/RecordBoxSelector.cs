@@ -34,6 +34,7 @@ namespace record
 
         private readonly Dictionary<Transform, Vector3> restPositions = new();
         private Transform hoveredTransform;
+        private bool wasOwningSpotActive = false;
 
         private void Awake()
         {
@@ -61,12 +62,24 @@ namespace record
             if (GlobalInteractionState.Instance != null &&
                 GlobalInteractionState.Instance.IsInteractionBlocked)
                 return;
-            if (!IsOwningSpotActive() ||
-                vinylSelectController == null ||
-                vinylSelectController.CurrentVinylState != VinylState.BrowsingBox)
+
+            bool isOwningSpotActive = IsOwningSpotActive() &&
+                                      vinylSelectController != null &&
+                                      vinylSelectController.CurrentVinylState == VinylState.BrowsingBox;
+
+            if (!isOwningSpotActive)
             {
                 ClearHover(true);
+                wasOwningSpotActive = false;
                 return;
+            }
+
+            // First frame back on this spot: snap all records to their rest positions
+            // so colliders and visuals are in sync before raycasting begins.
+            if (!wasOwningSpotActive)
+            {
+                SnapAllRecordsToRest();
+                wasOwningSpotActive = true;
             }
 
             IVinyl hoveredVinyl = GetVinylUnderCursor(out Transform vinylTransform);
@@ -168,6 +181,18 @@ namespace record
 
             if (hideUIWhenNotHovering)
                 recordInfoUI?.Hide();
+        }
+
+        // Immediately snaps every tracked record to its stored rest position.
+        // Called on the first frame after returning to the vinyl spot so that
+        // colliders and visuals are in sync before raycasting starts.
+        private void SnapAllRecordsToRest()
+        {
+            foreach (KeyValuePair<Transform, Vector3> record in restPositions)
+            {
+                if (record.Key != null)
+                    record.Key.localPosition = record.Value;
+            }
         }
 
         private bool IsOwningSpotActive()
