@@ -455,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.00031826508, y: -0.000084351595}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3542627351927228176
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5692030723321127724}
   m_HandleRect: {fileID: 7821279062507371903}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1222,7 +1222,6 @@ GameObject:
   - component: {fileID: 2777938584579008763}
   - component: {fileID: 838210147121631051}
   - component: {fileID: 7023425903485775027}
-  - component: {fileID: 8888487772011242252}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -1303,29 +1302,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8888487772011242252
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2573580032508357721}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2580766259766507586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,8 +1485,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6128154436071468007}
   m_HandleRect: {fileID: 7095389882559262803}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.9999995
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2663,7 +2639,7 @@ GameObject:
   - component: {fileID: 5531782999689574822}
   m_Layer: 5
   m_Name: NPCDialogueWindow
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3870,7 +3846,7 @@ Transform:
   m_GameObject: {fileID: 6491445695060435060}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.027, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4007,7 +3983,7 @@ GameObject:
   - component: {fileID: 6368223511619672754}
   - component: {fileID: 3326868444909886808}
   m_Layer: 0
-  m_Name: InteractionTrigger
+  m_Name: Interaction_Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4023,7 +3999,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.7, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6981005416767380961}
@@ -4621,6 +4597,7 @@ GameObject:
   - component: {fileID: 3515723466574101576}
   - component: {fileID: 5233928681277537747}
   - component: {fileID: 6636596529686608895}
+  - component: {fileID: 5365674977954371452}
   m_Layer: 0
   m_Name: B_Seiler
   m_TagString: Untagged
@@ -4638,8 +4615,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2777938584579008763}
   - {fileID: 6368223511619672754}
@@ -4688,6 +4665,8 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   stoppingDistance: 0.5
   startPatrollingOnStart: 1
   pickRandomPoints: 1
@@ -4726,7 +4705,7 @@ MonoBehaviour:
   agent: {fileID: 6965068603932430482}
   animator: {fileID: 557816399987040436}
   referenceWalkSpeed: 2
-  animationSpeedMultiplier: 1.28
+  animationSpeedMultiplier: 1.15
 --- !u!114 &6636596529686608895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4741,9 +4720,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCAmbientSpeech
   npc: {fileID: 8816145889897903339}
   playerAnchor: {fileID: 0}
-  triggerDistance: 4
+  triggerDistance: 2
   cooldownSeconds: 12
-  chancePerCheck: 35
+  chancePerCheck: 15
   checkInterval: 1
   ambientLines:
   - "Leg die Platte ruhig auf. Wenn sie dich nicht sofort versteht, gib ihr \u2019ne
@@ -4752,6 +4731,23 @@ MonoBehaviour:
   - Fass die Platte ruhig an. Vinyl will respektiert werden, aber nich angebetet.
   - "Manchmal kam jemand rein und fragte: \u201EHaben Sie was Normales?\u201C Hab
     ick gesagt: \u201EHeute leider geschlossen.\u201C"
+--- !u!114 &5365674977954371452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728081373099745418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
+  transitionDuration: 1
+  startGrayscale: 1
+  includeChildRenderers: 1
+  includeInactiveChildren: 1
+  stayColored: 0
 --- !u!1 &7747899346823914774
 GameObject:
   m_ObjectHideFlags: 0
