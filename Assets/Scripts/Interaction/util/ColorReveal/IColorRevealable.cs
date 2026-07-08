@@ -16,5 +16,6 @@
          * Locks or unlocks the object in its colored state.
          */
         void SetStayColored(bool stayColored);
+
     }
 }

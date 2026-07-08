@@ -1,3 +1,6 @@
+
+
+
 using UnityEngine;
 
 public class FotowandInteractable : MonoBehaviour, IFotowand
@@ -19,6 +22,8 @@ public class FotowandInteractable : MonoBehaviour, IFotowand
 
     public void SetHighlight(bool isHighlighted)
     {
+        Debug.Log($"[{gameObject.name}] SetHighlight({isHighlighted}) called. highlightBorder null? {highlightBorder == null}");
+
         if (highlightBorder != null)
             highlightBorder.SetActive(isHighlighted);
     }
