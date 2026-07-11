@@ -148,6 +148,8 @@ namespace record
             Mouse mouse = Mouse.current;
             if (targetCamera == null || mouse == null)
                 return null;
+            
+            Physics.SyncTransforms();
 
             Ray ray = targetCamera.ScreenPointToRay(mouse.position.ReadValue());
             if (!Physics.Raycast(
