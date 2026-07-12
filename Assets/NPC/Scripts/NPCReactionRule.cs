@@ -42,10 +42,10 @@ public class NPCReactionRule
             return false;
         }
 
-        if(useIntModulus)
+        if(useIntModulus && context.intValue != 0)
         {
             if (useMinimumIntValue &&
-                ((context.intValue % minimumIntValue != 0)))
+                (context.intValue % minimumIntValue != 0))
             {
                 return false;
             }
@@ -57,10 +57,10 @@ public class NPCReactionRule
                 return false;
             }
 
-        if(useFloatModulus)
+        if(useFloatModulus && context.floatValue != 0)
         {
             if (useMinimumFloatValue &&
-                ((context.floatValue % minimumFloatValue != 0)))
+                (context.floatValue % minimumFloatValue != 0))
             {
                 return false;
             }

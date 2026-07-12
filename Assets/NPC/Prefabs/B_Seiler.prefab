@@ -455,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0003628748, y: -0.000006513427}
+  m_AnchoredPosition: {x: -0.0004319934, y: -0.000006513427}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3542627351927228176
@@ -1417,7 +1417,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7095389882559262803}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.9999996
+  m_Size: 0.9999995
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3930,7 +3930,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.7, z: 0.3}
+  m_LocalScale: {x: 0.2, y: 0.7, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6981005416767380961}
@@ -4604,7 +4604,7 @@ MonoBehaviour:
   avoidSamePointTwice: 1
   isInteractable: 1
   doWelcomeInteractionAfterSpawn: 1
-  welcomeDialogueScript: {fileID: 0}
+  welcomeDialogueScript: {fileID: 11400000, guid: be23c8cae9613f84fa33d1228f81094e, type: 2}
   welcomeInteractionDelay: 0.1
   interactionMoveAwayTolerance: 0.25
   interactionDestinationRefreshRate: 0.2
@@ -4639,7 +4639,7 @@ MonoBehaviour:
   agent: {fileID: 6965068603932430482}
   animator: {fileID: 557816399987040436}
   referenceWalkSpeed: 2.5
-  animationSpeedMultiplier: 0.95
+  animationSpeedMultiplier: 0.92
 --- !u!114 &6636596529686608895
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -80,8 +80,9 @@ public class NPCDialogueWindow : MonoBehaviour
         RenderNode(currentNode);
     }
 
-    public void ShowReactionDialogue(string text)
+    public void ShowReactionDialogue(string text, NPCController npc)
     {
+        currentNPC = npc;
         ShowReactionDialogue(text, defaultReactionDuration);
     }
 

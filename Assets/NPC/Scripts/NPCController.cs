@@ -186,7 +186,7 @@ public class NPCController : MonoBehaviour
         Debug.Log($"{NPCName} says: {text}");
 
         if (NPCDialogueWindow.Instance != null)
-            NPCDialogueWindow.Instance.ShowReactionDialogue(text);
+            NPCDialogueWindow.Instance.ShowReactionDialogue(text, this);
         else
             Debug.LogWarning("NPCDialogueWindow.Instance is null.");
     }

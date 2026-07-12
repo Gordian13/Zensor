@@ -44,6 +44,5 @@ MonoBehaviour:
     reactionText: "Sach ma, das waren jetzt 6 Platten! Ick bin keine Bibliothek,
       entweder du kaufst etwas oder du l\xE4sst es bleiben!"
     blockOriginalAction: 0
-  interactions:
-  - {fileID: 0}
+  interactions: []
   defaultDialogueScript: {fileID: 11400000, guid: f74036bc3c79cc044a66fdcc11669898, type: 2}
