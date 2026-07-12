@@ -33,8 +33,10 @@ MonoBehaviour:
   reactionRules:
   - eventType: 8
     requiredObjectId: records_played
+    useIntModulus: 1
     useMinimumIntValue: 1
-    minimumIntValue: 6
+    minimumIntValue: 2
+    useFloatModulus: 0
     useMinimumFloatValue: 0
     minimumFloatValue: 0
     changeMood: 0
