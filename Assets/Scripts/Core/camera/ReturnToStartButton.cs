@@ -53,6 +53,7 @@ namespace Core.camera
             }
 
             transitionManager.PlayRoute(null, startSpotId);
+            
         }
 
         private static bool IsVinylPlayerState(VinylState state)
