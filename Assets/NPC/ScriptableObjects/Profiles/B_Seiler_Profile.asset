@@ -35,7 +35,7 @@ MonoBehaviour:
     requiredObjectId: records_played
     useIntModulus: 1
     useMinimumIntValue: 1
-    minimumIntValue: 2
+    minimumIntValue: 6
     useFloatModulus: 0
     useMinimumFloatValue: 0
     minimumFloatValue: 0
