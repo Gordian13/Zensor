@@ -197,6 +197,9 @@ public class VinylSelectController : MonoBehaviour
             CurrentVinylState != VinylState.VinylPlayerInfoOpen)
             return false;
 
+        if (GlobalInteractionState.Instance.IsInteractionBlocked)
+            return false;
+
         GlobalInteractionState.Instance.UnblockInteractions();
         BackGroundMusicManager.Instance.PlayBackGroundMusic();
         this._spot.SetAllowRightClickLook(true);
