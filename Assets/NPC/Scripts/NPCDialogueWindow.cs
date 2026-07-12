@@ -102,7 +102,7 @@ public class NPCDialogueWindow : MonoBehaviour
 
         root.SetActive(true);
         SetWindowMode(false);
-        PlayTypingAnimation(text);
+        PlayTypingAnimation(FormatNpcText(text));
 
         autoHideRoutine = StartCoroutine(AutoHideAfterSeconds(duration));
     }
@@ -128,7 +128,7 @@ public class NPCDialogueWindow : MonoBehaviour
         currentNode = node;
 
         if (showNpcLine)
-            PlayTypingAnimation(node.npcLine);
+            PlayTypingAnimation(FormatNpcText(node.npcLine));
 
         ClearChoices();
 
@@ -143,7 +143,7 @@ public class NPCDialogueWindow : MonoBehaviour
         ClearChoices();
 
         if (!string.IsNullOrWhiteSpace(choice.npcResponse))
-            PlayTypingAnimation(choice.npcResponse);
+            PlayTypingAnimation(FormatNpcText(choice.npcResponse));
 
         if (choice.endsDialogue)
         {
@@ -173,6 +173,14 @@ public class NPCDialogueWindow : MonoBehaviour
                 Debug.LogWarning($"Dialogue node not found: {choice.nextNodeId}");
             }
         }
+    }
+
+    private string FormatNpcText(string text)
+    {
+        if (currentNPC == null)
+            return text;
+
+        return $"{currentNPC.NPCName}: {text}";
     }
 
     public void CloseConversation()

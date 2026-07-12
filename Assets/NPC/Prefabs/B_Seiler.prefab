@@ -455,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00031826508, y: -0.000084351595}
+  m_AnchoredPosition: {x: -0.00045354597, y: -0.000006513427}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3542627351927228176
@@ -993,7 +993,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 354901369807287124}
-  - component: {fileID: 7128369373803588733}
   - component: {fileID: 7187669351374034689}
   m_Layer: 0
   m_Name: NPC_InputSystem
@@ -1017,23 +1016,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6981005416767380961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7128369373803588733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2401479637594779259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e333bad15e0e754d931763a16238bfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCHoverDetector
-  raycastCamera: {fileID: 0}
-  npcLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxDistance: 100
 --- !u!114 &7187669351374034689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,7 +1187,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5692030723321127724}
   m_HandleRect: {fileID: 7821279062507371903}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1486,7 +1468,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7095389882559262803}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.9999995
+  m_Size: 0.99999946
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4598,6 +4580,7 @@ GameObject:
   - component: {fileID: 5233928681277537747}
   - component: {fileID: 6636596529686608895}
   - component: {fileID: 5365674977954371452}
+  - component: {fileID: 6496812490803407361}
   m_Layer: 0
   m_Name: B_Seiler
   m_TagString: Untagged
@@ -4722,7 +4705,7 @@ MonoBehaviour:
   playerAnchor: {fileID: 0}
   triggerDistance: 2
   cooldownSeconds: 12
-  chancePerCheck: 15
+  chancePerCheck: 30
   checkInterval: 1
   ambientLines:
   - "Leg die Platte ruhig auf. Wenn sie dich nicht sofort versteht, gib ihr \u2019ne
@@ -4748,6 +4731,23 @@ MonoBehaviour:
   includeChildRenderers: 1
   includeInactiveChildren: 1
   stayColored: 0
+--- !u!114 &6496812490803407361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728081373099745418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb41211f9676c834093a5c862ffaa383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCNumericReactionListener
+  npc: {fileID: 8816145889897903339}
+  valueSource: {fileID: 0}
+  sourceId: records_played
+  sourceDisplayName: Played Records
+  evaluateCurrentValueOnEnable: 1
 --- !u!1 &7747899346823914774
 GameObject:
   m_ObjectHideFlags: 0

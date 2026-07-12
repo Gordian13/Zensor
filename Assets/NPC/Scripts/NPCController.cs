@@ -513,16 +513,4 @@ public class NPCController : MonoBehaviour
         FacePosition(lookPosition);
         onArrived?.Invoke();
     }
-
-    private void OnEnable()
-    {
-        if (NPCReactionBroadcaster.Instance != null)
-            NPCReactionBroadcaster.Instance.Register(this);
-    }
-
-    private void OnDisable()
-    {
-        if (NPCReactionBroadcaster.Instance != null)
-            NPCReactionBroadcaster.Instance.Unregister(this);
-    }
 }

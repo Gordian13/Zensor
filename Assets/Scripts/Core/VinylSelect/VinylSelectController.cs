@@ -181,6 +181,8 @@ public class VinylSelectController : MonoBehaviour
     public bool GoToVinylPlayer()
     {
         BackGroundMusicManager.Instance.StopBackGroundMusic();
+        if (GlobalPlayedRecordsCounter.Instance != null)
+            GlobalPlayedRecordsCounter.Instance.IncreaseRecordsPlayed();
         return TryChangeState(VinylState.VinylDraggedOutFocused, VinylState.vinylPlayer);
     }
 

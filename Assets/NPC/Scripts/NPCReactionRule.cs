@@ -33,17 +33,17 @@ public class NPCReactionRule
         if (eventType != context.eventType)
             return false;
 
-        if (!string.IsNullOrWhiteSpace(requiredObjectId))
+        if (!string.IsNullOrWhiteSpace(requiredObjectId) &&
+            requiredObjectId != context.objectId)
         {
-            if (requiredObjectId != context.objectId)
-                return false;
+            return false;
         }
 
-        if (useMinimumIntValue && context.intValue < minimumIntValue)
+        if (useMinimumIntValue &&
+            context.intValue < minimumIntValue)
+        {
             return false;
-
-        if (useMinimumFloatValue && context.floatValue < minimumFloatValue)
-            return false;
+        }
 
         return true;
     }
