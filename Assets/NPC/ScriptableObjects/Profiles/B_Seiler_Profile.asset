@@ -12,34 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16963c36978495e4a9bef4e183a57508, type: 3}
   m_Name: B_Seiler_Profile
   m_EditorClassIdentifier: Assembly-CSharp::NPCProfile
-  npcName: Burkhard Seiler
+  npcName: Burkhardt Seiler
   hoverColor: {r: 1, g: 1, b: 0, a: 0.44705883}
   moods:
   - mood: 0
-    moveSpeed: 2
+    moveSpeed: 2.5
     waitAtPointSeconds: 12
     speechBubbleText: MOOD NORMAL
     gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   - mood: 1
-    moveSpeed: 2
+    moveSpeed: 2.5
     waitAtPointSeconds: 12
     speechBubbleText: MOOD MOODY
     gizmoColor: {r: 1, g: 0.47529262, b: 0, a: 0}
   - mood: 2
-    moveSpeed: 2
+    moveSpeed: 2.5
     waitAtPointSeconds: 12
     speechBubbleText: MOOD RAGED
     gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   reactionRules:
-  - eventType: 4
-    requiredObjectId: 
+  - eventType: 8
+    requiredObjectId: records_played
     useMinimumIntValue: 1
-    minimumIntValue: 10
+    minimumIntValue: 6
     useMinimumFloatValue: 0
     minimumFloatValue: 0
-    changeMood: 1
+    changeMood: 0
     resultingMood: 2
-    reactionText: "Entweder du kaufst was oder du l\xE4sst es bleiben."
+    reactionText: "Sach ma, das waren jetzt 6 Platten! Ick bin keine Bibliothek,
+      entweder du kaufst etwas oder du l\xE4sst es bleiben!"
     blockOriginalAction: 0
   interactions:
   - {fileID: 0}
