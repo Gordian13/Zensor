@@ -41,6 +41,9 @@ public class NPCController : MonoBehaviour
     [Header("Interactions")]
     [SerializeField] private bool isInteractable = true;
     public bool IsInteractable => isInteractable;
+    [SerializeField] private bool doWelcomeInteractionAfterSpawn;
+    [SerializeField] private NPCDialogueScript welcomeDialogueScript;
+    [SerializeField] private float welcomeInteractionDelay = 0.1f;
 
     [SerializeField] private float interactionMoveAwayTolerance = 1f;
     [SerializeField] private float interactionDestinationRefreshRate = 0.15f;
@@ -91,10 +94,27 @@ public class NPCController : MonoBehaviour
     }
 
     // Starts automatic patrol if enabled.
-    private void Start()
+    private IEnumerator Start()
     {
+        if (doWelcomeInteractionAfterSpawn)
+        {
+            yield return new WaitForSeconds(welcomeInteractionDelay);
+
+            if (NPCInteractionHandler.Instance != null)
+            {
+                NPCInteractionHandler.Instance.StartInteraction(
+                    this,
+                    welcomeDialogueScript
+                );
+
+                yield return new WaitUntil(() => !isInteracting);
+            }
+        }
+
         if (startPatrollingOnStart)
+        {
             StartPatrol();
+        }
     }
 
     // Runs in the editor when Inspector values change.

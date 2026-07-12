@@ -120,6 +120,21 @@ public class NPCDialogueWindow : MonoBehaviour
         }
     }
 
+    private void OpenExternalDialogue()
+    {
+        if (currentScript == null ||
+            currentScript.externalDialogue == null)
+        {
+            Debug.LogWarning("No external dialogue assigned.");
+            return;
+        }
+
+        ShowDialogueScript(
+            currentScript.externalDialogue,
+            currentNPC
+        );
+    }
+
     private void RenderNode(NPCParsedDialogueNode node, bool showNpcLine = true)
     {
         if (node == null)
@@ -134,6 +149,33 @@ public class NPCDialogueWindow : MonoBehaviour
 
         foreach (NPCParsedDialogueChoice choice in node.choices)
             AddChoice(choice.playerText, () => SelectChoice(choice));
+        if (node.choices.Count == 0)
+        {
+            if (node.endsDialogue)
+            {
+                AddSingleContinueChoice("Weiter", CloseConversation);
+                return;
+            }
+
+            if (node.opensExternalDialogue)
+            {
+                AddSingleContinueChoice("Weiter", OpenExternalDialogue);
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(node.nextNodeId))
+            {
+                if (currentNodes.TryGetValue(
+                        node.nextNodeId,
+                        out NPCParsedDialogueNode nextNode))
+                {
+                    AddSingleContinueChoice(
+                        "Weiter",
+                        () => RenderNode(nextNode)
+                    );
+                }
+            }
+        }
     }
     private void SelectChoice(NPCParsedDialogueChoice choice)
     {

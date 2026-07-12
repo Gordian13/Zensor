@@ -171,7 +171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000008978941, y: -0.0000017318205}
+  m_AnchoredPosition: {x: -0.000043513683, y: -0.0000017318205}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3542627351927228176
@@ -422,57 +422,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &2401479637594779259
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 354901369807287124}
-  - component: {fileID: 7187669351374034689}
-  m_Layer: 0
-  m_Name: NPC_InputSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &354901369807287124
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2401479637594779259}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6981005416767380961}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7187669351374034689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2401479637594779259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef5d0f9a2bdf4842b610523582dfdb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCInteractionHandler
-  raycastCamera: {fileID: 0}
-  npcLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxDistance: 100
-  interactionAnchor: {fileID: 0}
-  lookAtTarget: {fileID: 0}
 --- !u!1 &2566408795619330242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,7 +1993,6 @@ Transform:
   m_Children:
   - {fileID: 2777938584579008763}
   - {fileID: 1065115800421019450}
-  - {fileID: 354901369807287124}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &6965068603932430482
@@ -2093,6 +2041,9 @@ MonoBehaviour:
   pickRandomPoints: 1
   avoidSamePointTwice: 1
   isInteractable: 0
+  doWelcomeInteractionAfterSpawn: 0
+  welcomeDialogueScript: {fileID: 0}
+  welcomeInteractionDelay: 0.1
   interactionMoveAwayTolerance: 0.25
   interactionDestinationRefreshRate: 0.2
   animationController: {fileID: 5233928681277537747}
@@ -2297,7 +2248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448534543866003367, guid: 1d59b388e7ef37d46870fb3e5dede751, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000013659
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7448534543866003367, guid: 1d59b388e7ef37d46870fb3e5dede751, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2305,7 +2256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448534543866003367, guid: 1d59b388e7ef37d46870fb3e5dede751, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0054639
+      value: -0.574
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

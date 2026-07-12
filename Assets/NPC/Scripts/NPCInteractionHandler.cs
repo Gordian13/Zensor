@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 // This script should usually live on a central scene object, for example "NPC_InputSystem".
 public class NPCInteractionHandler : MonoBehaviour
 {
+    public static NPCInteractionHandler Instance { get; private set; }
     // Camera used to raycast from the mouse into the 3D world.
     [SerializeField] private Camera raycastCamera;
 
@@ -21,9 +22,59 @@ public class NPCInteractionHandler : MonoBehaviour
 
     private void Awake()
     {
-        // Automatically use the main camera if none was assigned.
+        Instance = this;
+
         if (raycastCamera == null)
             raycastCamera = Camera.main;
+    }
+    public void StartInteraction(
+        NPCController npc,
+        NPCDialogueScript dialogueScript)
+    {
+        if (npc == null || dialogueScript == null)
+            return;
+
+        if (!npc.IsInteractable)
+            return;
+
+        if (interactionAnchor == null)
+        {
+            Debug.LogWarning("Interaction anchor is null.");
+            return;
+        }
+
+        if (GlobalInteractionState.Instance != null)
+            GlobalInteractionState.Instance.BlockInteractions();
+
+        npc.MoveToInteractionAnchor(
+            interactionAnchor,
+            lookAtTarget,
+            () =>
+            {
+                if (NPCDialogueWindow.Instance != null)
+                {
+                    NPCDialogueWindow.Instance.ShowDialogueScript(
+                        dialogueScript,
+                        npc
+                    );
+                }
+                else
+                {
+                    npc.EndInteraction();
+                }
+            }
+        );
+    }
+
+    public void StartInteraction(NPCController npc)
+    {
+        if (npc == null || npc.Profile == null)
+            return;
+
+        StartInteraction(
+            npc,
+            npc.Profile.defaultDialogueScript
+        );
     }
 
     private void Update()
@@ -66,21 +117,6 @@ public class NPCInteractionHandler : MonoBehaviour
             return;
         }
 
-        if (interactionAnchor == null)
-        {
-            Debug.LogWarning("Interaction anchor is null.");
-            return;
-        }
-
-        // Own the input from the click on, so nothing else can start while the
-        // NPC is still walking over. Released again by NPCController.EndInteraction.
-        if (GlobalInteractionState.Instance != null)
-            GlobalInteractionState.Instance.BlockInteractions();
-
-        npc.MoveToInteractionAnchor(interactionAnchor, lookAtTarget, () =>
-        {
-            if (NPCDialogueWindow.Instance != null)
-                NPCDialogueWindow.Instance.ShowDialogueScript(npc.Profile.defaultDialogueScript, npc);
-        });
+        StartInteraction(npc);
     }
 }
