@@ -42,9 +42,6 @@ namespace recordPlayer
         {
             if (selectController == null) return;
             if (!IsPlayerState(selectController.CurrentVinylState)) return;
-
-            if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
-                ExitPlayer();
         }
 
         private void OnStateChanged(VinylState previous, VinylState next)
