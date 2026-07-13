@@ -55,8 +55,6 @@ public class FotowandUI : MonoBehaviour
 
     private void Update()
     {
-        if (panel.activeSelf && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
-            Close();
     }
 
     public void Open(FotowandData data)
