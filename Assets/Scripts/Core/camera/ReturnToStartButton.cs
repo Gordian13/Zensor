@@ -36,6 +36,9 @@ namespace Core.camera
                 return;
             }
 
+            if (GlobalInteractionState.Instance.IsInteractionBlocked)
+                return;
+
             string startSpotId = spotManager.GetStartSpotId();
             if (string.IsNullOrWhiteSpace(startSpotId))
             {
