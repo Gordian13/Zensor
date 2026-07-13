@@ -78,6 +78,7 @@ public class FotowandUI : MonoBehaviour
         }
 
         HideHint();
+        GlobalInteractionState.Instance.BlockInteractions();
         panel.SetActive(true);
 
         FindEmergencyButton();
@@ -87,6 +88,7 @@ public class FotowandUI : MonoBehaviour
 
     public void Close()
     {
+        GlobalInteractionState.Instance.UnblockInteractions();
         panel.SetActive(false);
 
         if (emergencyButton != null)
