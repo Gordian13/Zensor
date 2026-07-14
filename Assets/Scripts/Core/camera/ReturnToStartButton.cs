@@ -36,6 +36,9 @@ namespace Core.camera
                 return;
             }
 
+            if (GlobalInteractionState.Instance.IsInteractionBlocked)
+                return;
+
             string startSpotId = spotManager.GetStartSpotId();
             if (string.IsNullOrWhiteSpace(startSpotId))
             {
@@ -53,6 +56,7 @@ namespace Core.camera
             }
 
             transitionManager.PlayRoute(null, startSpotId);
+            
         }
 
         private static bool IsVinylPlayerState(VinylState state)

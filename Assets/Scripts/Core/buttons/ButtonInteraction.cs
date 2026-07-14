@@ -17,7 +17,7 @@ public class ButtonInteraction : MonoBehaviour
         if (_interactionCamera == null || Mouse.current == null)
             return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame && !GlobalInteractionState.Instance.IsInteractionBlocked)
         {
             Ray ray = _interactionCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, buttonLayer);

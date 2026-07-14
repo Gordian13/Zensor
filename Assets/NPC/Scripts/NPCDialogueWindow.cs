@@ -80,8 +80,9 @@ public class NPCDialogueWindow : MonoBehaviour
         RenderNode(currentNode);
     }
 
-    public void ShowReactionDialogue(string text)
+    public void ShowReactionDialogue(string text, NPCController npc)
     {
+        currentNPC = npc;
         ShowReactionDialogue(text, defaultReactionDuration);
     }
 
@@ -102,7 +103,7 @@ public class NPCDialogueWindow : MonoBehaviour
 
         root.SetActive(true);
         SetWindowMode(false);
-        PlayTypingAnimation(text);
+        PlayTypingAnimation(FormatNpcText(text));
 
         autoHideRoutine = StartCoroutine(AutoHideAfterSeconds(duration));
     }
@@ -120,6 +121,21 @@ public class NPCDialogueWindow : MonoBehaviour
         }
     }
 
+    private void OpenExternalDialogue()
+    {
+        if (currentScript == null ||
+            currentScript.externalDialogue == null)
+        {
+            Debug.LogWarning("No external dialogue assigned.");
+            return;
+        }
+
+        ShowDialogueScript(
+            currentScript.externalDialogue,
+            currentNPC
+        );
+    }
+
     private void RenderNode(NPCParsedDialogueNode node, bool showNpcLine = true)
     {
         if (node == null)
@@ -128,12 +144,39 @@ public class NPCDialogueWindow : MonoBehaviour
         currentNode = node;
 
         if (showNpcLine)
-            PlayTypingAnimation(node.npcLine);
+            PlayTypingAnimation(FormatNpcText(node.npcLine));
 
         ClearChoices();
 
         foreach (NPCParsedDialogueChoice choice in node.choices)
             AddChoice(choice.playerText, () => SelectChoice(choice));
+        if (node.choices.Count == 0)
+        {
+            if (node.endsDialogue)
+            {
+                AddSingleContinueChoice("Weiter", CloseConversation);
+                return;
+            }
+
+            if (node.opensExternalDialogue)
+            {
+                AddSingleContinueChoice("Weiter", OpenExternalDialogue);
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(node.nextNodeId))
+            {
+                if (currentNodes.TryGetValue(
+                        node.nextNodeId,
+                        out NPCParsedDialogueNode nextNode))
+                {
+                    AddSingleContinueChoice(
+                        "Weiter",
+                        () => RenderNode(nextNode)
+                    );
+                }
+            }
+        }
     }
     private void SelectChoice(NPCParsedDialogueChoice choice)
     {
@@ -143,7 +186,7 @@ public class NPCDialogueWindow : MonoBehaviour
         ClearChoices();
 
         if (!string.IsNullOrWhiteSpace(choice.npcResponse))
-            PlayTypingAnimation(choice.npcResponse);
+            PlayTypingAnimation(FormatNpcText(choice.npcResponse));
 
         if (choice.endsDialogue)
         {
@@ -173,6 +216,14 @@ public class NPCDialogueWindow : MonoBehaviour
                 Debug.LogWarning($"Dialogue node not found: {choice.nextNodeId}");
             }
         }
+    }
+
+    private string FormatNpcText(string text)
+    {
+        if (currentNPC == null)
+            return text;
+
+        return $"{currentNPC.NPCName}: {text}";
     }
 
     public void CloseConversation()

@@ -55,8 +55,6 @@ public class FotowandUI : MonoBehaviour
 
     private void Update()
     {
-        if (panel.activeSelf && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
-            Close();
     }
 
     public void Open(FotowandData data)
@@ -78,6 +76,7 @@ public class FotowandUI : MonoBehaviour
         }
 
         HideHint();
+        GlobalInteractionState.Instance.BlockInteractions();
         panel.SetActive(true);
 
         FindEmergencyButton();
@@ -87,6 +86,7 @@ public class FotowandUI : MonoBehaviour
 
     public void Close()
     {
+        GlobalInteractionState.Instance.UnblockInteractions();
         panel.SetActive(false);
 
         if (emergencyButton != null)

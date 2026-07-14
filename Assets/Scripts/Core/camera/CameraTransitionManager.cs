@@ -83,7 +83,6 @@ namespace Core.camera
 
             if (spotManager != null && spotManager.IsCurrentSpot(destinationSpot))
                 return;
-
             currentTransition = StartCoroutine(PlayRouteRoutine(route, destinationSpot));
         }
 
@@ -96,6 +95,8 @@ namespace Core.camera
                 currentSpot.SetLookControlActive(false);
 
             CinemachineCamera destinationCamera = destinationSpot.getSpotCamera();
+
+            GlobalInteractionState.Instance.BlockInteractions();
 
             if (route != null && route.wayCamerasIds != null)
             {
@@ -142,6 +143,7 @@ namespace Core.camera
                 spotManager.SetCurrentSpot(destinationSpot);
 
             FinishTransition();
+
         }
 
         private bool SetActiveCamera(CinemachineCamera targetCamera)
@@ -225,6 +227,7 @@ namespace Core.camera
         {
             IsTransitioning = false;
             currentTransition = null;
+            GlobalInteractionState.Instance.UnblockInteractions();
         }
     }
 }

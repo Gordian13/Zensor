@@ -9,18 +9,20 @@ public class FotowandInteractable : MonoBehaviour, IFotowand
     [Tooltip("Child object with the yellow border frame, shown on hover")]
     [SerializeField] private GameObject highlightBorder;
 
+    private HoverYellowTint hoverYellowTint;
     public FotowandData GetData() => data;
     public Transform GetSelectionTransform() => transform;
 
     private void Awake()
     {
+        hoverYellowTint = GetComponent<HoverYellowTint>();
         SetHighlight(false);
     }
 
     public void SetHighlight(bool isHighlighted)
     {
-        if (highlightBorder != null)
-            highlightBorder.SetActive(isHighlighted);
+        if (hoverYellowTint != null)
+            hoverYellowTint.SetTint(isHighlighted);
     }
 }
 

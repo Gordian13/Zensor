@@ -455,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.0004319934, y: -0.000006513427}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3542627351927228176
@@ -984,75 +984,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3235570246965785150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2401479637594779259
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 354901369807287124}
-  - component: {fileID: 7128369373803588733}
-  - component: {fileID: 7187669351374034689}
-  m_Layer: 0
-  m_Name: NPC_InputSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &354901369807287124
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2401479637594779259}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6981005416767380961}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7128369373803588733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2401479637594779259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e333bad15e0e754d931763a16238bfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCHoverDetector
-  raycastCamera: {fileID: 0}
-  npcLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxDistance: 100
---- !u!114 &7187669351374034689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2401479637594779259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef5d0f9a2bdf4842b610523582dfdb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCInteractionHandler
-  raycastCamera: {fileID: 0}
-  npcLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxDistance: 100
-  interactionAnchor: {fileID: 0}
-  lookAtTarget: {fileID: 0}
 --- !u!1 &2531510585439255140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,7 +1153,6 @@ GameObject:
   - component: {fileID: 2777938584579008763}
   - component: {fileID: 838210147121631051}
   - component: {fileID: 7023425903485775027}
-  - component: {fileID: 8888487772011242252}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -1303,29 +1233,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8888487772011242252
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2573580032508357721}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2580766259766507586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,8 +1416,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6128154436071468007}
   m_HandleRect: {fileID: 7095389882559262803}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.9999995
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2663,7 +2570,7 @@ GameObject:
   - component: {fileID: 5531782999689574822}
   m_Layer: 5
   m_Name: NPCDialogueWindow
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3870,7 +3777,7 @@ Transform:
   m_GameObject: {fileID: 6491445695060435060}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.027, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4007,7 +3914,7 @@ GameObject:
   - component: {fileID: 6368223511619672754}
   - component: {fileID: 3326868444909886808}
   m_Layer: 0
-  m_Name: InteractionTrigger
+  m_Name: Interaction_Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4023,7 +3930,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.7, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6981005416767380961}
@@ -4621,6 +4528,8 @@ GameObject:
   - component: {fileID: 3515723466574101576}
   - component: {fileID: 5233928681277537747}
   - component: {fileID: 6636596529686608895}
+  - component: {fileID: 5365674977954371452}
+  - component: {fileID: 6496812490803407361}
   m_Layer: 0
   m_Name: B_Seiler
   m_TagString: Untagged
@@ -4638,13 +4547,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2777938584579008763}
   - {fileID: 6368223511619672754}
   - {fileID: 1065115800421019450}
-  - {fileID: 354901369807287124}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &6965068603932430482
@@ -4657,7 +4565,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 2.5
   m_Acceleration: 20
   avoidancePriority: 30
   m_AngularSpeed: 720
@@ -4688,11 +4596,16 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   stoppingDistance: 0.5
   startPatrollingOnStart: 1
   pickRandomPoints: 1
   avoidSamePointTwice: 1
   isInteractable: 1
+  doWelcomeInteractionAfterSpawn: 1
+  welcomeDialogueScript: {fileID: 11400000, guid: be23c8cae9613f84fa33d1228f81094e, type: 2}
+  welcomeInteractionDelay: 0.1
   interactionMoveAwayTolerance: 0.25
   interactionDestinationRefreshRate: 0.2
   animationController: {fileID: 5233928681277537747}
@@ -4725,8 +4638,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCAnimationController
   agent: {fileID: 6965068603932430482}
   animator: {fileID: 557816399987040436}
-  referenceWalkSpeed: 2
-  animationSpeedMultiplier: 1.28
+  referenceWalkSpeed: 2.5
+  animationSpeedMultiplier: 0.92
 --- !u!114 &6636596529686608895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4741,9 +4654,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCAmbientSpeech
   npc: {fileID: 8816145889897903339}
   playerAnchor: {fileID: 0}
-  triggerDistance: 4
+  triggerDistance: 2
   cooldownSeconds: 12
-  chancePerCheck: 35
+  chancePerCheck: 30
   checkInterval: 1
   ambientLines:
   - "Leg die Platte ruhig auf. Wenn sie dich nicht sofort versteht, gib ihr \u2019ne
@@ -4752,6 +4665,40 @@ MonoBehaviour:
   - Fass die Platte ruhig an. Vinyl will respektiert werden, aber nich angebetet.
   - "Manchmal kam jemand rein und fragte: \u201EHaben Sie was Normales?\u201C Hab
     ick gesagt: \u201EHeute leider geschlossen.\u201C"
+--- !u!114 &5365674977954371452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728081373099745418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
+  transitionDuration: 1
+  startGrayscale: 1
+  includeChildRenderers: 1
+  includeInactiveChildren: 1
+  stayColored: 0
+--- !u!114 &6496812490803407361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728081373099745418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb41211f9676c834093a5c862ffaa383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCNumericReactionListener
+  npc: {fileID: 8816145889897903339}
+  valueSource: {fileID: 0}
+  sourceId: records_played
+  sourceDisplayName: Played Records
+  evaluateCurrentValueOnEnable: 1
 --- !u!1 &7747899346823914774
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,10 +57,13 @@ namespace background
 
         void PlayRandomOnAll()
         {
+            if (songs.Length == 0) return;
+
             AudioClip newSong = _currentClip;
             while (songs.Length > 1 && newSong == _currentClip)
                 newSong = songs[Random.Range(0, songs.Length)];
 
+            if (newSong == null) newSong = songs[0];
             _currentClip = newSong;
 
             foreach (var s in targetedBoxes)

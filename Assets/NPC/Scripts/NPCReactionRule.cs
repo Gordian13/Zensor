@@ -9,10 +9,13 @@ public class NPCReactionRule
     [Tooltip("Leave empty to match any object.")]
     public string requiredObjectId;
 
-    [Header("Optional Numeric Condition")]
+    [Header("Optional Int Condition")]
+    public bool useIntModulus;
     public bool useMinimumIntValue;
     public int minimumIntValue;
 
+    [Header("Optional Float Condition")]
+    public bool useFloatModulus;
     public bool useMinimumFloatValue;
     public float minimumFloatValue;
 
@@ -33,17 +36,41 @@ public class NPCReactionRule
         if (eventType != context.eventType)
             return false;
 
-        if (!string.IsNullOrWhiteSpace(requiredObjectId))
+        if (!string.IsNullOrWhiteSpace(requiredObjectId) &&
+            requiredObjectId != context.objectId)
         {
-            if (requiredObjectId != context.objectId)
-                return false;
+            return false;
         }
 
-        if (useMinimumIntValue && context.intValue < minimumIntValue)
-            return false;
+        if(useIntModulus && context.intValue != 0)
+        {
+            if (useMinimumIntValue &&
+                (context.intValue % minimumIntValue != 0))
+            {
+                return false;
+            }
+        }
+        else
+            if (useMinimumIntValue &&
+                (context.intValue < minimumIntValue))
+            {
+                return false;
+            }
 
-        if (useMinimumFloatValue && context.floatValue < minimumFloatValue)
-            return false;
+        if(useFloatModulus && context.floatValue != 0)
+        {
+            if (useMinimumFloatValue &&
+                (context.floatValue % minimumFloatValue != 0))
+            {
+                return false;
+            }
+        }
+        else
+            if (useMinimumFloatValue &&
+                (context.floatValue < minimumFloatValue))
+            {
+                return false;
+            }
 
         return true;
     }

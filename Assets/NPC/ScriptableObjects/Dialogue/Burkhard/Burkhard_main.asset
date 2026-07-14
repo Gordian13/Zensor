@@ -27,28 +27,29 @@ MonoBehaviour:
     wirklich. Die meisten haben gelacht. Die anderen waren meistens genau die Leute,
     \xFCber die man lachen sollte.\r\n-> zensor_story_3\r\n\r\n> Und der Laden selbst?\r\n->
     zensor_story_4\r\n\r\n> Zur\xFCck.\r\n-> zensor_story_2\r\n\r\n\r\n::zensor_story_4\r\nNPC:
-    1979 ging's los. Punk, Reggae, New Wave, Free Jazz. Alles wat anderswo komisch
-    angeguckt wurde.\r\n\r\n> Wer kam denn da hin?\r\n-> zensor_story_5\r\n\r\n>
-    Zur\xFCck.\r\n-> zensor_story_3\r\n\r\n\r\n::zensor_story_5\r\nNPC: Zensor war
-    immer auch \u2019n Treffpunkt f\xFCr Leute, die woanders zu komisch waren. Also
-    eigentlich f\xFCr die richtigen Leute.\r\n\r\n> Was f\xFCr Leute waren das?\r\nNPC:
-    Musiker, Studenten, K\xFCnstler, Arbeitslose, Verr\xFCckte. Oft alles gleichzeitig.\r\n->
-    zensor_story_5\r\n\r\n> Und dann?\r\n-> zensor_story_6\r\n\r\n> Zur\xFCck.\r\n->
-    zensor_story_4\r\n\r\n\r\n::zensor_story_6\r\nNPC: Der Laden war klein, aber
-    die Ideen hatten Platzangst. Die mussten raus \u2014 auf Vinyl, auf Kassetten
-    oder auf irgendeine B\xFChne.\r\n\r\n> Klingt chaotisch.\r\n-> zensor_story_7\r\n\r\n>
-    Zur\xFCck.\r\n-> zensor_story_5\r\n\r\n\r\n::zensor_story_7\r\nNPC: War et auch.
-    Manche Abende wusste keiner, ob dit Konzert oder Unfall war. Meistens beides.\r\n\r\n>
-    Wirklich so chaotisch?\r\nNPC: Siehste den Konzertposter da an der Wand? Damals
-    hat man nicht gefragt, ob dit funktioniert. Man hat gefragt, ob jemand \u2019nen
-    Verst\xE4rker hat.\r\n-> zensor_story_7\r\n\r\n> Wie ging's weiter?\r\n-> zensor_story_8\r\n\r\n>
-    Zur\xFCck.\r\n-> zensor_story_6\r\n\r\n\r\n::zensor_story_8\r\nNPC: Irgendwann
-    wurde aus dem Laden auch ein Label. Und aus dem Chaos wurde Geschichte. Wat meistens
-    passiert, wenn genug Zeit vergeht.\r\n\r\n> Zur\xFCck zum Anfang.\r\n-> start\r\n\r\n\r\n\r\n::burkhard_1\r\nNPC:
-    Manche nennen mich Burkhard. Manche nennen mich Zensor. Kommt drauf an, ob se
-    Musik suchen oder \xC4rger.\r\n\r\n> Du arbeitest hier immer noch?\r\nNPC: Na
-    irgendwer muss ja aufpassen, dass ihr nich die guten Platten anfasst.\r\n-> burkhard_1\r\n\r\n>
-    Warum ausgerechnet Platten?\r\n-> burkhard_2\r\n\r\n> Zur\xFCck.\r\n-> start\r\n\r\n\r\n::burkhard_2\r\nNPC:
+    1979 ging's los. Punk, Reggae, New Wave, Free Jazz und dann unsere \"Neue Deutsche
+    Welle\". Alles wat anderswo komisch angeguckt wurde.\r\n\r\n> Wer kam denn da
+    hin?\r\n-> zensor_story_5\r\n\r\n> Zur\xFCck.\r\n-> zensor_story_3\r\n\r\n\r\n::zensor_story_5\r\nNPC:
+    Zensor war immer auch \u2019n Treffpunkt f\xFCr Leute, die woanders zu komisch
+    waren. Also eigentlich f\xFCr die richtigen Leute.\r\n\r\n> Was f\xFCr Leute
+    waren das?\r\nNPC: Musiker, Studenten, K\xFCnstler, Arbeitslose, meine verr\xFCckten
+    Freunde. Oft alles gleichzeitig.\r\n-> zensor_story_5\r\n\r\n> Und dann?\r\n->
+    zensor_story_6\r\n\r\n> Zur\xFCck.\r\n-> zensor_story_4\r\n\r\n\r\n::zensor_story_6\r\nNPC:
+    Der Laden war klein, aber die Ideen hatten Platzangst. Die mussten raus \u2014
+    auf Vinyl, auf Kassetten oder auf irgendeine B\xFChne.\r\n\r\n> Klingt chaotisch.\r\n->
+    zensor_story_7\r\n\r\n> Zur\xFCck.\r\n-> zensor_story_5\r\n\r\n\r\n::zensor_story_7\r\nNPC:
+    War et auch. Manche Abende wusste keiner, ob dit Konzert oder Unfall war. Meistens
+    beides.\r\n\r\n> Wirklich so chaotisch?\r\nNPC: Siehste den Konzertposter da
+    an der Wand? Damals hat man nicht gefragt, ob dit funktioniert. Man hat gefragt,
+    ob jemand \u2019nen Verst\xE4rker hat.\r\n-> zensor_story_7\r\n\r\n> Wie ging's
+    weiter?\r\n-> zensor_story_8\r\n\r\n> Zur\xFCck.\r\n-> zensor_story_6\r\n\r\n\r\n::zensor_story_8\r\nNPC:
+    Irgendwann wurde aus dem Laden auch ein Label. Und aus dem Chaos wurde Geschichte.
+    Wat meistens passiert, wenn genug Zeit vergeht.\r\n\r\n> Zur\xFCck zum Anfang.\r\n->
+    start\r\n\r\n\r\n\r\n::burkhard_1\r\nNPC: Manche nennen mich Burkhardt. Manche
+    nennen mich den Zensor. Kommt drauf an, ob se Musik suchen oder \xC4rger.\r\n\r\n>
+    Du arbeitest hier immer noch?\r\nNPC: Na irgendwer muss ja aufpassen, dass ihr
+    nich die guten Platten anfasst.\r\n-> burkhard_1\r\n\r\n> Warum ausgerechnet
+    Platten?\r\n-> burkhard_2\r\n\r\n> Zur\xFCck.\r\n-> start\r\n\r\n\r\n::burkhard_2\r\nNPC:
     Weil Musik die h\xF6flichste Form von Ungehorsam sein kann. Du legst einfach
     'ne Platte auf und pl\xF6tzlich klingt die Welt anders.\r\n\r\n> Klingt romantisch.\r\n->
     burkhard_3\r\n\r\n> Zur\xFCck.\r\n-> start\r\n\r\n\r\n::burkhard_3\r\nNPC: Romantisch?
