@@ -1022,6 +1022,7 @@ GameObject:
   - component: {fileID: 100032959}
   - component: {fileID: 100032963}
   - component: {fileID: 100032962}
+  - component: {fileID: 100032964}
   m_Layer: 0
   m_Name: Poster3
   m_TagString: Untagged
@@ -1161,6 +1162,20 @@ MonoBehaviour:
   includeChildRenderers: 0
   includeInactiveChildren: 1
   stayColored: 0
+--- !u!114 &100032964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100032957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 1461944823}
+  spotManager: {fileID: 0}
 --- !u!1 &100957919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,6 +1713,7 @@ GameObject:
   - component: {fileID: 213848693}
   - component: {fileID: 213848691}
   - component: {fileID: 213848695}
+  - component: {fileID: 213848696}
   m_Layer: 0
   m_Name: PosterWand
   m_TagString: Untagged
@@ -1851,6 +1867,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5141985450832305362, guid: af98fc6797a723f4fbd98727b8336fe1, type: 3}
+--- !u!114 &213848696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213848687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &215181074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,6 +1895,7 @@ GameObject:
   - component: {fileID: 215181076}
   - component: {fileID: 215181080}
   - component: {fileID: 215181079}
+  - component: {fileID: 215181081}
   m_Layer: 0
   m_Name: Poster4 (2)
   m_TagString: Untagged
@@ -2004,6 +2035,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 6.123233e-17}
   m_Center: {x: 0.00000047683716, y: 0.00000011920929, z: 0}
+--- !u!114 &215181081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215181074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &229965141
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2395,7 @@ GameObject:
   - component: {fileID: 264142526}
   - component: {fileID: 264142525}
   - component: {fileID: 264142528}
+  - component: {fileID: 264142529}
   m_Layer: 0
   m_Name: Poster4 (3)
   m_TagString: Untagged
@@ -2468,6 +2514,20 @@ MonoBehaviour:
   includeChildRenderers: 0
   includeInactiveChildren: 1
   stayColored: 0
+--- !u!114 &264142529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264142523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 1461944823}
+  spotManager: {fileID: 0}
 --- !u!1 &265645483
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,6 +3293,7 @@ GameObject:
   - component: {fileID: 320004542}
   - component: {fileID: 320004546}
   - component: {fileID: 320004545}
+  - component: {fileID: 320004547}
   m_Layer: 0
   m_Name: Poster4 (3)
   m_TagString: Untagged
@@ -3372,6 +3433,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 6.123233e-17}
   m_Center: {x: 0.00000047683716, y: 0, z: 0}
+--- !u!114 &320004547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320004540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &321871512
 GameObject:
   m_ObjectHideFlags: 0
@@ -4615,6 +4690,7 @@ GameObject:
   - component: {fileID: 436960899}
   - component: {fileID: 436960903}
   - component: {fileID: 436960902}
+  - component: {fileID: 436960904}
   m_Layer: 0
   m_Name: Poster2
   m_TagString: Untagged
@@ -4754,6 +4830,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.99999994, z: 6.1232336e-17}
   m_Center: {x: 0.00000071525574, y: 0.00000023841858, z: 0}
+--- !u!114 &436960904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436960897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943708454}
+  spotManager: {fileID: 0}
 --- !u!1001 &485831574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6598,6 +6688,7 @@ GameObject:
   - component: {fileID: 650939885}
   - component: {fileID: 650939888}
   - component: {fileID: 650939887}
+  - component: {fileID: 650939889}
   m_Layer: 0
   m_Name: Poster.011
   m_TagString: Untagged
@@ -6717,6 +6808,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.020000009, y: 0.020000007, z: 0.000000011576439}
   m_Center: {x: -0.0000000037252903, y: 0, z: 0}
+--- !u!114 &650939889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650939883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &669156117 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1224647287179432816, guid: b985c9d4776c7864ba87684adff25f69, type: 3}
@@ -6974,6 +7079,7 @@ GameObject:
   - component: {fileID: 705682098}
   - component: {fileID: 705682102}
   - component: {fileID: 705682101}
+  - component: {fileID: 705682103}
   m_Layer: 0
   m_Name: Poster2
   m_TagString: Untagged
@@ -7113,6 +7219,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 6.123233e-17}
   m_Center: {x: -0.00000011920929, y: 0, z: -0.0000009536743}
+--- !u!114 &705682103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705682096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &710611396
 GameObject:
   m_ObjectHideFlags: 0
@@ -8892,6 +9012,7 @@ GameObject:
   - component: {fileID: 971561069}
   - component: {fileID: 971561073}
   - component: {fileID: 971561072}
+  - component: {fileID: 971561074}
   m_Layer: 0
   m_Name: Poster4
   m_TagString: Untagged
@@ -9031,6 +9152,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 6.123233e-17}
   m_Center: {x: 0.00000023841858, y: 0.00000023841858, z: 0}
+--- !u!114 &971561074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971561067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &996410692
 GameObject:
   m_ObjectHideFlags: 0
@@ -9734,6 +9869,7 @@ GameObject:
   - component: {fileID: 1039385069}
   - component: {fileID: 1039385073}
   - component: {fileID: 1039385072}
+  - component: {fileID: 1039385074}
   m_Layer: 0
   m_Name: Poster3
   m_TagString: Untagged
@@ -9873,6 +10009,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 6.123233e-17}
   m_Center: {x: 0.00000047683716, y: 0, z: 0}
+--- !u!114 &1039385074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039385067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1001 &1048023190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10466,6 +10616,7 @@ GameObject:
   - component: {fileID: 1133907469}
   - component: {fileID: 1133907471}
   - component: {fileID: 1133907472}
+  - component: {fileID: 1133907473}
   m_Layer: 0
   m_Name: Poster.004
   m_TagString: Untagged
@@ -10587,6 +10738,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.020000001, y: 0.02000001, z: 0.0000000016326938}
   m_Center: {x: 0.0000000037252903, y: 0, z: -0.000000059604645}
+--- !u!114 &1133907473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133907467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &1151406481
 GameObject:
   m_ObjectHideFlags: 0
@@ -10933,6 +11098,7 @@ GameObject:
   - component: {fileID: 1212225549}
   - component: {fileID: 1212225552}
   - component: {fileID: 1212225551}
+  - component: {fileID: 1212225553}
   m_Layer: 0
   m_Name: Poster.012
   m_TagString: Untagged
@@ -11055,6 +11221,20 @@ MonoBehaviour:
   includeChildRenderers: 0
   includeInactiveChildren: 1
   stayColored: 0
+--- !u!114 &1212225553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212225547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &1214500805 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9150935765873980742, guid: c910e513605ea6a419ab846caf3f2389, type: 3}
@@ -11131,6 +11311,7 @@ GameObject:
   - component: {fileID: 1223332195}
   - component: {fileID: 1223332194}
   - component: {fileID: 1223332197}
+  - component: {fileID: 1223332198}
   m_Layer: 0
   m_Name: Poster4 (1)
   m_TagString: Untagged
@@ -11249,6 +11430,20 @@ MonoBehaviour:
   includeChildRenderers: 0
   includeInactiveChildren: 1
   stayColored: 0
+--- !u!114 &1223332198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223332192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 1461944823}
+  spotManager: {fileID: 0}
 --- !u!1001 &1226191419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11712,6 +11907,7 @@ GameObject:
   - component: {fileID: 1275755144}
   - component: {fileID: 1275755148}
   - component: {fileID: 1275755147}
+  - component: {fileID: 1275755149}
   m_Layer: 0
   m_Name: Poster2
   m_TagString: Untagged
@@ -11851,6 +12047,20 @@ MonoBehaviour:
   includeChildRenderers: 0
   includeInactiveChildren: 1
   stayColored: 0
+--- !u!114 &1275755149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275755142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 1461944823}
+  spotManager: {fileID: 0}
 --- !u!1 &1292801264
 GameObject:
   m_ObjectHideFlags: 0
@@ -12044,6 +12254,7 @@ GameObject:
   - component: {fileID: 1308681918}
   - component: {fileID: 1308681917}
   - component: {fileID: 1308681920}
+  - component: {fileID: 1308681921}
   m_Layer: 0
   m_Name: Poster4 (2)
   m_TagString: Untagged
@@ -12162,6 +12373,20 @@ MonoBehaviour:
   includeChildRenderers: 0
   includeInactiveChildren: 1
   stayColored: 0
+--- !u!114 &1308681921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308681915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 1461944823}
+  spotManager: {fileID: 0}
 --- !u!1 &1315095272
 GameObject:
   m_ObjectHideFlags: 0
@@ -12691,6 +12916,7 @@ GameObject:
   - component: {fileID: 1350009849}
   - component: {fileID: 1350009848}
   - component: {fileID: 1350009851}
+  - component: {fileID: 1350009852}
   m_Layer: 0
   m_Name: Poster1
   m_TagString: Untagged
@@ -12809,6 +13035,20 @@ MonoBehaviour:
   includeChildRenderers: 0
   includeInactiveChildren: 1
   stayColored: 0
+--- !u!114 &1350009852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350009846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 1461944823}
+  spotManager: {fileID: 0}
 --- !u!1 &1356725029
 GameObject:
   m_ObjectHideFlags: 0
@@ -15655,6 +15895,7 @@ GameObject:
   - component: {fileID: 1616325967}
   - component: {fileID: 1616325971}
   - component: {fileID: 1616325970}
+  - component: {fileID: 1616325972}
   m_Layer: 0
   m_Name: Poster4 (1)
   m_TagString: Untagged
@@ -15794,6 +16035,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 6.123233e-17}
   m_Center: {x: 0.00000047683716, y: 0, z: 0}
+--- !u!114 &1616325972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616325965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &1627157401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6236832085635185405, guid: 7543ece12bf5c7e49915f1b7010c22b1, type: 3}
@@ -16946,6 +17201,7 @@ GameObject:
   - component: {fileID: 1825121879}
   - component: {fileID: 1825121881}
   - component: {fileID: 1825121882}
+  - component: {fileID: 1825121883}
   m_Layer: 0
   m_Name: Poster.008
   m_TagString: Untagged
@@ -17069,6 +17325,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02000001, y: 0.020000005, z: 0.000000013009743}
   m_Center: {x: -0.000000011175871, y: 0.000000022351742, z: 0}
+--- !u!114 &1825121883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825121877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &1827494429
 GameObject:
   m_ObjectHideFlags: 0
@@ -18250,6 +18520,7 @@ GameObject:
   - component: {fileID: 1944823803}
   - component: {fileID: 1944823807}
   - component: {fileID: 1944823806}
+  - component: {fileID: 1944823808}
   m_Layer: 0
   m_Name: Poster1
   m_TagString: Untagged
@@ -18389,6 +18660,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 6.123233e-17}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1944823808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944823801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 943444833}
+  spotManager: {fileID: 0}
 --- !u!1 &1969296084
 GameObject:
   m_ObjectHideFlags: 0
@@ -19170,6 +19455,7 @@ GameObject:
   - component: {fileID: 2042729371}
   - component: {fileID: 2042729370}
   - component: {fileID: 2042729373}
+  - component: {fileID: 2042729374}
   m_Layer: 0
   m_Name: Poster4
   m_TagString: Untagged
@@ -19288,6 +19574,20 @@ MonoBehaviour:
   includeChildRenderers: 0
   includeInactiveChildren: 1
   stayColored: 0
+--- !u!114 &2042729374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042729368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56a6306941e0384aa1e804dc76cb671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceGrayscaleAtSpot
+  owningSpot: {fileID: 1461944823}
+  spotManager: {fileID: 0}
 --- !u!1 &2070864796
 GameObject:
   m_ObjectHideFlags: 0
