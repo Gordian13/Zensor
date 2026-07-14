@@ -1,11 +1,7 @@
 using UnityEngine;
+using Interaction.util.ColorReveal;
 
-/// <summary>
-/// Attach this to posters whose base is static black-and-white.
-/// Tints the whole surface slightly yellow while the poster is being hovered.
-/// Works alongside FotowandInteractable via SetHighlight().
-/// </summary>
-public class HoverYellowTint : MonoBehaviour
+public class HoverYellowTint : MonoBehaviour, IColorRevealable
 {
     [SerializeField] private Color tintColor = new Color(1f, 0.92f, 0.5f, 1f);
     [Range(0f, 1f)]
@@ -14,6 +10,8 @@ public class HoverYellowTint : MonoBehaviour
     private Renderer[] renderers;
     private MaterialPropertyBlock propertyBlock;
     private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
+
+    private bool stayColored = false;
 
     private void Awake()
     {
@@ -24,6 +22,12 @@ public class HoverYellowTint : MonoBehaviour
 
     public void SetTint(bool isHovered)
     {
+        if (renderers == null || propertyBlock == null)
+        {
+            renderers = GetComponentsInChildren<Renderer>();
+            propertyBlock = new MaterialPropertyBlock();
+        }
+
         Color targetColor = isHovered
             ? Color.Lerp(Color.white, tintColor, tintStrength)
             : Color.white;
@@ -34,5 +38,26 @@ public class HoverYellowTint : MonoBehaviour
             propertyBlock.SetColor(BaseColorId, targetColor);
             r.SetPropertyBlock(propertyBlock);
         }
+    }
+
+    // --- IColorRevealable ---
+
+    public void SetColorReveal(bool revealed)
+    {
+        SetColor(revealed);
+    }
+
+    public void SetColor(bool showColor)
+    {
+        if (stayColored && !showColor)
+            return;
+
+        SetTint(showColor);
+    }
+
+    public void SetStayColored(bool stayColored)
+    {
+        this.stayColored = stayColored;
+        SetColor(stayColored);
     }
 }
