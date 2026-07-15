@@ -7783,7 +7783,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 0
-  m_Color: {r: 0.73333335, g: 0.74509805, b: 0.5372549, a: 1}
+  m_Color: {r: 0.8322247, g: 0.8396226, b: 0.7089266, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 70.04163
@@ -8488,7 +8488,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 0
-  m_Color: {r: 0.73333335, g: 0.74509805, b: 0.5372549, a: 1}
+  m_Color: {r: 0.8039216, g: 0.8117647, b: 0.6784314, a: 1}
   m_Intensity: 9
   m_Range: 10
   m_SpotAngle: 54.41931
@@ -8647,7 +8647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
-  transitionDuration: 1
   startGrayscale: 1
   includeChildRenderers: 0
   includeInactiveChildren: 1
@@ -11930,7 +11929,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 0
-  m_Color: {r: 0.73333335, g: 0.74509805, b: 0.5372549, a: 1}
+  m_Color: {r: 0.803739, g: 0.8113208, b: 0.67737633, a: 1}
   m_Intensity: 9
   m_Range: 10
   m_SpotAngle: 96.84508
@@ -14244,7 +14243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
-  transitionDuration: 1
   startGrayscale: 1
   includeChildRenderers: 1
   includeInactiveChildren: 1

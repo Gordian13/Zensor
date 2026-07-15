@@ -2150,16 +2150,20 @@ PrefabInstance:
       value: 0.9999995
       objectReference: {fileID: 0}
     - target: {fileID: 1144783361760373214, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
+      propertyPath: m_Color.a
+      value: 0.79607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 1144783361760373214, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: m_Color.b
-      value: 0.1509434
+      value: 0.103773594
       objectReference: {fileID: 0}
     - target: {fileID: 1144783361760373214, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: m_Color.g
-      value: 0.1509434
+      value: 0.103773594
       objectReference: {fileID: 0}
     - target: {fileID: 1144783361760373214, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: m_Color.r
-      value: 0.1509434
+      value: 0.103773594
       objectReference: {fileID: 0}
     - target: {fileID: 1345152420974476657, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2183,7 +2187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4386106217530650124, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00088066055
+      value: -0.0014387447
       objectReference: {fileID: 0}
     - target: {fileID: 5233928681277537747, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: animationSpeedMultiplier
@@ -2293,6 +2297,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7686743760411921747, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
     - target: {fileID: 7728081373099745418, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: m_Name
       value: B_Seiler
@@ -2329,6 +2337,10 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[3]'
       value: 
       objectReference: {fileID: 682821827}
+    - target: {fileID: 8816145889897903339, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
+      propertyPath: interactionMoveAwayTolerance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8816145889897903339, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: doWelcomeInteractionAfterSpawn
       value: 1

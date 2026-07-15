@@ -17,10 +17,9 @@ public class NPCDialogueWindow : MonoBehaviour
     [SerializeField] private GameObject choicesArea;
     [SerializeField] private float conversationHeight = 400f;
     [SerializeField] private float reactionHeight = 180f;
-    [SerializeField] private GameObject clickBlocker;
 
     [Header("Reaction Dialogue")]
-    [SerializeField] private float defaultReactionDuration = 4f;
+    [SerializeField] private float defaultReactionDuration = 8f;
 
     [Header("Typing")]
     [SerializeField] private bool useTypingAnimation = false;
@@ -90,7 +89,7 @@ public class NPCDialogueWindow : MonoBehaviour
     {
         StopAutoHide();
         StopTyping();
-
+        string formatedText = FormatNpcText(text);
         currentNPC = null;
         currentScript = null;
         currentNodes = null;
@@ -103,7 +102,7 @@ public class NPCDialogueWindow : MonoBehaviour
 
         root.SetActive(true);
         SetWindowMode(false);
-        PlayTypingAnimation(FormatNpcText(text));
+        PlayTypingAnimation(formatedText);
 
         autoHideRoutine = StartCoroutine(AutoHideAfterSeconds(duration));
     }
