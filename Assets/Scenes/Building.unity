@@ -291,7 +291,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b2e5f3f5e07bd404bb176c3ebbb6b900, type: 2}
+  - {fileID: 2100000, guid: d22b685784f339541a3cd5e2c9065961, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8109,6 +8109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1100655322}
   - component: {fileID: 1100655323}
+  - component: {fileID: 1100655324}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -8157,7 +8158,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44226071158fc414b98be43802587f41, type: 2}
+  - {fileID: 2100000, guid: d22b685784f339541a3cd5e2c9065961, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8190,6 +8191,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1100655324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100655321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
+  transitionDuration: 1
+  startGrayscale: 1
+  includeChildRenderers: 0
+  includeInactiveChildren: 1
+  stayColored: 0
 --- !u!1 &1156651462
 GameObject:
   m_ObjectHideFlags: 0
@@ -11406,6 +11424,7 @@ GameObject:
   - component: {fileID: 1508045706}
   - component: {fileID: 1508045705}
   - component: {fileID: 1508045704}
+  - component: {fileID: 1508045708}
   m_Layer: 0
   m_Name: SchildFront
   m_TagString: Untagged
@@ -11508,6 +11527,23 @@ Transform:
   - {fileID: 2123646039}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 17.807}
+--- !u!114 &1508045708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508045703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
+  transitionDuration: 1
+  startGrayscale: 1
+  includeChildRenderers: 0
+  includeInactiveChildren: 1
+  stayColored: 0
 --- !u!1001 &1517604256
 PrefabInstance:
   m_ObjectHideFlags: 0
