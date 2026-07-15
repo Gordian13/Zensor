@@ -2288,7 +2288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
-  transitionDuration: 1
   startGrayscale: 1
   includeChildRenderers: 1
   includeInactiveChildren: 1

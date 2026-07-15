@@ -6,7 +6,7 @@ namespace Interaction.util.ColorReveal
 {
     public class ColorRevealToggle : MonoBehaviour, IColorRevealable
     {
-        [SerializeField] private float transitionDuration = 1f;
+        private float transitionDuration = 0.3f;
         [SerializeField] private bool startGrayscale = true;
         [SerializeField] private bool includeChildRenderers = false;
         [SerializeField] private bool includeInactiveChildren = true;
