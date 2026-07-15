@@ -337,7 +337,7 @@ Transform:
   m_GameObject: {fileID: 516898084}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 4.49, y: 3.816, z: 1.44}
+  m_LocalPosition: {x: 4.49, y: 3.81, z: 1.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1152,7 +1152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
-  transitionDuration: 1
   startGrayscale: 1
   includeChildRenderers: 0
   includeInactiveChildren: 1
@@ -1364,13 +1363,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901170929}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.106235154, y: 0.81812155, z: -0.21097966, w: -0.5242889}
+  m_LocalRotation: {x: 0, y: -0.83845663, z: 0, w: 0.54496837}
   m_LocalPosition: {x: 4.7176356, y: 3.81, z: 9.004942}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1313512622}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -113.955, z: 0}
 --- !u!114 &1901170932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1701,7 +1700,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1f26f5b2499bb4f86df494038d64c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction.util.ColorReveal.ColorRevealToggle
-  transitionDuration: 1
   startGrayscale: 1
   includeChildRenderers: 0
   includeInactiveChildren: 1
