@@ -2310,6 +2310,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: be23c8cae9613f84fa33d1228f81094e, type: 2}
     - target: {fileID: 8816145889897903339, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
+      propertyPath: interactionArrivalDistance
+      value: 1.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816145889897903339, guid: 8ded5d01eab5fc945a34fecf24951018, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 169748733}
