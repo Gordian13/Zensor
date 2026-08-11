@@ -6,12 +6,15 @@ namespace Interaction.util.ColorReveal
 {
     public class ColorRevealToggle : MonoBehaviour, IColorRevealable
     {
-        [SerializeField] private float transitionDuration = 1f;
+        private float transitionDuration = 0.3f;
         [SerializeField] private bool startGrayscale = true;
         [SerializeField] private bool includeChildRenderers = false;
         [SerializeField] private bool includeInactiveChildren = true;
         [SerializeField] private bool stayColored = false;
 
+        private bool revealedBySpot;
+        private bool revealedByHover;
+        
         private readonly List<Renderer> _renderers = new List<Renderer>();
         private MaterialPropertyBlock _propertyBlock;
         private Coroutine _transitionRoutine;
@@ -52,7 +55,8 @@ namespace Interaction.util.ColorReveal
 
         public void SetColorReveal(bool revealed)
         {
-            SetColor(revealed);
+            revealedBySpot = revealed;
+            ApplyState();
         }
 
         /**
@@ -61,9 +65,17 @@ namespace Interaction.util.ColorReveal
          */
         public void SetColor(bool showColor)
         {
-            if (stayColored && !showColor)
-                return;
+            revealedByHover = showColor;
+            ApplyState();
+        }
 
+        private void ApplyState()
+        {
+            bool showColor = revealedBySpot || revealedByHover || stayColored;
+            
+            if (_isGrayscale == !showColor)
+                return;
+            
             _isGrayscale = !showColor;
             StartColorTransition(_isGrayscale ? GrayscaleAmount : ColorAmount);
         }
@@ -200,6 +212,10 @@ namespace Interaction.util.ColorReveal
             if (stayColored)
             {
                 SetColor(true);
+            }
+            else
+            {
+                SetColor(false);
             }
         }
     }

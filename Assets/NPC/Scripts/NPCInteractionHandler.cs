@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.EventSystems;
 // Detects right-clicks on NPCs and opens the NPC interaction menu.
 // This script should usually live on a central scene object, for example "NPC_InputSystem".
 public class NPCInteractionHandler : MonoBehaviour
 {
+    public static NPCInteractionHandler Instance { get; private set; }
     // Camera used to raycast from the mouse into the 3D world.
     [SerializeField] private Camera raycastCamera;
 
@@ -21,9 +22,59 @@ public class NPCInteractionHandler : MonoBehaviour
 
     private void Awake()
     {
-        // Automatically use the main camera if none was assigned.
+        Instance = this;
+
         if (raycastCamera == null)
             raycastCamera = Camera.main;
+    }
+    public void StartInteraction(
+        NPCController npc,
+        NPCDialogueScript dialogueScript)
+    {
+        if (npc == null || dialogueScript == null)
+            return;
+
+        if (!npc.IsInteractable)
+            return;
+
+        if (interactionAnchor == null)
+        {
+            Debug.LogWarning("Interaction anchor is null.");
+            return;
+        }
+
+        if (GlobalInteractionState.Instance != null)
+            GlobalInteractionState.Instance.BlockInteractions();
+
+        npc.MoveToInteractionAnchor(
+            interactionAnchor,
+            lookAtTarget,
+            () =>
+            {
+                if (NPCDialogueWindow.Instance != null)
+                {
+                    NPCDialogueWindow.Instance.ShowDialogueScript(
+                        dialogueScript,
+                        npc
+                    );
+                }
+                else
+                {
+                    npc.EndInteraction();
+                }
+            }
+        );
+    }
+
+    public void StartInteraction(NPCController npc)
+    {
+        if (npc == null || npc.Profile == null)
+            return;
+
+        StartInteraction(
+            npc,
+            npc.Profile.defaultDialogueScript
+        );
     }
 
     private void Update()
@@ -32,9 +83,17 @@ public class NPCInteractionHandler : MonoBehaviour
         // If there is no mouse or no camera, interaction detection cannot run.
         if (Mouse.current == null || raycastCamera == null)
             return;
+        
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        // Another interaction (dialogue, vinyl flow, ...) currently owns the input.
+        if (GlobalInteractionState.Instance != null &&
+            GlobalInteractionState.Instance.IsInteractionBlocked)
+            return;
 
         // Only react on the exact frame the right mouse button is pressed.
-        if (!Mouse.current.rightButton.wasPressedThisFrame)
+        if (!Mouse.current.leftButton.wasPressedThisFrame)
             return;
 
         // Convert current mouse position into a ray from the camera.
@@ -53,17 +112,11 @@ public class NPCInteractionHandler : MonoBehaviour
         if (npc == null)
             return;
 
-        // Open the interaction menu for the clicked NPC.
-        // Requires NPCInteractionMenu to exist in the scene.
-        if (NPCInteractionMenu.Instance == null)
+        if(!npc.IsInteractable)
         {
-            Debug.LogError("NPCInteractionMenu.Instance is NULL.");
             return;
         }
 
-        npc.MoveToInteractionAnchor(interactionAnchor, lookAtTarget, () =>
-        {
-            NPCInteractionMenu.Instance.Open(npc);
-        });
+        StartInteraction(npc);
     }
 }

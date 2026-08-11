@@ -1,59 +1,77 @@
 using UnityEngine;
 
-// Defines one rule for how an NPC reacts to a specific kind of event.
-// Stored inside NPCProfile.
 [System.Serializable]
 public class NPCReactionRule
 {
     [Header("Condition")]
-    // Event type this rule listens for.
-    // Example: RecordPlayed, FlyerRead, CabinetOpened.
     public NPCReactionEventType eventType;
 
-    // Optional object ID filter.
-    //
-    // If empty:
-    // this rule reacts to every object with the matching event type.
-    //
-    // If set:
-    // this rule only reacts when context.objectId exactly matches this value.
     [Tooltip("Leave empty to match any object.")]
     public string requiredObjectId;
 
-    [Header("Reaction")]
-    // If true, this rule changes the NPC's mood when it matches.
-    public bool changeMood;
+    [Header("Optional Int Condition")]
+    public bool useIntModulus;
+    public bool useMinimumIntValue;
+    public int minimumIntValue;
 
-    // Mood applied when changeMood is true.
+    [Header("Optional Float Condition")]
+    public bool useFloatModulus;
+    public bool useMinimumFloatValue;
+    public float minimumFloatValue;
+
+    [Header("Reaction")]
+    public bool changeMood;
     public NPCMood resultingMood;
 
-    // Text the NPC says when this rule matches.
     [TextArea]
     public string reactionText;
 
-    // If true, the caller should block the original action.
-    // Example: player tries to play a forbidden record -> NPC reacts -> record should not play.
     public bool blockOriginalAction;
 
-    // Checks whether this rule applies to the given reaction context.
     public bool Matches(NPCReactionContext context)
     {
-        // Null context can never match.
         if (context == null)
             return false;
 
-        // Event type must match exactly.
         if (eventType != context.eventType)
             return false;
 
-        // If this rule has a required object ID, the context must match it exactly.
-        if (!string.IsNullOrWhiteSpace(requiredObjectId))
+        if (!string.IsNullOrWhiteSpace(requiredObjectId) &&
+            requiredObjectId != context.objectId)
         {
-            if (requiredObjectId != context.objectId)
-                return false;
+            return false;
         }
 
-        // All checks passed: this rule applies.
+        if(useIntModulus && context.intValue != 0)
+        {
+            if (useMinimumIntValue &&
+                (context.intValue % minimumIntValue != 0))
+            {
+                return false;
+            }
+        }
+        else
+            if (useMinimumIntValue &&
+                (context.intValue < minimumIntValue))
+            {
+                return false;
+            }
+
+        if(useFloatModulus && context.floatValue != 0)
+        {
+            if (useMinimumFloatValue &&
+                (context.floatValue % minimumFloatValue != 0))
+            {
+                return false;
+            }
+        }
+        else
+            if (useMinimumFloatValue &&
+                (context.floatValue < minimumFloatValue))
+            {
+                return false;
+            }
+
         return true;
     }
 }

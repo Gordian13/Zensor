@@ -1,4 +1,6 @@
+using Core.VinylSelect;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Core.camera
@@ -9,8 +11,11 @@ namespace Core.camera
         [SerializeField] private SpotManager spotManager;
         [SerializeField] private CameraSpotRegistry registry;
         [SerializeField] private CameraTransitionManager transitionManager;
+        [SerializeField] private VinylSelectController vinylSelectController;
         [SerializeField] private LayerMask spotLayer = ~0;
+        [SerializeField] private LayerMask wallBlockLayer = ~0;
         [SerializeField] private float rayDistance = 100f;
+        [SerializeField] private FotowandUI fotowandUI;
 
         private SpotNavigationTrigger currentHoveredTrigger;
 
@@ -31,7 +36,35 @@ namespace Core.camera
 
         private void Update()
         {
+            // https://discussions.unity.com/t/how-to-stop-raycast-by-ui/915538/14
+
+            if (IsPointerOverUI())
+            {
+                ClearHover();
+                return;
+            }
+
+            if (GlobalInteractionState.Instance.IsInteractionBlocked)
+                return;
+
             if (transitionManager != null && transitionManager.IsTransitioning)
+                return;
+
+            // Another interaction (dialogue, vinyl flow, ...) currently owns the input.
+            if (GlobalInteractionState.Instance != null &&
+                GlobalInteractionState.Instance.IsInteractionBlocked)
+                return;
+
+            if (vinylSelectController == null)
+                vinylSelectController = FindFirstObjectByType<VinylSelectController>(FindObjectsInactive.Include);
+
+            if (vinylSelectController != null && IsVinylPlayerState(vinylSelectController.CurrentVinylState))
+                return;
+
+            if (fotowandUI == null)
+                fotowandUI = FindFirstObjectByType<FotowandUI>();
+
+            if (fotowandUI != null && fotowandUI.IsOpen)
                 return;
 
             UpdateHover();
@@ -78,12 +111,8 @@ namespace Core.camera
                 return;
             }
 
+            // No matching route means a direct blend to the target spot.
             CameraRoute route = GetCurrentRoute();
-            if (route == null)
-            {
-                Debug.LogWarning("Clicked spot trigger, but no route matched the current spot.", currentHoveredTrigger);
-                return;
-            }
 
             targetSpot.SetSpotReveal(false);
             transitionManager.PlayRoute(route, targetSpotId);
@@ -116,7 +145,9 @@ namespace Core.camera
 
             Ray ray = targetCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            if (!Physics.Raycast(ray, out RaycastHit hit, rayDistance, spotLayer))
+            // Use wallBlockLayer (all layers by default) so walls block the ray.
+            // Only return a trigger if the very first hit object is a spot trigger.
+            if (!Physics.Raycast(ray, out RaycastHit hit, rayDistance, wallBlockLayer))
                 return null;
 
             return hit.collider.GetComponentInParent<SpotNavigationTrigger>();
@@ -132,5 +163,29 @@ namespace Core.camera
 
             return currentHoveredTrigger.GetRouteFrom(spotManager.GetCurrentSpotId());
         }
+
+        private static bool IsVinylPlayerState(VinylState state)
+        {
+            return state == VinylState.vinylPlayer ||
+                   state == VinylState.VinylPlayerInfoOpen;
+        }
+
+
+        private void ClearHover()
+        {
+            if (currentHoveredTrigger == null)
+                return;
+
+            SetHoveredReveal(false);
+            currentHoveredTrigger = null;
+        }
+
+        private static bool IsPointerOverUI()
+        {
+            return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        }
     }
+
+    
+
 }

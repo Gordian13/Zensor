@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_800
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: c383715447a60364d80e9117a40c6bc1, type: 3}
+  title: SO36
+  description: 'SO36 war das raue Herz von Kreuzberg: ein West-Berliner Punk-, New-Wave-
+    und Underground-Club, in dem internationale Bands und lokale Szenen auf engem
+    Raum zusammenprallten.
+
+'
+  hasExtraInfo: 1
+  extraInfoTitle: 
+  extraInfoContent: "Am 28. November 1980 spielten die U.K. Subs im SO36 in West-Berlin,
+    dem legend\xE4ren Club in Kreuzberg, benannt nach dem alten Postbezirk Berlin
+    SO 36. Das Poster k\xFCndigt die Band gro\xDF und kompromisslos als Teil der
+    \u201ETour 80\u201C an; handschriftlich ist SO36 sowie das Datum 28.11. vermerkt.
+    Die U.K. Subs kamen aus London und geh\xF6rten zur ersten Welle des britischen
+    Punk. Um S\xE4nger Charlie Harper entwickelte die Band einen direkten, schnellen
+    und stra\xDFennahen Sound, der 1980 mit Alben wie \u201EBrand New Age\u201C und
+    der Live-LP \u201ECrash Course\u201C international pr\xE4sent war. In West-Berlin
+    traf diese Energie auf eine Stadt im Ausnahmezustand: Mauer, Inselgef\xFChl,
+    besetzte H\xE4user, L\xE4rm, Nachtleben. Ein Konzert wie dieses im SO36 war nicht
+    nur ein Tourstopp, sondern ein Austausch zwischen britischem Punk und der aufgeladenen
+    Kreuzberger Underground-Kultur.\r\n"
+  extraInfoImage: {fileID: 0}

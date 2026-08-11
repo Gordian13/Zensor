@@ -38,6 +38,20 @@ public class NPCController : MonoBehaviour
     // Prevents the NPC from selecting the same patrol point twice in a row.
     [SerializeField] private bool avoidSamePointTwice = true;
 
+    [Header("Interactions")]
+    [SerializeField] private bool isInteractable = true;
+    public bool IsInteractable => isInteractable;
+    [SerializeField] private bool doWelcomeInteractionAfterSpawn;
+    [SerializeField] private NPCDialogueScript welcomeDialogueScript;
+    [SerializeField] private float welcomeInteractionDelay = 0.1f;
+
+    [SerializeField] private float interactionMoveAwayTolerance = 1f;
+    [SerializeField] private float interactionDestinationRefreshRate = 0.15f;
+
+    [Header("Animation")]
+
+    [SerializeField] private NPCAnimationController animationController;
+
     [Header("Debug")]
     // Enables/disables scene gizmo drawing for patrol points.
     [SerializeField] private bool drawGizmos = true;
@@ -45,14 +59,12 @@ public class NPCController : MonoBehaviour
     // Shows the currently selected patrol target in the Inspector.
     [SerializeField] private Transform currentTarget;
 
-    [SerializeField] private float interactionMoveAwayTolerance = 1f;
-    [SerializeField] private float interactionDestinationRefreshRate = 0.15f;
-
     // Public read-only access to profile and runtime state.
     public NPCProfile Profile => profile;
     public string NPCName => profile != null ? profile.npcName : "Unnamed NPC";
     public NPCMood CurrentMood => currentMood;
     public List<Transform> PatrolPoints => patrolPoints;
+    public bool IsInteracting => isInteracting;
 
     private Coroutine patrolRoutine;
     private int currentPatrolIndex = -1;
@@ -71,18 +83,38 @@ public class NPCController : MonoBehaviour
     // Runtime initialization.
     private void Awake()
     {
+        if (animationController == null)
+            animationController = GetComponent<NPCAnimationController>();
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false; // We handle rotation manually in the animation controller for better control.
-
+        if (animationController == null)
+            animationController = GetComponent<NPCAnimationController>();
         ApplyCurrentMoodSettings();
     }
 
     // Starts automatic patrol if enabled.
-    private void Start()
+    private IEnumerator Start()
     {
+        if (doWelcomeInteractionAfterSpawn)
+        {
+            yield return new WaitForSeconds(welcomeInteractionDelay);
+
+            if (NPCInteractionHandler.Instance != null)
+            {
+                NPCInteractionHandler.Instance.StartInteraction(
+                    this,
+                    welcomeDialogueScript
+                );
+
+                yield return new WaitUntil(() => !isInteracting);
+            }
+        }
+
         if (startPatrollingOnStart)
+        {
             StartPatrol();
+        }
     }
 
     // Runs in the editor when Inspector values change.
@@ -154,13 +186,9 @@ public class NPCController : MonoBehaviour
         Debug.Log($"{NPCName} says: {text}");
 
         if (NPCDialogueWindow.Instance != null)
-        {
-            NPCDialogueWindow.Instance.Show(text, this);
-        }
+            NPCDialogueWindow.Instance.ShowReactionDialogue(text, this);
         else
-        {
             Debug.LogWarning("NPCDialogueWindow.Instance is null.");
-        }
     }
 
     // Applies movement values from the current mood data.
@@ -210,8 +238,8 @@ public class NPCController : MonoBehaviour
 
         patrolRoutine = null;
 
-        if (agent != null)
-            agent.ResetPath();
+        //if (agent != null)
+        //    agent.ResetPath();
     }
 
     // Main patrol loop.
@@ -341,15 +369,12 @@ public class NPCController : MonoBehaviour
             return;
 
         isInteracting = true;
+        animationController?.SetInteracting(true);
         wasPatrollingBeforeInteraction = patrolRoutine != null;
 
+    
         StopPatrol();
 
-        if (agent != null)
-        {
-            agent.isStopped = true;
-            agent.ResetPath();
-        }
     }
 
     public void EndInteraction()
@@ -358,6 +383,7 @@ public class NPCController : MonoBehaviour
             return;
 
         isInteracting = false;
+        animationController?.SetInteracting(false);
 
         if (agent != null)
             agent.isStopped = false;
@@ -370,8 +396,13 @@ public class NPCController : MonoBehaviour
 
         if (wasPatrollingBeforeInteraction)
             StartPatrol();
+
+        // The interaction owned the global input block (set on the NPC click);
+        // release it on every exit path, including cancelled walks.
+        if (GlobalInteractionState.Instance != null)
+            GlobalInteractionState.Instance.UnblockInteractions();
     }
-    public void MoveToInteractionAnchor(
+    public void MoveToInteractionAnchor( 
         Transform anchor,
         Transform lookAtTarget,
         System.Action onArrived)
@@ -416,6 +447,13 @@ public class NPCController : MonoBehaviour
         EndInteraction();
     }
 
+    Vector3 GetFlatAnchorPosition(Transform anchor)
+    {
+        Vector3 position = anchor.position;
+        position.y = transform.position.y;
+        return position;
+    }
+
     private IEnumerator MoveToInteractionAnchorRoutine(
         Transform anchor,
         Transform lookAtTarget,
@@ -430,7 +468,7 @@ public class NPCController : MonoBehaviour
         float shortestDistanceToAnchor = Vector3.Distance(transform.position, anchor.position);
 
         agent.isStopped = false;
-        agent.SetDestination(anchor.position);
+        agent.SetDestination(GetFlatAnchorPosition(anchor));
 
         float refreshTimer = 0f;
 
@@ -451,7 +489,7 @@ public class NPCController : MonoBehaviour
             if (currentDistanceToAnchor < shortestDistanceToAnchor)
             {
                 shortestDistanceToAnchor = currentDistanceToAnchor;
-                agent.SetDestination(anchor.position);
+                agent.SetDestination(GetFlatAnchorPosition(anchor));
             }
             
 
@@ -476,7 +514,7 @@ public class NPCController : MonoBehaviour
 
             if (refreshTimer >= interactionDestinationRefreshRate)
             {
-                agent.SetDestination(anchor.position);
+                agent.SetDestination(GetFlatAnchorPosition(anchor));
                 refreshTimer = 0f;
             }
 
@@ -485,7 +523,7 @@ public class NPCController : MonoBehaviour
 
         agent.isStopped = true;
         agent.ResetPath();
-
+        agent.velocity = Vector3.zero;
         agent.stoppingDistance = originalStoppingDistance;
 
         Vector3 lookPosition = lookAtTarget != null
@@ -493,7 +531,6 @@ public class NPCController : MonoBehaviour
             : anchor.position;
 
         FacePosition(lookPosition);
-
         onArrived?.Invoke();
     }
 }

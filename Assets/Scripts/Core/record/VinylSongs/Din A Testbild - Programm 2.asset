@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Din A Testbild - Programm 2
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Din A Testbild - Programm 2
+  author: Din A Testbild
+  album: Programm 2
+  year: 1981
+  description: 'Din A Testbild – „Programm 2“ erschien 1981 in Deutschland auf Roadrunner Records / Innovative Communication unter der Katalognummer RR 9990 als Vinyl-LP mit 45 RPM. Musikalisch bewegt sich die Platte zwischen Electronic, Electro, Synth-Pop und Experimental. Die Stücke sind „Satisfactory“, „Tight Pants“, „Lasst Uns Singen“, „Logischer Gefrierpunkt“ und „Harrakiry Mon Amour“, bei dem Andy Orgel spielt. Mark Eins war für Texte, Gesang und Konzeptideen verantwortlich; Funky Götzner spielte Schlagzeug, Klaus Schulze produzierte, mischte und schnitt das Album von den Original-Mastertapes, außerdem steuerte er Sequencer und Sounds bei. Aufgenommen wurde im IC-Studio und im Klaus Schulze Studio, veröffentlicht über P.O.E.M. Musikverlag / Klaus D. Mueller, Berlin. Auch wenn „Programm 2“ nicht direkt auf Zensor erschien, gehört Din A Testbild eng in das Umfeld, das Zensor sichtbar machte: eine West-Berliner Zone zwischen Laden, Bühne, Elektronik, Punk, Kunst und Zukunftsrauschen.'
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 1
+  tracks:
+  - {fileID: 8300000, guid: 18e78e139bfdc496aa83aceed76141d4, type: 3}
+  - {fileID: 8300000, guid: 5db07f079424146a29624e15b47e0df0, type: 3}
+  - {fileID: 8300000, guid: c3233d9ebbb4b4bcf99fddbf87aada9d, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: 1542e1319345982468459a64c7ffd3bd, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: f98add67634610449bd17b9e4898b5ec, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: 64f2eea1d2df4414f8cfa5c2580dea11, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: 2b7ff6b48acf9ae4493751b30dbc9ca7, type: 3}

@@ -9,6 +9,8 @@ namespace Core.camera
      */
     public class CameraTransitionManager : MonoBehaviour
     {
+        public static CameraTransitionManager Instance { get; private set; }
+
         [SerializeField] private SpotManager spotManager;
         [SerializeField] private CameraSpotRegistry registry;
         [SerializeField] private CinemachineBrain brain;
@@ -22,6 +24,8 @@ namespace Core.camera
 
         private void Awake()
         {
+            Instance = this;
+
             if (spotManager == null)
                 Debug.LogError($"{nameof(CameraTransitionManager)} has no SpotManager assigned.", this);
 
@@ -66,6 +70,22 @@ namespace Core.camera
             currentTransition = StartCoroutine(PlayRouteRoutine(route, destinationSpot));
         }
 
+        public void PlayRoute(CameraRoute route, CameraSpot destinationSpot)
+        {
+            if (destinationSpot == null)
+            {
+                Debug.LogError("Cannot play transition because destination spot is null.", this);
+                return;
+            }
+
+            if (IsTransitioning)
+                return;
+
+            if (spotManager != null && spotManager.IsCurrentSpot(destinationSpot))
+                return;
+            currentTransition = StartCoroutine(PlayRouteRoutine(route, destinationSpot));
+        }
+
         private IEnumerator PlayRouteRoutine(CameraRoute route, CameraSpot destinationSpot)
         {
             IsTransitioning = true;
@@ -75,6 +95,8 @@ namespace Core.camera
                 currentSpot.SetLookControlActive(false);
 
             CinemachineCamera destinationCamera = destinationSpot.getSpotCamera();
+
+            GlobalInteractionState.Instance.BlockInteractions();
 
             if (route != null && route.wayCamerasIds != null)
             {
@@ -121,6 +143,7 @@ namespace Core.camera
                 spotManager.SetCurrentSpot(destinationSpot);
 
             FinishTransition();
+
         }
 
         private bool SetActiveCamera(CinemachineCamera targetCamera)
@@ -204,6 +227,7 @@ namespace Core.camera
         {
             IsTransitioning = false;
             currentTransition = null;
+            GlobalInteractionState.Instance.UnblockInteractions();
         }
     }
 }

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Die Zwei - Einsamkeit Hat Viele Namen
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Die Zwei - Einsamkeit Hat Viele Namen
+  author: Die Zwei
+  album: Einsamkeit Hat Viele Namen
+  year: 1982
+  description: "Die Zwei \u2013 \u201EEinsamkeit Hat Viele Namen / Wir Bleiben Hier\u201C
+    erschien 1982 auf Zensor unter der Katalognummer Zensor CM 01 als 7\"-Vinyl-Single
+    mit 45 UPM. Auf der A-Seite steht \u201EEinsamkeit Hat Viele Namen\u201C, geschrieben
+    von Christian Anders, mit einer Laufzeit von 2:56. Die B-Seite enth\xE4lt \u201EWir
+    Bleiben Hier\u201C, geschrieben von Die Zwei, mit 2:26. Gesungen wurde die Single
+    von Brett Sinclaire und Danny Wilde. Aufgenommen wurde sie im Dezember 1981,
+    ver\xF6ffentlicht als Zensor-Produktion 1982, mit GEMA als Rechtegesellschaft
+    und SST im Matrix-/Runout-Vermerk. Musikalisch liegt die Ver\xF6ffentlichung
+    im Bereich Pop / Vocal, aber im Zensor-Kontext wirkt sie weniger wie normale
+    Unterhaltung als wie eine kleine, schr\xE4g platzierte Ansage: Melodie, Ironie,
+    Einsamkeit und \u201EWir bleiben hier\u201C als West-Berliner Haltung auf sieben
+    Zoll."
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 0
+  tracks:
+  - {fileID: 8300000, guid: c21cf5b32e4a0486192793d9289bb1cf, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: b507f04014256a84882ed0d9ee19824b, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: 06e911a18b0fc84469279e537cfdc4d6, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: 5170e7fa644feb84f966000fa3965e01, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: aae76bff4bcbf4c4e8b4c85d8cbcb249, type: 3}

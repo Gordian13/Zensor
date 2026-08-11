@@ -25,5 +25,7 @@ public enum NPCReactionEventType
     PlayerEnteredRoom,
 
     // Player left the NPC's room/area.
-    PlayerLeftRoom
+    PlayerLeftRoom,
+
+    NumericValueChanged
 }

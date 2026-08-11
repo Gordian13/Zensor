@@ -30,9 +30,6 @@ public class NPCProfile : ScriptableObject
     // Each entry is a ScriptableObject derived from NPCInteraction.
     public List<NPCInteraction> interactions = new List<NPCInteraction>();
 
-    [Header("Dialogue")]
-    // Optional fallback/default dialogue text.
-    // Not heavily used yet, but useful as a safe default.
-    [TextArea]
-    public string defaultSpeechBubbleText;
+    [Header("Dialogue Script")]
+    public NPCDialogueScript defaultDialogueScript;
 }

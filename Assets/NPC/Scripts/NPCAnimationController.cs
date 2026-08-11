@@ -6,11 +6,17 @@ public class NPCAnimationController : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Animator animator;
 
+    
+
     [SerializeField] private float referenceWalkSpeed = 2f;
     [SerializeField] private float animationSpeedMultiplier = 1.5f;
 
     private static readonly int SpeedHash =
         Animator.StringToHash("Speed");
+
+    private static readonly int IsInteractingHash = Animator.StringToHash("IsInteracting");
+
+    private static readonly int RandomIdleHash = Animator.StringToHash("RandomIdle");
 
     private void Reset()
     {
@@ -39,6 +45,19 @@ public class NPCAnimationController : MonoBehaviour
         if (!agent.hasPath || agent.remainingDistance <= agent.stoppingDistance + 0.15f)
             speed = 0f;
 
+        if (speed == 0f)
+        {
+            int maxIdleAnimations = 3;
+
+            int oldValue = animator.GetInteger(RandomIdleHash);
+
+            int newValue = Random.Range(0, maxIdleAnimations - 1);
+
+            if (newValue >= oldValue)
+                newValue++;
+
+            animator.SetInteger(RandomIdleHash, newValue);
+        }
         animator.SetFloat(SpeedHash, speed);
 
         // Animation Speed
@@ -63,5 +82,11 @@ public class NPCAnimationController : MonoBehaviour
         localPos.x = 0f;
         localPos.z = 0f;
         animator.transform.localPosition = localPos;
+    }
+
+    public void SetInteracting(bool isInteracting)
+    {
+        if (animator != null)
+            animator.SetBool(IsInteractingHash, isInteracting);
     }
 }

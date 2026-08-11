@@ -1,3 +1,4 @@
+using Core.VinylSelect;
 using UnityEngine;
 
 namespace Core.camera
@@ -35,14 +36,33 @@ namespace Core.camera
                 return;
             }
 
+            if (GlobalInteractionState.Instance.IsInteractionBlocked)
+                return;
+
             string startSpotId = spotManager.GetStartSpotId();
             if (string.IsNullOrWhiteSpace(startSpotId))
             {
                 Debug.LogError($"{nameof(ReturnToStartButton)} cannot return because no start spot id was found.", this);
                 return;
             }
+            
+            VinylSelectController vinylController = FindFirstObjectByType<VinylSelectController>();
+            if (vinylController != null)
+            {
+                if (IsVinylPlayerState(vinylController.CurrentVinylState))
+                    vinylController.ExitVinylPlayer();
+                else if (vinylController.CurrentVinylState != VinylState.BrowsingBox)
+                    vinylController.CloseSelection();
+            }
 
             transitionManager.PlayRoute(null, startSpotId);
+            
+        }
+
+        private static bool IsVinylPlayerState(VinylState state)
+        {
+            return state == VinylState.vinylPlayer ||
+                   state == VinylState.VinylPlayerInfoOpen;
         }
     }
 }

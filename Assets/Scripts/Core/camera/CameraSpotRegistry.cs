@@ -50,7 +50,14 @@ namespace Core.camera
                 return null;
             }
 
-            spots.TryGetValue(spotId, out CameraSpot spot);
+            if (!spots.TryGetValue(spotId, out CameraSpot spot))
+            {
+                foreach (CameraSpot s in FindObjectsByType<CameraSpot>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+                    RegisterSpot(s);
+
+                spots.TryGetValue(spotId, out spot);
+            }
+
             if (spot == null)
                 Debug.LogError($"No registered CameraSpot with id '{spotId}'.", this);
 

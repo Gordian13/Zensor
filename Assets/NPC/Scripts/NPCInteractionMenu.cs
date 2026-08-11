@@ -14,6 +14,7 @@ public class NPCInteractionMenu : MonoBehaviour
     [SerializeField] private TMP_Text emptyText;
 
     private NPCController currentNPC;
+    private Coroutine closeRoutine;
 
     private void Awake()
     {
@@ -28,11 +29,12 @@ public class NPCInteractionMenu : MonoBehaviour
 
     private void Update()
     {
-        if (root != null && root.activeSelf && Keyboard.current != null)
+        // Deprecated, was used to allow closing the menu with the Escape key.
+        /*if (root != null && root.activeSelf && Keyboard.current != null)
         {
             if (Keyboard.current.escapeKey.wasPressedThisFrame)
                 Close();
-        }
+        }*/
     }
 
     public void Open(NPCController npc)
@@ -41,9 +43,8 @@ public class NPCInteractionMenu : MonoBehaviour
             return;
 
         currentNPC = npc;
-        currentNPC.BeginInteraction();
         ClearButtons();
-
+        
         bool hasInteractions = npc.Profile.interactions != null && npc.Profile.interactions.Count > 0;
 
         if (emptyText != null)
@@ -65,14 +66,6 @@ public class NPCInteractionMenu : MonoBehaviour
                 button.onClick.AddListener(() =>
                 {
                     interaction.Execute(currentNPC);
-
-                    if (root != null)
-                        root.SetActive(false);
-
-                    ClearButtons();
-
-                    if (emptyText != null)
-                        emptyText.gameObject.SetActive(false);
                 });
             }
         }
@@ -82,6 +75,11 @@ public class NPCInteractionMenu : MonoBehaviour
 
     public void Close()
     {
+        if (closeRoutine != null)
+        {
+            StopCoroutine(closeRoutine);
+            closeRoutine = null;
+        }
         if (root != null)
             root.SetActive(false);
 
@@ -90,9 +88,26 @@ public class NPCInteractionMenu : MonoBehaviour
         if (emptyText != null)
             emptyText.gameObject.SetActive(false);
 
+        if (NPCDialogueWindow.Instance != null)
+            NPCDialogueWindow.Instance.Hide();
+
         if (currentNPC != null)
             currentNPC.EndInteraction();
         currentNPC = null;
+    }
+
+    public void CloseAfterDelay(float seconds)
+    {
+        if (closeRoutine != null)
+            StopCoroutine(closeRoutine);
+
+        closeRoutine = StartCoroutine(CloseAfterDelayRoutine(seconds));
+    }
+
+    private System.Collections.IEnumerator CloseAfterDelayRoutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Close();
     }
 
     private void ClearButtons()

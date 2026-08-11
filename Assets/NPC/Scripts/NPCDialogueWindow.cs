@@ -1,6 +1,7 @@
-using UnityEngine;
+using System.Collections.Generic;
 using TMPro;
-using UnityEngine.InputSystem;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class NPCDialogueWindow : MonoBehaviour
 {
@@ -8,8 +9,32 @@ public class NPCDialogueWindow : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject root;
-    [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private TMP_Text npcText;
+    [SerializeField] private Transform choicesParent;
+    [SerializeField] private TMP_Text choiceTextPrefab;
+    [SerializeField] private Button closeButton;
+    [SerializeField] private RectTransform windowRect;
+    [SerializeField] private GameObject choicesArea;
+    [SerializeField] private float conversationHeight = 400f;
+    [SerializeField] private float reactionHeight = 180f;
+
+    [Header("Reaction Dialogue")]
+    [SerializeField] private float defaultReactionDuration = 8f;
+
+    [Header("Typing")]
+    [SerializeField] private bool useTypingAnimation = false;
+    [SerializeField] private float charactersPerSecond = 40f;
+
     private NPCController currentNPC;
+    private NPCDialogueScript currentScript;
+    private Dictionary<string, NPCParsedDialogueNode> currentNodes;
+    private NPCParsedDialogueNode currentNode;
+
+    private Coroutine autoHideRoutine;
+    private Coroutine typingRoutine;
+    private string fullCurrentText;
+
+    private const string RootNodeId = "start";
 
     private void Awake()
     {
@@ -17,39 +42,312 @@ public class NPCDialogueWindow : MonoBehaviour
 
         if (root != null)
             root.SetActive(false);
+
+        if (closeButton != null)
+            closeButton.onClick.AddListener(CloseConversation);
     }
 
-    private void Update()
+    public void ShowDialogueScript(NPCDialogueScript dialogueScript, NPCController npc)
     {
-        if (root != null && root.activeSelf && Keyboard.current != null)
-        {
-            if (Keyboard.current.escapeKey.wasPressedThisFrame)
-                Hide();
-        }
-    }
+        StopAutoHide();
+        StopTyping();
 
-    public void Show(string text, NPCController npc = null)
-    {
-        if (root == null || dialogueText == null)
+        currentNPC = npc;
+
+        if (dialogueScript == null)
         {
-            Debug.LogError("NPCDialogueWindow is missing UI references.");
+            Debug.LogWarning("Dialogue script is null.");
+            CloseConversation();
             return;
         }
 
-        currentNPC = npc;
-        dialogueText.text = text;
+        currentScript = dialogueScript;
+        currentNodes = NPCDialogueParser.Parse(dialogueScript.dialogueText);
+
+        if (!currentNodes.TryGetValue(RootNodeId, out currentNode))
+        {
+            Debug.LogWarning("Dialogue script has no ::start node.");
+            CloseConversation();
+            return;
+        }
+        GlobalInteractionState.Instance.BlockInteractions();
+        if (closeButton != null)
+            closeButton.gameObject.SetActive(true);
+
         root.SetActive(true);
+        SetWindowMode(true);
+        RenderNode(currentNode);
+    }
+
+    public void ShowReactionDialogue(string text, NPCController npc)
+    {
+        currentNPC = npc;
+        ShowReactionDialogue(text, defaultReactionDuration);
+    }
+
+    public void ShowReactionDialogue(string text, float duration)
+    {
+        StopAutoHide();
+        StopTyping();
+        string formatedText = FormatNpcText(text);
+        currentNPC = null;
+        currentScript = null;
+        currentNodes = null;
+        currentNode = null;
+
+        ClearChoices();
+
+        if (closeButton != null)
+            closeButton.gameObject.SetActive(true);
+
+        root.SetActive(true);
+        SetWindowMode(false);
+        PlayTypingAnimation(formatedText);
+
+        autoHideRoutine = StartCoroutine(AutoHideAfterSeconds(duration));
+    }
+
+    private void SetWindowMode(bool conversationMode)
+    {
+        if (choicesArea != null)
+            choicesArea.SetActive(conversationMode);
+
+        if (windowRect != null)
+        {
+            Vector2 size = windowRect.sizeDelta;
+            size.y = conversationMode ? conversationHeight : reactionHeight;
+            windowRect.sizeDelta = size;
+        }
+    }
+
+    private void OpenExternalDialogue()
+    {
+        if (currentScript == null ||
+            currentScript.externalDialogue == null)
+        {
+            Debug.LogWarning("No external dialogue assigned.");
+            return;
+        }
+
+        ShowDialogueScript(
+            currentScript.externalDialogue,
+            currentNPC
+        );
+    }
+
+    private void RenderNode(NPCParsedDialogueNode node, bool showNpcLine = true)
+    {
+        if (node == null)
+            return;
+
+        currentNode = node;
+
+        if (showNpcLine)
+            PlayTypingAnimation(FormatNpcText(node.npcLine));
+
+        ClearChoices();
+
+        foreach (NPCParsedDialogueChoice choice in node.choices)
+            AddChoice(choice.playerText, () => SelectChoice(choice));
+        if (node.choices.Count == 0)
+        {
+            if (node.endsDialogue)
+            {
+                AddSingleContinueChoice("Weiter", CloseConversation);
+                return;
+            }
+
+            if (node.opensExternalDialogue)
+            {
+                AddSingleContinueChoice("Weiter", OpenExternalDialogue);
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(node.nextNodeId))
+            {
+                if (currentNodes.TryGetValue(
+                        node.nextNodeId,
+                        out NPCParsedDialogueNode nextNode))
+                {
+                    AddSingleContinueChoice(
+                        "Weiter",
+                        () => RenderNode(nextNode)
+                    );
+                }
+            }
+        }
+    }
+    private void SelectChoice(NPCParsedDialogueChoice choice)
+    {
+        if (choice == null)
+            return;
+
+        ClearChoices();
+
+        if (!string.IsNullOrWhiteSpace(choice.npcResponse))
+            PlayTypingAnimation(FormatNpcText(choice.npcResponse));
+
+        if (choice.endsDialogue)
+        {
+            AddSingleContinueChoice("Weiter", CloseConversation);
+            return;
+        }
+
+        if (choice.opensExternalDialogue)
+        {
+            if (currentScript != null && currentScript.externalDialogue != null)
+                ShowDialogueScript(currentScript.externalDialogue, currentNPC);
+
+            return;
+        }
+
+        if (!string.IsNullOrWhiteSpace(choice.nextNodeId))
+        {
+            if (currentNodes != null && currentNodes.TryGetValue(choice.nextNodeId, out NPCParsedDialogueNode nextNode))
+            {
+                if (!string.IsNullOrWhiteSpace(choice.npcResponse))
+                    AddSingleContinueChoice("Zurück", () => RenderNode(nextNode, false));
+                else
+                    RenderNode(nextNode);
+            }
+            else
+            {
+                Debug.LogWarning($"Dialogue node not found: {choice.nextNodeId}");
+            }
+        }
+    }
+
+    private string FormatNpcText(string text)
+    {
+        if (currentNPC == null)
+            return text;
+
+        return $"{currentNPC.NPCName}: {text}";
+    }
+
+    public void CloseConversation()
+    {
+        Hide();
+
+        if (currentNPC != null)
+        {
+            NPCAmbientSpeech ambient = currentNPC.GetComponent<NPCAmbientSpeech>();
+
+            if (ambient != null)
+                ambient.PauseAmbient(5f);
+
+            currentNPC.EndInteraction();
+            currentNPC = null;
+        }
+
+        GlobalInteractionState.Instance.UnblockInteractions();
     }
 
     public void Hide()
     {
+        StopAutoHide();
+        StopTyping();
+
         if (root != null)
             root.SetActive(false);
 
-        if (currentNPC != null)
+        ClearChoices();
+
+        currentScript = null;
+        currentNodes = null;
+        currentNode = null;
+    }
+
+    private void PlayTypingAnimation(string text)
+    {
+        StopTyping();
+
+        fullCurrentText = text;
+
+        if (!useTypingAnimation)
         {
-            currentNPC.EndInteraction();
-            currentNPC = null;
+            npcText.text = text;
+            return;
+        }
+
+        typingRoutine = StartCoroutine(TypeText(text));
+    }
+
+    private System.Collections.IEnumerator TypeText(string text)
+    {
+        npcText.text = "";
+
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            typingRoutine = null;
+            yield break;
+        }
+
+        float delay = 1f / charactersPerSecond;
+
+        foreach (char c in text)
+        {
+            npcText.text += c;
+            yield return new WaitForSeconds(delay);
+        }
+
+        typingRoutine = null;
+    }
+
+    private void StopTyping()
+    {
+        if (typingRoutine != null)
+        {
+            StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
+
+        if (!string.IsNullOrEmpty(fullCurrentText) && npcText != null)
+            npcText.text = fullCurrentText;
+    }
+
+    private void AddChoice(string text, System.Action action)
+    {
+        TMP_Text choiceText = Instantiate(choiceTextPrefab, choicesParent);
+        choiceText.text = text;
+
+        DialogueChoiceClickHandler clickHandler =
+            choiceText.gameObject.AddComponent<DialogueChoiceClickHandler>();
+
+        clickHandler.Setup(
+            choiceText,
+            Color.white,
+            Color.yellow,
+            action
+        );
+    }
+
+    private void AddSingleContinueChoice(string text, System.Action action)
+    {
+        AddChoice(text, action);
+    }
+
+    private void ClearChoices()
+    {
+        if (choicesParent == null)
+            return;
+
+        for (int i = choicesParent.childCount - 1; i >= 0; i--)
+            Destroy(choicesParent.GetChild(i).gameObject);
+    }
+
+    private System.Collections.IEnumerator AutoHideAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Hide();
+    }
+
+    private void StopAutoHide()
+    {
+        if (autoHideRoutine != null)
+        {
+            StopCoroutine(autoHideRoutine);
+            autoHideRoutine = null;
         }
     }
 }
