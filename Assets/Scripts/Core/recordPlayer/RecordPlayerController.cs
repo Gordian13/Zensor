@@ -231,7 +231,7 @@ namespace recordPlayer
         public void SetPitch(float rpm)
         {
             _currentRPM = rpm;
-            audioSource.pitch = rpm == 45f ? 1.25f : 0.65f;
+            audioSource.pitch = rpm == 45f ? 1.0f : 0.65f;
         }
 
         private void ApplyLabel(RecordData record)

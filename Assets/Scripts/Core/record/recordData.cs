@@ -3,9 +3,9 @@ using UnityEngine;
 
 public enum Speed
 {
-    Fast,
+    Normal, // Standard-Wiedergabe (Pitch 1.0) - auch fuer Tape
     Slow,
-    Normal // for tape
+    Fast
 }
 
 public enum RecordFormat
