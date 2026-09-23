@@ -2790,7 +2790,6 @@ GameObject:
   - component: {fileID: 1660153187}
   - component: {fileID: 1660153186}
   - component: {fileID: 1660153185}
-  - component: {fileID: 1660153184}
   - component: {fileID: 1660153190}
   - component: {fileID: 1660153191}
   - component: {fileID: 1660153193}
@@ -2802,18 +2801,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1660153184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660153183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cc110ef29739f04d90323328f1d0eb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DragHandler
 --- !u!114 &1660153185
 MonoBehaviour:
   m_ObjectHideFlags: 0
