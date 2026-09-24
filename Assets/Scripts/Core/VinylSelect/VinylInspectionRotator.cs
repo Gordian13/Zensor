@@ -4,7 +4,14 @@ using UnityEngine.InputSystem;
 namespace Core.VinylSelect
 {
     /**
-     * Converts right-mouse dragging into inspection rotation for the selected cover or focused disc.
+     * @brief Converts right-mouse dragging into cover or disc inspection rotation.
+     *
+     * Assign vinylSelectController and inspectionView in the Inspector. Awake attempts
+     * to find either reference if missing. Horizontal mouse movement is multiplied by
+     * degreesPerPixel; invertDirection reverses its sign. Only VinylSelected (cover)
+     * and VinylDraggedOutFocused (disc) accept rotation. Other states ignore this input.
+     * VinylInspectionView applies and resets the accumulated angles.
+     * @see VinylInspectionView
      */
     public class VinylInspectionRotator : MonoBehaviour
     {
@@ -57,6 +64,10 @@ namespace Core.VinylSelect
             ApplyRotationForCurrentState(rotationDegrees);
         }
 
+        /**
+         * @brief Routes the rotation delta to the object allowed by the current state.
+         * @param rotationDegrees Signed angle increment in degrees.
+         */
         private void ApplyRotationForCurrentState(float rotationDegrees)
         {
             VinylState state = vinylSelectController.CurrentVinylState;

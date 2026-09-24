@@ -5,6 +5,15 @@ using UnityEngine.InputSystem;
 
 namespace Core.camera
 {
+    /**
+     * @brief Resolves navigation targets under the mouse and requests camera transitions.
+     *
+     * The vinyl integration suppresses navigation in both vinylPlayer and
+     * VinylPlayerInfoOpen, keeping clicks in the player view from selecting room spots.
+     * A missing vinylSelectController is searched for, including inactive objects.
+     * UI hover, camera transitions, global interaction blocks and an open photo wall
+     * also prevent navigation updates.
+     */
     public class SpotInputRaycaster : MonoBehaviour
     {
         [SerializeField] private Camera targetCamera;
@@ -164,6 +173,11 @@ namespace Core.camera
             return currentHoveredTrigger.GetRouteFrom(spotManager.GetCurrentSpotId());
         }
 
+        /**
+         * @brief Includes the metadata overlay in the player navigation lock.
+         * @param state State to classify.
+         * @return True while the normal player view or its information panel is active.
+         */
         private static bool IsVinylPlayerState(VinylState state)
         {
             return state == VinylState.vinylPlayer ||

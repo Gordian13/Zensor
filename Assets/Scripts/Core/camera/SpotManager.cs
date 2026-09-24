@@ -69,6 +69,12 @@ namespace Core.camera
             return CurrentSpot.GetSpotId();
         }
 
+        /**
+         * @brief Returns the navigation ID used by ReturnToStartButton.
+         * @return The configured startSpotId, otherwise the ID of the assigned start spot.
+         * Logs an error and returns an empty string if neither is configured.
+         * This lookup does not change the current spot or start a transition.
+         */
         public string GetStartSpotId()
         {
             if (!string.IsNullOrWhiteSpace(startSpotId))

@@ -6,8 +6,15 @@ using UnityEngine.InputSystem;
 namespace recordPlayer
 {
     /**
-     * Bridges the vinyl selection flow with the record player.
-     * Uses direct CameraSpot references to avoid cross-scene registry lookup issues.
+     * @brief Connects selection state changes to record loading and player camera routes.
+     *
+     * Assign recordPlayer, playerSpot, browsingSpot and the desired routes in the Inspector.
+     * selectController is searched for when the component is enabled, and the scene must
+     * provide CameraTransitionManager.Instance for entering the player view.
+     *
+     * vinylPlayer and VinylPlayerInfoOpen are treated as one player session. Switching
+     * between them only changes the information UI; it must not reload/clear the record
+     * or restart camera navigation. The state subscription is removed on disable.
      */
     public class VinylPlayerConnector : MonoBehaviour
     {
@@ -44,6 +51,11 @@ namespace recordPlayer
             if (!IsPlayerState(selectController.CurrentVinylState)) return;
         }
 
+        /**
+         * @brief Handles transitions across the player-session boundary only.
+         * @param previous State before the change.
+         * @param next State after the change.
+         */
         private void OnStateChanged(VinylState previous, VinylState next)
         {
             bool enteredPlayer = !IsPlayerState(previous) && IsPlayerState(next);
@@ -76,6 +88,13 @@ namespace recordPlayer
             CameraTransitionManager.Instance.PlayRoute(routeToPlayer, playerSpot);
         }
 
+        /**
+         * @brief Clears playback, requests the browsing route and asks the controller to exit.
+         *
+         * A reentrancy guard prevents nested exit calls triggered by StateChanged.
+         * Record cleanup and routing occur before ExitVinylPlayer() is called; its
+         * boolean result is not checked here. The controller may reject a blocked exit.
+         */
         public void ExitPlayer()
         {
             if (_isExiting)
@@ -91,6 +110,11 @@ namespace recordPlayer
             _isExiting = false;
         }
 
+        /**
+         * @brief Treats the player metadata overlay as part of the active player session.
+         * @param state State to classify.
+         * @return True for vinylPlayer or VinylPlayerInfoOpen.
+         */
         private static bool IsPlayerState(VinylState state)
         {
             return state == VinylState.vinylPlayer ||

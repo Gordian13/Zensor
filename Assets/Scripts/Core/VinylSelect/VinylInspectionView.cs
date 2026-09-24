@@ -3,9 +3,18 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 /**
- * Moves the selected vinyl to the inspection point and returns it to its original pose.
- * Also controls whether the disc sits inside the cover or peeks out of it.
- * Twelve and seven inch vinyls use separate inspection points because the discs differ in size.
+ * @brief Positions the selected cover and disc and applies inspection rotation.
+ *
+ * Assign vinylSelectController and the twelve/seven inch inspection transforms in
+ * the Inspector. positionSpeed and rotationSpeed control interpolation; the two
+ * disc inspection offsets control how far each size peeks out of its cover.
+ *
+ * The cover rotates in VinylSelected; the disc rotates in VinylDraggedOutFocused.
+ * VinylInspectionRotator supplies angle deltas, while VinylDragController owns disc
+ * movement during dragging. Entering or leaving DraggingVinylIn snaps the disc back
+ * to its cached local rotation to avoid an animated rotation correction.
+ * Original local positions and rotations are cached per selected object and restored
+ * when returning to browsing or switching to a different record.
  */
 public class VinylInspectionView : MonoBehaviour
 {
@@ -26,7 +35,9 @@ public class VinylInspectionView : MonoBehaviour
     private float _discRotationDegrees;
 
     /**
-     * Adds right-mouse inspection rotation to the selected cover/vinyl group.
+     * @brief Accumulates cover rotation for the VinylSelected state.
+     * @param degrees Signed angle increment in degrees around the inspection pose's
+     * local negative Z axis. The caller is responsible for checking the input state.
      */
     public void AddVinylInspectionRotation(float degrees)
     {
@@ -34,7 +45,9 @@ public class VinylInspectionView : MonoBehaviour
     }
 
     /**
-     * Adds right-mouse inspection rotation to the focused disc only.
+     * @brief Accumulates disc rotation for the VinylDraggedOutFocused state.
+     * @param degrees Signed angle increment in degrees around the parent-local negative
+     * Z axis. The stored rest rotation is retained as the base orientation.
      */
     public void AddDiscInspectionRotation(float degrees)
     {
@@ -69,7 +82,9 @@ public class VinylInspectionView : MonoBehaviour
     }
 
     /**
-     * Hides the disc rotation reset when the player starts or finishes pushing the disc back into its cover.
+     * @brief Resets disc orientation at the start and completion of dragging into the cover.
+     * @param previousState State before the transition.
+     * @param nextState State after the transition.
      */
     private void OnVinylStateChanged(VinylState previousState, VinylState nextState)
     {
@@ -365,7 +380,8 @@ public class VinylInspectionView : MonoBehaviour
     }
 
     /**
-     * Immediately restores the hidden disc rotation without animating a visible correction.
+     * @brief Restores the cached local disc rotation immediately and clears its angle offset.
+     * @param restPose Cached disc transform and original local rotation.
      */
     private void SnapDiscToRestRotation(RestPose restPose)
     {

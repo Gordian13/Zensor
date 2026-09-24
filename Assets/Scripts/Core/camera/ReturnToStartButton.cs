@@ -3,10 +3,13 @@ using UnityEngine;
 
 namespace Core.camera
 {
-    /*
-     * UI hook for a "return to start" button.
-     * The button does not move the player itself; it asks the existing camera navigation system
-     * to switch back to the configured start spot.
+    /**
+     * @brief Connects the return-to-start UI action to the camera navigation system.
+     *
+     * Assign spotManager and transitionManager or let Awake find them in the loaded scene.
+     * Wire the button's onClick event to ReturnToStart(). The target comes from
+     * SpotManager.GetStartSpotId(); this component requests a route instead of moving
+     * the camera directly. The scene must provide GlobalInteractionState.Instance.
      */
     public class ReturnToStartButton : MonoBehaviour
     {
@@ -22,6 +25,14 @@ namespace Core.camera
                 transitionManager = FindFirstObjectByType<CameraTransitionManager>();
         }
 
+        /**
+         * @brief Requests navigation to the configured start spot when interaction is allowed.
+         *
+         * Returns without navigating if a required manager or start ID is missing, or
+         * global interactions are blocked. Otherwise requests closure of an active vinyl
+         * selection/player state and calls PlayRoute with no explicit route asset.
+         * Closure return values are not checked by this method.
+         */
         public void ReturnToStart()
         {
             if (spotManager == null)

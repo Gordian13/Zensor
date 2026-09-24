@@ -4,6 +4,14 @@ using Core.VinylSelect;
 
 namespace camera
 {
+    /**
+     * @brief Provides keyboard movement and right-mouse camera look when enabled.
+     *
+     * VinylSelected and VinylDraggedOutFocused reserve right-mouse movement for
+     * VinylInspectionRotator, so HandleLook skips camera rotation in those states.
+     * Keyboard movement is independent of this guard. Assign vinylSelectController
+     * or let Start find it in the loaded scene.
+     */
     public class CameraController : MonoBehaviour
     {
         public float moveSpeed = 2f;
@@ -55,6 +63,10 @@ namespace camera
             transform.rotation = Quaternion.Euler(_pitch, _yaw, 0f);
         }
 
+        /**
+         * @brief Checks whether the inspection feature owns the right-mouse gesture.
+         * @return True for cover or focused-disc inspection; false without a controller.
+         */
         private bool IsVinylInspectionRotationState()
         {
             if (vinylSelectController == null)
