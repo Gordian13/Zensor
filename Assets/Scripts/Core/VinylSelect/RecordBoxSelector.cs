@@ -7,6 +7,22 @@ using UnityEngine.InputSystem;
 
 namespace record
 {
+    /**
+     * @brief Handles record hover and selection at the active vinyl browsing spot.
+     *
+     * Assign vinylSelectController, targetCamera, spotManager and owningSpot in the
+     * Inspector. Missing camera/spot references are searched for in Awake; if either
+     * spotManager or owningSpot remains missing, the spot guard permits interaction.
+     * recordInfoUI is optional and can display metadata while hovering.
+     *
+     * recordLayer identifies selectable records. blockingLayer must contain both
+     * record colliders and walls or other occluders: only the nearest non-trigger hit
+     * is considered, and a non-record hit stops selection. An empty blockingLayer
+     * falls back to Physics.DefaultRaycastLayers. rayDistance limits the query.
+     * Hover/selection runs only in BrowsingBox and pauses during a global interaction
+     * block. Leaving browsing or the owning spot restores the current hover position.
+     * @see VinylSelectController
+     */
     public class RecordBoxSelector : MonoBehaviour
     {
         [Header("References")] [SerializeField]
@@ -141,6 +157,12 @@ namespace record
             }
         }
 
+        /**
+         * @brief Resolves a record from the nearest blocking collider under the mouse.
+         * @param[out] vinylTransform Selection transform of the accepted record, or null.
+         * @return An IVinyl provider with vinyl-format data, or null when no valid record
+         * is hit. Objects behind the first blocking hit are never considered.
+         */
         private IVinyl GetVinylUnderCursor(out Transform vinylTransform)
         {
             vinylTransform = null;
@@ -168,6 +190,10 @@ namespace record
             return GetVinylFromHit(hit, out vinylTransform);
         }
 
+        /**
+         * @brief Clears the current hover and optionally restores its position immediately.
+         * @param restoreImmediately Whether to snap the hovered record to its cached position.
+         */
         private void ClearHover(bool restoreImmediately = false)
         {
             if (hoveredTransform == null)
@@ -197,6 +223,10 @@ namespace record
             }
         }
 
+        /**
+         * @brief Checks whether this selector belongs to the current camera spot.
+         * @return True for the current spot, or when either guard reference is missing.
+         */
         private bool IsOwningSpotActive()
         {
             if (spotManager == null || owningSpot == null)
