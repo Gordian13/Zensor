@@ -2791,7 +2791,6 @@ GameObject:
   - component: {fileID: 1660153186}
   - component: {fileID: 1660153185}
   - component: {fileID: 1660153190}
-  - component: {fileID: 1660153191}
   - component: {fileID: 1660153193}
   - component: {fileID: 1660153194}
   m_Layer: 0
@@ -2950,25 +2949,6 @@ MonoBehaviour:
   hoverLayer:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1660153191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660153183}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95fdd9fb23c0470aafafe55c64370460, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RecordSelectionController
-  targetCamera: {fileID: 1660153188}
-  recordInfoUI: {fileID: 1464888760}
-  interactableLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  rayDistance: 100
-  hideUIWhenClickMisses: 1
 --- !u!114 &1660153193
 MonoBehaviour:
   m_ObjectHideFlags: 0
