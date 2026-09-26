@@ -1,7 +1,22 @@
 using System.Collections.Generic;
 
+// doxygen uses &gt; for the > character, so -&gt; and =&gt; below mean -> and => in dialogue files
+/// <summary>
+/// Reads the project's plain-text dialogue format and turns it into dialogue nodes.
+/// The parser supports NPC lines, player choices, links, endings and external dialogues.
+/// </summary>
+/// <remarks>
+/// The supported format is intentionally small:
+/// ::start begins the required first node, NPC: begins an NPC line, and &gt; begins a player choice.
+/// -&gt; nodeId links to another node, -&gt; end closes the conversation, and =&gt; external opens the linked dialogue asset.
+/// Lines beginning with # or // are ignored. Other text is appended either to the current NPC response or to the node's main NPC line.
+/// If the same node ID appears more than once, the later node replaces the earlier entry in the parsed dictionary.
+/// </remarks>
 public static class NPCDialogueParser
 {
+    /// <summary>Parses a complete dialogue text.</summary>
+    /// <param name="rawText">The text stored in an <see cref="NPCDialogueScript"/>.</param>
+    /// <returns>All parsed nodes, addressed by their node ID.</returns>
     public static Dictionary<string, NPCParsedDialogueNode> Parse(string rawText)
     {
         Dictionary<string, NPCParsedDialogueNode> nodes =
@@ -10,7 +25,6 @@ public static class NPCDialogueParser
         if (string.IsNullOrWhiteSpace(rawText))
             return nodes;
 
-        // Unterstützt Windows- und Unix-Zeilenumbrüche.
         string normalizedText = rawText
             .Replace("\r\n", "\n")
             .Replace('\r', '\n');
@@ -28,11 +42,9 @@ public static class NPCDialogueParser
             if (string.IsNullOrWhiteSpace(line))
                 continue;
 
-            // Kommentare erlauben.
             if (line.StartsWith("#") || line.StartsWith("//"))
                 continue;
 
-            // Neuer Node.
             if (line.StartsWith("::"))
             {
                 SavePendingChoice(
@@ -54,7 +66,6 @@ public static class NPCDialogueParser
             if (currentNode == null)
                 continue;
 
-            // NPC-Text.
             if (line.StartsWith("NPC:"))
             {
                 string text = line.Substring(4).Trim();
@@ -71,7 +82,6 @@ public static class NPCDialogueParser
                 continue;
             }
 
-            // Player-Option.
             if (line.StartsWith(">") && !line.StartsWith("=>"))
             {
                 SavePendingChoice(
@@ -85,7 +95,6 @@ public static class NPCDialogueParser
                 continue;
             }
 
-            // Externer Übergang.
             if (line.StartsWith("=>"))
             {
                 string target = line.Substring(2).Trim();
@@ -110,7 +119,6 @@ public static class NPCDialogueParser
                 continue;
             }
 
-            // Interner Übergang oder Dialogende.
             if (line.StartsWith("->"))
             {
                 string target = line.Substring(2).Trim();
@@ -120,7 +128,6 @@ public static class NPCDialogueParser
 
                 if (currentPlayerText != null)
                 {
-                    // Übergang gehört zur aktuellen Player-Option.
                     SavePendingChoice(
                         currentNode,
                         ref currentPlayerText,
@@ -132,7 +139,6 @@ public static class NPCDialogueParser
                 }
                 else
                 {
-                    // Übergang gehört zum gesamten Node.
                     currentNode.nextNodeId = nextNodeId;
                     currentNode.endsDialogue = endsDialogue;
                 }
@@ -140,9 +146,6 @@ public static class NPCDialogueParser
                 continue;
             }
 
-            // Freier Text:
-            // Innerhalb einer Player-Option wird er an die NPC-Antwort gehängt,
-            // sonst an den allgemeinen NPC-Text des Nodes.
             if (currentPlayerText != null)
                 AppendLine(ref currentNpcResponse, line);
             else
@@ -158,6 +161,13 @@ public static class NPCDialogueParser
         return nodes;
     }
 
+    /// <summary>Adds a completed player choice to its node and clears the temporary values.</summary>
+    /// <param name="node">The node that receives the choice.</param>
+    /// <param name="playerText">The temporary player text.</param>
+    /// <param name="npcResponse">The temporary NPC response.</param>
+    /// <param name="nextNodeId">The optional ID of the next node.</param>
+    /// <param name="endsDialogue">Whether the choice ends the dialogue.</param>
+    /// <param name="opensExternalDialogue">Whether the choice opens the linked dialogue.</param>
     private static void SavePendingChoice(
         NPCParsedDialogueNode node,
         ref string playerText,
@@ -181,6 +191,9 @@ public static class NPCDialogueParser
         npcResponse = "";
     }
 
+    /// <summary>Adds a non-empty line to an existing text with a line break when needed.</summary>
+    /// <param name="target">The text that receives the new line.</param>
+    /// <param name="text">The line to add.</param>
     private static void AppendLine(ref string target, string text)
     {
         if (string.IsNullOrWhiteSpace(text))
