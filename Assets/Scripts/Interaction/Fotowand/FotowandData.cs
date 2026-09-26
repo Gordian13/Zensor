@@ -2,7 +2,8 @@ using UnityEngine;
 
 /// <summary>
 /// ScriptableObject that stores the data for a single photo item on a Fotowand.
-/// Create a new asset via: right-click in Project > Create > Zensor > Fotowand Data
+/// Create a new asset via: right-click in Project > Create > Zensor > FotowandData,
+/// fill in the fields, then assign it to a <see cref="FotowandInteractable"/>.
 /// </summary>
 [CreateAssetMenu(fileName = "NewFotowandData", menuName = "Zensor/FotowandData")]
 public class FotowandData : ScriptableObject
