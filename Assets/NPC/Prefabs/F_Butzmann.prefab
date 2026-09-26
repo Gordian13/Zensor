@@ -760,7 +760,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7095389882559262803}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.9999996
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1967,7 +1967,6 @@ GameObject:
   - component: {fileID: 6981005416767380961}
   - component: {fileID: 6965068603932430482}
   - component: {fileID: 8816145889897903339}
-  - component: {fileID: 3515723466574101576}
   - component: {fileID: 5233928681277537747}
   - component: {fileID: 6636596529686608895}
   m_Layer: 0
@@ -2048,19 +2047,6 @@ MonoBehaviour:
   animationController: {fileID: 5233928681277537747}
   drawGizmos: 1
   currentTarget: {fileID: 0}
---- !u!114 &3515723466574101576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7728081373099745418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c969ed9264732794bac15fa97934153f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCReactionDebugTester
-  npc: {fileID: 8816145889897903339}
 --- !u!114 &5233928681277537747
 MonoBehaviour:
   m_ObjectHideFlags: 0

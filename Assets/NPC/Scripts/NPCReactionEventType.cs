@@ -1,31 +1,33 @@
-// Event categories that an NPC can react to.
-// These are NPC-facing events, not full museum object implementations.
-// Other systems can use these values when creating an NPCReactionContext.
+/// <summary>
+/// Lists the events an NPC can react to.
+/// Other systems pass one of these values through an <see cref="NPCReactionContext"/>.
+/// </summary>
 public enum NPCReactionEventType
 {
-    // No event / default value.
+    /// <summary>No event has happened.</summary>
     None,
 
-    // Generic object click.
+    /// <summary>An object was clicked.</summary>
     ObjectClicked,
 
-    // Player read a flyer.
+    /// <summary>A flyer was read.</summary>
     FlyerRead,
 
-    // Player selected a record but did not necessarily play it yet.
+    /// <summary>A record was selected.</summary>
     RecordSelected,
 
-    // Player attempted to play a record.
+    /// <summary>A record was played.</summary>
     RecordPlayed,
 
-    // Player opened a cabinet.
+    /// <summary>A cabinet was opened.</summary>
     CabinetOpened,
 
-    // Player entered the NPC's room/area.
+    /// <summary>The player entered the NPC's area.</summary>
     PlayerEnteredRoom,
 
-    // Player left the NPC's room/area.
+    /// <summary>The player left the NPC's area.</summary>
     PlayerLeftRoom,
 
+    /// <summary>A numeric value from another system changed.</summary>
     NumericValueChanged
 }
