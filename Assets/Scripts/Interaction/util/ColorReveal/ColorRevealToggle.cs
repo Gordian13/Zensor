@@ -4,29 +4,48 @@ using UnityEngine;
 
 namespace Interaction.util.ColorReveal
 {
+    /**
+     * Makes an object gray and fades it into color when it is hovered, revealed by a spot or locked.
+     *
+     * The object needs a material with the FadeColor shader (_ColorAmount property).
+     * The color is set per renderer with a MaterialPropertyBlock, so the material itself is not changed.
+     */
     public class ColorRevealToggle : MonoBehaviour, IColorRevealable
     {
-        private float transitionDuration = 0.3f;
-        [SerializeField] private bool startGrayscale = true;
+        /** How long the fade between gray and color takes (in seconds). */
+        private const float TransitionDuration = 0.3f;
+        /** If true, the renderers of all children get colored too, not only the one on this object.
+         * This is important for the current vinyls
+         */
+        [Header("Renderers")]
         [SerializeField] private bool includeChildRenderers = false;
-        [SerializeField] private bool includeInactiveChildren = true;
-        [SerializeField] private bool stayColored = false;
 
+        /** True while the object is locked in color (e.g. the selected vinyl). */
+        private bool stayColored;
+
+        /** True while the current camera spot reveals this object. */
         private bool revealedBySpot;
+        /** True while the mouse is over this object. */
         private bool revealedByHover;
         
+        /** All renderers that use the FadeColor shader. */
         private readonly List<Renderer> _renderers = new List<Renderer>();
+        /** Used to set _ColorAmount without changing the shared material. */
         private MaterialPropertyBlock _propertyBlock;
+        /** The fade that is running right now, or null. */
         private Coroutine _transitionRoutine;
+        /** True while the object is gray. */
         private bool _isGrayscale;
 
-        // _ColorAmount ID in shader
+        /** _ColorAmount ID in shader */
         private static readonly int ColorAmountId = Shader.PropertyToID("_ColorAmount");
+        /** _ColorAmount value for gray. */
         private const float GrayscaleAmount = 0f;
+        /** _ColorAmount value for full color. */
         private const float ColorAmount = 1f;
 
         /**
-         * Sets the initial color amount based on startGrayscale.
+         * Starts the object in grayscale.
          * Source: https://docs.unity3d.com/ScriptReference/MaterialPropertyBlock.html
          */
         private void Awake()
@@ -39,20 +58,15 @@ namespace Interaction.util.ColorReveal
                 Debug.LogWarning($"{name} uses ColorRevealToggle, but no renderer with the custom shader was found.", this);
             }
 
-            _isGrayscale = startGrayscale;
-            SetColorAmount(_isGrayscale ? GrayscaleAmount : ColorAmount);
+            _isGrayscale = true;
+            SetColorAmount(GrayscaleAmount);
         }
 
         /**
-         * Toggles between grayscale and color, restarting the fade animation if one is already running.
+         * Sets whether the current camera spot reveals this object.
+         *
+         * @param revealed True if the spot shows the object in color.
          */
-        public void ToggleColor()
-        {
-            SetColor(_isGrayscale);
-
-            Debug.Log($"Toggled grayscale on object {gameObject.name}");
-        }
-
         public void SetColorReveal(bool revealed)
         {
             revealedBySpot = revealed;
@@ -60,8 +74,11 @@ namespace Interaction.util.ColorReveal
         }
 
         /**
-         * Sets the object to color or grayscale directly.
-         * showColor true means _ColorAmount 1, showColor false means _ColorAmount 0.
+         * Sets whether the mouse is over the object.
+         * showColor true means _ColorAmount 1, showColor false means _ColorAmount 0,
+         * unless the spot or stayColored still keeps it in color.
+         *
+         * @param showColor True if the object is hovered.
          */
         public void SetColor(bool showColor)
         {
@@ -69,6 +86,10 @@ namespace Interaction.util.ColorReveal
             ApplyState();
         }
 
+        /**
+         * Checks spot, hover and stayColored and fades to color if one of them is true, otherwise to gray.
+         * Does nothing if the object already has the right state.
+         */
         private void ApplyState()
         {
             bool showColor = revealedBySpot || revealedByHover || stayColored;
@@ -82,7 +103,7 @@ namespace Interaction.util.ColorReveal
 
         /**
          * Fades the color amount from its current value to targetAmount over
-         * transitionDuration seconds using linear interpolation.
+         * TransitionDuration seconds using linear interpolation.
          *
          * Mathf.Lerp: interpolates between startAmount and targetAmount based on t.
          * Mathf.Clamp01: keeps t between 0 and 1, even if a frame spike pushes time past the duration.
@@ -97,11 +118,11 @@ namespace Interaction.util.ColorReveal
             float[] startAmounts = GetColorAmounts();
             float time = 0f;
 
-            while (time < transitionDuration)
+            while (time < TransitionDuration)
             {
                 time += Time.deltaTime;
                 // e.g. Clamp01(10 / 2) = Clamp01(5) = 1
-                float t = Mathf.Clamp01(time / transitionDuration);
+                float t = Mathf.Clamp01(time / TransitionDuration);
                 SetColorAmounts(startAmounts, targetAmount, t);
 
                 yield return null;
@@ -110,6 +131,11 @@ namespace Interaction.util.ColorReveal
             SetColorAmount(targetAmount);
         }
 
+        /**
+         * Starts the fade to targetAmount and stops the old fade if one is still running.
+         *
+         * @param targetAmount The _ColorAmount to fade to.
+         */
         private void StartColorTransition(float targetAmount)
         {
             if (_transitionRoutine != null)
@@ -127,7 +153,7 @@ namespace Interaction.util.ColorReveal
 
             if (includeChildRenderers)
             {
-                Renderer[] childRenderers = GetComponentsInChildren<Renderer>(includeInactiveChildren);
+                Renderer[] childRenderers = GetComponentsInChildren<Renderer>(true);
 
                 foreach (Renderer childRenderer in childRenderers)
                 {
@@ -140,6 +166,11 @@ namespace Interaction.util.ColorReveal
             AddRendererIfCompatible(GetComponent<Renderer>());
         }
 
+        /**
+         * Adds the renderer to _renderers if it uses the FadeColor shader.
+         *
+         * @param rendererToAdd The renderer to check, can be null.
+         */
         private void AddRendererIfCompatible(Renderer rendererToAdd)
         {
             if (rendererToAdd == null)
@@ -151,6 +182,12 @@ namespace Interaction.util.ColorReveal
             _renderers.Add(rendererToAdd);
         }
 
+        /**
+         * Checks if one of the renderer's materials has the _ColorAmount property.
+         *
+         * @param rendererToCheck The renderer to check.
+         * @return True if the renderer uses the FadeColor shader.
+         */
         private bool UsesColorRevealShader(Renderer rendererToCheck)
         {
             foreach (Material material in rendererToCheck.sharedMaterials)
@@ -173,6 +210,13 @@ namespace Interaction.util.ColorReveal
             }
         }
 
+        /**
+         * Sets every renderer to a value between its start amount and targetAmount.
+         *
+         * @param startAmounts The _ColorAmount of each renderer when the fade started.
+         * @param targetAmount The _ColorAmount to fade to.
+         * @param t How far the fade is, from 0 to 1.
+         */
         private void SetColorAmounts(float[] startAmounts, float targetAmount, float t)
         {
             for (int i = 0; i < _renderers.Count; i++)
@@ -183,6 +227,12 @@ namespace Interaction.util.ColorReveal
             }
         }
 
+        /**
+         * Sets _ColorAmount on one renderer via the property block.
+         *
+         * @param rendererToSet The renderer to change.
+         * @param amount The new _ColorAmount.
+         */
         private void SetRendererColorAmount(Renderer rendererToSet, float amount)
         {
             rendererToSet.GetPropertyBlock(_propertyBlock);
@@ -206,17 +256,15 @@ namespace Interaction.util.ColorReveal
             return colorAmounts;
         }
         
+        /**
+         * Locks or unlocks the object in color.
+         *
+         * @param stayColored True to keep the object colored, false to unlock it.
+         */
         public void SetStayColored(bool stayColored)
         {
             this.stayColored = stayColored;
-            if (stayColored)
-            {
-                SetColor(true);
-            }
-            else
-            {
-                SetColor(false);
-            }
+            SetColor(stayColored);
         }
     }
 }
