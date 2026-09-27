@@ -17,6 +17,31 @@ using UnityEngine;
  * with an IColorRevealable child for selection/exit operations. Player entry and exit
  * also use BackGroundMusicManager.Instance. Methods ending in FromButton are void
  * adapters for Unity button events and discard the transition result.
+ *
+ * State changes:
+ * @dot
+ * digraph VinylState {
+ *   start [shape=point, width=0.15, label=""];
+ *   start                  -> BrowsingBox;
+ *   BrowsingBox            -> VinylSelected          [label="SelectVinyl"];
+ *   VinylSelected          -> VinylInfoOpen          [label="OpenInfo"];
+ *   VinylInfoOpen          -> VinylSelected          [label="CloseInfo"];
+ *   VinylSelected          -> DraggingVinylOut       [label="BeginDragOut"];
+ *   DraggingVinylOut       -> VinylDraggedOutFocused [label="FinishDragOut"];
+ *   DraggingVinylOut       -> VinylSelected          [label="CancelDragOut"];
+ *   VinylDraggedOutFocused -> DraggingVinylIn        [label="BeginDragIn"];
+ *   DraggingVinylIn        -> VinylSelected          [label="FinishDragIn"];
+ *   DraggingVinylIn        -> VinylDraggedOutFocused [label="CancelDragIn"];
+ *   VinylDraggedOutFocused -> vinylPlayer            [label="GoToVinylPlayer"];
+ *   vinylPlayer            -> VinylPlayerInfoOpen    [label="OpenInfo"];
+ *   VinylPlayerInfoOpen    -> vinylPlayer            [label="CloseInfo"];
+ *   VinylSelected          -> BrowsingBox            [label="CloseSelection"];
+ *   VinylInfoOpen          -> BrowsingBox            [label="CloseSelection"];
+ *   VinylDraggedOutFocused -> BrowsingBox            [label="CloseSelection"];
+ *   vinylPlayer            -> BrowsingBox            [label="ExitVinylPlayer"];
+ *   VinylPlayerInfoOpen    -> BrowsingBox            [label="ExitVinylPlayer"];
+ * }
+ * @enddot
  */
 public class VinylSelectController : MonoBehaviour
 {
@@ -30,8 +55,14 @@ public class VinylSelectController : MonoBehaviour
      * Selection cleanup order depends on the transition; consumers must tolerate null data.
      */
     public event Action<VinylState, VinylState> StateChanged;
+    /**
+     * The CameraSpot this controller belongs to, used to turn right click look on and off.
+     */
     private CameraSpot _spot;
 
+    /**
+     * Gets the CameraSpot from the parent.
+     */
     public void Awake()
     {
         this._spot = GetComponentInParent<CameraSpot>();
@@ -173,47 +204,30 @@ public class VinylSelectController : MonoBehaviour
         CloseInfo();
     }
 
-    public void BeginDragOutFromButton()
-    {
-        BeginDragOut();
-    }
-
-    public void FinishDragOutFromButton()
-    {
-        FinishDragOut();
-    }
-
-    public void BeginDragInFromButton()
-    {
-        BeginDragIn();
-    }
-
-    public void FinishDragInFromButton()
-    {
-        FinishDragIn();
-    }
-
+    /** @brief Unity button adapter for CloseSelection(). */
     public void ContinueBrowsingFromButton()
     {
         CloseSelection();
     }
 
+    /** @brief Unity button adapter for GoToVinylPlayer(). */
     public void GoToVinylPlayerFromButton()
     {
         GoToVinylPlayer();
     }
 
+    /**
+     * Puts the dragged out disc on the record player.
+     * Stops the background music and counts the record as played.
+     *
+     * @return True if the state was VinylDraggedOutFocused and is now vinylPlayer.
+     */
     public bool GoToVinylPlayer()
     {
         BackGroundMusicManager.Instance.StopBackGroundMusic();
         if (GlobalPlayedRecordsCounter.Instance != null)
             GlobalPlayedRecordsCounter.Instance.IncreaseRecordsPlayed();
         return TryChangeState(VinylState.VinylDraggedOutFocused, VinylState.vinylPlayer);
-    }
-
-    public void ExitVinylPlayerFromButton()
-    {
-        ExitVinylPlayer();
     }
 
     /**

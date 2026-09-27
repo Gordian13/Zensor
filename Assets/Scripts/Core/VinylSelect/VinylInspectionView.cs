@@ -69,12 +69,18 @@ public class VinylInspectionView : MonoBehaviour
             Debug.LogError($"{nameof(VinylInspectionView)} has no seven inch inspection point assigned.", this);
     }
 
+    /**
+     * Subscribes to StateChanged of the VinylSelectController.
+     */
     private void OnEnable()
     {
         if (vinylSelectController != null)
             vinylSelectController.StateChanged += OnVinylStateChanged;
     }
 
+    /**
+     * Unsubscribes from StateChanged of the VinylSelectController.
+     */
     private void OnDisable()
     {
         if (vinylSelectController != null)
@@ -422,6 +428,15 @@ public class VinylInspectionView : MonoBehaviour
         public Vector3 VinylDiscLocalPosition { get; }
         public Quaternion VinylDiscLocalRotation { get; }
 
+        /**
+         * Creates a new RestPose.
+         *
+         * @param localPosition Local position of the vinyl.
+         * @param localRotation Local rotation of the vinyl.
+         * @param vinylDisc The disc of the vinyl, can be null.
+         * @param vinylDiscLocalPosition Local position of the disc.
+         * @param vinylDiscLocalRotation Local rotation of the disc.
+         */
         public RestPose(
             Vector3 localPosition,
             Quaternion localRotation,

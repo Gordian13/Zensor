@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Core.camera;
 using Core.VinylSelect;
-using Interaction.util.ColorReveal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -52,6 +51,10 @@ namespace record
         private Transform hoveredTransform;
         private bool wasOwningSpotActive = false;
 
+        /**
+         * Searches for the camera, SpotManager and CameraSpot if they are not set in the Inspector.
+         * Logs an error if the camera or the VinylSelectController is missing.
+         */
         private void Awake()
         {
             if (targetCamera == null)
@@ -73,6 +76,10 @@ namespace record
                 owningSpot = GetComponentInParent<CameraSpot>();
         }
 
+        /**
+         * Checks every frame which record is under the mouse and selects it on left click.
+         * Only runs while this spot is active and the state is BrowsingBox.
+         */
         private void Update()
         {
             if (GlobalInteractionState.Instance != null &&
@@ -116,6 +123,13 @@ namespace record
             AnimateRecords();
         }
 
+        /**
+         * Changes the hovered record and shows its data in the recordInfoUI.
+         * Saves the rest position of the record the first time it is hovered.
+         *
+         * @param vinyl The hovered record, or null if nothing is hovered.
+         * @param vinylTransform The transform of the hovered record, or null.
+         */
         private void ChangeHoveredRecord(IVinyl vinyl, Transform vinylTransform)
         {
             hoveredTransform = vinylTransform;
@@ -133,6 +147,9 @@ namespace record
             }
         }
 
+        /**
+         * Pulls the hovered record out a bit and moves all other records back to their rest position.
+         */
         private void AnimateRecords()
         {
             foreach (KeyValuePair<Transform, Vector3> record in restPositions)
@@ -211,9 +228,11 @@ namespace record
                 recordInfoUI?.Hide();
         }
 
-        // Immediately snaps every tracked record to its stored rest position.
-        // Called on the first frame after returning to the vinyl spot so that
-        // colliders and visuals are in sync before raycasting starts.
+        /**
+         * Immediately snaps every tracked record to its stored rest position.
+         * Called on the first frame after returning to the vinyl spot so that
+         * colliders and visuals are in sync before raycasting starts.
+         */
         private void SnapAllRecordsToRest()
         {
             foreach (KeyValuePair<Transform, Vector3> record in restPositions)
@@ -235,6 +254,11 @@ namespace record
             return spotManager.IsCurrentSpot(owningSpot);
         }
 
+        /**
+         * Returns the blockingLayer, or the default raycast layers if blockingLayer is empty.
+         *
+         * @return The layer mask used for the raycast.
+         */
         private int GetBlockingLayerMask()
         {
             return blockingLayer.value != 0
@@ -242,11 +266,25 @@ namespace record
                 : Physics.DefaultRaycastLayers;
         }
 
+        /**
+         * Checks if a layer is part of a layer mask.
+         *
+         * @param layer The layer to check.
+         * @param layerMask The mask to check against.
+         * @return True if the layer is in the mask.
+         */
         private static bool IsLayerInMask(int layer, LayerMask layerMask)
         {
             return (layerMask.value & (1 << layer)) != 0;
         }
 
+        /**
+         * Searches the hit object and its parents for an IVinyl with vinyl format.
+         *
+         * @param hit The raycast hit.
+         * @param[out] vinylTransform The selection transform of the found record, or null.
+         * @return The found record, or null if there is no vinyl.
+         */
         private static IVinyl GetVinylFromHit(RaycastHit hit, out Transform vinylTransform)
         {
             vinylTransform = null;
