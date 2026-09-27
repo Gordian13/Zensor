@@ -3,8 +3,17 @@ using TMPro;
 using UnityEngine;
 
 /**
- * Updates the vinyl UI whenever the selection state changes.
- * Controls the visible buttons and displays the selected record information.
+ * @brief Synchronizes vinyl buttons, hints and metadata with the selection state.
+ *
+ * Subscribes to VinylSelectController.StateChanged while enabled. Assign controller,
+ * recordInfoUI and the relevant button GameObjects in the Inspector or via Configure().
+ * A missing controller is searched for on enable; panel lookup includes inactive objects.
+ *
+ * VinylInfoOpen and VinylPlayerInfoOpen share the same RecordInfoUI. The Info button
+ * is available in VinylSelected and vinylPlayer, while Play requires a focused disc.
+ * Track buttons require the normal player state and more than one track. Optional
+ * guidance fields display dragging and rotation hints only during inspection/dragging.
+ * This component controls visibility and text, not the buttons' onClick bindings.
  */
 public class VinylSelectionUI : MonoBehaviour
 {
@@ -29,7 +38,19 @@ public class VinylSelectionUI : MonoBehaviour
     [SerializeField] private string rotateHint = "Rechte Maustaste halten + Maus bewegen -> Cover oder Platte drehen";
 
     /**
-     * Connects the controller, info panel, and buttons when the UI is created by the editor setup tool.
+     * @brief Assigns UI references and immediately refreshes from the controller state.
+     * @param selectController Controller supplying the current selection and state.
+     * @param infoUI Shared metadata panel.
+     * @param info Button object for opening information.
+     * @param closeInfo Button object for closing information.
+     * @param browseMore Button object for returning to browsing.
+     * @param play Button object for entering the player.
+     * @param guidance Optional parent object for inspection hints; null disables this reference.
+     * @param primaryHint Optional text for the current dragging action.
+     * @param secondaryHint Optional text for the rotation gesture.
+     *
+     * Track button references remain Inspector-assigned. This method does not rebind
+     * StateChanged subscriptions; configure the controller before enabling the component.
      */
     public void Configure(
         VinylSelectController selectController,
@@ -108,7 +129,8 @@ public class VinylSelectionUI : MonoBehaviour
     }
 
     /**
-     * Shows the buttons and information panel required by the given vinyl state.
+     * @brief Applies visibility rules and displays metadata for either information state.
+     * @param state Current state reported by the selection controller.
      */
     private void ApplyState(VinylState state)
     {
@@ -191,6 +213,7 @@ public class VinylSelectionUI : MonoBehaviour
         }
     }
 
+    /** @brief Finds an unassigned metadata panel, including panels that are currently inactive. */
     private void ResolveRecordInfoUI()
     {
         if (recordInfoUI == null)

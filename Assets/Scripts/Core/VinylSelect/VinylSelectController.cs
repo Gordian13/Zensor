@@ -6,24 +6,73 @@ using Interaction.util.ColorReveal;
 using UnityEngine;
 
 /**
- * Owns the current vinyl selection state and validates all allowed state transitions.
- * Other scripts request changes through this controller instead of changing the state directly.
+ * @brief Owns the selected vinyl and validates transitions between interaction states.
+ *
+ * Call transition methods instead of assigning state directly. Successful changes emit
+ * StateChanged so VinylSelectionUI and VinylPlayerConnector can update their views.
+ * VinylInfoOpen returns to VinylSelected; VinylPlayerInfoOpen returns to vinylPlayer.
+ * Opening player information must not be treated as leaving the record player.
+ *
+ * Requires a parent CameraSpot, GlobalInteractionState.Instance and a selected vinyl
+ * with an IColorRevealable child for selection/exit operations. Player entry and exit
+ * also use BackGroundMusicManager.Instance. Methods ending in FromButton are void
+ * adapters for Unity button events and discard the transition result.
+ *
+ * State changes:
+ * @dot
+ * digraph VinylState {
+ *   start [shape=point, width=0.15, label=""];
+ *   start                  -> BrowsingBox;
+ *   BrowsingBox            -> VinylSelected          [label="SelectVinyl"];
+ *   VinylSelected          -> VinylInfoOpen          [label="OpenInfo"];
+ *   VinylInfoOpen          -> VinylSelected          [label="CloseInfo"];
+ *   VinylSelected          -> DraggingVinylOut       [label="BeginDragOut"];
+ *   DraggingVinylOut       -> VinylDraggedOutFocused [label="FinishDragOut"];
+ *   DraggingVinylOut       -> VinylSelected          [label="CancelDragOut"];
+ *   VinylDraggedOutFocused -> DraggingVinylIn        [label="BeginDragIn"];
+ *   DraggingVinylIn        -> VinylSelected          [label="FinishDragIn"];
+ *   DraggingVinylIn        -> VinylDraggedOutFocused [label="CancelDragIn"];
+ *   VinylDraggedOutFocused -> vinylPlayer            [label="GoToVinylPlayer"];
+ *   vinylPlayer            -> VinylPlayerInfoOpen    [label="OpenInfo"];
+ *   VinylPlayerInfoOpen    -> vinylPlayer            [label="CloseInfo"];
+ *   VinylSelected          -> BrowsingBox            [label="CloseSelection"];
+ *   VinylInfoOpen          -> BrowsingBox            [label="CloseSelection"];
+ *   VinylDraggedOutFocused -> BrowsingBox            [label="CloseSelection"];
+ *   vinylPlayer            -> BrowsingBox            [label="ExitVinylPlayer"];
+ *   VinylPlayerInfoOpen    -> BrowsingBox            [label="ExitVinylPlayer"];
+ * }
+ * @enddot
  */
 public class VinylSelectController : MonoBehaviour
 {
+    /** @brief Current interaction state, initially BrowsingBox. */
     public VinylState CurrentVinylState { get; private set; } = VinylState.BrowsingBox;
+    /** @brief Selected record provider, or null when no record is selected. */
     public IVinyl SelectedVinyl { get; private set; }
 
+    /**
+     * @brief Reports the previous and new state after CurrentVinylState is updated.
+     * Selection cleanup order depends on the transition; consumers must tolerate null data.
+     */
     public event Action<VinylState, VinylState> StateChanged;
+    /**
+     * The CameraSpot this controller belongs to, used to turn right click look on and off.
+     */
     private CameraSpot _spot;
 
+    /**
+     * Gets the CameraSpot from the parent.
+     */
     public void Awake()
     {
         this._spot = GetComponentInParent<CameraSpot>();
     }
 
     /**
-     * Selects a vinyl while browsing and changes the state to VinylSelected.
+     * @brief Selects a record from browsing and reserves interaction for inspection.
+     * @param vinyl Record provider to select.
+     * @return True if selected; false if input is blocked, the state is not BrowsingBox,
+     * or vinyl is null.
      */
     public bool SelectVinyl(IVinyl vinyl)
     {
@@ -41,7 +90,9 @@ public class VinylSelectController : MonoBehaviour
     }
 
     /**
-     * Opens the information view for the currently selected vinyl.
+     * @brief Opens the shared information panel from inspection or player mode.
+     * @return True if VinylSelected becomes VinylInfoOpen or vinylPlayer becomes
+     * VinylPlayerInfoOpen; false in all other states.
      */
     public bool OpenInfo()
     {
@@ -55,7 +106,9 @@ public class VinylSelectController : MonoBehaviour
     }
 
     /**
-     * Closes the information view and returns to the state that opened it.
+     * @brief Closes the information panel and restores its corresponding interaction mode.
+     * @return True if VinylInfoOpen becomes VinylSelected or VinylPlayerInfoOpen becomes
+     * vinylPlayer; false if neither information state is active.
      */
     public bool CloseInfo()
     {
@@ -117,9 +170,10 @@ public class VinylSelectController : MonoBehaviour
     }
 
     /**
-     * Clears the current selection and returns to browsing.
-     * Also works with the disc dragged out or the info panel open, so leaving
-     * the spot always releases the selection and the global interaction block.
+     * @brief Releases the selection, color hold and interaction block when leaving inspection.
+     * @return True from VinylSelected, VinylInfoOpen or VinylDraggedOutFocused;
+     * false during dragging, browsing or player states.
+     * @see ExitVinylPlayer
      */
     public bool CloseSelection()
     {
@@ -138,46 +192,36 @@ public class VinylSelectController : MonoBehaviour
     }
 
     // Void wrappers are used because Unity buttons do not display bool-returning methods.
+    /** @brief Unity button adapter for OpenInfo(). */
     public void OpenInfoFromButton()
     {
         OpenInfo();
     }
 
+    /** @brief Unity button adapter for CloseInfo(). */
     public void CloseInfoFromButton()
     {
         CloseInfo();
     }
 
-    public void BeginDragOutFromButton()
-    {
-        BeginDragOut();
-    }
-
-    public void FinishDragOutFromButton()
-    {
-        FinishDragOut();
-    }
-
-    public void BeginDragInFromButton()
-    {
-        BeginDragIn();
-    }
-
-    public void FinishDragInFromButton()
-    {
-        FinishDragIn();
-    }
-
+    /** @brief Unity button adapter for CloseSelection(). */
     public void ContinueBrowsingFromButton()
     {
         CloseSelection();
     }
 
+    /** @brief Unity button adapter for GoToVinylPlayer(). */
     public void GoToVinylPlayerFromButton()
     {
         GoToVinylPlayer();
     }
 
+    /**
+     * Puts the dragged out disc on the record player.
+     * Stops the background music and counts the record as played.
+     *
+     * @return True if the state was VinylDraggedOutFocused and is now vinylPlayer.
+     */
     public bool GoToVinylPlayer()
     {
         BackGroundMusicManager.Instance.StopBackGroundMusic();
@@ -186,11 +230,12 @@ public class VinylSelectController : MonoBehaviour
         return TryChangeState(VinylState.VinylDraggedOutFocused, VinylState.vinylPlayer);
     }
 
-    public void ExitVinylPlayerFromButton()
-    {
-        ExitVinylPlayer();
-    }
-
+    /**
+     * @brief Returns from either player state to browsing and clears the selected record.
+     * @return False outside vinylPlayer/VinylPlayerInfoOpen or while global interactions
+     * are blocked; true after restoring background music and camera look control.
+     * StateChanged is raised after SelectedVinyl has been cleared.
+     */
     public bool ExitVinylPlayer()
     {
         if (CurrentVinylState != VinylState.vinylPlayer &&

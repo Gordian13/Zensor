@@ -5,8 +5,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// Unity editor helper that creates and wires the record metadata UI automatically.
-// This runs only inside the Unity Editor and is not part of the in-game runtime logic.
+/**
+ * @brief Creates and configures the record metadata UI in the Unity Editor.
+ *
+ * Run Tools > Zensor > Setup Record Metadata UI with the relevant scene objects loaded.
+ * The tool uses RecordInfoCanvas and RecordInfoPanel for the panel, and looks for
+ * Info, CloseInfo, BrowseMore and Play directly below VinylSelectCanvas.
+ * If VinylSelectCanvas is absent, RecordInfoCanvas is used as the button root.
+ * A loaded VinylSelectController is needed to configure VinylSelectionUI.
+ *
+ * Layout and button style constants in this class are applied when Setup() runs;
+ * the canvas scales against a 1920 x 1080 reference resolution. This editor-only
+ * tool is not executed in a player build.
+ * @see RecordInfoUI
+ * @see VinylSelectionUI
+ */
 public static class RecordMetadataUISetup
 {
     private const string CanvasName = "RecordInfoCanvas";
@@ -29,7 +42,15 @@ public static class RecordMetadataUISetup
     private static readonly Color ExitButtonHighlight = new Color(0.9411765f, 0.44313726f, 0.30980393f, 1f);
     private static readonly Color ExitButtonPressed = new Color(0.68235296f, 0.23137255f, 0.15686275f, 1f);
 
-    // Adds the setup action to the Unity menu: Tools > Zensor > Setup Record Metadata UI.
+    /**
+     * @brief Creates or reuses the panel, assigns its fields and styles existing buttons.
+     *
+     * Reapplies configured layout values and removes obsolete PlayableText and CoverImage
+     * children. This can overwrite manual layout adjustments. Existing button click
+     * callbacks are not configured here and must already be wired in the scene.
+     * Configure() is called without guidance references, so reassign optional guidance
+     * fields afterwards if needed. The active scene is marked dirty but not saved.
+     */
     [MenuItem("Tools/Zensor/Setup Record Metadata UI")]
     public static void Setup()
     {

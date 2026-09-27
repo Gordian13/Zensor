@@ -2,46 +2,25 @@ using UnityEngine;
 
 namespace record
 {
+    /**
+     * Component on each vinyl record in the scene.
+     *
+     * Holds the record's data and references to its parts, and exposes them
+     * through IVinyl so that the selection, inspection and player scripts
+     * can work with the record.
+     */
     public class RecordInteractionScript : MonoBehaviour, IVinyl
     {
+        /** Data of this record */
+        [Header("Vinyl Data")]
         [SerializeField] private RecordData data;
 
+        /** The disc object inside the sleeve. */
         [Header("Vinyl Parts")]
-        [SerializeField] private Transform cover;
         [SerializeField] private Transform vinylDisc;
-        
-        [Header("Playback")]
-        [SerializeField] private int rotationSpeed = 10;
-
-        private bool isPlaying;
         
         public RecordData GetData() => data;
         public Transform GetSelectionTransform() => transform;
-        public Transform GetCoverTransform() => cover;
         public Transform GetVinylDiscTransform() => vinylDisc;
-
-        private void Awake()
-        {
-            isPlaying = false;
-        }
-
-        public void OnPlaced()
-        {
-            isPlaying = true;
-            Debug.Log("Record placed");
-        }
-
-        public void OnRemoved()
-        {
-            isPlaying = false;
-            Debug.Log("Record removed");
-        }
-
-        private void Update()
-        {
-            if (!isPlaying) return;
-            
-            transform.Rotate(Vector3.up * (rotationSpeed * Time.deltaTime));
-        }
     }
 }

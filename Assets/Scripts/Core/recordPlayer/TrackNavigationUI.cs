@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 namespace recordPlayer
 {
+    /**
+     * @brief Connects track navigation controls and updates the current track label.
+     *
+     * Assign the button and text references in the Inspector. Start finds the record
+     * player and selection controller and binds their actions. Both vinylPlayer and
+     * VinylPlayerInfoOpen keep the track label and Back button visible, so opening
+     * metadata does not remove the exit control. VinylSelectionUI separately controls
+     * next/previous button visibility according to state and track count.
+     */
     public class TrackNavigationUI : MonoBehaviour
     {
         [SerializeField] private Button nextTrackButton;
@@ -65,6 +74,11 @@ namespace recordPlayer
             if (BackButton != null) BackButton.gameObject.SetActive(visible);
         }
 
+        /**
+         * @brief Includes the information overlay when checking for player controls.
+         * @param state State to classify.
+         * @return True for normal player mode or its metadata overlay.
+         */
         private static bool IsPlayerState(VinylState state)
         {
             return state == VinylState.vinylPlayer ||

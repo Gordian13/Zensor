@@ -20,6 +20,14 @@ public enum VinylType
     TwelveInch
 }
 
+/**
+ * @brief Stores a record's metadata, playback content and visual assets.
+ *
+ * Create assets through Create > Zensor > recordData. RecordInfoUI reads title,
+ * author, album, year and description from the selected record's data. Edit these
+ * fields on the asset to update panel contents without changing the UI scripts.
+ * Existing record assets are stored in Assets/Scripts/Core/record/VinylSongs/.
+ */
 [CreateAssetMenu(fileName = "recordData", menuName = "Zensor/recordData")]
 public class RecordData : ScriptableObject
 {
@@ -28,6 +36,11 @@ public class RecordData : ScriptableObject
     public string author;
     public string album;
     public string year;
+    /**
+     * @brief Background text displayed in the record information panel.
+     * The Inspector provides a multiline editing area; empty or whitespace-only
+     * values cause RecordInfoUI to display its configured fallback description.
+     */
     [TextArea(4, 12)]
     public string description;
 
