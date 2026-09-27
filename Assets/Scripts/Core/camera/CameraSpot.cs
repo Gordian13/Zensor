@@ -4,29 +4,40 @@ using UnityEngine;
 
 namespace Core.camera
 {
-    /*
+    /**
      * Defines one camera spot in the scene.
+     *
+     * A spot has its own camera and registers itself in the CameraSpotRegistry.
      */
     public class CameraSpot : MonoBehaviour
     {
+        /** Unique id of this spot, used by the registry and the navigation triggers. */
         [SerializeField] private string spotId;
+        /** All objects in this spot that turn colored when the spot is revealed. */
         private IColorRevealable[] revealableChildren;
+        /** The camera that is active while the player is at this spot. */
         [SerializeField] private CinemachineCamera spotCamera;
+        /** Lets the player look around with right click, taken from the spotCamera if not set. */
         [SerializeField] private RightClickCameraOrbit rightClickCameraOrbit;
+        /** If false, right click look is turned off even while this spot is active (e.g. during vinyl inspection). */
         [SerializeField] private bool allowRightClickLook = true;
+        /** True while this is the current spot. */
         private bool isLookControlActive;
 
+        /** @return The id of this spot. */
         public string GetSpotId()
         {
             return spotId;
         }
 
+        /** @return The camera of this spot. */
         public CinemachineCamera getSpotCamera()
         {
             return this.spotCamera;
         }
 
         
+        /** Checks the references, collects all revealable children and turns the look control off. */
         public void Awake()
         {
             if (string.IsNullOrWhiteSpace(spotId))
@@ -45,6 +56,7 @@ namespace Core.camera
             SetLookControlActive(false);
         }
 
+        /** Registers this spot in the CameraSpotRegistry. */
         private void OnEnable()
         {
             CameraSpotRegistry registry = FindFirstObjectByType<CameraSpotRegistry>();
@@ -57,6 +69,7 @@ namespace Core.camera
             registry.RegisterSpot(this);
         }
 
+        /** Removes this spot from the CameraSpotRegistry. */
         private void OnDisable()
         {
             CameraSpotRegistry registry = FindFirstObjectByType<CameraSpotRegistry>();
@@ -66,7 +79,11 @@ namespace Core.camera
             registry.UnregisterSpot(this);
         }
 
-        // Reveals all objects in this spot.
+        /**
+         * Reveals all objects in this spot.
+         *
+         * @param isReveal True to show them in color, false for gray.
+         */
         public void SetSpotReveal(bool isReveal)
         {
             if (revealableChildren == null)
@@ -81,12 +98,19 @@ namespace Core.camera
             }
         }
 
+        /** Turns the camera back to its start rotation. */
         public void ResetLook()
         {
             if (rightClickCameraOrbit != null)
                 rightClickCameraOrbit.ResetLook();
         }
 
+        /**
+         * Turns the right click look on or off, called when the spot becomes current or not.
+         * The look only works if allowRightClickLook is also true.
+         *
+         * @param isActive True if this is the current spot.
+         */
         public void SetLookControlActive(bool isActive)
         {
             isLookControlActive = isActive;
@@ -97,6 +121,11 @@ namespace Core.camera
             rightClickCameraOrbit.enabled = isLookControlActive && allowRightClickLook;
         }
 
+        /**
+         * Allows or blocks the right click look, e.g. while a vinyl is selected.
+         *
+         * @param state True to allow looking around.
+         */
         public void SetAllowRightClickLook(bool state)
         {
             allowRightClickLook = state;

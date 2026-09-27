@@ -2,17 +2,22 @@
 
 namespace Core.camera
 {
-    /*
-     * This Class is a placeHolder for the current selected Spot
+    /**
+     * This Class is a placeholder for the current selected Spot.
      */
     public class SpotManager : MonoBehaviour
     {
+        /** The spot the game starts at, use this or startSpotId. */
         [SerializeField] private CameraSpot _startSpot;
+        /** Id of the spot the game starts at, use this or _startSpot. */
         [SerializeField] private string startSpotId;
+        /** Used to find the start spot by startSpotId. */
         [SerializeField] private CameraSpotRegistry registry;
 
+        /** The spot the camera is at right now. */
         private CameraSpot CurrentSpot;
 
+        /** Sets the start spot as current spot. */
         private void Awake()
         {
             CurrentSpot = _startSpot;
@@ -21,6 +26,10 @@ namespace Core.camera
                 Debug.LogError($"{nameof(SpotManager)} has no CameraSpotRegistry assigned.", this);
         }
 
+        /**
+         * Finds the start spot and turns its look control on.
+         * Logs an error if both or none of _startSpot and startSpotId are set.
+         */
         private void Start()
         {
             if (_startSpot != null && !string.IsNullOrWhiteSpace(startSpotId))
@@ -34,6 +43,12 @@ namespace Core.camera
                 CurrentSpot.SetLookControlActive(true);
         }
 
+        /**
+         * Changes the current spot.
+         * The old spot gets its look control turned off and reset, the new one gets it turned on.
+         *
+         * @param spot The new current spot.
+         */
         public void SetCurrentSpot(CameraSpot spot)
         {
             if (spot == null)
@@ -52,12 +67,14 @@ namespace Core.camera
             CurrentSpot.SetLookControlActive(true);
         }
 
+        /** @return The current spot. */
         public CameraSpot GetCurrentSpot()
         {
             ResolveStartSpot();
             return CurrentSpot;
         }
 
+        /** @return The id of the current spot, or an empty string if there is none. */
         public string GetCurrentSpotId()
         {
             if (CurrentSpot == null)
@@ -87,12 +104,19 @@ namespace Core.camera
             return string.Empty;
         }
 
+        /**
+         * Checks if the given spot is the current spot.
+         *
+         * @param spot The spot to check.
+         * @return True if it is the current spot.
+         */
         public bool IsCurrentSpot(CameraSpot spot)
         {
             ResolveStartSpot();
             return this.CurrentSpot == spot;
         }
 
+        /** Finds the start spot by startSpotId if there is no current spot yet. */
         private void ResolveStartSpot()
         {
             if (CurrentSpot != null || string.IsNullOrWhiteSpace(startSpotId))

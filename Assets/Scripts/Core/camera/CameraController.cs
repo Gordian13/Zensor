@@ -14,13 +14,19 @@ namespace camera
      */
     public class CameraController : MonoBehaviour
     {
+        /** How fast the camera moves with WASD. */
         public float moveSpeed = 2f;
+        /** How fast the camera turns with the mouse. */
         public float lookSpeed = 0.1f;
+        /** Used to block looking around while a vinyl is inspected. */
         [SerializeField] private VinylSelectController vinylSelectController;
 
+        /** Current up and down rotation. */
         private float _pitch;
+        /** Current left and right rotation. */
         private float _yaw;
 
+        /** Saves the start rotation and searches the VinylSelectController if it is not set. */
         void Start()
         {
             _pitch = transform.eulerAngles.x;
@@ -30,12 +36,14 @@ namespace camera
                 vinylSelectController = FindFirstObjectByType<VinylSelectController>();
         }
 
+        /** Moves and turns the camera every frame. */
         void Update()
         {
             HandleMovement();
             HandleLook();
         }
 
+        /** Moves the camera with WASD. */
         private void HandleMovement()
         {
             var keyboard = Keyboard.current;
@@ -49,6 +57,7 @@ namespace camera
             transform.position += dir * (moveSpeed * Time.deltaTime);
         }
 
+        /** Turns the camera while the right mouse button is pressed, but not while a vinyl is inspected. */
         private void HandleLook()
         {
             var mouse = Mouse.current;
