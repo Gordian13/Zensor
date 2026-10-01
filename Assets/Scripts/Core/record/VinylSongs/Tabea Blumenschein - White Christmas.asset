@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Tabea Blumenschein - White Christmas
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Tabea Blumenschein - White Christmas
+  author: "Tabea Blumenschein, Frieder Butzmann, Gudrun Gut, Bettina K\xF6ster"
+  album: White Christmas
+  year: 1980
+  description: "Tabea Blumenschein / Frieder Butzmann / Gudrun Gut / Bettina K\xF6ster
+    \u2013 \u201EWhite Christmas\u201C erschien 1980 in Deutschland auf Marat Records
+    unter der Katalognummer 24 als 7\"-Vinyl mit 45 RPM und wurde \xFCber Zensor
+    vertrieben. Die x-Seite enth\xE4lt \u201EStille Nacht Goes Disco\u201C mit 3:30,
+    die y-Seite \u201EWhite Christmas\u201C mit 2:55, urspr\xFCnglich von Irving
+    Berlin geschrieben. Stilistisch bewegt sich die Single zwischen New Wave, Avantgarde,
+    Holiday-Musik, Rock und Non-Music \u2014 also eher Weihnachtskarte aus dem besch\xE4digten
+    Untergrund als festliche Dekoration. Tabea Blumenschein singt, Frieder Butzmann
+    spielt Orgel und Synthesizer, Gudrun Gut Schlagzeug und Gitarre, Bettina K\xF6ster
+    Saxofon. Die Platte wurde im TELDEC-Studio Hamburg geschnitten und bei Teldec-Press
+    GmbH gepresst; die Fotos stammen von T. Kiesel. Im Zensor-XR-Kontext zeigt diese
+    kleine Single wunderbar, wie offen der Zensor/Marat-Kosmos war: Pop-Tradition
+    reinnehmen, einmal zerlegen, schief wieder zusammensetzen \u2014 und pl\xF6tzlich
+    klingt Weihnachten nach West-Berlin."
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 0
+  tracks:
+  - {fileID: 8300000, guid: a08dc1ffb37fd4e9e833fb1886446f00, type: 3}
+  - {fileID: 8300000, guid: 10c64e0ee525143109378c5b34537e95, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: d673b9d891c2929439a2c02b0e5c6f1e, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: a6ee2d787786a3245a7aa5736e360219, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: fdb50096b948ba041af7d5d86a6f82ac, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: 7807f23950cb84348a0a847b1a35189e, type: 3}

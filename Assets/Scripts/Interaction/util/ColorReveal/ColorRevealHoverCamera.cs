@@ -9,15 +9,21 @@ namespace Interaction.util.ColorReveal
      */
     public class ColorRevealHoverCamera : MonoBehaviour
     {
+        [Header("Raycast")]
         [SerializeField] private float maxDistanceMeter = 100f;
         [SerializeField] private LayerMask hoverLayer = ~0;
 
+        /** The Camera on this GameObject, used for the raycast. */
         private Camera _camera;
+        /** The object that was hovered in the last frame. */
         private IColorRevealable _lastHovered;
 
+        /**
+         * Initializes the camera reference and logs an error if no camera is found.
+         */
         private void Awake()
         {
-            _camera = Camera.main;
+            _camera = GetComponent<Camera>();
 
             if (_camera == null)
                 Debug.LogError($"{nameof(ColorRevealHoverCamera)}: no Camera.main found in the scene.", this);

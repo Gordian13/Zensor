@@ -3,7 +3,67 @@ guid: e5de606fed7aab9488cd56c48648bd1a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DiscoNacht
+    second: {fileID: 2100000, guid: b3cf60c30f2133244b08cc4b61d54a98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelFire.001
+    second: {fileID: 2100000, guid: b79d364ce4cc9994e88629c808482168, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelFire.002
+    second: {fileID: 2100000, guid: 2c295aaa1b2b98f4880a70c656df9977, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelFire.003
+    second: {fileID: 2100000, guid: 7550ff7444190eb45a95e6c622e02460, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelFire.004
+    second: {fileID: 2100000, guid: 3f88d29e5d43a5345a72684a0d7c72ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelFire.005
+    second: {fileID: 2100000, guid: 9a69cb91323837843a251d5d16f1510c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelFire.006
+    second: {fileID: 2100000, guid: b5fe49440780b2a42a1b360bcdaacf93, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelFire.007
+    second: {fileID: 2100000, guid: 2a3124cbc4ad47c47b5750ab52fa7016, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelFire.008
+    second: {fileID: 2100000, guid: 2e11c3b85660f6145a4f1c7731d7a3d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SynthNight
+    second: {fileID: 2100000, guid: 92fe9832379223248a1b2530a5765b56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tape
+    second: {fileID: 2100000, guid: 3e53125168387e84187a966788dd17f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VinylNight
+    second: {fileID: 2100000, guid: 00086494fdf8661459fac04743508329, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

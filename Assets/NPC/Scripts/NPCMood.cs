@@ -1,13 +1,15 @@
-// Defines the high-level emotional/behavioral state of the NPC.
-// The current mood influences values such as speed, wait time, dialogue flavor, and gizmo color.
+/// <summary>
+/// Lists the moods an NPC can have.
+/// The mood affects values such as movement speed and waiting time.
+/// </summary>
 public enum NPCMood
 {
-    // Default calm state.
+    /// <summary>The NPC is calm.</summary>
     Normal,
 
-    // Irritated / annoyed state.
+    /// <summary>The NPC is annoyed.</summary>
     Moody,
 
-    // Angry / aggressive state.
+    /// <summary>The NPC is angry.</summary>
     Raged
 }
