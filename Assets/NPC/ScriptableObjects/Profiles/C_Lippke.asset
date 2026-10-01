@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16963c36978495e4a9bef4e183a57508, type: 3}
-  m_Name: NPC_Profile
+  m_Name: C_Lippke
   m_EditorClassIdentifier: Assembly-CSharp::NPCProfile
-  npcName: Unnamed NPC
-  hoverColor: {r: 1, g: 1, b: 0, a: 0.35}
-  moods: []
+  npcName: Frieder Butzmann
+  moods:
+  - mood: 0
+    moveSpeed: 2
+    waitAtPointSeconds: 4
+    speechBubbleText: 
+    gizmoColor: {r: 0, g: 0, b: 0, a: 0}
   reactionRules: []
   interactions: []
   defaultDialogueScript: {fileID: 0}

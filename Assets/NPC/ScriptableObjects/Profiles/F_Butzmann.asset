@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: F_Butzmann
   m_EditorClassIdentifier: Assembly-CSharp::NPCProfile
   npcName: Frieder Butzmann
-  hoverColor: {r: 1, g: 1, b: 0, a: 0.35}
   moods:
   - mood: 0
     moveSpeed: 2

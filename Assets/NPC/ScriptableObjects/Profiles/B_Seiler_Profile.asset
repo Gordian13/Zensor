@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: B_Seiler_Profile
   m_EditorClassIdentifier: Assembly-CSharp::NPCProfile
   npcName: Burkhardt Seiler
-  hoverColor: {r: 1, g: 1, b: 0, a: 0.44705883}
   moods:
   - mood: 0
     moveSpeed: 2.5
@@ -40,7 +39,7 @@ MonoBehaviour:
     useMinimumFloatValue: 0
     minimumFloatValue: 0
     changeMood: 0
-    resultingMood: 2
+    resultingMood: 0
     reactionText: "Sach ma, das waren jetzt 6 Platten! Ick bin keine Bibliothek,
       entweder du kaufst etwas oder du l\xE4sst es bleiben!"
     blockOriginalAction: 0

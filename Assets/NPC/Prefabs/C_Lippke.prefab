@@ -2027,7 +2027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3c169295e31354d8e43b0b86c94c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCController
-  profile: {fileID: 11400000, guid: a0ba5e67dac70364587a489eec508d5a, type: 2}
+  profile: {fileID: 11400000, guid: 844c1d2319ce98d449676c57dc2dc3ed, type: 2}
   currentMood: 0
   agent: {fileID: 6965068603932430482}
   interactionArrivalDistance: 1.2

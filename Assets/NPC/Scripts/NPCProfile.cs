@@ -17,15 +17,6 @@ public class NPCProfile : ScriptableObject
     public string npcName = "Unnamed NPC";
 
     /// <summary>
-    /// Color reserved for hover or selection highlighting.
-    /// Yellow is easy to notice, while the default 0.35 alpha keeps the original material visible.
-    /// The current scripts in this NPC folder store this value but do not apply it themselves.
-    /// </summary>
-    [Header("Visual")]
-    [Tooltip("Color intended for NPC highlighting. Current NPC scripts store it but do not apply it directly.")]
-    public Color hoverColor = new Color(1f, 1f, 0f, 0.35f);
-
-    /// <summary>
     /// Settings available for each NPC mood.
     /// NPCController searches this list for the current mood and uses the first matching entry.
     /// Each mood used by a reaction should normally have an entry here.
