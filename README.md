@@ -12,11 +12,11 @@ The reconstructed mail-order room illustrates the organisational work behind the
 
 ## The Zensor: Burkhardt Seiler
 
-Burkhardt Seiler (1953–2023), widely known as “Zensor,” was a key figure in West Berlin’s independent and underground music scene. As a record-store owner, label operator, publisher, concert promoter, and cultural networker, he introduced audiences to international artists, emerging genres, and experimental music. Together with journalist Hans Keller, he coined the term “Neue Deutsche Welle.” His Zensor record store, opened in Berlin-Schöneberg in 1979, was far more than a place to buy records: it served as a meeting point for musicians, a concert venue, a mail-order business, and a hub connecting Berlin’s music scene with the wider world. Seiler was remembered as unconventional, direct, and sometimes difficult. His nickname—and later the store’s name—originated from his joking response whenever a requested record was unavailable: “It’s censored.”
+Burkhardt Seiler (1953–2023), widely known as “Zensor”, was a key figure in West Berlin’s independent and underground music scene. As a record-store owner, label operator, publisher, concert promoter, and cultural networker, he introduced audiences to international artists, emerging genres, and experimental music. Together with journalist Hans Keller, he coined the term “Neue Deutsche Welle”. His Zensor record store, opened in Berlin-Schöneberg in 1979, was far more than a place to buy records: it served as a meeting point for musicians, a concert venue, a mail-order business, and a hub connecting Berlin’s music scene with the wider world. Seiler was remembered as unconventional, direct, and sometimes difficult. His nickname—and later the store’s name—originated from his joking response whenever a requested record was unavailable: “It’s censored”.
 
 ## The spirit: Robert M. Stanley
 
-// 1 paragraph about Stanley, his work, influence and motivation (+ quotes?)
+Rob Stanley is CPO at EAB – European Artist Bank and project lead of “Zensor XR”, a cultural heritage project that reconstructs the legendary West Berlin record store "Zensor Schallplatten" as an immersive Unity/XR experience. His work explores how artists, archives, and lost cultural spaces can be preserved, revitalised, and made accessible through digital tools, storytelling, and community engagement. At the heart of his work is the belief that cultural memory should not merely be preserved, but brought back to life and made accessible.
 
 ## Features
 
@@ -111,7 +111,3 @@ Supervised by:
 ### Team
 
 Anton E., Lennart K., Jessica L.,  Gordian R., Muhammad R., Nils S., Nikita S., Ryu S., Phu Dat T.
-
-## License
-
-// foo
