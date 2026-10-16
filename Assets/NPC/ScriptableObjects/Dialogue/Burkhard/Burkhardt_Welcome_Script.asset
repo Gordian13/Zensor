@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e56986e72841045b39d8be6f829376, type: 3}
+  m_Name: Burkhardt_Welcome_Script
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialogueScript
+  dialogueText: "::start\r\nNPC: Na, komm rin. Ick bin Burkhardt. Willkommen im Zensor.
+    Dit hier is nich blo\xDF'n Plattenladen \u2013 dit is'n St\xFCck West-Berlin,
+    das sich bis heute weigert, leise zu werden. Schau dich in Ruhe um.\r\n\r\n>
+    Was kann ich hier machen?\r\n-> activities\r\n\r\n> Was ist Zensor \xFCberhaupt?\r\nNPC:
+    Dit erkl\xE4r ick dir sp\xE4ter gern. Aber nich alles auf einmal \u2013 sonst
+    denkste am Ende noch, dit w\xE4r Bildung.\n-> start\n\r\n> Alles klar, danke.\r->
+    goodbye\r\n\r\n\r\n::activities\r\nNPC: Dit hier sollste nich blo\xDF angucken.
+    Der Laden lebt erst, wenn man neugierig wird.\r\n\r\n> Was empfiehlst du zuerst?\r\nNPC:
+    Schnapp dir 'ne Platte und h\xF6r se dir an. Gute Musik erkennt man selten am
+    Cover.\r\n-> activities\n\r\n> Und sonst?\r\nNPC: Da dr\xFCben liegen Flyer rum.
+    Wenn dich interessiert, warum Zensor \xFCberhaupt existiert, fang da an.\n->
+    activities\r\n\r\n> Alles klar.\r\n-> goodbye\r\n\r\n> Zur\xFCck.\r\n-> start\r\n\r\n\r\n::goodbye\nNPC:
+    Na jut! Schau dich um. Und falls irgendwat is oder dir 'ne Frage unter den N\xE4geln
+    brennt \u2013 frag einfach. Daf\xFCr bin ick hier.\n-> end"
+  externalDialogue: {fileID: 0}

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using recordPlayer;
@@ -8,28 +9,26 @@ public class ButtonInteraction : MonoBehaviour
 
     [SerializeField] private LayerMask buttonLayer;
 
-    private void Awake()
+    private void Update()
     {
-        _interactionCamera = GetComponent<Camera>();
-
         if (_interactionCamera == null)
             _interactionCamera = Camera.main;
 
-        if (_interactionCamera == null)
-            Debug.LogError($"{nameof(ButtonInteraction)} on {name} could not find a camera.", this);
-    }
-
-    private void Update()
-    {
         if (_interactionCamera == null || Mouse.current == null)
             return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame && !GlobalInteractionState.Instance.IsInteractionBlocked)
         {
             Ray ray = _interactionCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, buttonLayer))
+            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, buttonLayer);
+            foreach (RaycastHit hit in hits)
             {
-                hit.collider.GetComponentInParent<RecordButton>()?.OnPress();
+                RecordButton button = hit.collider.GetComponentInParent<RecordButton>();
+                if (button != null)
+                {
+                    button.OnPress();
+                    break;
+                }
             }
         }
     }

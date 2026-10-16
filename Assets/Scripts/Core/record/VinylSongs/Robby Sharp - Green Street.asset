@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed298a5a4a9c1843a8000e5e1e580b0, type: 3}
+  m_Name: Robby Sharp - Green Street
+  m_EditorClassIdentifier: Assembly-CSharp::RecordData
+  title: Rebby Sharp - Green Street
+  author: Rebby Sharp
+  album: Green Street
+  year: 1982
+  description: "Rebby Sharp \u2013 \u201EGreen Street\u201C erschien 1982 in Deutschland
+    auf Zensor unter der Katalognummer Zensor 03 als 7\"-Vinyl-Single. Die A-Seite
+    enth\xE4lt \u201EGreen Street\u201C mit einer Laufzeit von 3:40, die B-Seite
+    \u201EHollow Earth\u201C mit 2:21. Musikalisch wird die Ver\xF6ffentlichung dem
+    Bereich Rock zugeordnet, mit einem besonderen Klang zwischen Lo-Fi und Neofolk.
+    Rebby Sharp schrieb, arrangierte und sang die Songs und spielte au\xDFerdem Gitarre
+    und Bass. John Barnett steuerte Percussion bei, Frank Daniel war Engineer, und
+    produziert wurde die Single von Burkhardt Seiler. Im Zensor-Kosmos zeigt diese
+    kleine Platte eine andere Seite des Labels: nicht nur L\xE4rm, Punk, Elektronik
+    oder Clubenergie, sondern auch intime, handgemachte Musik mit viel Luft zwischen
+    den T\xF6nen. Ein stilles St\xFCck Zensor \u2014 aber nicht weniger eigenwillig."
+  sprite: {fileID: 0}
+  format: 0
+  speed: 0
+  vinylType: 0
+  tracks:
+  - {fileID: 8300000, guid: 8c1c068a72322495baf3cb5bb66e55f4, type: 3}
+  - {fileID: 8300000, guid: d175378ac97d5489199a2f2596cee1fd, type: 3}
+  labelFrontTexture: {fileID: 2800000, guid: 90d33ff41682e0344834b967c8140d79, type: 3}
+  labelBackTexture: {fileID: 2800000, guid: 4951538091ce2404b91e1658245ad986, type: 3}
+  coverFrontTexture: {fileID: 2800000, guid: 5222d02506a3d914aa449955c0e997fc, type: 3}
+  coverBackTexture: {fileID: 2800000, guid: e9074b1f5eb2785459b18e8571e54fd9, type: 3}

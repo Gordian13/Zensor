@@ -1,19 +1,31 @@
-// Result returned by NPCController.ReactTo(context).
-// This tells the calling system whether the NPC reacted and whether the original action should continue.
+/// <summary>
+/// Contains the result of an NPC reaction.
+/// It also tells the calling system whether its own action may continue.
+/// </summary>
 public class NPCReactionResult
 {
-    // True if any NPCReactionRule matched the given context.
+    /// <summary>
+    /// Whether any reaction rule matched the supplied context.
+    /// A matching silent rule still sets this to true.
+    /// </summary>
     public bool hasReaction;
 
-    // If true, the external system should block its original action.
-    // Example: do not play a forbidden record.
+    /// <summary>
+    /// Whether the calling system should stop its original action.
+    /// This is only information; NPCController cannot cancel work owned by another system.
+    /// </summary>
     public bool blockOriginalAction;
 
-    // Text the NPC said as part of the reaction.
-    // Empty if the reaction had no dialogue.
+    /// <summary>
+    /// Text configured by the matching rule.
+    /// It is an empty string in the result returned by <see cref="NoReaction"/>.
+    /// </summary>
     public string reactionText;
 
-    // Creates a reaction result with explicit values.
+    /// <summary>Creates a result with the given values.</summary>
+    /// <param name="hasReaction">Whether a reaction happened.</param>
+    /// <param name="blockOriginalAction">Whether the original action should stop.</param>
+    /// <param name="reactionText">The text spoken by the NPC.</param>
     public NPCReactionResult(bool hasReaction, bool blockOriginalAction, string reactionText)
     {
         this.hasReaction = hasReaction;
@@ -21,7 +33,8 @@ public class NPCReactionResult
         this.reactionText = reactionText;
     }
 
-    // Convenience factory for the common "nothing happened" case.
+    /// <summary>Creates a result for the case where nothing happened.</summary>
+    /// <returns>A result without a reaction.</returns>
     public static NPCReactionResult NoReaction()
     {
         return new NPCReactionResult(false, false, "");

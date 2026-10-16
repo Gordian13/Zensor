@@ -1,5 +1,10 @@
 ﻿namespace Interaction.util.ColorReveal
 {
+    /**
+     * Interface for objects that can be revealed in color when hovered over or selected.
+     * 
+     * Implement this interface on any object that should change its color state based on user interaction.
+     */
     public interface IColorRevealable
     {
         /**

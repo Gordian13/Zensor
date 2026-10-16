@@ -1,0 +1,454 @@
+using Core.VinylSelect;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+/**
+ * @brief Positions the selected cover and disc and applies inspection rotation.
+ *
+ * Assign vinylSelectController and the twelve/seven inch inspection transforms in
+ * the Inspector. positionSpeed and rotationSpeed control interpolation; the two
+ * disc inspection offsets control how far each size peeks out of its cover.
+ *
+ * The cover rotates in VinylSelected; the disc rotates in VinylDraggedOutFocused.
+ * VinylInspectionRotator supplies angle deltas, while VinylDragController owns disc
+ * movement during dragging. Entering or leaving DraggingVinylIn snaps the disc back
+ * to its cached local rotation to avoid an animated rotation correction.
+ * Original local positions and rotations are cached per selected object and restored
+ * when returning to browsing or switching to a different record.
+ */
+public class VinylInspectionView : MonoBehaviour
+{
+    [SerializeField] private VinylSelectController vinylSelectController;
+    [FormerlySerializedAs("inspectionPoint")]
+    [SerializeField] private Transform twelveInchInspectionPoint;
+    [SerializeField] private Transform sevenInchInspectionPoint;
+    [SerializeField] private float positionSpeed = 6f;
+    [SerializeField] private float rotationSpeed = 15f;
+    [FormerlySerializedAs("vinylDiscInspectionXOffset")]
+    [SerializeField] private float twelveInchDiscInspectionXOffset = 0.2f;
+    [SerializeField] private float sevenInchDiscInspectionXOffset = 0.12f;
+
+    private Transform _inspectedVinyl;
+    private RestPose _restPose;
+    private bool _hasRestPose;
+    private float _vinylRotationDegrees;
+    private float _discRotationDegrees;
+
+    /**
+     * @brief Accumulates cover rotation for the VinylSelected state.
+     * @param degrees Signed angle increment in degrees around the inspection pose's
+     * local negative Z axis. The caller is responsible for checking the input state.
+     */
+    public void AddVinylInspectionRotation(float degrees)
+    {
+        _vinylRotationDegrees += degrees;
+    }
+
+    /**
+     * @brief Accumulates disc rotation for the VinylDraggedOutFocused state.
+     * @param degrees Signed angle increment in degrees around the parent-local negative
+     * Z axis. The stored rest rotation is retained as the base orientation.
+     */
+    public void AddDiscInspectionRotation(float degrees)
+    {
+        _discRotationDegrees += degrees;
+    }
+
+    /**
+     * Validates the references required to display a vinyl at the inspection point.
+     */
+    private void Awake()
+    {
+        if (vinylSelectController == null)
+            Debug.LogError($"{nameof(VinylInspectionView)} has no VinylSelectController assigned.", this);
+
+        if (twelveInchInspectionPoint == null)
+            Debug.LogError($"{nameof(VinylInspectionView)} has no twelve inch inspection point assigned.", this);
+
+        if (sevenInchInspectionPoint == null)
+            Debug.LogError($"{nameof(VinylInspectionView)} has no seven inch inspection point assigned.", this);
+    }
+
+    /**
+     * Subscribes to StateChanged of the VinylSelectController.
+     */
+    private void OnEnable()
+    {
+        if (vinylSelectController != null)
+            vinylSelectController.StateChanged += OnVinylStateChanged;
+    }
+
+    /**
+     * Unsubscribes from StateChanged of the VinylSelectController.
+     */
+    private void OnDisable()
+    {
+        if (vinylSelectController != null)
+            vinylSelectController.StateChanged -= OnVinylStateChanged;
+    }
+
+    /**
+     * @brief Resets disc orientation at the start and completion of dragging into the cover.
+     * @param previousState State before the transition.
+     * @param nextState State after the transition.
+     */
+    private void OnVinylStateChanged(VinylState previousState, VinylState nextState)
+    {
+        bool startedDraggingIn =
+            previousState == VinylState.VinylDraggedOutFocused &&
+            nextState == VinylState.DraggingVinylIn;
+
+        bool finishedDraggingIn =
+            previousState == VinylState.DraggingVinylIn &&
+            nextState == VinylState.VinylSelected;
+
+        if (startedDraggingIn || finishedDraggingIn)
+        {
+            SnapDiscToRestRotation(_restPose);
+        }
+    }
+
+    /**
+     * Updates the selected vinyl and disc positions according to the current vinyl state.
+     */
+    private void Update()
+    {
+        CacheSelectedVinyl();
+        ResetInactiveRotationOffsets();
+
+        if (!_hasRestPose || _inspectedVinyl == null)
+            return;
+
+        if (ShouldShowAtInspectionPoint())
+        {
+            MoveToInspectionPoint(_inspectedVinyl);
+
+            if (ShouldDiscPeekOut())
+            {
+                MoveDiscToInspectionPose(_restPose);
+                MoveDiscToRestRotation(_restPose);
+            }
+            else if (ShouldDiscSitInCover())
+            {
+                MoveDiscToRestPose(_restPose);
+                MoveDiscToRestRotation(_restPose);
+            }
+            else if (ShouldDiscStayFocused())
+            {
+                MoveDiscToFocusedRotation(_restPose);
+            }
+        }
+        else
+        {
+            MoveToRestPose(_inspectedVinyl, _restPose);
+            MoveDiscToRestPose(_restPose);
+            MoveDiscToRestRotation(_restPose);
+        }
+    }
+
+    /**
+     * Stores the original pose of a newly selected vinyl and its disc.
+     */
+    private void CacheSelectedVinyl()
+    {
+        if (vinylSelectController?.SelectedVinyl == null)
+            return;
+
+        Transform selectedTransform = vinylSelectController.SelectedVinyl.GetSelectionTransform();
+        if (selectedTransform == null || selectedTransform == _inspectedVinyl)
+            return;
+
+        RestoreCurrentVinylImmediately();
+
+        Transform vinylDisc = vinylSelectController.SelectedVinyl.GetVinylDiscTransform();
+
+        _inspectedVinyl = selectedTransform;
+        _restPose = new RestPose(
+            selectedTransform.localPosition,
+            selectedTransform.localRotation,
+            vinylDisc,
+            vinylDisc != null ? vinylDisc.localPosition : Vector3.zero,
+            vinylDisc != null ? vinylDisc.localRotation : Quaternion.identity
+        );
+        _vinylRotationDegrees = 0f;
+        _discRotationDegrees = 0f;
+        _hasRestPose = true;
+    }
+
+    /**
+     * Returns the inspection point matching the selected vinyl's type from its record data.
+     * Seven inch discs are smaller, so they use their own point closer to the camera.
+     */
+    private Transform GetActiveInspectionPoint()
+    {
+        if (IsSevenInchSelected() && sevenInchInspectionPoint != null)
+            return sevenInchInspectionPoint;
+
+        return twelveInchInspectionPoint;
+    }
+
+    /**
+     * Returns the disc peek-out offset matching the selected vinyl's type.
+     */
+    private float GetActiveDiscInspectionXOffset()
+    {
+        return IsSevenInchSelected()
+            ? sevenInchDiscInspectionXOffset
+            : twelveInchDiscInspectionXOffset;
+    }
+
+    /**
+     * Returns true if the selected vinyl is marked as a seven inch disc in its record data.
+     */
+    private bool IsSevenInchSelected()
+    {
+        RecordData data = vinylSelectController?.SelectedVinyl?.GetData();
+        return data != null && data.vinylType == VinylType.SevenInch;
+    }
+
+    /**
+     * Returns true while the selected vinyl should remain in front of the camera.
+     */
+    private bool ShouldShowAtInspectionPoint()
+    {
+        if (vinylSelectController == null ||
+            vinylSelectController.SelectedVinyl == null ||
+            GetActiveInspectionPoint() == null)
+        {
+            return false;
+        }
+
+        bool isSelectedVinyl =
+            vinylSelectController.SelectedVinyl.GetSelectionTransform() == _inspectedVinyl;
+
+        bool usesInspectionPose =
+            vinylSelectController.CurrentVinylState != VinylState.BrowsingBox;
+
+        return isSelectedVinyl && usesInspectionPose;
+    }
+
+    /**
+     * Clears stale rotation from states where that object should no longer be rotated.
+     */
+    private void ResetInactiveRotationOffsets()
+    {
+        if (vinylSelectController == null)
+            return;
+
+        VinylState state = vinylSelectController.CurrentVinylState;
+
+        if (state != VinylState.VinylSelected)
+            _vinylRotationDegrees = 0f;
+
+        if (state != VinylState.VinylDraggedOutFocused &&
+            state != VinylState.DraggingVinylIn)
+        {
+            _discRotationDegrees = 0f;
+        }
+    }
+
+    /**
+     * Returns true while the disc should peek out of its cover.
+     */
+    private bool ShouldDiscPeekOut()
+    {
+        return vinylSelectController != null &&
+               vinylSelectController.CurrentVinylState == VinylState.VinylSelected;
+    }
+
+    /**
+     * Returns true while the info panel is open and the disc should sit inside its cover.
+     */
+    private bool ShouldDiscSitInCover()
+    {
+        return vinylSelectController != null &&
+               vinylSelectController.CurrentVinylState == VinylState.VinylInfoOpen;
+    }
+
+    /**
+     * Returns true while the disc is out of the cover and can be inspected on its own.
+     */
+    private bool ShouldDiscStayFocused()
+    {
+        return vinylSelectController != null &&
+               vinylSelectController.CurrentVinylState == VinylState.VinylDraggedOutFocused;
+    }
+
+    /**
+     * Immediately restores the previously inspected vinyl before another vinyl is cached.
+     */
+    private void RestoreCurrentVinylImmediately()
+    {
+        if (!_hasRestPose || _inspectedVinyl == null)
+            return;
+
+        _inspectedVinyl.localPosition = _restPose.LocalPosition;
+        _inspectedVinyl.localRotation = _restPose.LocalRotation;
+
+        if (_restPose.VinylDisc != null)
+        {
+            _restPose.VinylDisc.localPosition = _restPose.VinylDiscLocalPosition;
+            _restPose.VinylDisc.localRotation = _restPose.VinylDiscLocalRotation;
+        }
+    }
+
+    /**
+     * Smoothly moves and rotates the complete vinyl asset to the inspection point.
+     */
+    private void MoveToInspectionPoint(Transform vinylTransform)
+    {
+        Transform activeInspectionPoint = GetActiveInspectionPoint();
+
+        Quaternion targetRotation = activeInspectionPoint.rotation;
+        if (vinylSelectController != null &&
+            vinylSelectController.CurrentVinylState == VinylState.VinylSelected)
+        {
+            targetRotation *= Quaternion.AngleAxis(_vinylRotationDegrees, Vector3.back);
+        }
+
+        vinylTransform.position = Vector3.Lerp(
+            vinylTransform.position,
+            activeInspectionPoint.position,
+            positionSpeed * Time.deltaTime
+        );
+
+        vinylTransform.rotation = Quaternion.Slerp(
+            vinylTransform.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
+    }
+
+    /**
+     * Smoothly returns the complete vinyl asset to its stored local pose.
+     */
+    private void MoveToRestPose(Transform vinylTransform, RestPose restPose)
+    {
+        vinylTransform.localPosition = Vector3.Lerp(
+            vinylTransform.localPosition,
+            restPose.LocalPosition,
+            positionSpeed * Time.deltaTime
+        );
+
+        vinylTransform.localRotation = Quaternion.Slerp(
+            vinylTransform.localRotation,
+            restPose.LocalRotation,
+            rotationSpeed * Time.deltaTime
+        );
+    }
+
+    /**
+     * Moves the disc out of its cover by the configured local X offset.
+     */
+    private void MoveDiscToInspectionPose(RestPose restPose)
+    {
+        if (restPose.VinylDisc == null)
+            return;
+
+        Vector3 targetPosition =
+            restPose.VinylDiscLocalPosition + Vector3.left * GetActiveDiscInspectionXOffset();
+
+        restPose.VinylDisc.localPosition = Vector3.Lerp(
+            restPose.VinylDisc.localPosition,
+            targetPosition,
+            positionSpeed * Time.deltaTime
+        );
+    }
+
+    /**
+     * Moves the disc back to its original local position inside the cover.
+     */
+    private void MoveDiscToRestPose(RestPose restPose)
+    {
+        if (restPose.VinylDisc == null)
+            return;
+
+        restPose.VinylDisc.localPosition = Vector3.Lerp(
+            restPose.VinylDisc.localPosition,
+            restPose.VinylDiscLocalPosition,
+            positionSpeed * Time.deltaTime
+        );
+    }
+
+    /**
+     * Smoothly restores the disc to the rotation it had inside its cover.
+     */
+    private void MoveDiscToRestRotation(RestPose restPose)
+    {
+        if (restPose.VinylDisc == null)
+            return;
+
+        restPose.VinylDisc.localRotation = Quaternion.Slerp(
+            restPose.VinylDisc.localRotation,
+            restPose.VinylDiscLocalRotation,
+            rotationSpeed * Time.deltaTime
+        );
+    }
+
+    /**
+     * @brief Restores the cached local disc rotation immediately and clears its angle offset.
+     * @param restPose Cached disc transform and original local rotation.
+     */
+    private void SnapDiscToRestRotation(RestPose restPose)
+    {
+        if (restPose.VinylDisc == null)
+            return;
+
+        _discRotationDegrees = 0f;
+        restPose.VinylDisc.localRotation = restPose.VinylDiscLocalRotation;
+    }
+
+    /**
+     * Applies right-mouse inspection rotation to the focused disc.
+     */
+    private void MoveDiscToFocusedRotation(RestPose restPose)
+    {
+        if (restPose.VinylDisc == null)
+            return;
+
+        Quaternion targetRotation =
+            Quaternion.AngleAxis(_discRotationDegrees, Vector3.back) *
+            restPose.VinylDiscLocalRotation;
+
+        restPose.VinylDisc.localRotation = Quaternion.Slerp(
+            restPose.VinylDisc.localRotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
+    }
+
+    /**
+     * Stores the original local pose of the complete vinyl and its disc.
+     */
+    private readonly struct RestPose
+    {
+        public Vector3 LocalPosition { get; }
+        public Quaternion LocalRotation { get; }
+        public Transform VinylDisc { get; }
+        public Vector3 VinylDiscLocalPosition { get; }
+        public Quaternion VinylDiscLocalRotation { get; }
+
+        /**
+         * Creates a new RestPose.
+         *
+         * @param localPosition Local position of the vinyl.
+         * @param localRotation Local rotation of the vinyl.
+         * @param vinylDisc The disc of the vinyl, can be null.
+         * @param vinylDiscLocalPosition Local position of the disc.
+         * @param vinylDiscLocalRotation Local rotation of the disc.
+         */
+        public RestPose(
+            Vector3 localPosition,
+            Quaternion localRotation,
+            Transform vinylDisc,
+            Vector3 vinylDiscLocalPosition,
+            Quaternion vinylDiscLocalRotation)
+        {
+            LocalPosition = localPosition;
+            LocalRotation = localRotation;
+            VinylDisc = vinylDisc;
+            VinylDiscLocalPosition = vinylDiscLocalPosition;
+            VinylDiscLocalRotation = vinylDiscLocalRotation;
+        }
+    }
+}
