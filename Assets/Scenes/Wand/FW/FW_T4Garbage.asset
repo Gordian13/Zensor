@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_T4Garbage
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: 642251a6991ec764982cf1cd7e21166f, type: 3}
+  title: "Garbage & Din A Testbild \u2013 Live at Zensor"
+  description: "Dieses fr\xFChe Zensor-Plakat zeigt den Laden im Blue-Moon\nHinterraum
+    als B\xFChne, B\xFCro und Sender zugleich: Din A Testbild\nund Frieder Butzmann
+    spielten am 2.6. um 16 Uhr im Keller von\nZensor, Belziger Stra\xDFe 23."
+  hasExtraInfo: 1
+  extraInfoTitle: In-Store Concerts at Zensor
+  extraInfoContent: "Das handgemachte Konzertplakat k\xFCndigt \u201EGarbage\u201C,
+    \u201Efrdaha\np\xF8tzm*n\u201C / Frieder Butzmann mit Tapes und Saxofon sowie\nDin
+    A Testbild f\xFCr den 2. Juni, 16 Uhr, beim Zensor,\nBelzigerstra\xDFe 23, im
+    Blue Moon an. Es geh\xF6rt zur ganz\nfr\xFChen Zensor-Zeit, als Burkhardt Seilers
+    Plattenladen nicht\nnur Verkaufsraum war, sondern auch Kellerb\xFChne, Treffpunkt,\nMailorder-Zentrale
+    und Produktionsidee. Frieder Butzmann\nwar dabei nicht nur K\xFCnstler, sondern
+    arbeitete auch im\nZensor-Umfeld, besonders beim Versand / Mailorder-Service,\nder
+    die West-Berliner Musik weit \xFCber die Inselstadt\nhinaustrug. Din A Testbild
+    geh\xF6rten zu den wichtigen fr\xFChen\nGruppen zwischen Punk, Elektronik, Dada,
+    Krach und Neuer\nDeutscher Welle. Die Ver\xF6ffentlichung \u201EAbfall / Garbage
+    /\nGlas-Konkav\u201C steht genau f\xFCr diesen Moment: Musik als\nAbfallprodukt,
+    St\xF6rung, Fundst\xFCck und Signal. Nicht sauber,\nnicht brav, nicht f\xFCr
+    den Markt gegl\xE4ttet \u2014 sondern roh\ngenug, um wahr zu sein. Zensor machte
+    aus solchen\nMomenten keine Legende im Nachhinein, sondern sofort ein\nMedium:
+    Konzert, Platte, Kassette, Bestellung, Gespr\xE4ch."
+  extraInfoImage: {fileID: 0}

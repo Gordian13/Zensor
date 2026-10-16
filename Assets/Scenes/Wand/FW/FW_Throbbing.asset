@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: FW_Throbbing
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: f9b58ef7c4f2691439f0c07d6f5face9, type: 3}
+  title: "Throbbing Gristle \u2013 Band Portrait, 1980"
+  description: "Throbbing Gristle spielten am 7. und 8. November 1980 im SO36\nin
+    West-Berlin \u2014 zwei N\xE4chte industrieller Grenzverschiebung,\nsp\xE4ter
+    als Live-Vinyl \xFCber Zensor im Berliner Untergrund weitergetragen."
+  hasExtraInfo: 1
+  extraInfoTitle: Throbbing Gristle
+  extraInfoContent: "Am 7. und 8. November 1980 traten Throbbing Gristle im SO36
+    in Kreuzberg auf, einem der\nzentralen Orte des West-Berliner Punk-, New-Wave-
+    und Underground-Netzwerks. Die\nbritische Gruppe um Genesis P-Orridge, Cosey
+    Fanni Tutti, Chris Carter und Peter\n\u201CSleazy\u201D Christopherson galt als
+    eine der pr\xE4genden Kr\xE4fte der fr\xFChen Industrial Music:\nkonfrontativ,
+    elektronisch, performativ, unbequem. In West-Berlin traf dieser Sound auf\neine
+    Stadt, die selbst wie ein Experiment klang \u2014 isoliert, politisch aufgeladen,\nroh
+    und nachts besonders wach. Die Konzerte wurden zu einem wichtigen Moment im\nAustausch
+    zwischen britischem Industrial und der Berliner Avantgarde-Szene. Dass daraus\nsp\xE4ter
+    eine Live-Vinyl-Ver\xF6ffentlichung auf Zensor entstand, machte den Abend nicht
+    nur\nzu einer Erinnerung, sondern zu einem zirkulierenden Dokument: ein St\xFCck
+    SO36,\nein St\xFCck Zensor, ein St\xFCck kalter November 1980 auf Platte.\r\n"
+  extraInfoImage: {fileID: 21300000, guid: b2abde25ac1fb3341a451eaee570a405, type: 3}
