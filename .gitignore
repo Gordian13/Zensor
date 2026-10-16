@@ -83,6 +83,10 @@ crashlytics-build.properties
 # Uncomment if you do not want to share any workspace settings
 # .vscode/
 
+#doxygen
+html/
+latex/
+
 # Recommended alternative:
 # ignore most VS Code files, but allow shared team settings
 .vscode/*

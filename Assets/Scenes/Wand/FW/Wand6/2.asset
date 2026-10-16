@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf53cf59c492414ba5ce3b9941f083c, type: 3}
+  m_Name: 2
+  m_EditorClassIdentifier: Assembly-CSharp::FotowandData
+  photo: {fileID: 21300000, guid: ddf02af7feac35b49ba7e02099013f36, type: 3}
+  title: Frieder Butzmann
+  description: "Klangk\xFCnstler, Performer und Mitbegr\xFCnder der fr\xFChen Berliner
+    Industrial-Szene. Butzmann ver\xF6ffentlichte mehrere Alben bei Zensor und gilt
+    bis heute vielen als \"Vater des deutschen \nIndustrial\"."
+  hasExtraInfo: 1
+  extraInfoTitle: Vom Waschsalon zum Geniale-Dilletanten-Festival
+  extraInfoContent: "\nGeboren 1954 in Konstanz, kam Butzmann \xFCber Plattenk\xE4ufe
+    bei Burkhardt Seiler in Kontakt mit der fr\xFChen Westberliner NDW-Szene. Bereits
+    Ende der 1970er Jahre experimentierte er mit Klangmanipulationen und z\xE4hlte
+    zu den Pionieren der deutschen Industrial-Musik \u2013 lange bevor Bands wie
+    Einst\xFCrzende Neubauten mit ihrer Krachmusik bekannt wurden.\r\n\r\n\xDCber
+    seine Klangexperimente entstand der Kontakt zu Genesis P-Orridge von der britischen
+    Band Throbbing Gristle. 1981 ver\xF6ffentlichten die beiden gemeinsam die LP
+    \"Vertrauensmann Des Volkes\" auf dem Zensor-Label \u2013 eines von insgesamt
+    drei Alben, die \r\nButzmann bei Zensor herausbrachte.\r\n\r\nIm September 1981
+    trat er beim legend\xE4ren \"Geniale Dilletanten\"-Festival im Berliner Tempodrom
+    auf, das der Bewegung um Bands wie Einst\xFCrzende Neubauten ihren Namen gab.
+    Butzmann blieb dem Experiment und der Performance treu: Seit 1983 tourte er gemeinsam
+    mit Thomas Kapielski durch Berlin, New York und Amsterdam."
+  extraInfoImage: {fileID: 0}
